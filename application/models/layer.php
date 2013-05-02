@@ -35,6 +35,7 @@ class Layer_Model extends ORM
 		$array = Validation::factory($array)
 				->pre_filter('trim')
 				->add_rules('layer_name','required', 'length[3,80]')
+				->add_rules('meta_data','length[0,32766]')
 				->add_rules('layer_color','required', 'length[6,6]');
 		
 		// Add callbacks for the layer url and layer file
