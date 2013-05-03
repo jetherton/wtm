@@ -3,12 +3,12 @@
 * mapmeasureevents.php - Event handler for MapMeasure Plugin
 * This software is copy righted by WatchTheMed 2013
 * Writen by Dylan Gillespie, Etherton Technologies <http://ethertontech.com>
-* Started on 2013-02-05
+* Started on 2013-03-50
 * This plugin is to add a ruler tool to the maps.
 *************************************************************/
 
 
-class mapmeasureevents {
+class defaultwidemapevents {
 
 	public function __construct()
 	{
@@ -36,9 +36,9 @@ class mapmeasureevents {
 	}
 	
 	public function render_javascript(){
-		$view = new View('mapmeasure/mapmeasure_js');
+		$view = new View('defaultwidemap/defaultwidemap_js');
 		echo $view;
 	}
 	
 }
-new mapmeasureevents;
+new defaultwidemapevents;

@@ -3,45 +3,20 @@
 * mapmeasure_js.php - Javascript for Map Measure Plugin
 * This software is copy righted by WatchTheMed 2013
 * Writen by Dylan Gillespie, Etherton Technologies <http://ethertontech.com>
-* Started on 2013-04-30
+* Started on 2013-30-04
 * This plugin is to add a ruler tool to the maps.
 *************************************************************/
 ?>
 
 <script type="text/javascript">	
-	var path_info = '<?php echo url::current()?>';
+	var path_info = '<?php echo ((strpos(url::current(), 'reports/view')) !== false) ? substr(url::current(), 0, strlen('reports/view')) : url::current(); 	?>';
 	var map_div = '';
-	var reports_map_visible = false;
-	console.log(path_info);
+	var my_map = null;
 
-	switch(path_info){
-		case 'main':
-			map_div = 'map';
-			break;
-		case 'reports/submit':
-			map_div = 'divMap';
-			break;
-		case 'reports':
-			map_div = 'rb_map-view';
-			break;
-		case 'reports/view':
-			map_div = 'map';
-			break;
-	}
 
 	$(document).ready(function(){
-		$('a .map').click(function(){
-			if(!reports_map_visible){
-				console.log('I got in here');
-				createRuler();
-				init();
-				reports_map_visible = true;
-				console.log('I\'m on the reports page');
-			}
-			else{
-				$('#rulerControl').hide();
-				reports_map_visible = false;
-			}
+		$('a.map').click(function(){
+			Ruler();
 		});
 	});
 	// style the sketch fancy
@@ -121,13 +96,32 @@
 		});
 		$('#rulerControl').mouseleave(function(){
 			$('#rulerDiv').hide();
+			//$('#output').show();
 		});
 		
 	}
 
 
     var measureControls;
-    function init(){            
+    function Ruler(){        
+    	switch(path_info){
+		case 'main':
+			map_div = 'map';
+			my_map = map._olMap;
+			break;
+		case 'reports/submit':
+			map_div = 'divMap';
+			my_map = map;
+			break;
+		case 'reports':
+			map_div = 'rb_map-view';
+			my_map = map;
+			break;
+		case 'reports/view':
+			map_div = 'map';
+			my_map = document.getElementById('OpenLayers.Map_27_OpenLayers_Container');
+			break;
+		}    
         createRuler();
         var control;
         for(var key in measureControls) {
@@ -136,7 +130,7 @@
                 "measure": handleMeasurements,
                 "measurepartial": handleMeasurements
             });
-            map.addControl(control);
+            my_map.addControl(control);
         }
         for(key in measureControls) {
             var control = measureControls[key];
@@ -188,7 +182,7 @@
 	
 </script>
 
-<?php if(url::current() == 'reports/submit' OR url::current() == 'reports/view') echo '<body onload="init()">'?>
+<?php if(url::current() == 'reports/submit' OR ((strpos(url::current(), 'reports/view')) !== false) OR url::current() == 'main') echo '<body onload="Ruler()">'?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo url::base(); ?>plugins/mapmeasure/media/css/measureCSS.css"/>
 

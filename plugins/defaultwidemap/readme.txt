@@ -1,0 +1,20 @@
+=== About ===
+name: Wide Maps on Default
+website: http://www.ushahidi.com
+description: Will cause all maps to load as wide on default.
+version: 0.1
+requires: 2.1
+tested up to: 2.1
+author: Dylan Gillespie
+author website: http://www.ushahidi.com
+
+== Description ==
+Makes the maps that are present within the Ushahidi framework load as wide on default.
+
+== Installation ==
+1. Copy the entire /mapmeasure/ directory into your /plugins/ directory.
+2. Activate the plugin.
+
+== Changelog ==
+0.1
+* Created the plugin
