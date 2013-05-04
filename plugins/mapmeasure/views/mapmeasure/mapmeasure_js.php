@@ -12,11 +12,26 @@
 	var path_info = '<?php echo ((strpos(url::current(), 'reports/view')) !== false) ? substr(url::current(), 0, strlen('reports/view')) : url::current(); 	?>';
 	var map_div = '';
 	var my_map = null;
-
+	var map_expand = false;
+	var ruler_exists = false;
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
-			Ruler();
+			if(!map_expand){
+				if(!ruler_exists){
+					Ruler();
+				}
+				else{
+					$('#rulerControl').show();
+				}
+				map_expand = true;
+			}
+		});
+		$('a.list').click(function(){
+			if(map_expand){
+				map_expand = false;
+				$('#rulerControl').hide();
+			}
 		});
 	});
 	// style the sketch fancy
@@ -104,6 +119,7 @@
 
     var measureControls;
     function Ruler(){        
+        ruler_exists = true;
     	switch(path_info){
 		case 'main':
 			map_div = 'map';
@@ -118,8 +134,8 @@
 			my_map = map;
 			break;
 		case 'reports/view':
-			map_div = 'map';
-			my_map = document.getElementById('OpenLayers.Map_27_OpenLayers_Container');
+			map_div = 'report-map';
+			my_map = map;
 			break;
 		}    
         createRuler();
@@ -130,7 +146,8 @@
                 "measure": handleMeasurements,
                 "measurepartial": handleMeasurements
             });
-            my_map.addControl(control);
+            //(path_info == 'reports/view') ? my_map.addEventListener(control) : my_map.addControl(control);
+           my_map.addControl(control);
         }
         for(key in measureControls) {
             var control = measureControls[key];
