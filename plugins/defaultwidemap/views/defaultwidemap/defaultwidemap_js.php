@@ -14,15 +14,10 @@
 	function loadWide(){
 		switch(path_info){
 		case 'main':
-			map_div = 'map';
+			mainMapWide();
 			break;
 		case 'reports/submit':
-			map_div = 'divMap';
-			my_map = map;
-			break;
-		case 'reports':
-			map_div = 'rb_map-view';
-			my_map = map;
+			reportSubmitWide();
 			break;
 		case 'reports/view':
 			$('a.wider-map').click();
@@ -30,6 +25,48 @@
 		}    
 		
 	}
+
+	function reportSubmitWide(){
+		$('.report-find-location').prependTo($('.report_left'));
+		$('#divMap').prependTo($('.report_left'));
+
+		$('#divMap').width(900);
+		$('.report-find-location').width(883);
+		$('.report-find-location').height(50);
+		$('#location_find').css({"float": "right","top": "-38px","position": "relative"});
+		$('#button').css({"float": "right","top": "-38px","position": "relative"});
+		$('#find_text').css({"position":"relative", "top":"-32px"});
+		$('.report_right').css({"position":"relative", "top":"432px"});
+		$('.report_optional').prependTo($('.btn_submit').parent());
+		$('.big-block').height(1050);
+		
+		map.updateSize();
+	}
+
+
+	function mainMapWide(){
+		$('.map').css({"height":"350px", "width": "900px"});
+		$('#main').css({"height":"500px"});
+		$('#mapStatus').css({"width":"900px"});
+		$('.slider-holder').css({"width":"885px"});
+		$('#content').css({"height":"500px", "width": "1200px"});
+		$('#right').prependTo($('.content-container'));
+		map._olMap.updateSize();
+	}
+
+	//Reports/ page not accepting listeners elsewhere
+	$(document).ready(function(){
+		$('a.map').click(function(){
+			$('#reports-box').width(900);
+			$('#rb_map-view').width(897);
+			$('#filters-box').css({"float":"right"});
+			map.updateSize();
+		});
+		$('a.list').click(function(){
+			$('#reports-box').width(600);
+			$('#filters-box').css({"float":"left"});
+		});
+	});
 
 </script>
 
