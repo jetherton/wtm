@@ -34,7 +34,7 @@
 		$('#divMap').prependTo($('.report_left'));
 
 		$('#divMap').width(900);
-		$('.report-find-location').width(883);
+		$('.report-find-location').width(882);
 		$('.report-find-location').height(50);
 		$('#location_find').css({"float": "right","top": "-38px","position": "relative"});
 		$('#button').css({"float": "right","top": "-38px","position": "relative"});
@@ -43,7 +43,7 @@
 		$('.report_optional').prependTo($('.btn_submit').parent());
 		$('.big-block').height(1050);
 		//Tell the map that it has a new siez to update the center
-		map.updateSize();
+		//map.updateSize();
 	}
 
 	//For the main "home" page, moves the map and expands the divs
@@ -60,6 +60,7 @@
 
 	//Reports/ page not accepting listeners elsewhere, so this will load for all pages, but these only exist on the reports/ page
 	$(document).ready(function(){
+		loadWide();
 		$('a.map').click(function(){
 			$('#reports-box').width(900);
 			$('#rb_map-view').width(897);
@@ -73,6 +74,3 @@
 	});
 
 </script>
-
-<!-- Call the javascript to rearrange the divs so that the map is wide -->
-<body onload='loadWide()'>

@@ -1,5 +1,5 @@
 === About ===
-name: Map Measure
+name: Ruler Tool
 website: http://www.ushahidi.com
 description: Measuring Tool for any maps
 version: 0.1
@@ -9,7 +9,7 @@ author: Dylan Gillespie
 author website: http://www.ushahidi.com
 
 == Description ==
-Adds a Ruler measuring tool to the maps that are present within the Ushahidi framework.
+Adds a Ruler measuring tool to the maps that are present within the Ushahidi framework. Allows lines and polygons.
 
 == Installation ==
 1. Copy the entire /mapmeasure/ directory into your /plugins/ directory.

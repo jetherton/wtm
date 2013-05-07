@@ -124,14 +124,19 @@
 		case 'main':
 			map_div = 'map';
 			my_map = map._olMap;
+			//stops map from moving when this is active
+			$('.filters').css({"margin":"0"});
 			break;
 		case 'reports/submit':
 			map_div = 'divMap';
 			my_map = map;
+			$('.report_left').css({"margin":"0"});
 			break;
 		case 'reports':
 			map_div = 'rb_map-view';
 			my_map = map;
+			$('.rb_list-and-map-box').wrap('<div class="rulerOffSet" style="position:relative; top:-19px"/>');
+			
 			break;
 		case 'reports/view':
 			map_div = 'report-map';
