@@ -9,8 +9,10 @@
 ?>
 
 <script type="text/javascript">	
+	//get the current page
 	var path_info = '<?php echo ((strpos(url::current(), 'reports/view')) !== false) ? substr(url::current(), 0, strlen('reports/view')) : url::current(); 	?>';
 
+	//See what methods should be called based on the page
 	function loadWide(){
 		switch(path_info){
 		case 'main':
@@ -26,6 +28,7 @@
 		
 	}
 
+	//For the reports/submit page, moves the map and the report box below it to be wide
 	function reportSubmitWide(){
 		$('.report-find-location').prependTo($('.report_left'));
 		$('#divMap').prependTo($('.report_left'));
@@ -39,11 +42,11 @@
 		$('.report_right').css({"position":"relative", "top":"432px"});
 		$('.report_optional').prependTo($('.btn_submit').parent());
 		$('.big-block').height(1050);
-		
+		//Tell the map that it has a new siez to update the center
 		map.updateSize();
 	}
 
-
+	//For the main "home" page, moves the map and expands the divs
 	function mainMapWide(){
 		$('.map').css({"height":"350px", "width": "900px"});
 		$('#main').css({"height":"500px"});
@@ -51,10 +54,11 @@
 		$('.slider-holder').css({"width":"885px"});
 		$('#content').css({"height":"500px", "width": "1200px"});
 		$('#right').prependTo($('.content-container'));
+		//Tell the map that it has a new size to update the center
 		map._olMap.updateSize();
 	}
 
-	//Reports/ page not accepting listeners elsewhere
+	//Reports/ page not accepting listeners elsewhere, so this will load for all pages, but these only exist on the reports/ page
 	$(document).ready(function(){
 		$('a.map').click(function(){
 			$('#reports-box').width(900);
@@ -70,4 +74,5 @@
 
 </script>
 
+<!-- Call the javascript to rearrange the divs so that the map is wide -->
 <body onload='loadWide()'>
