@@ -16,6 +16,8 @@
  */
 ?>
 
+var myMap = null;
+
 // Set the base url
 Ushahidi.baseURL = "<?php echo url::site(); ?>";
 
@@ -142,6 +144,8 @@ jQuery(window).load(function() {
 		url: "<?php echo 'json/single/'.$incident_id; ?>",
 		styleMap: styleMap
 	});
+	 myMap = map._olMap;
+	
 	
 	// Ajax Validation for the comments
 	$("#commentForm").validate({

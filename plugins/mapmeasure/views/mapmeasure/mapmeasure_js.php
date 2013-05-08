@@ -9,7 +9,10 @@
 ?>
 
 <script type="text/javascript">	
-	var path_info = '<?php echo ((strpos(url::current(), 'reports/view')) !== false) ? substr(url::current(), 0, strlen('reports/view')) : url::current(); 	?>';
+	var path_info = '<?php 
+		if ((strpos(url::current(), 'reports/view')) !== false){ echo 'reports/view';}
+		elseif ((strpos(url::current(), 'admin/reports/edit')) !== false){ echo 'admin/reports/edit';}
+		else {echo url::current(); }	?>';
 	var map_div = '';
 	var my_map = null;
 	var map_expand = false;
@@ -120,6 +123,7 @@
     var measureControls;
     function Ruler(){        
         ruler_exists = true;
+        console.log(path_info);
     	switch(path_info){
 		case 'main':
 			map_div = 'map';
@@ -140,8 +144,14 @@
 			break;
 		case 'reports/view':
 			map_div = 'report-map';
-			my_map = map;
+			my_map = myMap;
+			console.log(myMap);
 			break;
+		case 'admin/reports/edit':
+			map_div = 'divMap';
+			my_map = myMap;
+			break;
+			
 		}    
         createRuler();
         var control;
@@ -200,11 +210,15 @@
             control.setImmediate(element.checked);
         }
     }
+
+jQuery(window).load(function() {
+	Ruler();
+});
 	
 	
 </script>
 
-<?php if(url::current() == 'reports/submit' OR ((strpos(url::current(), 'reports/view')) !== false) OR url::current() == 'main') echo '<body onload="Ruler()">'?>
+
 
 <link rel="stylesheet" type="text/css" href="<?php echo url::base(); ?>plugins/mapmeasure/media/css/measureCSS.css"/>
 

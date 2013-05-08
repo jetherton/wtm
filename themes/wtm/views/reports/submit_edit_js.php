@@ -15,6 +15,7 @@
  */
 ?>
 		var map;
+		var myMap = null;
 		var thisLayer;
 		var proj_4326 = new OpenLayers.Projection('EPSG:4326');
 		var proj_900913 = new OpenLayers.Projection('EPSG:900913');
@@ -81,7 +82,7 @@
 			
 			// Now initialise the map
 			map = new OpenLayers.Map('divMap', options);
-			
+			myMap = map;
 			<?php echo map::layers_js(FALSE); ?>
 			map.addLayers(<?php echo map::layers_array(FALSE); ?>);
 			map.addControl(new OpenLayers.Control.Navigation());

@@ -28,11 +28,12 @@ class mapmeasureevents {
 				$url == ''){
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}
-		else{
-			if(strpos($url, 'reports/view') !== false){
-				Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
-			}
+		elseif(strpos($url, 'reports/view') !== false){
+			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}
+		elseif(strpos($url, 'admin/reports/edit') !== false){
+			Event::add('ushahidi_action.header_scripts_admin', array($this, 'render_javascript'));
+		}		
 	}
 	
 	public function render_javascript(){
