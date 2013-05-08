@@ -10,18 +10,24 @@
 
 <script type="text/javascript">	
 	//get the current page
-	var path_info = '<?php echo ((strpos(url::current(), 'reports/view')) !== false) ? substr(url::current(), 0, strlen('reports/view')) : url::current(); 	?>';
+	var path_info = '<?php if(strpos($url, 'reports/view') !== false){echo 'reports/view';}
+	elseif(strpos($url, 'admin/reports/edit') !== false){echo 'admin/reports/edit';}
+	else {echo url::current();}?>';
 
 	//See what methods should be called based on the page
 	function loadWide(){
-		switch(path_info){
+		switch(path_info){		
+		/* Etherton: this is good but we don't need it right now and will probably do this by changing the theme since we'll want to move the category filter
 		case 'main':
 			mainMapWide();
-			break;
+			break;*/
 		case 'reports/submit':
 			reportSubmitWide();
 			break;
 		case 'reports/view':
+			$('a.wider-map').click();
+			break;
+		case 'admin/reports/edit':
 			$('a.wider-map').click();
 			break;
 		}    
@@ -43,7 +49,7 @@
 		$('.report_optional').prependTo($('.btn_submit').parent());
 		$('.big-block').height(1050);
 		//Tell the map that it has a new siez to update the center
-		//map.updateSize();
+		map.updateSize();
 	}
 
 	//For the main "home" page, moves the map and expands the divs
@@ -59,7 +65,7 @@
 	}
 
 	//Reports/ page not accepting listeners elsewhere, so this will load for all pages, but these only exist on the reports/ page
-	$(document).ready(function(){
+	$(window).load(function() {
 		loadWide();
 		$('a.map').click(function(){
 			$('#reports-box').width(900);
