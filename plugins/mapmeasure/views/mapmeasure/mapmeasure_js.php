@@ -98,7 +98,7 @@
 
 	function createRuler(){
 		//create the ruler buttons
-		console.log(map_div);
+		//console.log(map_div);
 		$('#'+map_div).before(
 				'<div id="rulerControl"><img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 				<div id="rulerDiv" style="display:none">\
@@ -146,7 +146,6 @@
 		case 'reports/view':
 			map_div = 'map';
 			my_map = myMap;
-			console.log(myMap);
 			break;
 		case 'admin/reports/edit':
 			map_div = 'divMap';
