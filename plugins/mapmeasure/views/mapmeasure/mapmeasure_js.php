@@ -140,6 +140,7 @@
 			map_div = 'rb_map-view';
 			my_map = map;
 			$('.rb_list-and-map-box').wrap('<div class="rulerOffSet" style="position:relative; top:-19px"/>');
+			$('.rulerOffSet').next().css({"position":"relative", "top":"-19px"});
 			
 			break;
 		case 'reports/view':
@@ -212,7 +213,9 @@
     }
 
 jQuery(window).load(function() {
-	Ruler();
+	if(path_info != 'reports'){
+		Ruler();
+	}
 });
 	
 	
