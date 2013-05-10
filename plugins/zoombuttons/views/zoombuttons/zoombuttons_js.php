@@ -14,19 +14,19 @@
 		if ((strpos(url::current(), 'reports/view')) !== false){ echo 'reports/view';}
 		elseif ((strpos(url::current(), 'admin/reports/edit')) !== false){ echo 'admin/reports/edit';}
 		else {echo url::current(); }	?>';
-	var map_div = '';
-	var my_map = null;
-	var map_expand = false;
+	var map_expandButtons = false;
 	var buttons_exists = false;
 
+	//listen for the reports page map creation button
 	$(document).ready(function(){
 		$('a.map').click(function(){
-			if(!map_expand){
+			if(!map_expandButtons){
 				if(!buttons_exists){
 					zoomButtons();
+					}
 				}
-				map_expand = true;
-			}
+				map_expandButtons = true;
+			
 		});
 	});
 
@@ -34,29 +34,40 @@
 		buttons_exists = true;
 		var zoomIn = $('.olControlZoomIn');
 		var zoomOut = $('.olControlZoomOut');
+		var zoomControl = $('.olControlZoom');
 		var path = '<?php echo URL::base()?>/plugins/zoombuttons/media/img/';
+
+		//remove any previous css that could get in the way
+		zoomControl.css({'padding':'0', 'width' : '58px'});
 		zoomIn.removeAttr('style');
 		zoomOut.removeAttr('style');
-		zoomIn.removeClass('olButton');
-		zoomOut.removeClass('olButton');
+		//remove the + and - text
 		zoomIn.text('');
 		zoomOut.text('');
 		var inPath = 'url("' + path + 'Zoomin.png") -1px 0px';
-		zoomIn.css({"src":"<?php echo URL::base();?>plugins/zoombuttons/media/img/img_trans.gif",
-			 "width" :"30",
-			 "height":"20",
-			 "background": inPath
+		var outPath = 'url("' + path + 'Zoomout.png") -1px -1px';
+		zoomIn.css({
+			 "src":"<?php echo URL::base();?>plugins/zoombuttons/media/img/img_trans.gif",
+			 "width" :"27",
+			 "height":"18",
+			 "background": inPath,
+			 "position" : "relative",
+			 "float" : "left"
 		});
-		zoomOut.css({"src":"<?php echo URL::base();?>plugins/zoombuttons/media/img/img_trans.gif",
-			 "width" :"30",
-			 "height":"20",
-			 "background": inPath
+		zoomOut.css({
+			 "src":"<?php echo URL::base();?>plugins/zoombuttons/media/img/img_trans.gif",
+			 "width" :"27",
+			 "height":"18",
+			 "background": outPath,
+			 "position" : "relative",
+			 "float" : "right",
+			 "left" : "-2px"
 		});
 		
 	}
 
 	
 	jQuery(window).load(function() {
-		zoomButtons();
+		if(path_info != 'reports'){zoomButtons();}
 	});
 </script>
