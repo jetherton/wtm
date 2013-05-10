@@ -400,7 +400,7 @@ class Settings_Controller extends Admin_Controller {
 				Settings_Model::save_all($post);
 				
 				// E.Kala 20th April 2012
-				// Ghetto workaround prevent resetting og Bing Maps API Key
+				// Ghetto workaround prevent resetting of Bing Maps API Key
 				// Soon to be addressed conclusively
 				if (isset($post['api_live']) AND ! empty($post['api_live']))
 				{
@@ -581,7 +581,7 @@ class Settings_Controller extends Admin_Controller {
 			$map_array[$layer->name] = $layer->title;
 		}
 		$this->template->content->map_array = $map_array;
-		
+	
 		$this->template->content->yesno_array = array(
 			'1'=>utf8::strtoupper(Kohana::lang('ui_main.yes')),
 			'0'=>utf8::strtoupper(Kohana::lang('ui_main.no')));
@@ -595,6 +595,7 @@ class Settings_Controller extends Admin_Controller {
 		$this->themes->js->default_lat = $form['default_lat'];
 		$this->themes->js->default_lon = $form['default_lon'];
 		$this->themes->js->all_maps_json = $this->_generate_settings_map_js();
+		
 	}
 
 
