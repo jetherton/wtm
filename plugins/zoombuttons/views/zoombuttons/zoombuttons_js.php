@@ -8,6 +8,7 @@
 *************************************************************/
 ?>
 
+
 <script type="text/javascript">		
 	var path_info = '<?php 
 		if ((strpos(url::current(), 'reports/view')) !== false){ echo 'reports/view';}
@@ -17,7 +18,6 @@
 	var my_map = null;
 	var map_expand = false;
 	var buttons_exists = false;
-	console.log('buttons!');
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
@@ -25,60 +25,37 @@
 				if(!buttons_exists){
 					zoomButtons();
 				}
-				else{
-					$('#rulerControl').show();
-				}
 				map_expand = true;
-			}
-		});
-		$('a.list').click(function(){
-			if(map_expand){
-				map_expand = false;
-				$('#rulerControl').hide();
 			}
 		});
 	});
 
 	function zoomButtons(){
 		buttons_exists = true;
-		switch(path_info){
-		case 'main':
-			map_div = 'map';
-			my_map = map._olMap;
-			//stops map from moving when this is active
-			//$('.filters').css({"margin":"0"});
-			break;
-		case 'reports/submit':
-			map_div = 'divMap';
-			my_map = map;
-			//$('.report_left').css({"margin":"0"});
-			break;
-		case 'reports':
-			map_div = 'rb_map-view';
-			my_map = map;
-			//$('.rb_list-and-map-box').wrap('<div class="rulerOffSet" style="position:relative; top:-19px"/>');
-			//$('.rulerOffSet').next().css({"position":"relative", "top":"-19px"});
-			
-			break;
-		case 'reports/view':
-			map_div = 'map';
-			my_map = myMap;
-			//console.log(myMap);
-			break;
-		case 'admin/reports/edit':
-			map_div = 'divMap';
-			my_map = myMap;
-			break;
-			
-		}    
-		$('#'+map_div).before(
-			'<div id="zoomControls"><img class="zoomIn" src="<?php echo URL::base();?>plugins/zoombuttons/media/img/img_trans.gif" width="40" height="40"/>\
-			<div id="zoomIn"></div></div>\
-			');
-		var zoom_in = new OpenLayers.Control.ZoomIn({
-			div: document.getElementById('zoomIn') });
-		my_map.addControl(zoom_in);
+		var zoomIn = $('.olControlZoomIn');
+		var zoomOut = $('.olControlZoomOut');
+		var path = '<?php echo URL::base()?>/plugins/zoombuttons/media/img/';
+		zoomIn.removeAttr('style');
+		zoomOut.removeAttr('style');
+		zoomIn.removeClass('olButton');
+		zoomOut.removeClass('olButton');
+		zoomIn.text('');
+		zoomOut.text('');
+		var inPath = 'url("' + path + 'Zoomin.png") -1px 0px';
+		zoomIn.css({"src":"<?php echo URL::base();?>plugins/zoombuttons/media/img/img_trans.gif",
+			 "width" :"30",
+			 "height":"20",
+			 "background": inPath
+		});
+		zoomOut.css({"src":"<?php echo URL::base();?>plugins/zoombuttons/media/img/img_trans.gif",
+			 "width" :"30",
+			 "height":"20",
+			 "background": inPath
+		});
+		
 	}
+
+	
 	jQuery(window).load(function() {
 		zoomButtons();
 	});
