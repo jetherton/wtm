@@ -11,7 +11,7 @@
 		<div id="underfooter"></div>
 
 		<!-- footer content -->
-		<div class="wrapper floatholder rapidxwpr">
+		<div class="wrapper floatholder">
 
 			<!-- footer credits -->
 			<div class="footer-credits">
@@ -39,12 +39,13 @@
 						</a>
 					</li>
 					<?php endif; ?>
-					
+
 					<?php if (Kohana::config('settings.allow_alerts')): ?>
-						<li>
-							<a href="<?php echo url::site()."alerts"; ?>">
-								<?php echo Kohana::lang('ui_main.alerts'); ?></a>
-						</li>
+					<li>
+						<a href="<?php echo url::site()."alerts"; ?>">
+							<?php echo Kohana::lang('ui_main.alerts'); ?>
+						</a>
+					</li>
 					<?php endif; ?>
 
 					<?php if (Kohana::config('settings.site_contact_page')): ?>
@@ -59,12 +60,11 @@
 					// Action::nav_main_bottom - Add items to the bottom links
 					Event::run('ushahidi_action.nav_main_bottom');
 					?>
-				</ul>
 
+				</ul>
 				<?php if ($site_copyright_statement != ''): ?>
 	      		<p><?php echo $site_copyright_statement; ?></p>
 		      	<?php endif; ?>
-		      	
 			</div>
 			<!-- / footer menu -->
 

@@ -100,13 +100,14 @@
 		//create the ruler buttons
 		//console.log(map_div);
 		$('#'+map_div).before(
-				'<div id="rulerControl"><img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
+				'<div style="position:absolute;">\
+				<div id="rulerControl"><img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 				<div id="rulerDiv" style="display:none">\
 					<input type="radio" value="line" name="ruler" title="Measure in a series of lines." id="lineDraw" onclick="toggleControl(this)"> Line</br>\
 					<input type="radio" value="polygon" name="ruler" title="Measure within an area." id="areaDraw" onclick="toggleControl(this)"> Area</br>\
 					<input type="radio" value="None" name="ruler" title="Turn off measuring." id="noDraw" onclick="toggleControl(this)"> None\
 				</div>\
-				<div id = "output"></div></div>\
+				<div id = "output"></div></div></div>\
 				');
 		//open the ruler buttons when clicked on
 		$('#rulerControl').mouseenter(function(){
