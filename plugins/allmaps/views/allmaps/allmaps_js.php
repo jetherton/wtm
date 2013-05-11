@@ -8,6 +8,8 @@
 *************************************************************/
 ?>
 
+<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+
 <script type="text/javascript">	
 	var path_info = '<?php 
 		if ((strpos(url::current(), 'reports/view')) !== false){ echo 'reports/view';}
@@ -69,7 +71,8 @@
 			
 		}    
 		for(var m = 0; m < all_maps.length; m++){
-			if(my_map.baseLayer.name != (all_maps[m].name)){
+			var preExistingLayers = my_map.getLayersByName(all_maps[m].name);
+			if(preExistingLayers == 0){
 				my_map.addLayer(all_maps[m]);
 			}
 		}
