@@ -37,7 +37,7 @@
 	//For the reports/submit page, moves the map and the report box below it to be wide
 	function reportSubmitWide(){
 		$('.report-find-location').prependTo($('.report_left'));
-		$('#divMap').prependTo($('.report_left'));
+		$('#divMap').parent().prependTo($('.report_left'));
 
 		$('#divMap').width(900);
 		$('.report-find-location').width(882);
@@ -45,7 +45,8 @@
 		$('#location_find').css({"float": "right","top": "-38px","position": "relative"});
 		$('#button').css({"float": "right","top": "-38px","position": "relative"});
 		$('#find_text').css({"position":"relative", "top":"-32px"});
-		$('.report_right').css({"position":"relative", "top":"432px"});
+		$('.report_right').css({"position":"relative", "top":"445px"});
+		$('#divMap').parent().css({'margin':'0'});
 		$('.report_optional').prependTo($('.btn_submit').parent());
 		$('.big-block').height(1050);
 		//Tell the map that it has a new siez to update the center

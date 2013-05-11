@@ -98,13 +98,13 @@
 
 	function createRuler(){
 		//create the ruler buttons
-		console.log(map_div);
+		//console.log(map_div);
 		$('#'+map_div).before(
 				'<div id="rulerControl"><img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 				<div id="rulerDiv" style="display:none">\
-					<input type="radio" value="line" name="ruler" id="lineDraw" onclick="toggleControl(this)"> Line</br>\
-					<input type="radio" value="polygon" name="ruler" id="areaDraw" onclick="toggleControl(this)"> Area</br>\
-					<input type="radio" value="None" name="ruler" id="noDraw" onclick="toggleControl(this)"> None\
+					<input type="radio" value="line" name="ruler" title="Measure in a series of lines." id="lineDraw" onclick="toggleControl(this)"> Line</br>\
+					<input type="radio" value="polygon" name="ruler" title="Measure within an area." id="areaDraw" onclick="toggleControl(this)"> Area</br>\
+					<input type="radio" value="None" name="ruler" title="Turn off measuring." id="noDraw" onclick="toggleControl(this)"> None\
 				</div>\
 				<div id = "output"></div></div>\
 				');
@@ -140,12 +140,12 @@
 			map_div = 'rb_map-view';
 			my_map = map;
 			$('.rb_list-and-map-box').wrap('<div class="rulerOffSet" style="position:relative; top:-19px"/>');
+			$('.rulerOffSet').next().css({"position":"relative", "top":"-19px"});
 			
 			break;
 		case 'reports/view':
 			map_div = 'map';
 			my_map = myMap;
-			console.log(myMap);
 			break;
 		case 'admin/reports/edit':
 			map_div = 'divMap';
@@ -212,7 +212,9 @@
     }
 
 jQuery(window).load(function() {
-	Ruler();
+	if(path_info != 'reports'){
+		Ruler();
+	}
 });
 	
 	
