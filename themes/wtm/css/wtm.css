@@ -195,6 +195,8 @@ div#right { position:absolute; z-index:1000; }
   #how-to-report-box { left:724px; padding-top:10px; }
     #how-to-report-box ol { margin-left:22px; }
     #how-to-report-box ol li { margin-bottom:5px; }
+ #kml_switch{width:250px;}
+ #layer_meta_window{display:none;margin-top: 15px;border: solid 1px #333;padding: 3px;border-radius: 3px;}
   
 
 /* home page map */

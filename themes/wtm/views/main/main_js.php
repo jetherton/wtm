@@ -15,6 +15,28 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 ?>
+
+$(document).ready(function() {
+  $("[id^='layer_']").mouseover(function(){
+  	var metaData = $(this).attr('meta_data');
+  	if(metaData != ''){
+  		$("#layer_meta_window").show();
+  		$("#layer_meta_window").html(metaData);
+  	}
+  });
+    $("[id^='layer_']").mouseenter(function(){
+  	var metaData = $(this).attr('meta_data');
+  	if(metaData != '' && typeof metaData != 'undefined'){
+  		var layerName = $(this).text();
+  		$("#layer_meta_window").show();
+  		$("#layer_meta_window").html(metaData);
+  	}
+  }).mouseleave(function(){
+ 		//$("#layer_meta_window").hide();
+  });
+});
+
+
 		
 // Initialize the Ushahidi namespace
 Ushahidi.baseUrl = "<?php echo url::site(); ?>";

@@ -5,4 +5,4 @@ Author: Etherton Technologies
 Author Email: info@ethertontech.com
 Demo: http://ethertontech.com
 CSS: wtm
-JS: 
+

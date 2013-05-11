@@ -163,14 +163,16 @@ $(function(){
 							$layer_color = $layer_info[1];
 							$layer_url = $layer_info[2];
 							$layer_file = $layer_info[3];
+							$layer_meta_data = $layer_info[4];
 							$layer_link = (!$layer_url) ?
 								url::base().Kohana::config('upload.relative_directory').'/'.$layer_file :
 								$layer_url;
-							echo '<li><a href="#" id="layer_'. $layer .'">
+							echo '<li><a href="#" id="layer_'. $layer .'" meta_data="<strong>'.htmlentities($layer_name).':</strong><br/><br/>'.htmlentities($layer_meta_data).'">
 							<span class="swatch" style="background-color:#'.$layer_color.'"></span>
 							<span class="layer-name">'.$layer_name.'</span></a></li>';
 						}
 						?>
+						<li id="layer_meta_window"></li>
 					</ul>
 				</div>
 				<!-- /Layers -->
