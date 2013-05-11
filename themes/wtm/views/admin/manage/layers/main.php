@@ -89,6 +89,7 @@
 										$layer_file = $layer->layer_file;
 										$layer_visible = $layer->layer_visible;
 										$meta_data = $layer->meta_data;
+										$parent_id = $layer->parent_id;
 										?>
 										<tr>
 											<td class="col-1">&nbsp;</td>
@@ -186,6 +187,10 @@
 						<div class="tab_form_item">
 							<strong><?php echo Kohana::lang('ui_main.kml_kmz_upload');?>:</strong><br />
 							<?php print form::upload('layer_file', '', ''); ?>
+						</div>
+							<div class="tab_form_item">
+							<strong><?php echo Kohana::lang('wtm.parent layer');?>:</strong><br />
+							<?php print form::dropdown('parent_id', $parents_array); ?>
 						</div>
 						<div style="clear:both"></div>
 						<div class="tab_form_item">

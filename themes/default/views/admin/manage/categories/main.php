@@ -93,7 +93,7 @@
 						</div>
 						<div class="tab_form_item">
 							<strong><?php echo Kohana::lang('ui_main.parent_category');?>:</strong><br />
-							<?php print form::dropdown('parent_id', $parents_array, '0'); ?>
+							<?php print form::dropdown('parent_id', $parents_array); ?>
 						</div>
 						<div class="tab_form_item">
 							<strong><?php echo Kohana::lang('ui_main.image_icon');?>:</strong><br />
