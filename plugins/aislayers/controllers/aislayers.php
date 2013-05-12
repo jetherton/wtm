@@ -22,8 +22,10 @@ class aislayers_Controller extends Template_Controller {
 	public function get_ship_json(){
 	
                 $url = 'http://www.marinetraffic.com/ais/exportraw.aspx?id=1234567890&protocol=json&timespan=10&msgtype=extended';
+                //$url = 'http://www.marinetraffic.com/ais/exportraw.aspx?id=1234567890&protocol=json&timespan=10';
                                 
                 $fileTarget = fopen('php://memory', 'w');
+                $headerBuff = fopen('php://memory', 'w');
                 
                 $ch = curl_init();
                 
@@ -33,6 +35,7 @@ class aislayers_Controller extends Template_Controller {
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);       
                 curl_setopt($ch, CURLOPT_FILE, $fileTarget);
+                curl_setopt($ch, CURLOPT_WRITEHEADER, $headerBuff);
                 
                 curl_setopt($ch,CURLOPT_HTTPHEADER,array (
                         "GET /ais/exportraw.aspx?id=1234567890&protocol=json&timespan=10&msgtype=extended HTTP/1.1",
@@ -49,13 +52,23 @@ class aislayers_Controller extends Template_Controller {
                 ));
                 
 
+                
 
                 $data = curl_exec($ch);               
                 curl_close($ch);
-                //$data = json_decode( $this->decode_gzip( array('Content-Encoding'=>'gzip'), $data));           
+                
+                rewind($headerBuff);
+                $headers= stream_get_contents($headerBuff);
+                                
+                
                 
                 rewind($fileTarget);
                 $data = stream_get_contents($fileTarget);
+                
+                //figure out if they zipped it
+                if(strpos($headers, 'Content-Encoding: gzip')!== false){
+                        $data = $this->decode_gzip( array('Content-Encoding'=>'gzip'), $data);     
+                }
                 
                 $data = json_decode($data);
                 
