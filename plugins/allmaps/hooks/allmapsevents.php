@@ -24,7 +24,7 @@ class allmapsevents {
 		if($url == 'main' OR 
 				$url == 'reports' OR 
 				$url == 'reports/submit' OR 
-				$url == 'alerts' OR 
+				//$url == 'alerts' OR 
 				$url == ''){
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}

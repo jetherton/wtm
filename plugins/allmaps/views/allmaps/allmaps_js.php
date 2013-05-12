@@ -68,6 +68,10 @@
 			map_div = 'divMap';
 			my_map = myMap;
 			break;
+                case 'alerts':
+                        map_div = 'divMap';
+                        my_map = map._olMap;
+                        break;
 			
 		}    
 		for(var m = 0; m < all_maps.length; m++){

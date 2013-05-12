@@ -152,6 +152,10 @@
 			map_div = 'divMap';
 			my_map = myMap;
 			break;
+                case 'alerts':
+                        map_div = 'divMap';
+                        my_map = map;
+                        break;
 			
 		}    
         createRuler();
