@@ -17,12 +17,16 @@
 	var my_map = null;
 	var map_expand = false;
 	var ruler_exists = false;
+	//variables to hold map zooming listeners
+	var clickOut;
+	var clickIn;
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
 			if(!map_expand){
 				if(!ruler_exists){
 					Ruler();
+					zoomButtons();
 				}
 				else{
 					$('#rulerControl').show();
@@ -96,18 +100,30 @@
         )
     };
 
+    //turn off all listeners
+    function deactivateAll(){
+		clickOut.deactivate();
+		clickIn.deactivate();
+		$('#'+map_div).css({
+			'cursor': "default"
+		});
+    }
+
 	function createRuler(){
 		//create the ruler buttons
 		//console.log(map_div);
 		$('#'+map_div).before(
 				'<div style="position:absolute;">\
-				<div id="rulerControl"><img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
-				<div id="rulerDiv" style="display:none">\
-					<input type="radio" value="line" name="ruler" title="Measure in a series of lines." id="lineDraw" onclick="toggleControl(this)"> Line</br>\
-					<input type="radio" value="polygon" name="ruler" title="Measure within an area." id="areaDraw" onclick="toggleControl(this)"> Area</br>\
-					<input type="radio" value="None" name="ruler" title="Turn off measuring." id="noDraw" onclick="toggleControl(this)"> None\
+				<div id="toolbarControl">\
+					<div id="rulerControl"><img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
+						<div id="rulerDiv" style="display:none">\
+							<input type="radio" value="line" name="ruler" title="Measure in a series of lines." id="lineDraw" onclick="toggleControl(this)"> Line</br>\
+							<input type="radio" value="polygon" name="ruler" title="Measure within an area." id="areaDraw" onclick="toggleControl(this)"> Area</br>\
+							<input type="radio" value="None" name="ruler" title="Turn off measuring." id="noDraw" onclick="toggleControl(this)"> None\
+						</div>\
+						<div id = "output"></div>\
+					</div>\
 				</div>\
-				<div id = "output"></div></div></div>\
 				');
 		//open the ruler buttons when clicked on
 		$('#rulerControl').mouseenter(function(){
@@ -118,9 +134,11 @@
 			$('#rulerDiv').hide();
 			//$('#output').show();
 		});
+		$('#output').mouseenter(function(){
+			$('#output').show();
+		});
 		
 	}
-
 
     var measureControls;
     function Ruler(){        
@@ -129,20 +147,14 @@
 		case 'main':
 			map_div = 'map';
 			my_map = map._olMap;
-			//stops map from moving when this is active
-			$('.filters').css({"margin":"0"});
 			break;
 		case 'reports/submit':
 			map_div = 'divMap';
 			my_map = map;
-			$('.report_left').css({"margin":"0"});
 			break;
 		case 'reports':
 			map_div = 'rb_map-view';
 			my_map = map;
-			$('.rb_list-and-map-box').wrap('<div class="rulerOffSet" style="position:relative; top:-19px"/>');
-			$('.rulerOffSet').next().css({"position":"relative", "top":"-19px"});
-			
 			break;
 		case 'reports/view':
 			map_div = 'map';
@@ -152,12 +164,11 @@
 			map_div = 'divMap';
 			my_map = myMap;
 			break;
-                case 'alerts':
-                        map_div = 'divMap';
-                        my_map = map;
-                        break;
-			
-		}    
+        case 'alerts':
+            map_div = 'divMap';
+            my_map = map;
+            break;
+    	}    
         createRuler();
         var control;
         for(var key in measureControls) {
@@ -166,7 +177,7 @@
                 "measure": handleMeasurements,
                 "measurepartial": handleMeasurements
             });
-            //(path_info == 'reports/view') ? my_map.addEventListener(control) : my_map.addControl(control);
+
            my_map.addControl(control);
         }
         for(key in measureControls) {
@@ -185,12 +196,13 @@
         if(order == 1) {
             out += "Distance: " + measure.toFixed(3) + " " + units;
         } else {
-            out += "Distance: " + measure.toFixed(3) + " " + units + "<sup>2</" + "sup>";
+            out += "Distance: " + measure.toFixed(3) + " " + units + "<sup>2</sup>";
         }
         element.innerHTML = out;
     }
 
     function toggleControl(element) {
+    	deactivateAll();
        	$('#rulerDiv').toggle();
        	if(element.id == 'noDraw'){
 			$('#output').hide();
@@ -216,9 +228,102 @@
         }
     }
 
+
+
+  //create the ZoomButtons
+	function zoomButtons(){
+		$('.olControlZoom').hide();
+
+		$('#rulerControl').before(
+			'<div id="clickIn"><img class="zoomInIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
+			<div id="clickOut"><img class="zoomOutIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
+			'
+  		);
+
+        OpenLayers.Control.ClickOut = OpenLayers.Class(OpenLayers.Control, {                
+            defaultHandlerOptions: {
+                'single': true,
+                'double': false,
+                'pixelTolerance': 0,
+                'stopSingle': false,
+                'stopDouble': false
+            },
+            initialize: function(options) {
+                this.handlerOptions = OpenLayers.Util.extend(
+                    {}, this.defaultHandlerOptions
+                );
+                OpenLayers.Control.prototype.initialize.apply(
+                    this, arguments
+                ); 
+                this.handler = new OpenLayers.Handler.Click(
+                    this, {
+                        'click': this.trigger
+                    }, this.handlerOptions
+                );
+            }, 
+            trigger: function(e) {
+            	var lonlat = my_map.getLonLatFromPixel(e.xy);
+            	my_map.setCenter(lonlat, my_map.getZoom() - 1);
+            }
+        });
+        
+        OpenLayers.Control.ClickIn = OpenLayers.Class(OpenLayers.Control, {                
+            defaultHandlerOptions: {
+                'single': true,
+                'double': false,
+                'pixelTolerance': 0,
+                'stopSingle': false,
+                'stopDouble': false
+            },
+
+            initialize: function(options) {
+                this.handlerOptions = OpenLayers.Util.extend(
+                    {}, this.defaultHandlerOptions
+                );
+                OpenLayers.Control.prototype.initialize.apply(
+                    this, arguments
+                ); 
+                this.handler = new OpenLayers.Handler.Click(
+                    this, {
+                        'click': this.trigger
+                    }, this.handlerOptions
+                );
+            }, 
+
+            trigger: function(e) {
+            	var lonlat = my_map.getLonLatFromPixel(e.xy);
+            	my_map.setCenter(lonlat, my_map.getZoom() + 1);
+            }
+
+        });
+
+        clickOut = new OpenLayers.Control.ClickOut();
+        clickIn = new OpenLayers.Control.ClickIn();
+
+        my_map.addControl(clickOut);
+        my_map.addControl(clickIn);
+        $('#clickOut').click(function(){
+			deactivateAll();
+			clickOut.activate();
+			$('#'+map_div).css({
+				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomOut.png'), -moz-zoom-out"
+			});
+		});	
+		$('#clickIn').click(function(){
+			deactivateAll();
+			clickIn.activate();
+			$('#'+map_div).css({
+				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomIn.png'), -moz-zoom-in"
+			});
+		});	
+  	}
+    
+
 jQuery(window).load(function() {
 	if(path_info != 'reports'){
 		Ruler();
+		zoomButtons();
+		
 	}
 });
 	
