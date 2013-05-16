@@ -83,7 +83,7 @@
     }
 
     //load the google API
-    if(google == null){
+    if(typeof(google) == "undefined"){
 	    window.google = window.google || {};
 	    google.maps = google.maps || {};
 	    (function() {
