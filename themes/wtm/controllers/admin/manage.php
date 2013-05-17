@@ -725,6 +725,7 @@ class Manage_Controller extends Admin_Controller
 			'layer_file' => '',
 			'layer_color' => '',
 			'meta_data'=>'',
+			'parent_id'=>'0',
 		);
 
 		// Copy the form as errors, so the errors will be stored with keys corresponding to the form field names
@@ -749,8 +750,8 @@ class Manage_Controller extends Admin_Controller
 			if ($post_data['action'] == 'a')
 			{
 				// Manually extract the primary layer data
-				$layer_data = arr::extract($post_data, 'layer_name', 'layer_color', 'layer_url', 'layer_file_old', 'meta_data');
-				
+				$layer_data = arr::extract($post_data, 'layer_name', 'layer_color', 'layer_url', 'layer_file_old', 'meta_data', 'parent_id');
+
 				// Grab the layer file to be uploaded
 				$layer_data['layer_file'] = isset($post_data['layer_file']['name'])? $post_data['layer_file']['name'] : NULL;
 				
@@ -831,6 +832,10 @@ class Manage_Controller extends Admin_Controller
 						$layer->layer_file = $layer_file;
 						$layer->save();
 					}
+					elseif (isset($_POST['layer_file_old']) AND $_POST['layer_file_old'] != ""){
+                                                $layer->layer_file = $_POST['layer_file_old'];
+                                                $layer->save();
+                                                }
 					
 					$form_saved = TRUE;
 					array_fill_keys($form, '');
