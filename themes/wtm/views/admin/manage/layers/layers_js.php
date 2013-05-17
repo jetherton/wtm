@@ -16,7 +16,7 @@
  */
 ?>
 // Layers JS
-function fillFields(id, layer_name, layer_url, layer_color, layer_file_old, meta_data)
+function fillFields(id, layer_name, layer_url, layer_color, layer_file_old, meta_data, parent_id)
 {
 	$("#layer_id").attr("value", decodeURIComponent(id));
 	$("#layer_name").attr("value", decodeURIComponent(layer_name));
@@ -24,6 +24,7 @@ function fillFields(id, layer_name, layer_url, layer_color, layer_file_old, meta
 	$("#layer_color").attr("value", decodeURIComponent(layer_color));
 	$("#layer_file_old").attr("value", decodeURIComponent(layer_file_old));
 	$("#meta_data").attr("value", decodeURIComponent(meta_data));
+	$("#parent_id option[value='" + parent_id + "']").attr("selected", "selected");
 }
 
 function layerAction ( action, confirmAction, id )
