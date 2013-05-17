@@ -127,7 +127,9 @@
 												</ul>
 											</td>
 										</tr>
-										<?php									
+										<?php			
+										//now figure out if there are any child layers
+										render_child_layers($layer_id,1);						
 									}
 									?>
 								</tbody>
@@ -205,3 +207,70 @@
 					</div>
 				</div>
 			</div>
+			
+			
+<?php 
+/**
+ * Used to recusively render child layers. This is used because it's so easy to just traverse
+ * down a tree recursively.
+ * @param unknown_type $layer_id
+ * @param unknown_type $indent_level
+ */
+function render_child_layers($layer_id,$indent_level)	{
+	$child_layers = ORM::factory('layer')
+	->where('parent_id', $layer_id)
+	->orderby('layer_name', 'asc')
+	->find_all();
+	
+	foreach($child_layers as $child_layer){
+		
+		$layer_id = $child_layer->id;
+		$layer_name = $child_layer->layer_name;
+		$layer_color = $child_layer->layer_color;
+		$layer_url = $child_layer->layer_url;
+		$layer_file = $child_layer->layer_file;
+		$layer_visible = $child_layer->layer_visible;
+		$meta_data = $child_layer->meta_data;
+		$parent_id = $child_layer->parent_id;
+		?>
+				<tr>
+					<td class="col-1">&nbsp;</td>
+					<td class="col-2">
+						<div class="post">
+							<h4><?php for($i=0; $i<$indent_level; $i++){echo "+------ ";}echo $layer_name; ?></h4>
+						</div>
+						<ul class="info">
+							<?php
+							if($layer_file)
+							{
+								?><li class="none-separator"><?php echo Kohana::lang('ui_main.kml_kmz_file');?>: <p><strong><?php echo $layer_file; ?></strong></p>
+								&nbsp;[<a href="javascript:layerAction('i','DELETE FILE','<?php echo rawurlencode($layer_id);?>')">Delete</a>]</li>
+								<?php
+							}
+							?>
+						</ul>
+						<ul class="links">
+							<?php
+							if($layer_url)
+							{
+								?><li class="none-separator"><?php echo Kohana::lang('ui_main.kml_url');?>: <p><strong><?php echo text::auto_link($layer_url); ?></strong></p></li><?php
+							}
+							?>
+						</ul>
+					</td>
+					<td class="col-3">
+					<?php echo "<img src=\"".url::base()."swatch/?c=".$layer_color."&w=30&h=30\">"; ?>
+					</td>
+					<td class="col-4">
+						<ul>
+							<li class="none-separator"><a href="#add" onClick="fillFields('<?php echo(rawurlencode($layer_id)); ?>','<?php echo(rawurlencode($layer_name)); ?>','<?php echo(rawurlencode($layer_url)); ?>','<?php echo(rawurlencode($layer_color)); ?>','<?php echo(rawurlencode($layer_file)); ?>','<?php echo(rawurlencode($meta_data)); ?>')"><?php echo Kohana::lang('ui_main.edit');?></a></li>
+							<li class="none-separator"><a class="status_yes" href="javascript:layerAction('v','SHOW/HIDE','<?php echo(rawurlencode($layer_id)); ?>')"><?php if ($layer_visible) { echo Kohana::lang('ui_main.visible'); } else { echo Kohana::lang('ui_main.hidden'); }?></a></li>
+							<li><a href="javascript:layerAction('d','DELETE','<?php echo(rawurlencode($layer_id)); ?>')" class="del"><?php echo Kohana::lang('ui_main.delete');?></a></li>
+						</ul>
+					</td>
+				</tr>
+	<?php 
+	render_child_layers($layer_id,$indent_level+1);
+	}
+}
+	?>

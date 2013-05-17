@@ -239,6 +239,7 @@ class Main_Controller extends Template_Controller {
 		if ($config_layers == $layers) {
 			foreach (ORM::factory('layer')
 					  ->where('layer_visible', 1)
+					  ->where('parent_id', 0)
 					  ->find_all() as $layer)
 			{
 				$layers[$layer->id] = array($layer->layer_name, $layer->layer_color,

@@ -906,8 +906,10 @@ class Manage_Controller extends Admin_Controller
 		));
 
 		$layers = ORM::factory('layer')
+					->where('parent_id', 0)
 					->orderby('layer_name', 'asc')
-					->find_all($this->items_per_page, $pagination->sql_offset);
+					->find_all();
+					//->find_all($this->items_per_page, $pagination->sql_offset);
 		
 		$parents_array[0] = Kohana::lang('wtm.none');
 		$parent_layers = ORM::factory('layer')->find_all();
