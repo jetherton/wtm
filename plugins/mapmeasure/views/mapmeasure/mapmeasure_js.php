@@ -115,7 +115,6 @@
 
 	function createRuler(){
 		//create the ruler buttons
-		//console.log(map_div);
 		$('#'+map_div).before(
 				'<div style="position:absolute;">\
 				<div id="toolbarControl">\
@@ -215,14 +214,7 @@
         }
         
     }
-    
-    function toggleImmediate(element) {
-        for(key in measureControls) {
-            var control = measureControls[key];
-            control.setImmediate(element.checked);
-        }
-    }
-
+ 
 
 
   //create the ZoomButtons
