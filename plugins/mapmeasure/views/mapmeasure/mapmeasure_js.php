@@ -107,37 +107,38 @@
 		$('#'+map_div).css({
 			'cursor': "default"
 		});
+		for(key in measureControls) {
+            var control = measureControls[key];
+            control.deactivate();
+        }
     }
 
 	function createRuler(){
 		//create the ruler buttons
-		//console.log(map_div);
 		$('#'+map_div).before(
 				'<div style="position:absolute;">\
 				<div id="toolbarControl">\
-					<div id="rulerControl"><img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
-						<div id="rulerDiv" style="display:none">\
-							<input type="radio" value="line" name="ruler" title="Measure in a series of lines." id="lineDraw" onclick="toggleControl(this)"> Line</br>\
-							<input type="radio" value="polygon" name="ruler" title="Measure within an area." id="areaDraw" onclick="toggleControl(this)"> Area</br>\
-							<input type="radio" value="None" name="ruler" title="Turn off measuring." id="noDraw" onclick="toggleControl(this)"> None\
+						<div title="Measure in a series of lines." id="lineDraw" onclick="toggleControl(this)">\
+							<img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 						</div>\
-						<div id = "output"></div>\
-					</div>\
+						<div title="Measure within an area." id="areaDraw" onclick="toggleControl(this)">\
+							<img class="areaIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
+						</div>\
+						<div value="None" title="Turn off measuring." id="noDraw">\
+							<img class="dragIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
+						</div>\
+						</br><div id = "output"></div>\
 				</div>\
 				');
-		//open the ruler buttons when clicked on
-		$('#rulerControl').mouseenter(function(){
-			$('#rulerDiv').show();
+		$('#lineDraw').val('line');
+		$('#areaDraw').val('polygon');
+		$('#noDraw').click(function(){
 			$('#output').hide();
-		});
-		$('#rulerControl').mouseleave(function(){
-			$('#rulerDiv').hide();
-			//$('#output').show();
-		});
-		$('#output').mouseenter(function(){
-			$('#output').show();
-		});
-		
+			deactivateAll();
+		});		
+
+		$('#filter-menu-toggle').css({"left": "185px"});
+		$('#layers-menu-toggle').css({"left": "346px"});
 	}
 
     var measureControls;
@@ -202,17 +203,10 @@
     }
 
     function toggleControl(element) {
-    	deactivateAll();
-       	$('#rulerDiv').toggle();
-       	if(element.id == 'noDraw'){
-			$('#output').hide();
-        }
-       	else{
-			$('#output').show();
-       	}
+        deactivateAll();
         for(key in measureControls) {
             var control = measureControls[key];
-            if(element.value == key && element.checked) {
+            if(element.value == key) {
                 control.activate();
             } else {
                 control.deactivate();
@@ -220,23 +214,16 @@
         }
         
     }
-    
-    function toggleImmediate(element) {
-        for(key in measureControls) {
-            var control = measureControls[key];
-            control.setImmediate(element.checked);
-        }
-    }
-
+ 
 
 
   //create the ZoomButtons
 	function zoomButtons(){
 		$('.olControlZoom').hide();
 
-		$('#rulerControl').before(
-			'<div id="clickIn"><img class="zoomInIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
-			<div id="clickOut"><img class="zoomOutIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
+		$('#lineDraw').before(
+			'<div id="clickIn" title="Zoom in"><img class="zoomInIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
+			<div id="clickOut" title="Zoom out"><img class="zoomOutIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
 			'
   		);
 
@@ -304,17 +291,21 @@
         my_map.addControl(clickIn);
         $('#clickOut').click(function(){
 			deactivateAll();
+			$('#noDraw').click();
 			clickOut.activate();
 			$('#'+map_div).css({
 				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomOut.png'), -moz-zoom-out"
 			});
+			
 		});	
 		$('#clickIn').click(function(){
 			deactivateAll();
+			$('#noDraw').click();
 			clickIn.activate();
 			$('#'+map_div).css({
 				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomIn.png'), -moz-zoom-in"
 			});
+			
 		});	
   	}
     

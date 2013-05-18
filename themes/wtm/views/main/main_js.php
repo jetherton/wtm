@@ -282,11 +282,14 @@ jQuery(function() {
 				if (this.id == context.id) {
 					isCurrentLayer = true;
 				}
-				map.trigger("deletelayer", $(".layer-name", this).html());
-				$(this).removeClass("active");
 			}
 		});
-
+		//remove the layer if it was clicked again
+		if(isCurrentLayer){
+			map.trigger("deletelayer", $(".layer-name", this).html());
+				$(this).removeClass("active");
+		}
+		
 		// Was a different layer selected?
 		if (!isCurrentLayer) {
 			// Set the currently selected layer as the active one

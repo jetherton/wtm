@@ -1,24 +1,39 @@
 #toolbarControl{
-	width: 75px;
+	width: 135px;
 	z-index: 20000;
 	position: relative;
 	left: 14px;
-	top: 29px;
+	top: 25px;
 }
-#rulerControl img.rulerIcon{
+#toolbarControl img.rulerIcon{
 	background: url('../img/Ruler.png') -11px -12px;	
 	width:25px;
 	height:20px;
 }
-#rulerDiv{
-	float:right;
+#toolbarControl img.areaIcon{
+	background: url('../img/areaRuler.png') -1px 0px;	
+	width:25px;
+	height:20px;
+}
+#toolbarControl img.dragIcon{
+	background: url('../img/dragIcon.png') -2px -2px;	
+	width:25px;
+	height:20px;
+}
+#lineDraw{
+	float:left;
 	position:relative;
-	left:18px;
-	background-color: rgb(225, 226, 228);
+}
+#noDraw{
+	float:left;
+	position:relative;
+}
+#areaDraw{
+	float:left;
+	position:relative;
 }
 #output{
 	width: 150px;
-	position:absolute;
 	background-color: rgb(225, 226, 228);
 }
 #clickOut{
@@ -33,7 +48,7 @@
 	height: 18px;
 }
 #clickIn img.zoomInIcon{
-	background: url('../img/ZoomIn.png') -2px -1px;
+	background: url('../img/ZoomIn.png') -2px 1px;
 	width : 25px;
 	height: 18px;
 }
