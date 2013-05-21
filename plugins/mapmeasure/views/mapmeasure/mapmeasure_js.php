@@ -107,9 +107,12 @@
 		$('#'+map_div).css({
 			'cursor': "default"
 		});
+		$('#output').hide();
 		for(key in measureControls) {
             var control = measureControls[key];
             control.deactivate();
+            my_map.removeControl(control);
+            //control.destroy();
         }
     }
 
@@ -200,10 +203,25 @@
             out += "Distance: " + measure.toFixed(3) + " " + units + "<sup>2</sup>";
         }
         element.innerHTML = out;
+        $('#output').show();
+        
     }
 
     function toggleControl(element) {
-        deactivateAll();
+        clickIn.deactivate();
+        clickOut.deactivate();
+        for(var key in measureControls) {
+            var control = measureControls[key];
+            control.events.on({
+                "measure": handleMeasurements,
+                "measurepartial": handleMeasurements
+            });
+
+           my_map.addControl(control);
+        }
+        $('#'+map_div).css({
+			'cursor': "default"
+		});
         for(key in measureControls) {
             var control = measureControls[key];
             if(element.value == key) {
@@ -212,7 +230,7 @@
                 control.deactivate();
             }
         }
-        
+        //console.log(my_map);
     }
  
 
@@ -233,7 +251,7 @@
                 'double': false,
                 'pixelTolerance': 0,
                 'stopSingle': false,
-                'stopDouble': false
+                'stopDouble': true
             },
             initialize: function(options) {
                 this.handlerOptions = OpenLayers.Util.extend(
@@ -260,7 +278,7 @@
                 'double': false,
                 'pixelTolerance': 0,
                 'stopSingle': false,
-                'stopDouble': false
+                'stopDouble': true
             },
 
             initialize: function(options) {
@@ -290,17 +308,15 @@
         my_map.addControl(clickOut);
         my_map.addControl(clickIn);
         $('#clickOut').click(function(){
-			deactivateAll();
-			$('#noDraw').click();
+        	deactivateAll()
 			clickOut.activate();
 			$('#'+map_div).css({
 				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomOut.png'), -moz-zoom-out"
 			});
-			
+			//console.log(my_map);
 		});	
 		$('#clickIn').click(function(){
 			deactivateAll();
-			$('#noDraw').click();
 			clickIn.activate();
 			$('#'+map_div).css({
 				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomIn.png'), -moz-zoom-in"

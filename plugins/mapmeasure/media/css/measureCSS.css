@@ -1,24 +1,24 @@
 #toolbarControl{
-	width: 135px;
+	width: 170px;
 	z-index: 20000;
 	position: relative;
 	left: 14px;
-	top: 25px;
+	top: 22px;
 }
 #toolbarControl img.rulerIcon{
-	background: url('../img/Ruler.png') -11px -12px;	
-	width:25px;
-	height:20px;
+	background: url('../img/toolbar.png') -100px -2px;	
+	width:32px;
+	height:23px;
 }
 #toolbarControl img.areaIcon{
-	background: url('../img/areaRuler.png') -1px 0px;	
-	width:25px;
-	height:20px;
+	background: url('../img/toolbar.png') -190px -1px;	
+	width:27px;
+	height:23px;
 }
 #toolbarControl img.dragIcon{
-	background: url('../img/dragIcon.png') -2px -2px;	
-	width:25px;
-	height:20px;
+	background: url('../img/toolbar.png') -158px -2px;	
+	width:26px;
+	height:23px;
 }
 #lineDraw{
 	float:left;
@@ -43,12 +43,12 @@
 	float:left;
 }
 #clickOut img.zoomOutIcon{
-	background: url('../img/ZoomOut.png') -1px 0px;
-	width : 22px;
-	height: 18px;
+	background: url('../img/toolbar.png') -65px -2px;
+	width : 35px;
+	height: 23px;
 }
 #clickIn img.zoomInIcon{
-	background: url('../img/ZoomIn.png') -2px 1px;
-	width : 25px;
-	height: 18px;
+	background: url('../img/toolbar.png') -29px -2px;
+	width : 34px;
+	height: 23px;
 }
