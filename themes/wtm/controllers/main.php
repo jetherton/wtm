@@ -239,11 +239,14 @@ class Main_Controller extends Template_Controller {
 		if ($config_layers == $layers) {
 			foreach (ORM::factory('layer')
 					  ->where('layer_visible', 1)
-					  ->where('parent_id', 0)
+					  ->orderby('layer_name', 'asc')
 					  ->find_all() as $layer)
 			{
-				$layers[$layer->id] = array($layer->layer_name, $layer->layer_color,
-					$layer->layer_url, $layer->layer_file, $layer->meta_data);
+				if(!isset($layers[$layer->parent_id])){
+					$layers[$layer->parent_id] = array();
+				}
+				
+				$layers[$layer->parent_id][$layer->id] = $layer;
 			}
 		}
 		else
