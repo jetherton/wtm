@@ -210,15 +210,7 @@
     function toggleControl(element) {
         clickIn.deactivate();
         clickOut.deactivate();
-        for(var key in measureControls) {
-            var control = measureControls[key];
-            control.events.on({
-                "measure": handleMeasurements,
-                "measurepartial": handleMeasurements
-            });
-
-           my_map.addControl(control);
-        }
+        
         $('#'+map_div).css({
 			'cursor': "default"
 		});
