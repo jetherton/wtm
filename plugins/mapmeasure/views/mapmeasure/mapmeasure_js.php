@@ -139,9 +139,6 @@
 			$('#output').hide();
 			deactivateAll();
 		});		
-
-		$('#filter-menu-toggle').css({"left": "185px"});
-		$('#layers-menu-toggle').css({"left": "346px"});
 	}
 
     var measureControls;
