@@ -15,7 +15,7 @@
 		else {echo url::current(); }	?>';
 	var map_div = '';
 	var my_map = null;
-	var map_expand = false;
+	var map_search = false;
 	var ruler_exists = false;
 	//variables to hold map zooming listeners
 	var clickOut;
@@ -23,7 +23,7 @@
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
-			if(!map_expand){
+			if(!map_search){
 				if(!ruler_exists){
 					Ruler();
 					zoomButtons();
@@ -31,74 +31,18 @@
 				else{
 					$('#rulerControl').show();
 				}
-				map_expand = true;
+				map_search = true;
 			}
 		});
 		$('a.list').click(function(){
-			if(map_expand){
-				map_expand = false;
+			if(map_search){
+				map_search = false;
 				$('#rulerControl').hide();
 			}
 		});
 	});
-	// style the sketch fancy
-    var sketchSymbolizers = {
-        "Point": {
-            pointRadius: 4,
-            graphicName: "square",
-            fillColor: "white",
-            fillOpacity: 1,
-            strokeWidth: 1,
-            strokeOpacity: 1,
-            strokeColor: "#333333"
-        },
-        "Line": {
-            strokeWidth: 3,
-            strokeOpacity: 1,
-            strokeColor: "#666666",
-            strokeDashstyle: "dash"
-        },
-        "Polygon": {
-            strokeWidth: 2,
-            strokeOpacity: 1,
-            strokeColor: "#666666",
-            fillColor: "white",
-            fillOpacity: 0.3
-        }
-    };
-    var style = new OpenLayers.Style();
-    
-    style.addRules([new OpenLayers.Rule({symbolizer: sketchSymbolizers})]);
-    var styleMap = new OpenLayers.StyleMap({"default": style});
-    
-    // allow testing of specific renderers via "?renderer=Canvas", etc
-    var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
-    renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+	
 
-    measureControls = {
-        line: new OpenLayers.Control.Measure(
-            OpenLayers.Handler.Path, {
-                persist: true,
-                handlerOptions: {
-                    layerOptions: {
-                        renderers: renderer,
-                        styleMap: styleMap
-                    }
-                }
-            }
-        ),
-        polygon: new OpenLayers.Control.Measure(
-            OpenLayers.Handler.Polygon, {
-                persist: true,
-                handlerOptions: {
-                    layerOptions: {
-                        renderers: renderer,
-                        styleMap: styleMap
-                    }
-                }
-            }
-        )
-    };
 
     //turn off all listeners
     function deactivateAll(){
@@ -144,52 +88,6 @@
 		$('#layers-menu-toggle').css({"left": "346px"});
 	}
 
-    var measureControls;
-    function Ruler(){        
-        ruler_exists = true;
-    	switch(path_info){
-		case 'main':
-			map_div = 'map';
-			my_map = map._olMap;
-			break;
-		case 'reports/submit':
-			map_div = 'divMap';
-			my_map = map;
-			break;
-		case 'reports':
-			map_div = 'rb_map-view';
-			my_map = map;
-			break;
-		case 'reports/view':
-			map_div = 'map';
-			my_map = myMap;
-			break;
-		case 'admin/reports/edit':
-			map_div = 'divMap';
-			my_map = myMap;
-			break;
-        case 'alerts':
-            map_div = 'divMap';
-            my_map = map;
-            break;
-    	}    
-        createRuler();
-        var control;
-        for(var key in measureControls) {
-            control = measureControls[key];
-            control.events.on({
-                "measure": handleMeasurements,
-                "measurepartial": handleMeasurements
-            });
-
-           my_map.addControl(control);
-        }
-        for(key in measureControls) {
-            var control = measureControls[key];
-            control.setImmediate(true);
-        }
-
-    }
     
     function handleMeasurements(event) {
         var units = event.units;
