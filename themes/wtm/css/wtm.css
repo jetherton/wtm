@@ -211,7 +211,7 @@ div.graph-holder { display:none; }
 #top-bar {display:none;}
 .submit-incident {display: none;}
 #header {display:none;}
-#header_nav {display:none;}
+/*#header_nav {display:none;}*/
 
 /* home page how to report */
 div.additional-content { display:none; }
