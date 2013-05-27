@@ -157,13 +157,13 @@ $(function(){
 					<!-- Layers (KML/KMZ) -->
 					<ul id="kml_switch" class="category-filters map-menu-box">
 						<?php
-						foreach ($layers as $layer => $layer_info)
+						foreach ($layers[0] as $layer_id => $layer)
 						{
-							$layer_name = $layer_info[0];
-							$layer_color = $layer_info[1];
-							$layer_url = $layer_info[2];
-							$layer_file = $layer_info[3];
-							$layer_meta_data = $layer_info[4];
+							$layer_name = $layer->layer_name;
+							$layer_color = $layer->layer_color;
+							$layer_url = $layer->layer_url;
+							$layer_file = $layer->layer_file;
+							$layer_meta_data = $layer->meta_data;
 							$layer_link = (!$layer_url) ?
 								url::base().Kohana::config('upload.relative_directory').'/'.$layer_file :
 								$layer_url;
@@ -171,7 +171,7 @@ $(function(){
 							<span class="swatch" style="background-color:#'.$layer_color.'"></span>
 							<span class="layer-name">'.$layer_name.'</span></a></li>';
 							
-							render_child_layers($layer);
+							render_child_layers($layer, $layers);
 						}
 						?>
 						<li id="layer_meta_window"></li>
@@ -288,12 +288,13 @@ $(function(){
  * Used to render child layers.
  * @param unknown_type $layer_id
  */
-function render_child_layers($layer_id)	{
+function render_child_layers($layer, $layers)	{
 	
-	$child_layers = ORM::factory('layer')
-	->where('parent_id', $layer_id)
-	->orderby('layer_name', 'asc')
-	->find_all();
+	if(!isset($layers[$layer->id])){
+		return;
+	}
+	
+	$child_layers = $layers[$layer->id];
 	echo '<ul style="margin-left:20px;">';
 	
 	foreach($child_layers as $child_layer){
@@ -313,7 +314,7 @@ function render_child_layers($layer_id)	{
 		<span class="swatch" style="background-color:#'.$layer_color.'"></span>
 							<span class="layer-name">'.$layer_name.'</span></a></li>';
 							
-		render_child_layers($layer);
+		render_child_layers($child_layer, $layers);
 	}
 	
 	echo '</ul>';
