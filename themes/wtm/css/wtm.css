@@ -38,9 +38,11 @@ h5, h4 {
 }
 
 /* structural divs */
-body#page { background:#e4e1dd url(../images/bg_transparent-lines.png) repeat; }
+body#page { background:#e4e1dd url(../images/background_single.png) no-repeat;
+			background-size: 1200px 1200px;}
+div#middle {background : none;}
+div.content-container {background:none;}
 
-div#middle { background:transparent url(../images/bg_top-cap.png) top no-repeat; }
 
 .big-block {   }
 .page-main #main { padding:0px 10px; }
@@ -212,6 +214,8 @@ div.graph-holder { display:none; }
 .submit-incident {display: none;}
 #header {display:none;}
 /*#header_nav {display:none;}*/
+#filter-menu-toggle {left:400px;}
+#layers-menu-toggle {left:565px;}
 
 /* home page how to report */
 div.additional-content { display:none; }
