@@ -156,7 +156,7 @@ div#right { position:absolute; z-index:1000; }
 }
 #the-filters { 
   top:49px; left:59px;
-  width:300px;
+  min-width:300px;
   
   display:none; }
 
@@ -166,7 +166,7 @@ div#right { position:absolute; z-index:1000; }
   #filter-menu-toggle { position:absolute; top:20px; left:108px; width:120px; }
   
   /* home page category filter */
-  .page-main #report-category-filter { padding:5px; float:left; width:175px; }
+  .page-main #report-category-filter { padding:5px; float:left; min-width:175px; }
   .page-main ul.category-filters { background:none; border:0; padding:0; }
   .page-main ul.category-filters li { display:block; list-style-type:none; overflow:auto; }
     .page-main ul.category-filters li li { clear:left; }
@@ -326,3 +326,7 @@ div.layer_meta_data{
 ul#kml_switch li:hover div.layer_meta_data{ 
 	display:block;
 	}
+
+div#the-filters ul#category_switch li a{
+    width:150px;
+}

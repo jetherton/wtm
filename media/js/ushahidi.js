@@ -727,7 +727,7 @@
 		$.each(filters, function(filter, value) {
 			var currentValue = context._reportFilters[filter];
 			if ((currentValue == undefined && currentValue == null) ||
-				currentValue !== value) {
+				currentValue !== value || typeof value == 'object' || typeof value == 'array') {
 				hasChanged = true;
 				context._reportFilters[filter] = value;
 			}

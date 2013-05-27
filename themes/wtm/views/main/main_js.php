@@ -47,6 +47,9 @@ Ushahidi.markerOpacity = <?php echo $marker_opacity; ?>;
 Ushahidi.markerStokeWidth = <?php echo $marker_stroke_width; ?>;
 Ushahidi.markerStrokeOpacity = <?php echo $marker_stroke_opacity; ?>;
 
+// Selected Category
+var gCategoryId = ['0']; //default to all
+//
 // Default to most active month
 var startTime = <?php echo $active_startDate ?>;
 
@@ -55,6 +58,25 @@ var endTime = <?php echo $active_endDate ?>;
 
 // To hold the Ushahidi.Map reference
 var map = null;
+
+
+
+/******
+* Removes the category ID from the string currentCat
+*******/
+function removeCategoryFilter(idToRemove)
+{
+        for(i = 0; i < gCategoryId.length; i++)
+        {
+                if (gCategoryId[i] == idToRemove)
+                {
+                        //deactivate
+                        $("#cat_"+idToRemove).removeClass("active");
+                        gCategoryId.splice(i,1);
+                        break;
+                }
+        }
+}//end removeCategoryFilter()
 
 
 /**
@@ -245,33 +267,155 @@ jQuery(function() {
 		s: startTime,
 		e: endTime
 	}); }, 800);
+    
+    
+    
+			//////////////////////////////////////////////////////////////////////////////////////
+			// Parent Category opener
+			$("a[id^='drop_cat_']").click(function()
+			{
+				//get the ID of the category we're dealing with
+				var catID = this.id.substring(9);
+				//if the kids aren't currenlty shown, show them
+				if( !$("#child_"+catID).is(":visible"))
+				{
+					$("#child_"+catID).show();
+					$(this).html("-");
+					//since all we're doing is showing things we don't need to update the map
+					// so just bounce
+					
+					$("a[id^='cat_']").addClass("forceRefresh"); //have to do this because IE sucks
+					$("a[id^='cat_']").removeClass("forceRefresh"); //have to do this because IE sucks
+					
+					return false;
+				}
+				else //kids are shown, deactivate them.
+				{
+					var kids = $("#child_"+catID).find('a');
+					kids.each(function(){
+						if($(this).hasClass("active"))
+						{
+							//remove this category ID from the list of IDs to show
+							var idNum = $(this).attr("id").substring(4);
+							//removeCategoryFilter(idNum);
+						}
+					});
+					$("#child_"+catID).hide();
+					$(this).html("+");
+					return false;
+				}
+			});
 
 
-	// Category Switch Action
-	$("ul#category_switch li > a").click(function(e) {
-		
-		var categoryId = this.id.substring(4);
-		var catSet = 'cat_' + this.id.substring(4);
 
-		// Remove All active
-		$("a[id^='cat_']").removeClass("active");
-		
-		// Hide All Children DIV
-		$("[id^='child_']").hide();
+	
+			//////////////////////////////////////////////////////////////////////////////////////
+			// Category Switch Action
+			$("a[id^='cat_']").click(function(e)
+			{
+				//the id of the category that just changed
+				var catID = this.id.substring(4);
+				
+				//the list of categories we're currently showing
+				numOfCategoriesSelected = gCategoryId.length;
+				 
+				 
+				//First we check if the "All Categories" button was pressed. If so unselect everything else
+				if( catID == 0)
+				{
+					if( !$("#cat_0").hasClass("active")) //it's being activated so unselect everything else
+					{
+						//unselect all other selected categories
+						while (gCategoryId.length > 0)
+						{
+							removeCategoryFilter(gCategoryId[0]);
+						}				
+					}
+				}
+				else
+				{ //we're dealing wtih single categories or parents
+				
+				
+					//first check and see if we're dealing with a parent category
+					if( $("#child_"+catID).find('a').length > 0)
+					{
+						//are we turning the parent on or off?
+						var parentActive = $("#cat_"+catID).hasClass("active");
+						
+						//we want to turn on/off kid categories						
+						var kids = $("#child_"+catID).find('a');
+						kids.each(function(){
+							
+							var kidNum = $(this).attr("id").substring(4);
+							if(!parentActive)
+							{
+								$(this).addClass("active");
 
-		// Add Highlight
-		$("#cat_" + categoryId).addClass("active"); 
+							}
+							else
+							{
+								removeCategoryFilter(kidNum);
+								$(this).removeClass("active");
+							}
+						});
+															
+					}//end of if for dealing with parents
+					
+					//check if we're dealing with a child
+					if($(this).attr("cat_parent"))
+					{
+						//get the parent ID
+						parentID = $(this).attr("cat_parent");
+						//if it's active deactivate it
+						//first check and see if we're adding or removing this category
+						if($("#cat_"+parentID).hasClass("active")) //it is active so make it unactive and remove this category from the list of categories we're looking at.
+						{ 
+							removeCategoryFilter(parentID);
+							//also deactiveate any siblings
+							var kids = $("#child_"+parentID).find('a');
+							kids.each(function(){
+								var kidNum = $(this).attr("id").substring(4);
+								removeCategoryFilter(kidNum);
+								$(this).removeClass("active");
+							});
+						}
+						
+					}//end of dealing with kids
+					
+					//first check and see if we're adding or removing this category
+					if($("#cat_"+catID).hasClass("active")) //it is active so make it unactive and remove this category from the list of categories we're looking at.
+					{ 
+						removeCategoryFilter(catID);
+					}
+					else //it isn't active so make it active
+					{ 
+					
+                                            $("#cat_"+catID).addClass("active");
 
-		// Show children DIV
-		$("#child_" + categoryId).show();
-		$(this).parents("div").show();
-		
-		// Update report filters
-		map.updateReportFilters({c: [categoryId]});
+                                            //make sure the "all categories" button isn't active
+                                            removeCategoryFilter("0");
 
-		e.stopPropagation();
-		return false;
-	});
+                                            gCategoryId.push(catID);                                            
+					}
+				}
+				
+				
+				//check to make sure something is selected. If nothing is selected then select "all gategories"
+				if( gCategoryId.length == 0)
+				{
+					$("#cat_0").addClass("active");
+					gCategoryId.push("0");
+				}
+
+                                 // Update report filters
+                                map.updateReportFilters({c: gCategoryId});
+
+                                e.stopPropagation();
+
+				
+				return false;
+			});
+			
 
 	// Layer selection
 	$("ul#kml_switch li > a").click(function(e) {
