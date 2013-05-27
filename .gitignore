@@ -11,3 +11,4 @@ application/config/database.php
 application/config/encryption.php
 tests/phpunit/phpunit.xml
 .settings\
+/nbproject

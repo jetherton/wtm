@@ -15,6 +15,8 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 ?>
+</script>
+<script type="text/javascript">
 
 $(document).ready(function() {
   $("[id^='layer_']").mouseover(function(){
@@ -108,7 +110,7 @@ function refreshTimeline(options) {
 	// Copy options object to avoid accidental modifications to reportFilters
 	options = jQuery.extend({}, options);
 
-	var url = "<?php echo url::site().'json/timeline/'; ?>";
+	var url = "<?php echo url::site().'bigmap_json/timeline'; ?>";
 
 	var interval = (options.e - options.s) / (3600 * 24);
 
@@ -177,7 +179,10 @@ function refreshTimeline(options) {
 
 
 jQuery(function() {
-	var reportsURL = "<?php echo Kohana::config('settings.allow_clustering') == 1 ? "json/cluster" : "json"; ?>";
+	//Etherton: commented this out and put in the enhanced map URL so that we can have the full power
+        //of enahcned map
+        //var reportsURL = "<?php echo Kohana::config('settings.allow_clustering') == 1 ? "json/cluster" : "json"; ?>";
+        var reportsURL = "bigmap_json";
 
 	// Render thee JavaScript for the base layers so that
 	// they are accessible by Ushahidi.js
@@ -262,7 +267,7 @@ jQuery(function() {
 		$(this).parents("div").show();
 		
 		// Update report filters
-		map.updateReportFilters({c: categoryId});
+		map.updateReportFilters({c: [categoryId]});
 
 		e.stopPropagation();
 		return false;
@@ -423,3 +428,7 @@ $(window).resize(function () {
 // EK <emmanuel(at)ushahidi.com
 // TODO: Load the sidebar with the checkins - moving this to BackboneJS
 <?php endif; ?>
+
+
+</script>
+<script type="text/javascript">

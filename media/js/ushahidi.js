@@ -587,7 +587,13 @@
 		if (layerType !== Ushahidi.KML) {
 			var params = [];
 			for (var _key in this._reportFilters) {
+                            if(typeof this._reportFilters[_key] === 'array' || typeof this._reportFilters[_key] === 'object'){
+                              for(i in this._reportFilters[_key]){
+                                  params.push(_key+'%5B'+i+'%5D='+this._reportFilters[_key][i]);
+                              }
+                            } else {
 				params.push(_key + '=' + this._reportFilters[_key]);
+                            }
 			}
 
 			if (fetchURL.indexOf("?") !== -1) {
@@ -726,6 +732,7 @@
 				context._reportFilters[filter] = value;
 			}
 		});
+                
 
 		// Have the filters changed
 		if (hasChanged) {
