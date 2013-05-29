@@ -63,7 +63,7 @@
 				<div id="searchControl">\
 					<img class="searchIcon" src="<?php echo URL::base();?>plugins/searchlocation/media/img/img_trans.gif" width="1" height="1"/>\
 						<div id="searchButtons" style="display:none">\
-							<input type="text" id="coordinates" name="coordinates"/><div id="searchBtn">Search</div>\
+							<input type="text" id="coordinates" name="coordinates"/><div id="searchBtn" class="searchBtn">Search</div></br>\
 							<input type="radio" name="search" id="Address" value="Address"/>Address</br>\
 							<input type="radio" name="search" id="LatLong" value="LatLong"/>Longitude and Latitude</br>\
 							<input type="radio" name="search" id="DMS" value="DMS"/>Degrees, minutes, seconds</br>\
