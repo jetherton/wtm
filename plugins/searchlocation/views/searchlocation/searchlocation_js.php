@@ -249,7 +249,86 @@
 	
 	//parse the items and convert to lat lon
 	function DMM(loc){
+		var values;
+		
+		if(loc.indexOf(',') != -1){
+			values = loc.split(',');
+		}
+		else{
+			//just putting ' ' didn't work for spaces
+			values = loc.split(/\s+/);
+		}
 
+		var Latdeg = (values[0].toLowerCase().indexOf('n') != -1 || (values[0].toLowerCase().indexOf('s') != -1)) ? values[0] : parseInt(values[0]);
+		var Latmins = (values[1].toLowerCase().indexOf('n') != -1 || (values[1].toLowerCase().indexOf('s') != -1)) ? values[1] : parseInt(values[1]);
+		var south = false;
+		var west = false;
+		var Londeg, Lonmins;
+
+		if(loc.toLowerCase().indexOf('and') != -1){
+			Londeg = (values[3].toLowerCase().indexOf('w') != -1 || (locvalues[3].toLowerCase().indexOf('e') != -1)) ? values[3] : parseInt(values[3]);
+			Lonmins = (values[4].toLowerCase().indexOf('w') != -1 || (values[4].toLowerCase().indexOf('e') != -1)) ? values[4] : parseInt(values[4]);
+		}
+		else{
+			Londeg = (values[2].toLowerCase().indexOf('w') != -1 || (values[2].toLowerCase().indexOf('e') != -1)) ? values[2] : parseInt(values[2]);
+			Lonmins = (values[3].toLowerCase().indexOf('w') != -1 || (values[3].toLowerCase().indexOf('e') != -1)) ? values[3] : parseInt(values[3]);
+		}
+
+		
+		if(Londeg == null || Lonmins == null || Latdeg == null || Latmins == null){
+			alert('Improper formatting. Example of proper formatting is: 41 25 01N and 120 58 57W or N41 25 01 W120 58 57.');
+		}
+
+		//Find and pull the Letter coordinates out of the variables
+		if(typeof Latdeg == 'string'){
+			if(Latdeg.toLowerCase().indexOf('s') != -1){
+				Latdeg = parseInt(Latdeg.substring(1));
+				south = true;
+			}
+			else{
+				Latdeg = parseInt(Latdeg.substring(1));
+			}
+		}
+		if(typeof Latmins == 'string'){
+			if(Latmins.toLowerCase().indexOf('s') != -1){
+				Latmins = parseInt(Latmins.substring(0, Latmins.toLowerCase().indexOf('s')));
+				south = true;
+			}
+			else{
+				Latmins = parseInt(Latmins.substring(0, Latmins.toLowerCase().indexOf('n')));
+			}
+		}
+		if(typeof Londeg == 'string'){
+			if(Londeg.toLowerCase().indexOf('w') != -1){
+				Londeg = parseInt(Londeg.substring(1));
+				west = true;
+			}
+			else{
+				Londeg = parseInt(Londeg.substring(1));
+			}
+		}
+		if(typeof Lonmins == 'string'){
+			if(Lonmins.toLowerCase().indexOf('w') != -1){
+				Lonmins = parseInt(Lonmins.substring(0, Lonmins.toLowerCase().indexOf('w')));
+				west = true;
+			}
+			else{
+				Lonmins = parseInt(Lonmins.substring(0, Lonmins.toLowerCase().indexOf('e')));
+			}
+		}
+
+		var lon = Londeg + (Lonmins/60);
+		lon = west ? -(lon) : lon;
+
+		var lat = Latdeg + (Latmins/60);
+		lat = south ? -(lat) : lat;
+
+		var results = new Array();
+		results['lat'] = lat;
+		results['lon'] = lon;
+
+		return results;
+		
 	}
 
 jQuery(window).load(function() {
