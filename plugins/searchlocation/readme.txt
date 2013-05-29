@@ -9,7 +9,7 @@ author: Dylan Gillespie
 author website: http://www.ushahidi.com
 
 == Description ==
-Adds a search tool that searches for addresses, decimal latitude and longitude, DHM, and Degree and decimal Minutes.
+Adds a search tool that searches for addresses, decimal latitude and longitude, DMS, and Degree and decimal Minutes.
 
 == Installation ==
 1. Copy the entire /searchlocation/ directory into your /plugins/ directory.

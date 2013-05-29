@@ -1,10 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /***********************************************************
-* mapmeasureevents.php - Event handler for MapMeasure Plugin
+* searchlocationevents.php - Event handler for MapMeasure Plugin
 * This software is copy righted by WatchTheMed 2013
 * Writen by Dylan Gillespie, Etherton Technologies <http://ethertontech.com>
 * Started on 2013-02-05
-* This plugin is to add a ruler tool to the maps.
+* This plugin is to add a search fucntion to the maps.
 *************************************************************/
 
 

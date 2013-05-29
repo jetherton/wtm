@@ -63,11 +63,11 @@
 				<div id="searchControl">\
 					<img class="searchIcon" src="<?php echo URL::base();?>plugins/searchlocation/media/img/img_trans.gif" width="1" height="1"/>\
 						<div id="searchButtons" style="display:none">\
-							<input type="text" name="coordinates"/><div id="searchBtn">Search</div></br>\
-							<input type="radio" name="search" value="Address"/>Address</br>\
-							<input type="radio" name="search" value="LatLong"/>Latitude and Longitude</br>\
-							<input type="radio" name="search" value="DHM"/>Degrees, hours, minutes</br>\
-							<input type="radio" name="search" value="Minutes"/>Degrees, decimal minutes</br>\
+							<input type="text" id="coordinates" name="coordinates"/><div id="searchBtn">Search</div>\
+							<input type="radio" name="search" id="Address" value="Address"/>Address</br>\
+							<input type="radio" name="search" id="LatLong" value="LatLong"/>Longitude and Latitude</br>\
+							<input type="radio" name="search" id="DMS" value="DMS"/>Degrees, minutes, seconds</br>\
+							<input type="radio" name="search" id="Minutes" value="Minutes"/>Degrees, decimal minutes</br>\
 						</div>\
 				</div>\
 				');
@@ -75,11 +75,189 @@
 		$('.searchIcon').click(function(){
 			$('#searchButtons').toggle();
 		});
+		$('#searchBtn').click(function(){
+			searchLocation();
+		});
 		map_search = true;
 	}
 
-    
-   
+
+
+	function searchLocation(){
+		var searchType = '';
+		var location = $('#coordinates').val();
+		//transform variables for coordinates
+		var proj4326 = new OpenLayers.Projection("EPSG:4326");
+		var projmerc = new OpenLayers.Projection("EPSG:900913");
+		
+		var searchArray = new Array();
+			searchArray[0] = $('#Address');
+			searchArray[1] = $('#LatLong');
+			searchArray[2] = $('#DMS');
+			searchArray[3] = $('#Minutes');
+
+		for(var i = 0; i < 4; i++){
+			if(searchArray[i].is(':checked')){
+				searchType = searchArray[i].val();
+				break;
+			}
+		}
+		if(searchType == ''){
+			alert('Please select a location type.');
+		}
+		else{
+			switch(searchType){
+				case 'Address':
+					if(location != ''){
+						$.post("<?php echo url::base(); ?>searchlocation/geocodeAddress", { 'loc': location },
+								function(data) {
+									var m = jQuery.parseJSON(data);
+									//have to transform the coordinates to match the map I guess
+									var lonlat = new OpenLayers.LonLat(m[1]['lon'], m[0]['lat']);
+									lonlat.transform(proj4326, projmerc);
+									my_map.setCenter(lonlat, my_map.zoom);
+								}, "json");
+					}
+					break;
+				case 'LatLong':
+					var result = latLong(location);
+					var lonlat = new OpenLayers.LonLat(result['lon'],result['lat']);
+					lonlat.transform(proj4326, projmerc);
+					my_map.setCenter(lonlat, my_map.zoom);
+					break;
+				case 'DMS':
+					var result = DMS(location);
+					var lonlat = new OpenLayers.LonLat(result['lon'],result['lat']);
+					lonlat.transform(proj4326, projmerc);
+					my_map.setCenter(lonlat, my_map.zoom);
+					break;
+				case 'Minutes':
+					var result = DMM(location);
+					var lonlat = new OpenLayers.LonLat(result['lon'],result['lat']);
+					lonlat.transform(proj4326, projmerc);
+					my_map.setCenter(lonlat, my_map.zoom);
+					break;
+			}
+			
+		}
+	}
+
+	//parse the string for lat long coordinates
+	function latLong(loc){
+		var lat, lon;
+		if(loc.indexOf(',') !== false){
+			lon = parseFloat(loc.substring(0, loc.indexOf(',')));
+			lat = parseFloat(loc.substring(loc.indexOf(',')+1));
+		}
+		else{
+			lon = parseFloat(loc.substring(0, loc.indexOf(' ')));
+			lat = parseFloat(loc.substring(loc.indexOf(' ')+1));
+		}
+		var results = new Array();
+		results['lat'] = lat;
+		results['lon'] = lon;
+
+		return results;
+	}
+	
+	//parse the items and convert to lat lon
+	function DMS(loc){
+		var values;
+		
+		if(loc.indexOf(',') !== false){
+			values = loc.split(',');
+		}
+		else{
+			values = loc.split(",");
+		}
+
+		console.log('values', values);
+		var Londeg = (values[0].toLowerCase().indexOf('n') !== false || (values[0].toLowerCase().indexOf('s') !== false)) ? values[0] : parseInt(values[0]);
+		var Lonmins = values[1];
+		var Lonsecs = (loc.toLowerCase().indexOf('n') !== false || (loc.toLowerCase().indexOf('s') !== false)) ? values[2] : parseInt(values[2]);
+		var south = false;
+		var west = false;
+		var Latdeg, Latmins, Latsecs;
+
+		if(loc.toLowerCase().indexOf('and') !== false){
+			Latdeg = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[4] : parseInt(values[4]);
+			Latmins = parseInt(values[5]);
+			Latsecs = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[6] : parseInt(values[6]);
+		}
+		else{
+			Latdeg = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[3] : parseInt(values[3]);
+			Latmins = parseInt(values[4]);
+			Latsecs = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[5] : parseInt(values[5]);
+		}
+
+		console.log('Londeg:', Londeg);
+		console.log('Lonmins:', Lonmins);
+		console.log('Lonsecs:', Lonsecs);
+		console.log('Latdeg:', Latdeg);
+		console.log('Latmins:', Latmins);
+		console.log('Latsecs:', Latsecs);
+		
+		if(Londeg == null || Lonmins == null || Lonsecs == null || Latdeg == null || Latmins == null || Latsecs == null){
+			alert('Improper formatting. Example of proper formatting is: 41 25 01N and 120 58 57W or N41 25 01 W120 58 57.');
+		}
+
+		//Find and pull the Letter coordinates out of the variables
+		if(typeof Londeg == 'string'){
+			if(Londeg.toLowerCase().indexOf('s') !== false){
+				Londeg = parseInt(Londeg.substring(1));
+				south = true;
+			}
+			else{
+				Londeg = parseInt(Londeg.substring(1));
+			}
+		}
+		if(typeof Lonsecs == 'string'){
+			if(Lonsecs.toLowerCase().indexOf('s') !== false){
+				Lonsecs = parseInt(Lonsecs.substring(0, Lonsecs.toLowerCase().indexOf('s')));
+				south = true;
+			}
+			else{
+				Lonsecs = parseInt(Lonsecs.substring(0, Lonsecs.toLowerCase().indexOf('s')));
+			}
+		}
+		if(typeof Latdeg == 'string'){
+			if(Latdeg.toLowerCase().indexOf('w') !== false){
+				Latdeg = parseInt(Latdeg.substring(1));
+				west = true;
+			}
+			else{
+				Latdeg = parseInt(Latdeg.substring(1));
+			}
+		}
+		if(typeof Latsecs == 'string'){
+			if(Latsecs.toLowerCase().indexOf('w') !== false){
+				Latsecs = parseInt(Latsecs.substring(0, Latsecs.toLowerCase().indexOf('w')));
+				west = true;
+			}
+			else{
+				Latsecs = parseInt(Latsecs.substring(0, Latsecs.toLowerCase().indexOf('w')));
+			}
+		}
+
+
+		var lon = Londeg + (Lonmins/60) + (Lonsecs/3600);
+		lon = south ? -(lon) : lon;
+
+		var lat = Latdeg + (Latmins/60) + (Latsecs/3600);
+		lat = west ? -(lat) : lat;
+
+		var results = new Array();
+		results['lat'] = lat;
+		results['lon'] = lon;
+
+		return results;
+		
+	}
+	
+	//parse the items and convert to lat lon
+	function DMM(loc){
+
+	}
 
 jQuery(window).load(function() {
 	switch(path_info){
