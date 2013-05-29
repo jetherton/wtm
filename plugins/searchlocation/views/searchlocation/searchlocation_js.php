@@ -39,23 +39,6 @@
 	});
 	
 
-
-    //turn off all listeners
-    function deactivateAll(){
-		clickOut.deactivate();
-		clickIn.deactivate();
-		$('#'+map_div).css({
-			'cursor': "default"
-		});
-		$('#output').hide();
-		for(key in measureControls) {
-            var control = measureControls[key];
-            control.deactivate();
-            my_map.removeControl(control);
-            //control.destroy();
-        }
-    }
-
 	function createSearchbar(){
 		//create the ruler buttons
 		$('#'+map_div).before(
@@ -63,11 +46,12 @@
 				<div id="searchControl">\
 					<img class="searchIcon" src="<?php echo URL::base();?>plugins/searchlocation/media/img/img_trans.gif" width="1" height="1"/>\
 						<div id="searchButtons" style="display:none">\
-							<input type="text" id="coordinates" name="coordinates"/><div id="searchBtn" class="searchBtn">Search</div></br>\
-							<input type="radio" name="search" id="Address" value="Address"/>Address</br>\
-							<input type="radio" name="search" id="LatLong" value="LatLong"/>Longitude and Latitude</br>\
-							<input type="radio" name="search" id="DMS" value="DMS"/>Degrees, minutes, seconds</br>\
-							<input type="radio" name="search" id="Minutes" value="Minutes"/>Degrees, decimal minutes</br>\
+							<input type="text" id="coordinates" name="coordinates"/>\
+								<div id="searchBtn" class="searchBtn">Search</div></br>\
+							<input type="radio" name="search" id="Address" title="Search by address." value="Address"/>Address</br>\
+							<input type="radio" name="search" id="LatLong" title="Search by Longitude and Latitude, seperated by a comma." value="LatLong"/>Longitude and Latitude</br>\
+							<input type="radio" name="search" id="DMS" title="Search for DMS, seperated by spaces or commas." value="DMS"/>Degrees, minutes, seconds</br>\
+							<input type="radio" name="search" id="Minutes" title="Search for DM, seperated by spaces or commas." value="Minutes"/>Degrees, decimal minutes</br>\
 						</div>\
 				</div>\
 				');
