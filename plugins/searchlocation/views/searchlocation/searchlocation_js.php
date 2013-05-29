@@ -168,10 +168,10 @@
 			values = loc.split(',');
 		}
 		else{
-			values = loc.split(",");
+			//just putting ' ' didn't work for spaces
+			values = loc.split(/\s+/);
 		}
 
-		console.log('values', values);
 		var Latdeg = (values[0].toLowerCase().indexOf('n') != -1 || (values[0].toLowerCase().indexOf('s') != -1)) ? values[0] : parseInt(values[0]);
 		var Latmins = parseInt(values[1]);
 		var Latsecs = (values[2].toLowerCase().indexOf('n') != -1 || (values[2].toLowerCase().indexOf('s') != -1)) ? values[2] : parseInt(values[2]);
@@ -243,8 +243,6 @@
 		results['lat'] = lat;
 		results['lon'] = lon;
 
-		console.log(lat);
-		console.log(lon);
 		return results;
 		
 	}
