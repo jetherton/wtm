@@ -145,7 +145,7 @@
 	//parse the string for lat long coordinates
 	function latLong(loc){
 		var lat, lon;
-		if(loc.indexOf(',') !== false){
+		if(loc.indexOf(',') != -1){
 			lon = parseFloat(loc.substring(0, loc.indexOf(',')));
 			lat = parseFloat(loc.substring(loc.indexOf(',')+1));
 		}
@@ -164,7 +164,7 @@
 	function DMS(loc){
 		var values;
 		
-		if(loc.indexOf(',') !== false){
+		if(loc.indexOf(',') != -1){
 			values = loc.split(',');
 		}
 		else{
@@ -172,84 +172,79 @@
 		}
 
 		console.log('values', values);
-		var Londeg = (values[0].toLowerCase().indexOf('n') !== false || (values[0].toLowerCase().indexOf('s') !== false)) ? values[0] : parseInt(values[0]);
-		var Lonmins = values[1];
-		var Lonsecs = (loc.toLowerCase().indexOf('n') !== false || (loc.toLowerCase().indexOf('s') !== false)) ? values[2] : parseInt(values[2]);
+		var Latdeg = (values[0].toLowerCase().indexOf('n') != -1 || (values[0].toLowerCase().indexOf('s') != -1)) ? values[0] : parseInt(values[0]);
+		var Latmins = parseInt(values[1]);
+		var Latsecs = (values[2].toLowerCase().indexOf('n') != -1 || (values[2].toLowerCase().indexOf('s') != -1)) ? values[2] : parseInt(values[2]);
 		var south = false;
 		var west = false;
-		var Latdeg, Latmins, Latsecs;
+		var Londeg, Lonmins, Lonsecs;
 
-		if(loc.toLowerCase().indexOf('and') !== false){
-			Latdeg = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[4] : parseInt(values[4]);
-			Latmins = parseInt(values[5]);
-			Latsecs = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[6] : parseInt(values[6]);
+		if(loc.toLowerCase().indexOf('and') != -1){
+			Londeg = (values[4].toLowerCase().indexOf('w') != -1 || (locvalues[4].toLowerCase().indexOf('e') != -1)) ? values[4] : parseInt(values[4]);
+			Lonmins = parseInt(values[5]);
+			Lonsecs = (values[6].toLowerCase().indexOf('w') != -1 || (values[6].toLowerCase().indexOf('e') != -1)) ? values[6] : parseInt(values[6]);
 		}
 		else{
-			Latdeg = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[3] : parseInt(values[3]);
-			Latmins = parseInt(values[4]);
-			Latsecs = (loc.toLowerCase().indexOf('w') !== false || (loc.toLowerCase().indexOf('e') !== false)) ? values[5] : parseInt(values[5]);
+			Londeg = (values[3].toLowerCase().indexOf('w') != -1 || (values[3].toLowerCase().indexOf('e') != -1)) ? values[3] : parseInt(values[3]);
+			Lonmins = parseInt(values[4]);
+			Lonsecs = (values[5].toLowerCase().indexOf('w') != -1 || (values[5].toLowerCase().indexOf('e') != -1)) ? values[5] : parseInt(values[5]);
 		}
 
-		console.log('Londeg:', Londeg);
-		console.log('Lonmins:', Lonmins);
-		console.log('Lonsecs:', Lonsecs);
-		console.log('Latdeg:', Latdeg);
-		console.log('Latmins:', Latmins);
-		console.log('Latsecs:', Latsecs);
 		
 		if(Londeg == null || Lonmins == null || Lonsecs == null || Latdeg == null || Latmins == null || Latsecs == null){
 			alert('Improper formatting. Example of proper formatting is: 41 25 01N and 120 58 57W or N41 25 01 W120 58 57.');
 		}
 
 		//Find and pull the Letter coordinates out of the variables
-		if(typeof Londeg == 'string'){
-			if(Londeg.toLowerCase().indexOf('s') !== false){
-				Londeg = parseInt(Londeg.substring(1));
-				south = true;
-			}
-			else{
-				Londeg = parseInt(Londeg.substring(1));
-			}
-		}
-		if(typeof Lonsecs == 'string'){
-			if(Lonsecs.toLowerCase().indexOf('s') !== false){
-				Lonsecs = parseInt(Lonsecs.substring(0, Lonsecs.toLowerCase().indexOf('s')));
-				south = true;
-			}
-			else{
-				Lonsecs = parseInt(Lonsecs.substring(0, Lonsecs.toLowerCase().indexOf('s')));
-			}
-		}
 		if(typeof Latdeg == 'string'){
-			if(Latdeg.toLowerCase().indexOf('w') !== false){
+			if(Latdeg.toLowerCase().indexOf('s') != -1){
 				Latdeg = parseInt(Latdeg.substring(1));
-				west = true;
+				south = true;
 			}
 			else{
 				Latdeg = parseInt(Latdeg.substring(1));
 			}
 		}
 		if(typeof Latsecs == 'string'){
-			if(Latsecs.toLowerCase().indexOf('w') !== false){
-				Latsecs = parseInt(Latsecs.substring(0, Latsecs.toLowerCase().indexOf('w')));
+			if(Latsecs.toLowerCase().indexOf('s') != -1){
+				Latsecs = parseInt(Latsecs.substring(0, Latsecs.toLowerCase().indexOf('s')));
+				south = true;
+			}
+			else{
+				Latsecs = parseInt(Latsecs.substring(0, Latsecs.toLowerCase().indexOf('n')));
+			}
+		}
+		if(typeof Londeg == 'string'){
+			if(Londeg.toLowerCase().indexOf('w') != -1){
+				Londeg = parseInt(Londeg.substring(1));
 				west = true;
 			}
 			else{
-				Latsecs = parseInt(Latsecs.substring(0, Latsecs.toLowerCase().indexOf('w')));
+				Londeg = parseInt(Londeg.substring(1));
+			}
+		}
+		if(typeof Lonsecs == 'string'){
+			if(Lonsecs.toLowerCase().indexOf('w') != -1){
+				Lonsecs = parseInt(Lonsecs.substring(0, Lonsecs.toLowerCase().indexOf('w')));
+				west = true;
+			}
+			else{
+				Lonsecs = parseInt(Lonsecs.substring(0, Lonsecs.toLowerCase().indexOf('e')));
 			}
 		}
 
-
 		var lon = Londeg + (Lonmins/60) + (Lonsecs/3600);
-		lon = south ? -(lon) : lon;
+		lon = west ? -(lon) : lon;
 
 		var lat = Latdeg + (Latmins/60) + (Latsecs/3600);
-		lat = west ? -(lat) : lat;
+		lat = south ? -(lat) : lat;
 
 		var results = new Array();
 		results['lat'] = lat;
 		results['lon'] = lon;
 
+		console.log(lat);
+		console.log(lon);
 		return results;
 		
 	}

@@ -297,7 +297,7 @@
         my_map.addControl(clickOut);
         my_map.addControl(clickIn);
         $('#clickOut').click(function(){
-        	deactivateAll()
+        	deactivateAll();
 			clickOut.activate();
 			$('#'+map_div).css({
 				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomOut.png'), -moz-zoom-out"
