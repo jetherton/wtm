@@ -152,7 +152,7 @@
 			});
 			map.addControl(drag);                        
                         
-                        
+
                         
                           $("ul#kml_switch li > a").click(function(e) {
                             // Get the layer id
@@ -172,18 +172,31 @@
                             var title = $(this, "strong").text();
                             //remove the layer if it was clicked again
                             if(isCurrentLayer){
-                                    map.trigger("deletelayer", title);
-                                            $(this).removeClass("active");
+                                    var kmlLayer = map.getLayersByName(title);
+                                    map.removeLayer(kmlLayer[0]);                                    
+                                    $(this).removeClass("active");
                             }
 
                             // Was a different layer selected?
                             if (!isCurrentLayer) {            
                                     // Set the currently selected layer as the active one
                                     $(this).addClass("active");
-                                    map.addLayer(Ushahidi.KML, {
-                                            name: title,
-                                            url: "json/layer/" + layerId
+                                    
+                                    var kmlLayer = new OpenLayers.Layer.Vector(title, {
+                                        projection: new OpenLayers.Projection("EPSG:4326"),
+                                        strategies: [new OpenLayers.Strategy.Fixed()],
+                                        protocol: new OpenLayers.Protocol.HTTP({
+                                            url: "<?php echo url::base();?>json/layer/" + layerId,
+                                            format: new OpenLayers.Format.KML({
+                                                extractStyles: true, 
+                                                extractAttributes: true,
+                                                maxDepth: 5
+                                            })
+                                        })
                                     });
+                                    
+                                     
+                                    map.addLayer(kmlLayer);
                             }
 
                             return false;

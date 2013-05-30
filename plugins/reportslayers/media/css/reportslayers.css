@@ -1,0 +1,19 @@
+/* 
+    Document   : reportslayers
+    Created on : May 29, 2013, 5:53:56 PM
+    Author     : etherton
+    Description:
+        For the Reports Layers plugin
+*/
+
+
+
+#layers-box a#layers-menu-toggle{
+    top:100px;
+    z-index:1000;
+}
+
+#layers-box ul#kml_switch{
+    top:130px;
+}
+
