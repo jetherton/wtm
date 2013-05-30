@@ -17,11 +17,20 @@ class reportslayers {
 
 	public function add()
 	{
-		if(Router::$controller == "reports")
+		if(Router::$controller == "reports" AND Router::$method == "view")
 		{
         	Event::add('ushahidi_action.report_view_sidebar', array($this, '_add_view_ui'));
-        	Event::add('ushahidi_action.header_scripts', array($this, '_add_view_js'));
-        }
+        	Event::add('ushahidi_action.header_scripts', array($this, '_add_view_js'));                
+                plugin::add_stylesheet("reportslayers/media/css/reportslayers");
+                }
+                
+                if(Router::$controller == "reports" AND Router::$method == "submit")
+		{
+        	Event::add('ushahidi_action.report_form_frontend_after_time', array($this, '_add_view_ui'));
+        	Event::add('ushahidi_action.header_scripts', array($this, '_add_view_js'));                
+                plugin::add_stylesheet("reportslayers/media/css/reportslayers_submit");
+                }
+
 
 	}
 	

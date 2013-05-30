@@ -145,6 +145,47 @@ jQuery(window).load(function() {
 		styleMap: styleMap
 	});
 	 myMap = map._olMap;
+         
+         
+         
+         
+         
+         
+         
+        $("ul#kml_switch li > a").click(function(e) {
+	// Get the layer id
+	var layerId = this.id.substring(6);
+
+	var isCurrentLayer = false;
+	var context = this;
+
+	// Remove all actively selected layers
+	$("#kml_switch a").each(function(i) {
+		if ($(this).hasClass("active")) {
+			if (this.id == context.id) {
+				isCurrentLayer = true;
+			}
+		}
+	});
+        var title = $(this, "strong").text();
+	//remove the layer if it was clicked again
+	if(isCurrentLayer){
+		map.trigger("deletelayer", title);
+			$(this).removeClass("active");
+	}
+	
+	// Was a different layer selected?
+	if (!isCurrentLayer) {            
+		// Set the currently selected layer as the active one
+		$(this).addClass("active");
+		map.addLayer(Ushahidi.KML, {
+			name: title,
+			url: "json/layer/" + layerId
+		});
+	}
+
+	return false;
+});
 	
 	
 	// Ajax Validation for the comments

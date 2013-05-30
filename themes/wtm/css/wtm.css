@@ -15,7 +15,8 @@ Copyright 2013 Etherton Techonologies Ltd.
   div.search-form input.text:focus { border-color: #d24836; }
   div.submit-incident a, .btn_submit,
   div.filters ul li a:hover, div.filters ul li a.active,
-  ul.category-filters li a:hover, ul.category-filters li a.active { background-color:#d24836; }
+  ul.category-filters li a.active { background-color:#d24836; color:white;}
+  ul.category-filters li a:hover { background-color:#f28856; color:black;}
   
   /* Lighter Primary Color - for hover effects */
   div#loggedin_user_action a, div#loggedin_user_action a:visited { color:#d25e4f; }

@@ -217,6 +217,10 @@ jQuery(window).load(function() {
 		map.trigger("resize");
 		return false;
 	});
+        
+        
+        
+      
 
 }); // END jQuery(window).load();	
 

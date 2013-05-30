@@ -22,15 +22,14 @@ $(document).ready(function() {
 	});
 
 
+<?php 
+/***********************************************
+ * Note this requires the following code in the /themes/active_theme/views/reports/view_js.php file
+ * Also needs to go in /themes/active_theme/views/reports/submit_edit_js.php
+ */
 
-
-
-
-
-
-jQuery(function() {
-//Layer selection
-$("ul#kml_switch li > a").click(function(e) {
+/*
+ $("ul#kml_switch li > a").click(function(e) {
 	// Get the layer id
 	var layerId = this.id.substring(6);
 
@@ -45,25 +44,32 @@ $("ul#kml_switch li > a").click(function(e) {
 			}
 		}
 	});
+        var title = $(this, "strong").text();
 	//remove the layer if it was clicked again
 	if(isCurrentLayer){
-		map.trigger("deletelayer", $(".layer-name", this).html());
+		map.trigger("deletelayer", title);
 			$(this).removeClass("active");
 	}
 	
 	// Was a different layer selected?
-	if (!isCurrentLayer) {
+	if (!isCurrentLayer) {            
 		// Set the currently selected layer as the active one
 		$(this).addClass("active");
 		map.addLayer(Ushahidi.KML, {
-			name: $(".layer-name", this).html(),
+			name: title,
 			url: "json/layer/" + layerId
 		});
 	}
 
 	return false;
 });
-});
+ */
+
+?>
+
+
+
+
 
 
 $(function(){
