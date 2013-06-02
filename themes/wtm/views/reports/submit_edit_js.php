@@ -154,21 +154,24 @@
                         
 
                         
-                          $("ul#kml_switch li > a").click(function(e) {
+                          $("input.layer_switcher").change(function(e) {
                             // Get the layer id
                             var layerId = this.id.substring(6);
+			    
+			    
 
                             var isCurrentLayer = false;
                             var context = this;
 
                             // Remove all actively selected layers
-                            $("#kml_switch a").each(function(i) {
-                                    if ($(this).hasClass("active")) {
+                            $("input.layer_switcher").each(function(i) {
+                                    if (!$(this).is(':checked')) {
                                             if (this.id == context.id) {
                                                     isCurrentLayer = true;
                                             }
                                     }
                             });
+    
                             var title = $(this, "strong").text();
                             //remove the layer if it was clicked again
                             if(isCurrentLayer){
@@ -180,7 +183,6 @@
                             // Was a different layer selected?
                             if (!isCurrentLayer) {            
                                     // Set the currently selected layer as the active one
-                                    $(this).addClass("active");
                                     
                                     var kmlLayer = new OpenLayers.Layer.Vector(title, {
                                         projection: new OpenLayers.Projection("EPSG:4326"),
@@ -199,7 +201,7 @@
                                     map.addLayer(kmlLayer);
                             }
 
-                            return false;
+                            return true;
                     });
                         
                         

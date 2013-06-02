@@ -1,6 +1,15 @@
 <script type="text/javascript">
 
 
+jQuery(window).load(function() {
+	  <?php if(sizeof($selections) > 0){ 
+	      foreach($selections as $selection){
+		echo '$("#layer_'.$selection.'").click();';
+	      }
+	  } ?>
+});
+
+
 $(document).ready(function() {
 	  $("[id^='layer_']").mouseover(function(){
 	  	var metaData = $(this).attr('meta_data');
@@ -19,7 +28,13 @@ $(document).ready(function() {
 	  }).mouseleave(function(){
 	 		//$("#layer_meta_window").hide();
 	  });
+	  
+	  
 	});
+	
+	
+
+
 
 
 <?php 

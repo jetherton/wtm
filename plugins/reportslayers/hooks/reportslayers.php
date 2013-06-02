@@ -10,6 +10,8 @@
 
 class reportslayers {
 
+	private $post = null;
+	
 	public function __construct()
 	{	
 		Event::add('system.pre_controller', array($this, 'add'));
@@ -26,19 +28,48 @@ class reportslayers {
                 
                 if(Router::$controller == "reports" AND Router::$method == "submit")
 		{
-                    Event::add('ushahidi_action.report_form_frontend_after_time', array($this, '_add_view_ui'));
-                    Event::add('ushahidi_action.header_scripts', array($this, '_add_view_js'));                
-                    plugin::add_stylesheet("reportslayers/media/css/reportslayers_submit");
+		    Event::add('ushahidi_action.report_form', array($this, '_add_submit_edit_ui'));
+		    Event::add('ushahidi_action.report_posted_frontend', array($this, '_grab_post'));
+		    Event::add('ushahidi_action.report_add', array($this, '_save_layers'));		    
+		    
                 }
                 
                    if(Router::$controller == "reports" AND Router::$method == "edit")
 		{
-                    Event::add('ushahidi_action.report_pre_form_admin', array($this, '_add_view_ui'));
-                    Event::add('ushahidi_action.header_scripts_admin', array($this, '_add_view_js'));                
-                    plugin::add_stylesheet("reportslayers/media/css/reportslayers_edit");
+		       
+		    Event::add('ushahidi_action.admin_report_form', array($this, '_add_submit_edit_ui'));	
+		    Event::add('ushahidi_action.report_submit_admin', array($this, '_grab_post'));	
+		    Event::add('ushahidi_action.report_edit', array($this, '_save_layers'));		    
                 }
 
 
+	}
+	
+	/**
+	 * Called when a controller has saved a report and we have an id to tie to the report
+	 */
+	public function _save_layers(){	    	    
+	    $report = Event::$data;
+	    $post = $this->post;
+	    //clear out current layer/report mapping
+	    ORM::factory('reportslayers')->where('report_id', $report->id)
+		    ->delete_all();
+	    if(isset($post['reportslayers'])){
+		foreach($post['reportslayers'] as $layer_id){
+		    $model = ORM::factory('reportslayers');
+		    $model->layer_id = $layer_id;
+		    $model->report_id = $report->id;
+		    $model->save();
+		}
+	    }
+	}
+	
+	
+	/**
+	 * Called when the controller processing the saving of a report has compiled the post variables
+	 */
+	public function _grab_post(){
+	    $this->post = Event::$data;
 	}
 	
 	
@@ -46,8 +77,20 @@ class reportslayers {
 	 * This adds the JS for users when viewing reports on the front end
 	 */
 	public function _add_view_js(){
-		$view = new View('reportslayers/view_js');
-		echo $view;
+		if(isset(Router::$arguments)){
+		    $id = Router::$arguments[0];
+		    $view = new View('reportslayers/view_js');
+		     //next grab the selections
+		    $selections_orm = ORM::factory('reportslayers')
+			->where('report_id',$id)
+			->find_all();
+		    $selections = array();
+		    foreach($selections_orm as $selection){
+			$selections[] = $selection->layer_id;
+		    }
+		    $view->selections = $selections;
+		    echo $view;
+		}
 	}
 	
 	/**
@@ -75,11 +118,52 @@ class reportslayers {
 		{
 			$layers = $config_layers;
 		}
-		$view = new View('reportslayers/view_ui');
+		$view = new View('reportslayers/view_ui');				
 		$view->layers = $layers;
 		
 		
 		echo $view;
+	}
+	
+	
+	/**
+	 * Used to add the layers on by default UI to an event 
+	 * submit / edit page
+	 */
+	public function _add_submit_edit_ui(){
+	    $id = Event::$data;
+	    
+	    // Get all active Layers (KMZ/KML)
+	    $layers = array();
+	    $config_layers = Kohana::config('map.layers'); 
+	    if ($config_layers == $layers) {
+		foreach (ORM::factory('layer')
+		    ->where('layer_visible', 1)
+		    ->orderby('layer_name', 'asc')
+		    ->find_all() as $layer){
+		    if(!isset($layers[$layer->parent_id])){ 
+			$layers[$layer->parent_id] = array();
+		    }
+
+		    $layers[$layer->parent_id][] = $layer;
+		}
+	    } else {
+		$layers = $config_layers;
+	    }
+	    $view = new View('reportslayers/submit_edit_ui');
+	    $view->layers = $layers;
+	    //next grab the selections
+	    $selections_orm = ORM::factory('reportslayers')
+		    ->where('report_id',$id)
+		    ->find_all();
+	    $selections = array();
+	    foreach($selections_orm as $selection){
+		$selections[] = $selection->layer_id;
+	    }
+	    $view->selections = $selections;
+
+	    echo $view;
+
 	}
 	
 }
