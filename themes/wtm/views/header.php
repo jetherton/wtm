@@ -99,7 +99,7 @@
 			<div class="background layoutleft">
 
 				<!-- mainmenu -->
-				<div id="mainmenu" class="clearingfix">
+				<div id="mainmenu" class="clearingfix agile_light_1em">
 					<ul class="clearingfix">
 						<?php nav::main_tabs($this_page); ?>
 					</ul>

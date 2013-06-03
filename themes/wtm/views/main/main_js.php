@@ -114,10 +114,10 @@ function smartColumns() {
 
 	// Set exact width of row in pixels instead of using % - Prevents
 	// cross-browser bugs that appear in certain view port resolutions.
-	$("ul.content-column").css({ 'width' : colWrap});
+	//$("ul.content-column").css({ 'width' : colWrap});
 
 	// Set exact width of the re-adjusted column	
-	$("ul.content-column li").css({ 'width' : colFixed});
+	//$("ul.content-column li").css({ 'width' : colFixed});
 }
 
 /**

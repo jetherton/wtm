@@ -453,6 +453,13 @@ class Main_Controller extends Template_Controller {
 		$this->themes->js->active_endDate = $display_endDate;
 
 		$this->themes->js->blocks_per_row = Kohana::config('settings.blocks_per_row');
+		
+		
+		//get the news for the home page
+		$news = ORM::factory('incident')
+			    ->orderby('incident_date', 'DESC')
+			    ->find_all(4);
+		$this->template->content->news = $news;
 	}
 	
 	/**

@@ -107,65 +107,7 @@ $(function(){
 			
 			
 			<!-- additional content -->
-			<?php
-			if (Kohana::config('settings.allow_reports'))
-			{
-				?>
-				<a class="btn toggle" id="how-to-report-menu-toggle" class="" href="#how-to-report-box"><?php echo Kohana::lang('ui_main.how_to_report'); ?> <span class="btn-icon ic-question">&raquo;</span></a>
-				<div id="how-to-report-box" class="map-menu-box">
-					
-					<div class="how-to-report-methods">
-
-						<!-- Phone -->
-						<?php if (!empty($phone_array)) { ?>
-						<div>
-							<strong><?php echo Kohana::lang('ui_main.report_option_1'); ?></strong>
-							<?php foreach ($phone_array as $phone) { ?>
-								<?php echo $phone; ?><br/>
-							<?php } ?>
-						</div>
-						<?php } ?>
-						
-						<!-- External Apps -->
-						<?php if (count($external_apps) > 0) { ?>
-						<div>
-							<strong><?php echo Kohana::lang('ui_main.report_option_external_apps'); ?>:</strong><br/>
-							<?php foreach ($external_apps as $app) { ?>
-								<a href="<?php echo $app->url; ?>"><?php echo $app->name; ?></a><br/>
-							<?php } ?>
-						</div>
-						<?php } ?>
-
-						<!-- Email -->
-						<?php if (!empty($report_email)) { ?>
-						<div>
-							<strong><?php echo Kohana::lang('ui_main.report_option_2'); ?>:</strong><br/>
-							<a href="mailto:<?php echo $report_email?>"><?php echo $report_email?></a>
-						</div>
-						<?php } ?>
-
-						<!-- Twitter -->
-						<?php if (!empty($twitter_hashtag_array)) { ?>
-						<div>
-							<strong><?php echo Kohana::lang('ui_main.report_option_3'); ?>:</strong><br/>
-							<?php foreach ($twitter_hashtag_array as $twitter_hashtag) { ?>
-								<span>#<?php echo $twitter_hashtag; ?></span>
-								<?php if ($twitter_hashtag != end($twitter_hashtag_array)) { ?>
-									<br />
-								<?php } ?>
-							<?php } ?>
-						</div>
-						<?php } ?>
-
-						<!-- Web Form -->
-						<div>
-							<a href="<?php echo url::site() . 'reports/submit/'; ?>"><?php echo Kohana::lang('ui_main.report_option_4'); ?></a>
-						</div>
-
-					</div>
-
-				</div>
-			<?php } ?>
+			
 			<!-- / additional content -->
 		</div>
 		<!-- / right column -->
@@ -191,7 +133,119 @@ $(function(){
 	<!-- content blocks -->
 	<div class="content-blocks clearingfix">
 		<ul class="content-column">
-			<?php blocks::render(); ?>
+		    <li id="front-page-news" class="wtm_head_up" style="width:612px;">
+			<h1>News</h1>
+			<table style="width:100%;">
+			    <?php
+				foreach($news as $news_item){
+				    ?>
+			    <tr>
+				<td>
+				    <div class="front_date_cat">
+					<?php 
+					    $t = strtotime($news_item->incident_date);
+					    echo date('Y-m-d',$t).' / ';
+					    echo Kohana::lang('ui_main.category').': '.$news_item->category[0]->category_title;
+					    echo ' /';
+					?>
+				    </div>
+				    <h1><a href="<?php echo url::base().'/reports/view/'.$news_item->id;?>"><?php echo $news_item->incident_title; ?></a></h1>
+				    <div class="front_teaser">
+					<?php
+					$content = $news_item->incident_description;
+					$content = substr($content, 0, strpos($content, "\n"));
+					$content = html::clean($content);
+					
+					echo $content.' <a style="text-decoration:underline;" href="'.url::base().'reports/view/'.$news_item->id.'">more&gt;</a>';
+					?>
+				    </div>
+				</td>				
+			    </tr>
+			    <?php
+				}
+			    ?>
+			</table>
+		    </li>
+		    <li id="front-col-small"  style="width:310px; padding:0px;">
+			<div id="front_all_about" class="wtm_head_up">
+			    <div id="front_about">
+				<h1>About</h1>
+				<p> 
+				    WatchTheMed is a network and a tool in order to document violations of 
+				    migrants' rights at sea to establish responsiblity for the violations which
+				    are structural products of the EU's policy of closure.
+				</p>
+			    </div>
+			    <div id="front_flyer">			
+				<p> 
+				    Read the Flyer: <a href="/">english</a>, <a href="/">french</a>, <a href="/">arabic</a>
+				</p>
+			    </div>
+
+			    <div id="how_to_report_box">
+				<h2><?php echo Kohana::lang("ui_main.how_to_report");?></h2>
+				<!-- Phone -->
+				<?php if (!empty($phone_array)) { ?>
+				<p>
+					<?php echo Kohana::lang('ui_main.report_option_1'); ?>
+					<?php foreach ($phone_array as $phone) { ?>
+						<?php echo $phone; ?><br/>
+					<?php } ?>
+				</p>
+				<?php } ?>
+
+				<!-- External Apps -->
+				<?php if (count($external_apps) > 0) { ?>
+				<p>
+					<?php echo Kohana::lang('ui_main.report_option_external_apps'); ?>:<br/>
+					<?php 
+					    $i = 0;
+					    foreach ($external_apps as $app) { 
+						$i++;
+						if($i>1){echo ', ';}?><a href="<?php echo $app->url; ?>"><?php echo $app->name; ?></a><?php } ?>
+				</p>
+				<?php } ?>
+
+				<!-- Email -->
+				<?php if (!empty($report_email)) { ?>
+				<p>
+					<?php echo Kohana::lang('ui_main.report_option_2'); ?>:<br/>
+					<a href="mailto:<?php echo $report_email?>"><?php echo $report_email?></a>
+				</p>
+				<?php } ?>
+
+				<!-- Twitter -->
+				<?php if (!empty($twitter_hashtag_array)) { ?>
+				<p>
+					<?php echo Kohana::lang('ui_main.report_option_3'); ?>:<br/>
+					<?php foreach ($twitter_hashtag_array as $twitter_hashtag) { ?>
+						<span>#<?php echo $twitter_hashtag; ?></span>
+						<?php if ($twitter_hashtag != end($twitter_hashtag_array)) { ?>
+							<br />
+						<?php } ?>
+					<?php } ?>
+				</p>
+				<?php } ?>
+
+				<!-- Web Form -->
+				<p>
+					<a href="<?php echo url::site() . 'reports/submit/'; ?>"><?php echo Kohana::lang('ui_main.report_option_4'); ?></a>
+				</p>
+
+
+
+			    </div>
+			</div>
+			
+			<div id="front_social" class="wtm_head_up">
+			    social
+			</div>
+			
+			<div id="tag cloud" class="wtm_head_up">
+			    <h1>Not sure what goes here</h1>
+			</div>
+
+		    </li>
 		</ul>
 	</div>
 	<!-- /content blocks -->
