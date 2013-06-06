@@ -16,19 +16,3 @@
 #searchButtons{
 	z-index: 2000;
 }
-
-.searchBtn {
--webkit-box-align: center;
-padding: 1px 6px;
-text-align: center;
-cursor: default;
-coor: buttontext;
-border: 2px outset buttonface;
-background-color: buttonface;
-box-sizing: border-box;
--webkit-appearance: push-button;
-white-space: pre;
-width: 50px;
-float:right;
-position:relative;
-}

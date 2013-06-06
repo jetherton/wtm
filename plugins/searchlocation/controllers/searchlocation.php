@@ -2,6 +2,12 @@
 
 class Searchlocation_Controller extends Controller{
 	
+	function index(){
+		if($_POST){
+			print_r($_POST);
+		}
+	}
+	
 	//function for using the Helper_map::geocode function 
 	function geocodeAddress(){
 		$address = $_POST['loc'];
