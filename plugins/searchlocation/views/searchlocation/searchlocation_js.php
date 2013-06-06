@@ -10,12 +10,6 @@
 
 
 <script type="text/javascript">	
-
-	<?php
-		if($_GET){
-	?>
-		searchLocation(<?php echo $_GET['coordinates']?>, <?php echo $_GET['search']?>);
-	<?php }?>
 	
 	var path_info = '<?php 
 		if ((strpos(url::current(), 'admin/reports/edit')) !== false){ echo 'admin/reports/edit';}
@@ -88,7 +82,6 @@
 
 
 	function searchLocation(location, searchType){
-		searchType = '\''+searchType+'\'';
 		//transform variables for coordinates
 		var proj4326 = new OpenLayers.Projection("EPSG:4326");
 		var projmerc = new OpenLayers.Projection("EPSG:900913");
@@ -173,12 +166,12 @@
 	function DMS(loc){
 		var values;
 		
-		if(loc.indexOf(',') != -1){
-			values = loc.split(',');
+		if(loc.indexOf('%2C') != -1){
+			values = loc.split('%2C');
 		}
 		else{
 			//just putting ' ' didn't work for spaces
-			values = loc.split(/\s+/);
+			values = loc.split('+');
 		}
 
 		if(values.length > 1){
@@ -266,12 +259,12 @@
 	function DMM(loc){
 		var values;
 		
-		if(loc.indexOf(',') != -1){
-			values = loc.split(',');
+		if(loc.indexOf('%2C') != -1){
+			values = loc.split('%2C');
 		}
 		else{
 			//just putting ' ' didn't work for spaces
-			values = loc.split(/\s+/);
+			values = loc.split('+');
 		}
 
 		if(values.length > 1){
@@ -377,6 +370,12 @@ jQuery(window).load(function() {
 	if(path_info != 'reports'){
 		createSearchbar();
 	}
+
+	<?php
+			if($_GET){
+		?>
+			searchLocation('<?php echo $_GET['coordinates']?>', '<?php echo $_GET['search']?>');
+		<?php }?>
 });
 	
 //
