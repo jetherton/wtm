@@ -300,7 +300,7 @@
         	deactivateAll();
 			clickOut.activate();
 			$('#'+map_div).css({
-				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomOut.png'), -moz-zoom-out"
+				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/mouseZoomOut.png'), -moz-zoom-out"
 			});
 			//console.log(my_map);
 		});	
@@ -308,7 +308,7 @@
 			deactivateAll();
 			clickIn.activate();
 			$('#'+map_div).css({
-				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomIn.png'), -moz-zoom-in"
+				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/mouseZoomIn.png'), -moz-zoom-in"
 			});
 			
 		});	

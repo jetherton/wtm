@@ -372,8 +372,11 @@ jQuery(window).load(function() {
 	}
 
 	<?php
-			if($_GET){
+			if(isset($_GET['coordinates'])){
 		?>
+			if(path_info == 'reports'){
+				$('a.map').click();
+			}
 			searchLocation('<?php echo $_GET['coordinates']?>', '<?php echo $_GET['search']?>');
 		<?php }?>
 });
