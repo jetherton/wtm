@@ -11,22 +11,43 @@
 
 <script type="text/javascript">	
 	
-	var path_info = '<?php echo url::current();?>';
-	var parents = $('.has_border_first').next().next().next();
-	
+var path_info = '<?php echo url::current();?>';	
+	var globalData;
 
-jQuery(window).load(function() {
 	$.post("<?php echo url::base(); ?>defaultcategories/retrieveCategories",
 			function(data) {
-				var m = jQuery.parseJSON(data);
-				console.log(m);
+				$('.has_border_first').next().next().next().append(data);
 			}, "json");
-});
-	
-//<link rel="stylesheet" type="text/css" href="<?php echo url::base(); ?>plugins/searchlocation/media/css/searchLocationCSS.css"/>
+	$.post("<?php echo url::base(); ?>defaultcategories/getCategories", 
+			function(data) {
+				globalData = data;
+			}, "json");
+
+	function test(){
+		var changed = new Array();
+		for(var i in globalData){
+			var name = globalData[i][0].replace(' ', '_');
+			var checked = $('#' + name).is(':checked');
+			if(globalData[i][4] != checked){
+				changed[name] = checked;
+				console.log(name);
+			}
+		}
+		console.log(changed);
+		//if(changed.length != 0){
+			$.post("<?php echo url::base(); ?>defaultcategories/changeDefault", { 'cha': changed });
+		//}
+		
+	}
+	$(document).ready(function(){
+		
+		$('.cancel-btn').click(function(){
+		});
+	});
+
 </script>
 
-
+<link rel="stylesheet" type="text/css" href="<?php echo url::base(); ?>plugins/defaultcategories/media/css/defaultcategoriesCSS.css"/>
 
 
 

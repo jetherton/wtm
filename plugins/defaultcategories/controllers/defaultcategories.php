@@ -7,16 +7,18 @@
 * This plugin is to allow default categories on maps.
 *************************************************************/
 
+
 class Defaultcategories_Controller extends Controller{
 
 	//function for using the Helper_map::geocode function
 	function retrieveCategories(){
 		$default_map_all = Kohana::config('settings.default_map_all');
 		$categories = $this->makeCategories();
-		$category_filter = Kohana::lang('ui_main.category_filter');
+		$category_filter = Kohana::lang('defaultcategories.categories');
 		$main_hide = Kohana::lang('ui_main.hide');
 		$all_categories = Kohana::lang('ui_main.all_categories');
-		
+		$hovertext = Kohana::lang('defaultcategories.hover');
+
 		// Get default icon
 		$default_map_all_icon = '';
 		if (Kohana::config('settings.default_map_all_icon_id'))
@@ -25,36 +27,27 @@ class Defaultcategories_Controller extends Controller{
 			$default_map_all_icon = Kohana::config('upload.relative_directory')."/".$icon_object->media_medium;
 		}
 		
-		$color_css = 'class=\"category-icon swatch\" style=\"background-color:#'.$default_map_all.'\"';
+		$color_css = 'class="category-icon swatch" style="background-color:#'.$default_map_all.'"';
 		$all_cat_image = '';
 		if ($default_map_all_icon != NULL)
 		{
 			$all_cat_image = html::image(array(
 					'src'=>$default_map_all_icon
 			));
-			$color_css = 'class=\"category-icon\"';
+			$color_css = 'class="category-icon"';
 		}
 		
 		$string = "<!-- category filters -->
-		<div class=\"cat-filters clearingfix\">
-		<strong>
-			$category_filter
-							<span>
-								[<a href=\"javascript:toggleLayer('category_switch_link', 'category_switch')\" id=\"category_switch_link\">
-									$main_hide
-								</a>]
-							</span>
-						</strong>
+		<h4><a href=\"#\" class=\"tooltip\" title=\"$hovertext\"> $category_filter</a></h4>
 					</div>
 		
 					<ul id=\"category_switch\" class=\"category-filters\">
 											
-						<li>
-							<a class=\"active\" id=\"cat_0\" href=\"#\">
+						<ul>
 								<span $color_css>$all_cat_image</span>
 								<span class=\"category-title\">$all_categories</span>
-							</a>
-						</li>";
+									<input type='checkbox' name=\"$all_categories\"/>
+						</ul>";
 		foreach ($categories as $category => $category_info)
 			{
 				$category_title = html::escape($category_info[0]);
@@ -64,23 +57,27 @@ class Defaultcategories_Controller extends Controller{
 								: NULL;
 				$category_description = html::escape(Category_Lang_Model::category_description($category));
 		
-				$color_css = 'class=\"category-icon swatch\" style=\"background-color:#'.$category_color.'\"';
+				$color_css = 'class="category-icon swatch" style="background-color:#'.$category_color.'"';
 				if ($category_info[2] != NULL)
 					{
 						$category_image = html::image(array(
 								'src'=>$category_image,
 								));
-						$color_css = 'class=\"category-icon\"';
+						$color_css = 'class="category-icon"';
 					}
 		
-								$string .= '<li>'
-								    . '<a href=\"#\" id=\"cat_'. $category .'\" title=\"'.$category_description.'\">'
+								$string .= '<ul>'
 								    . '<span '.$color_css.'>'.$category_image.'</span>'
-								    . '<span class=\"category-title\">'.$category_title.'</span>'
-								    . '</a>';
+								    . '<span class="category-title">'.$category_title.'</span>';
+								$checkbox = "<input type='checkbox' id='".str_replace(' ', '_', $category_title)."' value='$category_title'";
+								if($category_info[4] == 1){
+									$checkbox .= ' checked';
+								}
+								$checkbox .= '/>';
+								$string .= $checkbox;
 		
 								// Get Children
-								$string .= '<div class=\"hide\" id=\"child_'. $category .'\">';
+								$string .= '<div class="hide" id="child_'. $category .'">';
 								if (sizeof($category_info[3]) != 0)
 								{
 									$string .= '<ul>';
@@ -93,26 +90,29 @@ class Defaultcategories_Controller extends Controller{
 										    : NULL;
 										$child_description = html::escape(Category_Lang_Model::category_description($child));
 										
-										$color_css = 'class=\"category-icon swatch\" style=\"background-color:#'.$child_color.'\"';
+										$color_css = 'class="category-icon swatch" style="background-color:#'.$child_color.'"';
 										if ($child_info[2] != NULL)
 										{
 											$child_image = html::image(array(
 												'src' => $child_image
 											));
 		
-											$color_css = 'class=\"category-icon\"';
+											$color_css = 'class="category-icon"';
 										}
 		
-										$string .= '<li>'
-										    . '<a href=\"#\" id=\"cat_'. $child .'\" title=\"'.$child_description.'\">'
+										$string .= '<ul>'
 										    . '<span '.$color_css.'>'.$child_image.'</span>'
-										    . '<span class=\"category-title\">'.$child_title.'</span>'
-										    . '</a>'
-										    . '</li>';
+										    . '<span class="category-title">'.$child_title.'</span>';
+										$checkbox = "<input type='checkbox' id='$child_title' value='$child_title'";
+										if($child_info[3] == 1){
+											$checkbox .= ' checked';
+										}
+										$checkbox .= '</ul>';
+										$string .= $checkbox;
 									}
 									$string .= '</ul>';
 								}
-								$string .= '</div></li>';
+								$string .= '</div></ul>';
 							}
 					$string .= "</ul>
 					<!-- / category filters -->";
@@ -120,6 +120,7 @@ class Defaultcategories_Controller extends Controller{
 		echo json_encode($string);
 	}
 	
+	//Helper function to find parent and child categories
 	private function makeCategories(){
 		// Get locale
 		$l = Kohana::config('locale.language.0');
@@ -149,7 +150,8 @@ class Defaultcategories_Controller extends Controller{
 					$children[$child->id] = array(
 							$display_title,
 							$child->category_color,
-							$ca_img
+							$ca_img,
+							$child->category_default
 					);
 				}
 			}
@@ -166,13 +168,32 @@ class Defaultcategories_Controller extends Controller{
 					$display_title,
 					$category->category_color,
 					$ca_img,
-					$children
+					$children,
+					$category->category_default
 			);
 		}
 		return $parent_categories;
 	}
+	
+	
+	public function changeDefault(){
+		$changed = $_POST['cha'];
+		//print_r($_GET);
+		foreach($changed as $key=>$value){
+			$category = ORM::factory('category')->
+			where('category_title', '=', $key)->
+			find();
+			
+			print_r($category);
+			$category->category_default = $value;
+			$category->save();
+		}
+	}
+	
+	public function getCategories(){
+		echo json_encode($this->makeCategories());
+	}
 
 } // End Defaultcategories
-
 
 ?>

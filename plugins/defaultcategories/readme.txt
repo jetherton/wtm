@@ -13,7 +13,8 @@ Adds the option for the default categories to appear when a map loads.
 
 == Installation ==
 1. Copy the entire /defaultcategories/ directory into your /plugins/ directory.
-2. Activate the plugin.
+2. Copy the SQL from /sql/defaultcategories.sql into database.
+3. Activate the plugin.
 
 == Changelog ==
 0.1

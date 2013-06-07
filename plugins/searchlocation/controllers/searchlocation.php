@@ -10,7 +10,7 @@
 class Searchlocation_Controller extends Controller{
 	
 	//function for using the Helper_map::geocode function 
-	function geocodeAddress(){
+	public function geocodeAddress(){
 		$address = $_POST['loc'];
 		$results = map::geocode($address);
 		
