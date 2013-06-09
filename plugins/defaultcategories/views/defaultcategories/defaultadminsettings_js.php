@@ -29,13 +29,15 @@ var path_info = '<?php echo url::current();?>';
 			var name = globalData[i][0].replace(' ', '_');
 			var checked = $('#' + name).is(':checked');
 			if(globalData[i][4] != checked){
-				changed[name] = checked;
-				console.log(name);
+				changed[name.replace('_', ' ')] = checked;
+				//console.log(name);
 			}
 		}
 		console.log(changed);
+		console.log(changed == null);
+		
 		//if(changed.length != 0){
-			$.post("<?php echo url::base(); ?>defaultcategories/changeDefault", { 'cha': changed });
+			$.post("<?php echo url::base(); ?>defaultcategories/changeDefault", { 'cha' : JSON.stringify(changed) });
 		//}
 		
 	}

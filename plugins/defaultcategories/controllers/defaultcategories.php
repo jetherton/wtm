@@ -177,17 +177,20 @@ class Defaultcategories_Controller extends Controller{
 	
 	
 	public function changeDefault(){
-		$changed = $_POST['cha'];
+		$changed = json_decode($_POST['cha']);
+		//print_r($cha);
 		//print_r($_GET);
-		foreach($changed as $key=>$value){
+		foreach($changed as $key=>$value){		
 			$category = ORM::factory('category')->
 			where('category_title', '=', $key)->
 			find();
 			
-			print_r($category);
-			$category->category_default = $value;
-			$category->save();
+			//if($category->loaded()){
+				$category->category_default = $value;
+				$category->save();
+			//}
 		}
+		//exit;
 	}
 	
 	public function getCategories(){
