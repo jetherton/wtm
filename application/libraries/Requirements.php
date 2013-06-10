@@ -946,6 +946,7 @@ class Requirements_Backend {
 		if( !$this->combined_files_enabled) {
 			return;
 		}
+		return;
 		
 		switch ($type)
 		{
