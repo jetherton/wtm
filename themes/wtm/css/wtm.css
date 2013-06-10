@@ -11,6 +11,12 @@ Copyright 2013 Etherton Techonologies Ltd.
     src: url(Agile-Light.woff);
 }
 
+@font-face
+{
+    font-family:Agile-Bold;
+    src: url(Agile-Bold.woff);
+}
+
 /* Theme Settings
 --------------------*/
   /* Primary Color */
@@ -299,16 +305,18 @@ div.report-additional-reports h5 { font-family: Arial, sans-serif;  }
 }
 /* footer */
 div#footer {
-  margin-top:40px;
-  background: #000;
+  margin-top:20px;
+  background: none;
 }
 div#underfooter { background:transparent; }
 
 
 div.footermenu ul li a {
-  text-transform: uppercase;
-  font-weight: bold;
-  border-left: 1px solid #666;
+  font-family: Agile-Bold;
+  color: #333;
+  border-left: 1px solid #333;
+  font-size:13px;
+  text-decoration:none;
 }
 .additional-credits {
   margin-top: 18px;
@@ -458,6 +466,13 @@ h2{
     letter-spacing: 0;
     font-size: 1em;
 }
+
+img.teaser_img{
+	float:left;
+	width:222px;
+	height:146px;
+	margin-right:21px;
+	}
 
 #front_all_about div{
     font-family: Georgia;

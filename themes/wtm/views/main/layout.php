@@ -141,6 +141,21 @@ $(function(){
 				    ?>
 			    <tr>
 				<td>
+					<?php 
+					$media = ORM::Factory('media')->where('incident_id', $news_item->id)->find_all();
+					if ($media->count())
+					{
+						foreach ($media as $photo)
+						{
+							if ($photo->media_thumb)
+							{ // Get the first thumb
+								$incident_thumb = url::convert_uploaded_to_abs($photo->media_thumb);
+								echo '<img class="teaser_img" src="'.$incident_thumb.'"/>';
+								break;
+							}
+						}
+					}
+					?>
 				    <div class="front_date_cat">
 					<?php 
 					    $t = strtotime($news_item->incident_date);
@@ -152,6 +167,10 @@ $(function(){
 				    <h1><a href="<?php echo url::base().'/reports/view/'.$news_item->id;?>"><?php echo $news_item->incident_title; ?></a></h1>
 				    <div class="front_teaser">
 					<?php
+					
+					
+					
+					
 					$content = $news_item->incident_description;
 					$content = substr($content, 0, strpos($content, "\n"));
 					$content = html::clean($content);
