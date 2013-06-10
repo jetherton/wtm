@@ -186,14 +186,16 @@ class Defaultcategories_Controller extends Controller{
 		//print_r($changed);
 		//print_r($_GET);
 		//print_r($id);
-		foreach($val as $key=>$value){		
-			$category = ORM::factory('category', $key);
-			
-			//$val = $category->category_default;
-			$category->category_default = $value;
-			$category->save();
+		if($val.len() > 0){
+			foreach($val as $key=>$value){		
+				$category = ORM::factory('category', $key);
+				
+				//$val = $category->category_default;
+				$category->category_default = $value;
+				$category->save();
+			}
+			//exit;
 		}
-		//exit;
 	}
 	
 	public function getCategories(){
