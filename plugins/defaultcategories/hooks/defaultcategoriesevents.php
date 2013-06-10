@@ -22,15 +22,15 @@ class defaultcategoriesevents {
 		//Only add the plugin to pages with a map
 		//The last blank case happens when the webpage first loads, so the main page
 		if($url == 'main' OR 
-				$url == 'reports' OR 
-				$url == 'reports/submit' OR 
+				//$url == 'reports' OR 
+				//$url == 'reports/submit' OR 
 				//$url == 'alerts' OR 
 				$url == ''){
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}
-		elseif(strpos($url, 'admin/reports/edit') !== false){
-			Event::add('ushahidi_action.header_scripts_admin', array($this, 'render_javascript'));
-		}	
+		//elseif(strpos($url, 'admin/reports/edit') !== false){
+		//	Event::add('ushahidi_action.header_scripts_admin', array($this, 'render_javascript'));
+		//}	
 		elseif(strpos($url, 'admin/settings') !== false){
 			Event::add('ushahidi_action.header_scripts_admin', array($this, 'render_admin_viewjs'));
 		}

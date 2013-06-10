@@ -37,17 +37,18 @@ class Defaultcategories_Controller extends Controller{
 			$color_css = 'class="category-icon"';
 		}
 		
+		$all = str_replace(' ', '_', $all_categories);
 		$string = "<!-- category filters -->
 		<h4><a href=\"#\" class=\"tooltip\" title=\"$hovertext\"> $category_filter</a></h4>
 					</div>
 		
-					<ul id=\"category_switch\" class=\"category-filters\">
+					<table id=\"category_switch\" class=\"category_table\">
 											
-						<ul>
-								<span $color_css>$all_cat_image</span>
-								<span class=\"category-title\">$all_categories</span>
-									<input type='checkbox' name=\"$all_categories\"/>
-						</ul>";
+						<tr><td>
+								<span $color_css>$all_cat_image</span></td>
+								<td><span class=\"category-title\">$all_categories</span></td>
+									<td><input type='checkbox' name=\"$all\" id=\"$all\"/>
+						</td></tr>";
 		foreach ($categories as $category => $category_info)
 			{
 				$category_title = html::escape($category_info[0]);
@@ -65,22 +66,26 @@ class Defaultcategories_Controller extends Controller{
 								));
 						$color_css = 'class="category-icon"';
 					}
-		
-								$string .= '<ul>'
-								    . '<span '.$color_css.'>'.$category_image.'</span>'
-								    . '<span class="category-title">'.$category_title.'</span>';
-								$checkbox = "<input type='checkbox' id='".str_replace(' ', '_', $category_title)."' value='$category_title'";
+								$string .= '<tr><td>'
+								    . '<span '.$color_css.'>'.$category_image.'</span></td>'
+								    . '<td><span class="category-title">'.$category_title.'</span></td>';
+								$checkbox = "<td><input type='checkbox' id='".str_replace(' ', '_', $category_title)."' value='$category_title'";
 								if($category_info[4] == 1){
 									$checkbox .= ' checked';
 								}
-								$checkbox .= '/>';
+								$checkbox .= '/></td>';
 								$string .= $checkbox;
 		
 								// Get Children
-								$string .= '<div class="hide" id="child_'. $category .'">';
+								if(sizeof($category_info[3]) != 0){
+									$string .= '<td><a class="show" id="show_'.$category.'"> + </a></td></tr>';
+								}
+								else{
+									$string .= '</tr>';
+								}
+								$string .= '<div  id="child_'. $category .'">';
 								if (sizeof($category_info[3]) != 0)
 								{
-									$string .= '<ul>';
 									foreach ($category_info[3] as $child => $child_info)
 									{
 										$child_title = html::escape($child_info[0]);
@@ -99,22 +104,21 @@ class Defaultcategories_Controller extends Controller{
 		
 											$color_css = 'class="category-icon"';
 										}
-		
-										$string .= '<ul>'
-										    . '<span '.$color_css.'>'.$child_image.'</span>'
-										    . '<span class="category-title">'.$child_title.'</span>';
-										$checkbox = "<input type='checkbox' id='$child_title' value='$child_title'";
+										$child_name = str_replace(' ' , '_', $child_title);
+										$string .= '<tr style="display:none" class="child_'.$category.'"><td></td>'
+										    . '<td><span '.$color_css.'>'.$child_image.'</span>'
+										    . '<span class="category-title">'.$child_title.'</span></td>';
+										$checkbox = "<td><input type='checkbox' id='$child_name' value='$child_name'";
 										if($child_info[3] == 1){
 											$checkbox .= ' checked';
 										}
-										$checkbox .= '</ul>';
+										$checkbox .= '/></td></tr>';
 										$string .= $checkbox;
 									}
-									$string .= '</ul>';
 								}
-								$string .= '</div></ul>';
+								$string .= '</div>';
 							}
-					$string .= "</ul>
+					$string .= "</table>
 					<!-- / category filters -->";
 			
 		echo json_encode($string);
@@ -175,22 +179,23 @@ class Defaultcategories_Controller extends Controller{
 		return $parent_categories;
 	}
 	
-	
+	//change the categories to default or not
 	public function changeDefault(){
-		$changed = json_decode($_POST['cha']);
-		//print_r($cha);
+		$val = $_POST['chan'];
+		//$id = $_POST['catid'];
+		//print_r($changed);
 		//print_r($_GET);
-		foreach($changed as $key=>$value){		
-			$category = ORM::factory('category')->
-			where('category_title', '=', $key)->
-			find();
-			
-			//if($category->loaded()){
+		//print_r($id);
+		if($val.len() > 0){
+			foreach($val as $key=>$value){		
+				$category = ORM::factory('category', $key);
+				
+				//$val = $category->category_default;
 				$category->category_default = $value;
 				$category->save();
-			//}
+			}
+			//exit;
 		}
-		//exit;
 	}
 	
 	public function getCategories(){
