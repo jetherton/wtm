@@ -1,16 +1,15 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /***********************************************************
-* defaultcategories_js.php - Javascript for DefaultCategories Plugin
+* defaultacategories_js.php - Javascript for DefaultCategories Plugin
 * This software is copy righted by WatchTheMed 2013
 * Writen by Dylan Gillespie, Etherton Technologies <http://ethertontech.com>
 * Started on 2013-07-06
-* This plugin is to allow default categories on maps.
+* This javascript is to make categories default on.
 *************************************************************/
 ?>
 
-
 <script type="text/javascript">	
-	
+
 	var path_info = '<?php 
 		if ((strpos(url::current(), 'admin/reports/edit')) !== false){ echo 'admin/reports/edit';}
 		else {echo url::current(); }	?>';
@@ -18,16 +17,34 @@
 	var my_map = null;
 	var map_cat = false;
 	var cat_exists = false;
-    
+
+
+
+	function startDefaultCategories(){
+		$.post("<?php echo url::base(); ?>defaultcategories/getCategories", 
+				function(data) {
+					$("a[id^='cat_']").removeClass("active");
+					for(var i in data){
+						if(data[i][4] == 1){
+							$("#cat_" + i).addClass("active");
+						}
+						for(var j in data[i][3]){
+							if(data[i][3][j][3] == 1){
+								$("#cat_" + j).addClass("active");
+							}
+						}
+					}
+					
+				}, "json");
+	}
+
+
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
 			if(!map_cat){
 				if(!cat_exists){
-					createSearchbar();
-				}
-				else{
-					$('#searchControl').show();
+					startDefaultCategories();
 				}
 				map_cat = true;
 			}
@@ -35,11 +52,9 @@
 		$('a.list').click(function(){
 			if(map_cat){
 				map_cat = false;
-				$('#searchControl').hide();
 			}
 		});
 	});
-	
 
 jQuery(window).load(function() {
 	switch(path_info){
@@ -65,15 +80,8 @@ jQuery(window).load(function() {
         break;
 	}
 	if(path_info != 'reports'){
-		createSearchbar();
+		startDefaultCategories();
 	}
 });
-	
-//<link rel="stylesheet" type="text/css" href="<?php echo url::base(); ?>plugins/searchlocation/media/css/searchLocationCSS.css"/>
+
 </script>
-
-
-
-
-
-
