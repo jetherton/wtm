@@ -814,21 +814,8 @@
 
 		var content = "<div class=\"infowindow\">" + image +
 		    "<div class=\"infowindow_content\">"+
-		    "<div class=\"infowindow_list\">"+event.feature.attributes.name+"</div>\n" +
-		    "<div class=\"infowindow_meta\">";
+		    "<div class=\"infowindow_list\">"+event.feature.attributes.name+"</div>\n";
 
-		if (typeof(event.feature.attributes.link) != 'undefined' &&
-		    event.feature.attributes.link != '') {
-
-		    content += "<a href='"+event.feature.attributes.link+"'>" +
-			    "More Information</a><br/>";
-		}
-
-		content += "<a id=\"zoomIn\">";
-		content += "Zoom In</a>";
-		content += "&nbsp;&nbsp;|&nbsp;&nbsp;";
-		content += "<a id=\"zoomOut\">";
-		content += "Zoom Out</a></div>";
 		content += "</div><div style=\"clear:both;\"></div></div>";		
 
 		if (content.search("<script") != -1) {
