@@ -23,29 +23,46 @@ var path_info = '<?php echo url::current();?>';
 				globalData = data;
 			}, "json");
 
-	function test(){
+	function change(){
 		var changed = new Array();
 		for(var i in globalData){
 			var name = globalData[i][0].replace(' ', '_');
 			var checked = $('#' + name).is(':checked');
 			if(globalData[i][4] != checked){
-				changed[name.replace('_', ' ')] = checked;
-				//console.log(name);
+				changed[i] = checked;
+				//$.post("<?php echo url::base();?>defaultcategories/changeDefault", {catid: i, change : checked});
+			}
+			for(var j in globalData[i][3]){
+				var name = globalData[i][0].replace(' ', '_');
+				var checked = $('#' + name).is(':checked');
+				if(globalData[i][3][j][3] != checked){
+					changed[j] = checked;
+					//$.post("<?php echo url::base();?>defaultcategories/changeDefault", {catid: j, change :checked});
+				}
 			}
 		}
-		console.log(changed);
-		console.log(changed == null);
-		
-		//if(changed.length != 0){
-			$.post("<?php echo url::base(); ?>defaultcategories/changeDefault", { 'cha' : JSON.stringify(changed) });
-		//}
-		
+		$.post("<?php echo url::base()?>defaultcategories/changeDefault", {chan : changed});
 	}
-	$(document).ready(function(){
-		
-		$('.cancel-btn').click(function(){
-		});
+	$(document).on('click', '.cancel-btn', function(){
+		change();
 	});
+	
+	$(document).on('click','.show',function() {
+		var val = this.id.substring(5);
+		$('.child_' + val).toggle();
+		if(this.text == '+'){
+			$('#' + this.id).text('-');
+		}
+		else if(this.text == '-'){
+			$('#' + this.id).text('+');
+		}
+	 });
+	 $(document).on('click', '#All_Categories', function(){
+		 var checkedStatus = this.checked;
+		 $('table :checkbox').each(function () {
+		     $(this).prop('checked', checkedStatus);
+		 });
+	 });
 
 </script>
 
