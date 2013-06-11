@@ -30,8 +30,17 @@ class addreportlayersevents {
 		$layers = ORM::factory('layer')->
 		where('layer_visible', true)->
 		find_all();
+		// Pagination
+		// Pagination
+		$pagination = new Pagination(array(
+			'query_string' => 'page',
+			'total_items'	 => ORM::factory('feed')->count_all()
+		));
 		
+		
+		$view->total_items = count($layers);
 		$view->layers = $layers;
+		$view->pagination = $pagination;
 		echo $view;
 	}
 	
