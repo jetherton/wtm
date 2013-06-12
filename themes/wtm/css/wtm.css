@@ -526,7 +526,28 @@ img.teaser_img{
 	border: none;
 }
 
-div#chicken_close, div#chicken_FrameDecorationDiv_2, div#chicken_FrameDecorationDiv_3{display:none;}
+#chicken_FrameDecorationDiv_1, #chicken_close, #chicken_FrameDecorationDiv_3{
+	display:none;
+}
+
+.infowindow{
+	maring-top:15px;
+	margin-left:15px;
+	width:220px;
+}
+
+.infowindow .infowindow_content { 
+	width: 240px;
+}
+.infowindow a, .infowindow a:hover{ 
+	color: #333;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+.infowindow a .underline{ 
+	text-decoration:underline;
+}
 
 .social{
 	float: left;
