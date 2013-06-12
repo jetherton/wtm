@@ -517,3 +517,46 @@ img.teaser_img{
 #front_social{
     height:53px;
 }
+
+#chicken_GroupDiv .infowindow .infowindow_image{
+	float:none;
+}
+
+#chicken_GroupDiv .infowindow .infowindow_image img{
+	border: none;
+}
+
+div#chicken_close, div#chicken_FrameDecorationDiv_2, div#chicken_FrameDecorationDiv_3{display:none;}
+
+.social{
+	float: left;
+	margin:12px;
+}
+
+#social_facebook{
+	height:27px;
+	width: 15px;
+	background: url('../images/social_icons.png')  -0px 0px;
+	
+}
+
+#social_twitter{
+	height:27px;
+	width: 20px;
+	background: url('../images/social_icons.png')  -33px 0px;
+	
+}
+
+#social_rss{
+	height:27px;
+	width: 26px;
+	background: url('../images/social_icons.png')  -76px 0px;
+	
+}
+
+
+
+
+
+
+

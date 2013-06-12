@@ -803,7 +803,7 @@
 		var image = "";
 		if (event.feature.attributes.thumb !== undefined && event.feature.attributes.thumb != '') {
 			image = "<div class=\"infowindow_image\"><a href='"+event.feature.attributes.link+"'>";
-			image += "<img src=\""+event.feature.attributes.thumb+"\" height=\"59\" width=\"89\" /></a></div>";
+			image += "<img src=\""+event.feature.attributes.thumb+"\" height=\"146\" width=\"220\" /></a></div>";
 		} else if (event.feature.attributes.image !== undefined && event.feature.attributes.image != '') {
 			image = "<div class=\"infowindow_image\">";
 			image += "<a href=\""+event.feature.attributes.link+"\" title=\""+event.feature.attributes.name+"\">";
@@ -831,7 +831,7 @@
 		// Create the popup
 		var popup = new OpenLayers.Popup.FramedCloud("chicken", 
 			event.feature.geometry.getBounds().getCenterLonLat(),
-			new OpenLayers.Size(100,100),
+			new OpenLayers.Size(250,100),
 			content,
 			null, true, this.onPopupClose);
 
