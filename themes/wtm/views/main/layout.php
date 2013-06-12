@@ -22,7 +22,7 @@ $(function(){
 
 		<!-- right column -->
 		<div id="report-map-filter-box" class="clearingfix">
-			<a class="btn toggle" id="filter-menu-toggle" class="" href="#the-filters"><?php echo Kohana::lang('ui_main.filter_reports_by'); ?><span class="btn-icon ic-right">&raquo;</span></a>
+			<a class="btn toggle" id="filter-menu-toggle" class="" href="#the-filters"><?php echo Kohana::lang('ui_main.categories'); ?><span class="btn-icon ic-right">&raquo;</span></a>
 			
 			<!-- filters box -->
 			<div id="the-filters" class="map-menu-box">
@@ -44,25 +44,7 @@ $(function(){
 				
 				
 				
-				<!-- report type filters -->
-				<div id="report-type-filter" class="filters">
-					<h3><?php echo Kohana::lang('ui_main.type'); ?></h3>
-						<ul>
-							<li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
-							<li><a id="media_4" href="#"><span><?php echo Kohana::lang('ui_main.news'); ?></span></a></li>
-							<li><a id="media_1" href="#"><span><?php echo Kohana::lang('ui_main.pictures'); ?></span></a></li>
-							<li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
-							<li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
-						</ul>
-						<div class="floatbox">
-								<?php
-								// Action::main_filters - Add items to the main_filters
-								Event::run('ushahidi_action.map_main_filters');
-								?>
-							</div>
-							<!-- / report type filters -->
-				</div>
-			
+							
 				<?php
 				// Action::main_sidebar_post_filters - Add Items to the Entry Page after filters
 				Event::run('ushahidi_action.main_sidebar_post_filters');
@@ -117,6 +99,26 @@ $(function(){
 				<?php
 				// Map and Timeline Blocks
 				echo $div_map;
+				?>
+				<!-- report type filters -->
+				<div id="report-type-filter" class="filters">
+				<h3><?php echo Kohana::lang('ui_main.type'); ?></h3>
+										<ul>
+											<li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
+											<li><a id="media_4" href="#"><span><?php echo Kohana::lang('ui_main.news'); ?></span></a></li>
+											<li><a id="media_1" href="#"><span><?php echo Kohana::lang('ui_main.pictures'); ?></span></a></li>
+											<li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
+											<li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
+										</ul>
+										<div class="floatbox">
+												<?php
+												// Action::main_filters - Add items to the main_filters
+												Event::run('ushahidi_action.map_main_filters');
+												?>
+											</div>
+											<!-- / report type filters -->
+								</div>
+				<?php				
 				echo $div_timeline;
 				?>
 			</div>
