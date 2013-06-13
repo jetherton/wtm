@@ -33,8 +33,10 @@
 	position:relative;
 }
 #output{
-	width: 150px;
+	width: 167px;
 	background-color: rgb(225, 226, 228);
+	position:relative;
+	top: -8px;
 }
 #clickOut{
 	float: left;
@@ -51,4 +53,11 @@
 	background: url('../img/toolbar.png') -29px -2px;
 	width : 34px;
 	height: 23px;
+}
+#distanceOptionsDiv{
+	width:167px;	
+	background-color: rgb(225, 226, 228);
+	position : relative;
+	top : 7px;
+	display: none;
 }

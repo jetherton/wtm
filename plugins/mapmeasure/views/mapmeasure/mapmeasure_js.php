@@ -20,6 +20,7 @@
 	//variables to hold map zooming listeners
 	var clickOut;
 	var clickIn;
+	var nautMile = 0.539957;
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
@@ -108,6 +109,7 @@
 			'cursor': "default"
 		});
 		$('#output').hide();
+		$('#distanceOptionsDiv').hide();
 		for(key in measureControls) {
             var control = measureControls[key];
             control.deactivate();
@@ -121,22 +123,25 @@
 		$('#'+map_div).before(
 				'<div style="position:absolute;">\
 				<div id="toolbarControl">\
-						<div title="Measure in a series of lines." id="lineDraw" onclick="toggleControl(this)">\
+						<div title="<?php echo Kohana::lang('mapmeasure.lineMeasure')?>" id="lineDraw" onclick="toggleControl(this)">\
 							<img class="rulerIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 						</div>\
-						<div title="Measure within an area." id="areaDraw" onclick="toggleControl(this)">\
+						<div title="<?php echo Kohana::lang('mapmeasure.areaMeasure')?>" id="areaDraw" onclick="toggleControl(this)">\
 							<img class="areaIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 						</div>\
-						<div value="None" title="Turn off measuring." id="noDraw">\
+						<div value="None" title="<?php echo Kohana::lang('mapmeasure.noMeasure')?>" id="noDraw">\
 							<img class="dragIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 						</div>\
+						</br><div id="distanceOptionsDiv">\
+								<input type="radio" id="kilometers" name="distanceOptions" checked> <?php echo Kohana::lang('mapmeasure.kilometers')?>\
+								<input type="radio" name="distanceOptions" id="nautMile"> <?php echo Kohana::lang('mapmeasure.nautMile')?>\
+							</div>\
 						</br><div id = "output"></div>\
 				</div>\
 				');
 		$('#lineDraw').val('line');
 		$('#areaDraw').val('polygon');
 		$('#noDraw').click(function(){
-			$('#output').hide();
 			deactivateAll();
 		});		
 	}
@@ -189,18 +194,20 @@
     }
     
     function handleMeasurements(event) {
-        var units = event.units;
+        var units = ($('#kilometers').is(':checked')) ? event.units : 'NM';
         var order = event.order;
         var measure = event.measure;
         var element = document.getElementById('output');
         var out = "";
+        var kind = ($('#kilometers').is(':checked')) ? 1 : nautMile;
         if(order == 1) {
-            out += "Distance: " + measure.toFixed(3) + " " + units;
+            out += "Distance: " + measure.toFixed(3)*kind + " " + units;
         } else {
-            out += "Distance: " + measure.toFixed(3) + " " + units + "<sup>2</sup>";
+            out += "Distance: " + measure.toFixed(3)*kind + " " + units + "<sup>2</sup>";
         }
         element.innerHTML = out;
         $('#output').show();
+        $('#distanceOptionsDiv').show();
         
     }
 

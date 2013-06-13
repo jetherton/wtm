@@ -89,7 +89,7 @@ class defaultcategoriesevents {
 		
 			$all = str_replace(' ', '_', $all_categories);
 			$string = "<!-- category filters -->
-			<h4><a href=\"#\" class=\"tooltip\" title=\"$hovertext\"> $category_filter</a></h4>
+			<h4><a href='#' class='tooltip' title='$hovertext'>$category_filter</a></h4>
 			</div>
 		
 			<table id=\"category_switch\" class=\"category_table\">
@@ -132,7 +132,6 @@ class defaultcategoriesevents {
 			}
 									
 
-		$string .= '<div  id="child_'. $category .'">';
 		if (sizeof($category_info[3]) != 0)
 			{
 				foreach ($category_info[3] as $child => $child_info)
@@ -165,7 +164,7 @@ class defaultcategoriesevents {
 														$string .= $checkbox;
 					}
 					}
-					$string .= '</div></div>';
+					$string .= '</div>';
 		}
 		$string .= "</table>
 		<!-- / category filters -->";
