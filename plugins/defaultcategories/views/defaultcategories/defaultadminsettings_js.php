@@ -12,16 +12,11 @@
 <script type="text/javascript">	
 	
 var path_info = '<?php echo url::current();?>';	
-	var globalData;
+	var globalData = jQuery.parseJSON(<?php echo $categories ?>);
 
-	$.post("<?php echo url::base(); ?>defaultcategories/retrieveCategories",
-			function(data) {
-				$('.has_border_first').next().next().next().append(data);
-			}, "json");
-	$.post("<?php echo url::base(); ?>defaultcategories/getCategories", 
-			function(data) {
-				globalData = data;
-			}, "json");
+
+	$(document).ready(function(){$('.has_border_first').next().next().next().append(<?php echo $categoryDiv ?>);});
+
 
 	function change(){
 		var changed = new Array();

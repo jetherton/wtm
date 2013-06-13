@@ -1,9 +1,0 @@
-#addreportlayersWindow{
-	display:none;
-	background-color: white;
-	padding: 10px 10px 10px 10px;
-	z-index: 3000;
-	position: relative;
-	top: -50px;
-	left: -9px;
-}
