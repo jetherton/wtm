@@ -21,21 +21,18 @@
 
 
 	function startDefaultCategories(){
-		$.post("<?php echo url::base(); ?>defaultcategories/getCategories", 
-				function(data) {
-					$("a[id^='cat_']").removeClass("active");
-					for(var i in data){
-						if(data[i][4] == 1){
-							$("#cat_" + i).addClass("active");
-						}
-						for(var j in data[i][3]){
-							if(data[i][3][j][3] == 1){
-								$("#cat_" + j).addClass("active");
-							}
-						}
+			var data = jQuery.parseJSON(<?php echo $categories?>);
+			$("a[id^='cat_']").removeClass("active");
+			for(var i in data){
+				if(data[i][4] == 1){
+					$("#cat_" + i).addClass("active");
+				}
+				for(var j in data[i][3]){
+					if(data[i][3][j][3] == 1){
+						$("#cat_" + j).addClass("active");
 					}
-					
-				}, "json");
+				}
+			}
 	}
 
 
