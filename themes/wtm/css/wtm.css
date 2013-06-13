@@ -564,8 +564,47 @@ img.teaser_img{
 	
 }
 
+div.report-find-location div.olControlEditingToolbar div.olButton{
+	
+	height:31px;
+	width:36px;
+	border-right: solid 1px #9e9e9c;
+}
 
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePointItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -34px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePointItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -34px 0px;
+}
 
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -70px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -70x 0px;
+}
+
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -106px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -106px 0px;
+}
+
+div.report-find-location div.olControlEditingToolbar div.elipseItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -142px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.elipseItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -142px 0px;
+}
+
+div.report-find-location div.olControlEditingToolbar div.olControlDragPanItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -214px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDragPanItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -214px 0px;
+}
 
 
 

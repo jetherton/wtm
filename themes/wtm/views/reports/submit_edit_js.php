@@ -295,11 +295,41 @@
 			
 			// Create the Editing Toolbar
 			var container = document.getElementById("panel");
-			var panel = new OpenLayers.Control.EditingToolbar(
-				vlayer, {div: container}
-			);
+			
+			//var panel = new OpenLayers.Control.EditingToolbar(
+			//	vlayer, {div: container}
+			//);
+			//map.addControl(panel);
+			//panel.activateControl(panel.controls[0]);
+			
+			
+			var panelControls = [
+			 
+			 new OpenLayers.Control.DragPan(),
+			 new OpenLayers.Control.DrawFeature(vlayer,
+                 OpenLayers.Handler.RegularPolygon,
+                 {handlerOptions: {sides:40, irregular: true},
+                 'displayClass': 'elipse'}),
+			 new OpenLayers.Control.DrawFeature(vlayer,
+			     OpenLayers.Handler.Polygon,
+			     {'displayClass': 'olControlDrawFeaturePolygon'}),
+			 new OpenLayers.Control.DrawFeature(vlayer,
+			     OpenLayers.Handler.Path,
+			     {'displayClass': 'olControlDrawFeaturePath'}),
+			 new OpenLayers.Control.DrawFeature(vlayer,
+			     OpenLayers.Handler.Point,
+			     {'displayClass': 'olControlDrawFeaturePoint'})
+			];
+			var panel = new OpenLayers.Control.Panel({
+			   div:container,
+			   displayClass: 'olControlEditingToolbar'
+			});
+			panel.addControls(panelControls);
 			map.addControl(panel);
-			panel.activateControl(panel.controls[0]);
+			
+			
+			
+			
 			drag.activate();
 			highlightCtrl.activate();
 			selectCtrl.activate();
