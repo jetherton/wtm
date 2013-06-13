@@ -9,15 +9,36 @@
 
 
 if($post){
-	foreach($categories as $key=>$category){
+	foreach($categories as $key=>$parent){
 		
-		$cat = str_replace(' ', '_', $category[0]);
+		$cat = str_replace(' ', '_', $parent[0]);
+		$category = ORM::factory('category', $key);
 
 		if(isset($post[$cat])){
-			$category = ORM::factory('category', $key);
-				//$val = $category->category_default;
-				$category->category_default = !$category->category_default;
+				$category->category_default = 1;
 				$category->save();
 		}
+		else{
+			$category->category_default = 0;
+			$category->save();
+		}
+		
+		foreach($parent[3] as $val=>$child){
+			$cat = str_replace(' ', '_', $child[0]);
+			$category = ORM::factory('category', $val);
+			
+			if(isset($post[$cat])){
+				$category->category_default = 1;
+				$category->save();
+			}
+			else{
+				$category->category_default = 0;
+				$category->save();
+			}
+		}
+		
+		
 	}
+	//print_r($post);
+	//exit;
 }
