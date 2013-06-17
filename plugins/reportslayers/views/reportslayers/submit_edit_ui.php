@@ -15,7 +15,7 @@
 	<?php		
 	    $top_level_layers = sizeof($layers[0]);
 	    $start = 0;
-	    $stop = $top_level_layers/2;
+	    $stop = intval($top_level_layers/2);
 	    $column_count = 1;
 	    for($j = 0; $j < 2; $j++){
 		echo '<ul class="category-column category-column-'.$column_count.'" id="category-column-'.$column_count.'">';
@@ -37,8 +37,8 @@
 		    echo '</li>';
 		}
 		echo '</ul>';
-		$start = $stop;
-		$stop = $top_level_layers;
+		$start =  $stop;
+		$stop =  $top_level_layers;
 		$column_count++;
 	    }
 	?>
