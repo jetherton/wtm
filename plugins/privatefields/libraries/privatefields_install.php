@@ -7,7 +7,7 @@
  */
 
 
-class Enhancedmap_Install {
+class Privatefields_Install {
 
     /**
 	 * Function: __construct
