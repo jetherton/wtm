@@ -15,7 +15,7 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 ?>
-	<?php @require(APPPATH.'views/map_common_js.php'); ?>
+	<?php require(APPPATH.'../themes/WTM/views/map_common_js.php'); ?>
 	
 	// Tracks the current URL parameters
 	var urlParameters = <?php echo $url_params; ?>;

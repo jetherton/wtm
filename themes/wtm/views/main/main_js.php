@@ -230,6 +230,7 @@ jQuery(function() {
 			new OpenLayers.Control.Navigation({ dragPanOptions: { enableKinetic: true } }),
 			new OpenLayers.Control.Attribution(),
 			new OpenLayers.Control.Zoom(),
+			new OpenLayers.Control.ZoomBox(),
 			new OpenLayers.Control.MousePosition({
 				div: document.getElementById('mapMousePosition'),
 				numdigits: 5

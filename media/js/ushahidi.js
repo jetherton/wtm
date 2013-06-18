@@ -803,7 +803,7 @@
 		var image = "";
 		if (event.feature.attributes.thumb !== undefined && event.feature.attributes.thumb != '') {
 			image = "<div class=\"infowindow_image\"><a href='"+event.feature.attributes.link+"'>";
-			image += "<img src=\""+event.feature.attributes.thumb+"\" height=\"59\" width=\"89\" /></a></div>";
+			image += "<img src=\""+event.feature.attributes.thumb+"\" height=\"146\" width=\"220\" /></a></div><br/>";
 		} else if (event.feature.attributes.image !== undefined && event.feature.attributes.image != '') {
 			image = "<div class=\"infowindow_image\">";
 			image += "<a href=\""+event.feature.attributes.link+"\" title=\""+event.feature.attributes.name+"\">";
@@ -814,21 +814,8 @@
 
 		var content = "<div class=\"infowindow\">" + image +
 		    "<div class=\"infowindow_content\">"+
-		    "<div class=\"infowindow_list\">"+event.feature.attributes.name+"</div>\n" +
-		    "<div class=\"infowindow_meta\">";
+		    "<div class=\"infowindow_list\">"+event.feature.attributes.name+"</div>\n";
 
-		if (typeof(event.feature.attributes.link) != 'undefined' &&
-		    event.feature.attributes.link != '') {
-
-		    content += "<a href='"+event.feature.attributes.link+"'>" +
-			    "More Information</a><br/>";
-		}
-
-		content += "<a id=\"zoomIn\">";
-		content += "Zoom In</a>";
-		content += "&nbsp;&nbsp;|&nbsp;&nbsp;";
-		content += "<a id=\"zoomOut\">";
-		content += "Zoom Out</a></div>";
 		content += "</div><div style=\"clear:both;\"></div></div>";		
 
 		if (content.search("<script") != -1) {
@@ -844,9 +831,10 @@
 		// Create the popup
 		var popup = new OpenLayers.Popup.FramedCloud("chicken", 
 			event.feature.geometry.getBounds().getCenterLonLat(),
-			new OpenLayers.Size(100,100),
+			new OpenLayers.Size(250,100),
 			content,
 			null, true, this.onPopupClose);
+		
 
 		event.feature.popup = popup;
 		this._olMap.addPopup(popup);

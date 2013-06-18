@@ -22,7 +22,7 @@ $(function(){
 
 		<!-- right column -->
 		<div id="report-map-filter-box" class="clearingfix">
-			<a class="btn toggle" id="filter-menu-toggle" class="" href="#the-filters"><?php echo Kohana::lang('ui_main.filter_reports_by'); ?><span class="btn-icon ic-right">&raquo;</span></a>
+			<a class="btn toggle" id="filter-menu-toggle" class="" href="#the-filters"><?php echo Kohana::lang('ui_main.categories'); ?><span class="btn-icon ic-right">&raquo;</span></a>
 			
 			<!-- filters box -->
 			<div id="the-filters" class="map-menu-box">
@@ -44,25 +44,7 @@ $(function(){
 				
 				
 				
-				<!-- report type filters -->
-				<div id="report-type-filter" class="filters">
-					<h3><?php echo Kohana::lang('ui_main.type'); ?></h3>
-						<ul>
-							<li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
-							<li><a id="media_4" href="#"><span><?php echo Kohana::lang('ui_main.news'); ?></span></a></li>
-							<li><a id="media_1" href="#"><span><?php echo Kohana::lang('ui_main.pictures'); ?></span></a></li>
-							<li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
-							<li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
-						</ul>
-						<div class="floatbox">
-								<?php
-								// Action::main_filters - Add items to the main_filters
-								Event::run('ushahidi_action.map_main_filters');
-								?>
-							</div>
-							<!-- / report type filters -->
-				</div>
-			
+							
 				<?php
 				// Action::main_sidebar_post_filters - Add Items to the Entry Page after filters
 				Event::run('ushahidi_action.main_sidebar_post_filters');
@@ -117,6 +99,26 @@ $(function(){
 				<?php
 				// Map and Timeline Blocks
 				echo $div_map;
+				?>
+				<!-- report type filters -->
+				<div id="report-type-filter" class="filters">
+				<h3><?php echo Kohana::lang('ui_main.type'); ?></h3>
+										<ul>
+											<li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
+											<li><a id="media_4" href="#"><span><?php echo Kohana::lang('ui_main.news'); ?></span></a></li>
+											<li><a id="media_1" href="#"><span><?php echo Kohana::lang('ui_main.pictures'); ?></span></a></li>
+											<li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
+											<li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
+										</ul>
+										<div class="floatbox">
+												<?php
+												// Action::main_filters - Add items to the main_filters
+												Event::run('ushahidi_action.map_main_filters');
+												?>
+											</div>
+											<!-- / report type filters -->
+								</div>
+				<?php				
 				echo $div_timeline;
 				?>
 			</div>
@@ -141,6 +143,21 @@ $(function(){
 				    ?>
 			    <tr>
 				<td>
+					<?php 
+					$media = ORM::Factory('media')->where('incident_id', $news_item->id)->find_all();
+					if ($media->count())
+					{
+						foreach ($media as $photo)
+						{
+							if ($photo->media_thumb)
+							{ // Get the first thumb
+								$incident_thumb = url::convert_uploaded_to_abs($photo->media_thumb);
+								echo '<img class="teaser_img" src="'.$incident_thumb.'"/>';
+								break;
+							}
+						}
+					}
+					?>
 				    <div class="front_date_cat">
 					<?php 
 					    $t = strtotime($news_item->incident_date);
@@ -152,6 +169,10 @@ $(function(){
 				    <h1><a href="<?php echo url::base().'/reports/view/'.$news_item->id;?>"><?php echo $news_item->incident_title; ?></a></h1>
 				    <div class="front_teaser">
 					<?php
+					
+					
+					
+					
 					$content = $news_item->incident_description;
 					$content = substr($content, 0, strpos($content, "\n"));
 					$content = html::clean($content);
@@ -238,7 +259,9 @@ $(function(){
 			</div>
 			
 			<div id="front_social" class="wtm_head_up">
-			    social
+			    <a class="social" href="http://facebook.com"><div id="social_facebook"></div></a>
+			    <a class="social" href="http://twitter.com"><div id="social_twitter"></div></a>
+			    <a class="social" href="<?php echo url::base();?>rss"><div id="social_rss"></div></a>
 			</div>
 			
 			<div id="tag cloud" class="wtm_head_up">
