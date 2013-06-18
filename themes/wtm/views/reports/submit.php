@@ -123,10 +123,10 @@
 				</div>
 
 
-				<?php
-				// Action::report_form - Runs right after the report categories
-				Event::run('ushahidi_action.report_form');
-				?>
+			    <?php
+			    // Action::report_form - Runs right after the report categories
+			    Event::run('ushahidi_action.report_form');
+			    ?>
 
 				<?php echo $custom_forms ?>
 
