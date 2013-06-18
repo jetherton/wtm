@@ -582,7 +582,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePat
 	background: url('../images/edit_submit_nonselect_icons.png') -70px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -70x 0px;
+	background: url('../images/edit_submit_selected_icons.png') -70px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemInactive{

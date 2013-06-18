@@ -67,11 +67,20 @@ jQuery(window).load(function() {
 		graphicWidth: 21,
 		graphicHeight: 25,
 		graphicXOffset: -14,
-		graphicYOffset: -27
+		graphicYOffset: -27,
+		
+		label : '${label}',                    
+
+		fontSize: "12px",
+		fontFamily: "Courier New, monospace",
+		fontWeight: "bold",
+		labelOutlineColor: "white",
+		labelOutlineWidth: 2
 	},
 	{
 		context: 
 		{
+		
 			graphic: function(feature) {
 				if (typeof(feature) != 'undefined' && 
 					feature.data.id == <?php echo $incident_id; ?>)

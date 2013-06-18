@@ -106,7 +106,15 @@
 				graphicWidth: 21,
 				graphicHeight: 25,
 				graphicXOffset: -14,
-				graphicYOffset: -27
+				graphicYOffset: -27,
+				
+				label : '${label}',                    
+				
+				fontSize: "12px",
+				fontFamily: "Courier New, monospace",
+				fontWeight: "bold",
+				labelOutlineColor: "white",
+				labelOutlineWidth: 2
 			});
 			style2 = new OpenLayers.Style({
 				pointRadius: "8",
@@ -228,7 +236,16 @@
 					// vlayer.removeFeatures(vlayer.features);
 				},
 				featuresadded: function(event) {
+					//set the label to blank
+					for(i in event.features){
+					    var feature = event.features[i];
+					    if(typeof feature.attributes.label == "undefined"){
+						feature.attributes.label = "";
+						vlayer.drawFeature(feature);
+					    }	
+					}
 					refreshFeatures(event);
+					
 				},
 				featuremodified: function(event) {
 					refreshFeatures(event);
@@ -264,6 +281,7 @@
 				point = new OpenLayers.Geometry.Point(<?php echo $longitude; ?>, <?php echo $latitude; ?>);
 				OpenLayers.Projection.transform(point, proj_4326, map.getProjectionObject());
 				var origFeature = new OpenLayers.Feature.Vector(point);
+				origFeature.attributes.label = "";
 				vlayer.addFeatures(origFeature);
 				<?php
 			}
@@ -275,6 +293,7 @@
 					echo "wktFeature = wkt.read('$geometry->geometry');\n";
 					echo "wktFeature.geometry.transform(proj_4326,proj_900913);\n";
 					echo "wktFeature.label = '$geometry->label';\n";
+					echo "wktFeature.attributes.label = '$geometry->label';\n";
 					echo "wktFeature.comment = '$geometry->comment';\n";
 					echo "wktFeature.color = '$geometry->color';\n";
 					echo "wktFeature.strokewidth = '$geometry->strokewidth';\n";
@@ -295,21 +314,18 @@
 			
 			// Create the Editing Toolbar
 			var container = document.getElementById("panel");
+						
 			
-			//var panel = new OpenLayers.Control.EditingToolbar(
-			//	vlayer, {div: container}
-			//);
-			//map.addControl(panel);
-			//panel.activateControl(panel.controls[0]);
+			var circleControl = new OpenLayers.Control.DrawFeature(vlayer,
+			    OpenLayers.Handler.RegularPolygon,
+			    {handlerOptions: {sides:40, irregular: true},
+			    'displayClass': 'elipse'});
 			
 			
 			var panelControls = [
 			 
 			 new OpenLayers.Control.DragPan(),
-			 new OpenLayers.Control.DrawFeature(vlayer,
-                 OpenLayers.Handler.RegularPolygon,
-                 {handlerOptions: {sides:40, irregular: true},
-                 'displayClass': 'elipse'}),
+			 circleControl,
 			 new OpenLayers.Control.DrawFeature(vlayer,
 			     OpenLayers.Handler.Polygon,
 			     {'displayClass': 'olControlDrawFeaturePolygon'}),
@@ -613,6 +629,8 @@
 			}).bind("change keyup blur", function(){
 				for (f in selectedFeatures) {
 					selectedFeatures[f].label = this.value;
+					selectedFeatures[f].attributes.label = $(this).val();
+					vlayer.drawFeature(selectedFeatures[f]);
 				}
 				refreshFeatures();
 			});
@@ -668,7 +686,8 @@
 					alert('Invalid value!')
 				}
 			});
-				
+			
+							
 			// Event on Color Change
 			$('#geometry_color').ColorPicker({
 				onSubmit: function(hsb, hex, rgb) {

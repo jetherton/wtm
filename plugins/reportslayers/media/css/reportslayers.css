@@ -9,11 +9,11 @@
 
 
 #layers-box a#layers-menu-toggle{
-    top:100px;
+    top:200px;
     z-index:1000;
 }
 
 #layers-box ul#kml_switch{
-    top:130px;
+    top:230px;
 }
 
