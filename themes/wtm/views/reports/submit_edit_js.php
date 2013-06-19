@@ -292,9 +292,9 @@
 					$geometry = json_decode($geometry);
 					echo "wktFeature = wkt.read('$geometry->geometry');\n";
 					echo "wktFeature.geometry.transform(proj_4326,proj_900913);\n";
-					echo "wktFeature.label = '$geometry->label';\n";
+					echo "wktFeature.label = ".json_encode($geometry->label).";\n";
 					echo "wktFeature.attributes.label = '$geometry->label';\n";
-					echo "wktFeature.comment = '$geometry->comment';\n";
+					echo "wktFeature.comment = ".json_encode($geometry->comment).";\n";
 					echo "wktFeature.color = '$geometry->color';\n";
 					echo "wktFeature.strokewidth = '$geometry->strokewidth';\n";
 					echo "vlayer.addFeatures(wktFeature);\n";
@@ -371,6 +371,22 @@
 			map.events.register("click", map, function(e){
 				selectCtrl.deactivate();
 				selectCtrl.activate();
+			});
+			
+			//click on the coord button puts a dot in the center
+			//of the view window selects it, and then opens up the
+			//dialog to set the lat,lon
+			$('#pointCoords').on('click', function(){
+			     var mapCenter = map.getCenter();
+			     var newPoint = new OpenLayers.Geometry.Point(mapCenter.lon, mapCenter.lat);
+			     var newFeature = new OpenLayers.Feature.Vector(newPoint);
+			     newFeature.attributes = { label: ""};
+			     vlayer.addFeatures([newFeature]);
+			     refreshFeatures();
+			     //set this feature as what's active
+			     clearSelected();
+			     addSelected(newFeature);
+			     
 			});
 			
 			// Undo Action Removes Most Recent Marker
@@ -649,6 +665,10 @@
 				$('#geometry_lat').focus();
 				$('#geometry_color').ColorPickerHide();
 			}).bind("change keyup blur", function(){
+				//update the hours minutes seconds
+				$("#geometry_lat_degrees").val(decimalLatToHours(parseFloat(this.value)));
+				$("#geometry_lat_minutes").val(decimalLatToMinutes(parseFloat(this.value)));
+				$("#geometry_lat_seconds").val(decimalLatToSeconds(parseFloat(this.value)));
 				for (f in selectedFeatures) {
 					selectedFeatures[f].lat = this.value;
 			    }
@@ -659,11 +679,71 @@
 				$('#geometry_lon').focus();
 				$('#geometry_color').ColorPickerHide();
 			}).bind("change keyup blur", function(){
+				$("#geometry_lon_degrees").val(decimalLonToHours(parseFloat(this.value)));
+				$("#geometry_lon_minutes").val(decimalLonToMinutes(parseFloat(this.value)));
+				$("#geometry_lon_seconds").val(decimalLonToSeconds(parseFloat(this.value)));
 				for (f in selectedFeatures) {
 					selectedFeatures[f].lon = this.value;
 			    }
 				refreshFeatures();
 			});
+			
+			//bind changes in hh mm ss to decimal degress
+			$('#geometry_lat_degrees, #geometry_lat_minutes, #geometry_lat_seconds').bind("change keyup blur", function(){
+			
+			    var newlat = hmsToDecimal(
+				parseFloat($("#geometry_lat_degrees").val()),
+				parseFloat($("#geometry_lat_minutes").val()),
+				parseFloat($("#geometry_lat_seconds").val()));
+			    $('#geometry_lat').val(newlat);
+				
+				var newlon = $("#geometry_lon").val();
+				if (!isNaN(newlat) && !isNaN(newlon))
+				{
+					var lonlat = new OpenLayers.LonLat(newlon, newlat);
+					lonlat.transform(proj_4326,proj_900913);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].geometry.x = lonlat.lon;
+						selectedFeatures[f].geometry.y = lonlat.lat;
+						selectedFeatures[f].lon = newlat;
+						selectedFeatures[f].lat = newlon;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+				}
+				else
+				{
+					alert('Invalid value!')
+				}
+			});
+			
+			$('#geometry_lon_degrees, #geometry_lon_minutes, #geometry_lon_seconds').bind("change keyup blur", function(){
+			
+			    var newlon = hmsToDecimal(
+				parseFloat($("#geometry_lon_degrees").val()),
+				parseFloat($("#geometry_lon_minutes").val()),
+				parseFloat($("#geometry_lon_seconds").val()));
+			    $('#geometry_lon').val(newlon);
+				
+				var newlat = $("#geometry_lat").val();
+				if (!isNaN(newlat) && !isNaN(newlon))
+				{
+					var lonlat = new OpenLayers.LonLat(newlon, newlat);
+					lonlat.transform(proj_4326,proj_900913);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].geometry.x = lonlat.lon;
+						selectedFeatures[f].geometry.y = lonlat.lat;
+						selectedFeatures[f].lon = newlat;
+						selectedFeatures[f].lat = newlon;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+				}
+				else
+				{
+					alert('Invalid value!')
+				}
+				
+			});
+			
 			
 			// Event on Latitude/Longitude Typing Change
 			$('#geometry_lat, #geometry_lon').bind("change keyup", function() {
@@ -889,15 +969,25 @@
 				if (feature.geometry.CLASS_NAME == "OpenLayers.Geometry.Point") {
 					$('#geometryLat').show();
 					$('#geometryLon').show();
+					$('#hoursMinsSeconds').show();
 					$('#geometryColor').hide();
 					$('#geometryStrokewidth').hide();
 					thisPoint = feature.clone();
 					thisPoint.geometry.transform(proj_900913,proj_4326);
 					$('#geometry_lat').val(thisPoint.geometry.y);
 					$('#geometry_lon').val(thisPoint.geometry.x);
+					
+					$("#geometry_lat_degrees").val(decimalLatToHours(thisPoint.geometry.y));
+					$("#geometry_lat_minutes").val(decimalLatToMinutes(thisPoint.geometry.y));
+					$("#geometry_lat_seconds").val(decimalLatToSeconds(thisPoint.geometry.y));
+					$("#geometry_lon_degrees").val(decimalLonToHours(thisPoint.geometry.x));
+					$("#geometry_lon_minutes").val(decimalLonToMinutes(thisPoint.geometry.x));
+					$("#geometry_lon_seconds").val(decimalLonToSeconds(thisPoint.geometry.x));
+					
 				} else {
 					$('#geometryLat').hide();
 					$('#geometryLon').hide();
+					$('#hoursMinsSeconds').hide();
 					$('#geometryColor').show();
 					$('#geometryStrokewidth').show();
 				}
@@ -1070,4 +1160,69 @@
 					console.log("Geocoder failed due to: " + status);
 				}
 			});
+		}
+		
+		
+		function decimalLatToHours(lat){
+		    var signlat = 1;
+		    if(lat < 0)  { signlat = -1; }
+		    var latAbs = Math.abs( Math.round(lat * 1000000.));
+		    var hours = Math.floor(latAbs / 1000000) * signlat;
+		    return hours;
+		}
+		
+		function decimalLatToMinutes(lat){
+		    var signlat = 1;
+		    if(lat < 0)  { signlat = -1; }
+		    var latAbs = Math.abs( Math.round(lat * 1000000.));
+		    var minutes = Math.floor(  ((latAbs/1000000) - Math.floor(latAbs/1000000)) * 60) ;
+		    return minutes;
+		}
+		
+		function decimalLatToSeconds(lat){
+		    var signlat = 1;
+		    if(lat < 0)  { signlat = -1; }
+		    var latAbs = Math.abs( Math.round(lat * 1000000.));
+		    var seconds = ( Math.floor(((((latAbs/1000000) - Math.floor(latAbs/1000000)) * 60) - Math.floor(((latAbs/1000000) - Math.floor(latAbs/1000000)) * 60)) * 100000) *60/100000 );
+		    return seconds;
+		}
+		
+		
+		
+		function decimalLonToHours(lon){
+		    var signlon = 1;
+		    if(lon < 0)  { signlon = -1; }
+		    var lonAbs = Math.abs(Math.round(lon * 1000000.));
+		    var hours = Math.floor(lonAbs / 1000000) * signlon;
+		    return hours;
+		}
+		
+		function decimalLonToMinutes(lon){
+		    var signlon = 1;
+		    if(lon < 0)  { signlon = -1; }
+		    var lonAbs = Math.abs(Math.round(lon * 1000000.));
+		    var minutes = Math.floor(  ((lonAbs/1000000) - Math.floor(lonAbs/1000000)) * 60);
+		    return minutes;
+		}
+		
+		function decimalLonToSeconds(lon){
+		    var signlon = 1;
+		    if(lon < 0)  { signlon = -1; }
+		    var lonAbs = Math.abs(Math.round(lon * 1000000.));
+		    var seconds = ( Math.floor(((((lonAbs/1000000) - Math.floor(lonAbs/1000000)) * 60) - Math.floor(((lonAbs/1000000) - Math.floor(lonAbs/1000000)) * 60)) * 100000) *60/100000 );
+		    return seconds;
+		}
+		
+		function hmsToDecimal(hour, minute, second){
+		    latsign = 1;
+		    if(hour < 0)  { latsign = -1; }
+		    var absdlat = Math.abs( Math.round(hour * 1000000.));
+		    minute = Math.abs(Math.round(minute * 1000000.)/1000000);  //integer
+		    var absmlat = Math.abs(Math.round(minute * 1000000.));  //integer
+		    second = Math.abs(Math.round(second * 1000000.)/1000000);
+		    var absslat = Math.abs(Math.round(second * 1000000.)); 
+		    
+		    var decimal = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
+			
+		    return decimal;
 		}

@@ -181,25 +181,41 @@
 										<?php print form::dropdown('geometry_strokewidth', $stroke_width_array, ''); ?>
 									</span>
 									<span id="geometryLat">
-										<label><?php echo Kohana::lang('ui_main.latitude');?>:</label> 
+										<label><?php echo Kohana::lang('ui_main.latitude');?>(DD.DD):</label> 
 										<?php print form::input('geometry_lat', '', ' class="lbl_text"'); ?>
 									</span>
 									<span id="geometryLon">
-										<label><?php echo Kohana::lang('ui_main.longitude');?>:</label> 
+										<label><?php echo Kohana::lang('ui_main.longitude');?>(DD.DD):</label> 
 										<?php print form::input('geometry_lon', '', ' class="lbl_text"'); ?>
 									</span>
+									<div id="hoursMinsSeconds">
+									    <span id="geometryLatDegrees">
+										    <label><?php echo Kohana::lang('ui_main.latitude');?>(DD MM SS):</label> 
+										    <?php print form::input('geometry_lat_degrees', '', ' class="lbl_text short_input"'); ?> 
+										    <?php print form::input('geometry_lat_minutes', '', ' class="lbl_text short_input"'); ?> 
+										    <?php print form::input('geometry_lat_seconds', '', ' class="lbl_text short_input"'); ?>
+									    </span>
+									    <span id="geometryLonDegrees">
+										    <label><?php echo Kohana::lang('ui_main.longitude');?>(DD MM SS):</label> 
+										    <?php print form::input('geometry_lon_degrees', '', ' class="lbl_text short_input"'); ?>
+										    <?php print form::input('geometry_lon_minutes', '', ' class="lbl_text short_input"'); ?>
+										    <?php print form::input('geometry_lon_seconds', '', ' class="lbl_text short_input"'); ?>
+									    </span>
+									</div>
 								</div>
 							</div>
 							<div id="geometryLabelerClose"></div>
 						</div>
 					</div>
 					<div class="report-find-location">
+						<div id="pointPanel" class="olControlEditingToolbar" style="margin-right:0px;">
+						    <div id="pointCoords" class="olControlDrawFeatureCoordPointItemInactive olButton"></div>
+						</div>
 						<div id="panel" class="olControlEditingToolbar"></div>
 						<div class="btns">
 							<ul>
-								<li><a href="#" class="btn_del_last"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_last'));?></a></li>
-								<li><a href="#" class="btn_del_sel"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_selected'));?></a></li>
-								<li><a href="#" class="btn_clear"><?php echo utf8::strtoupper(Kohana::lang('ui_main.clear_map'));?></a></li>
+								<li><a title="Delete last item added." href="#" class="btn_del_last"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_last'));?></a></li>
+								<li><a title="Delete selected item." href="#" class="btn_del_sel"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_selected'));?></a></li>
 							</ul>
 						</div>
 						<div style="clear:both;"></div>

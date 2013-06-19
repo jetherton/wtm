@@ -606,6 +606,19 @@ div.report-find-location div.olControlEditingToolbar div.olControlDragPanItemAct
 	background: url('../images/edit_submit_selected_icons.png') -214px 0px;
 }
 
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoordPointItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') 0px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoordPointItemActive{
+	background: url('../images/edit_submit_selected_icons.png') 0px 0px;
+}
 
+#geometryLabeler input.short_input{
+    width: 50px;
+}
+
+#hoursMinsSeconds{
+    margin-top:10px;
+}
 
 
