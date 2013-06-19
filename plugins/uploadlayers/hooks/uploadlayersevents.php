@@ -8,7 +8,7 @@
 *************************************************************/
 
 
-class privatefieldsevents {
+class uploadlayersevents {
 
 	public function __construct()
 	{
@@ -22,50 +22,35 @@ class privatefieldsevents {
 		if(strpos($url, 'admin/reports/edit') !== false){
 			Event::add('ushahidi_action.header_scripts_admin', array($this, 'render_admin_viewjs'));
 		}
-		elseif(strpos($url, 'reports/view/') !== false){
+		elseif(strpos($url, 'reports/submit') !== false){
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}
-		Event::add('ushahidi_action.report_submit_admin', array($this, 'parseSubmit'));
+		Event::add('ushahidi_action.report_submit_admin', array($this, 'parseSubmitAdmin'));
+		Event::add('ushahidi_action.report_submit', array($this, 'parseSubmit'));
 
 	}
 	
 	public function render_javascript(){
-		$view = new View('privatefields/privatefields_js');
-		
-		$url = url::current();
-		$len = strlen('reports/view/');
-		$results = array();
-		$names = array();
-		
-		$incidentID = substr($url, $len);
-		
-		$incident = ORM::factory('incident', $incidentID);
-		
-		$person = ORM::factory('incident_person')->
-		where('incident_id', $incidentID)->
-		find();
-		
-		if($incident->incident_private == 1){
-			
-		}
-		
-		if(count($names) > 0){
-			$view->names = $names;
-		}
-
+		$view = new View('uploadlayers/uploadlayers_js');
 		echo $view;
 	}
 	
 	public function render_admin_viewjs(){
-		$view = new View('privatefields/privateadminsettings_js');
+		$view = new View('uploadlayers/uploadsettings_js');
 		echo $view;
 	}
 	
 	public function parseSubmit(){
-		$view = new View('privatefields/privatesubmit');
+		$view = new View('uploadlayers/uploadsubmit');
+		$view->post = $_POST;
+		echo $view;
+	}
+	
+	public function parseSubmitAdmin(){
+		$view = new View('uploadlayers/uploadsubmitadmin');
 		$view->post = $_POST;
 		echo $view;
 	}
 
 }
-new privatefieldsevents;
+new uploadlayersevents;

@@ -19,25 +19,6 @@
 		//divArray['last'] = 'incident_lastname';
 		//divArray['email'] = 'incident_email';
 
-	var privateArray = <?php echo $private?>;
 
-	$(document).ready(function(){
-		console.log(privateArray);
-		for(var i in privateArray){
-			switch(i){
-				case 'description' : $('.left-col').children('.report-description-text').text(''); break;
-				case 'date' : $('.left-col').children('.report-when-where').children('.r_date').text(''); break;
-				case 'title' : $('.left-col').children('.report-title').text(''); break;
-				case 'loc' : $('.left-col').children('.report-when-where').children('.r_location').text(''); break;
-				case 'first' : $('.left-col').children('.report-description-text').text(''); break;
-				case 'last' : $('.left-col').children('.report-description-text').text(''); break;
-				case 'email' : $('.left-col').children('.report-description-text').text(''); break;
-			}
-		}
-
-		if(<?php echo count($names)?> > 0){
-			console.log('<?php echo $names['first'].$names['last']?>');
-		}
-	});
 	
 </script>

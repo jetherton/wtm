@@ -7,7 +7,7 @@
  */
 
 
-class Privatefields_Install {
+class Uploadlayers_Install {
 
     /**
 	 * Function: __construct
@@ -37,23 +37,24 @@ class Privatefields_Install {
 	 *
 	 * Results: Database is initialized
 	 */
-public function run_install()
+	public function run_install()
 	{
 	
-		//check to see if the column already exists if the plugin is activated more than once
+		//check to see if the column already exists if the plugin is activated more than once	
 		$sql = false;
 		try{
 			$sql = $this->db->query(
-				'SELECT `incident_private` FROM `incident`');
+					'SELECT `data_uploaded` FROM `layer`');
 		}
 		catch(Exception $e){
 			if($e){
-				$this->db->query('ALTER TABLE `incident` ADD  `incident_private` BOOLEAN NOT NULL DEFAULT FALSE');
+				$this->db->query('ALTER TABLE `layer` ADD  `data_uploaded` DATE NOT NULL');
 			}
 		}
 		if (!$sql){		
-			$this->db->query('ALTER TABLE `incident` ADD  `incident_private` BOOLEAN NOT NULL DEFAULT FALSE');
+			$this->db->query('ALTER TABLE `layer` ADD  `data_uploaded` DATE NOT NULL');
 		}
+		
 		
 	}
 
