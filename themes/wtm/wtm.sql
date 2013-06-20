@@ -11,3 +11,6 @@ ALTER TABLE  `layer` ADD  `meta_data` TEXT NULL DEFAULT NULL;
 /** John Etherton - 2013-05-09 - Add icons and heirarchy to the layers*/
 ALTER TABLE  `layer` ADD  `parent_id` INT( 11 ) NULL DEFAULT '0';
 ALTER TABLE  `layer` ADD  `icon` CHAR( 255 ) NULL DEFAULT NULL;
+
+/** Dylan Gillespie 2013-06-20 - Add facebook field to incident_person **/
+ALTER TABLE  `incident_person` ADD  `person_facebook` VARCHAR( 200 ) NOT NULL;

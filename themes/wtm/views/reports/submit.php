@@ -13,7 +13,7 @@
 		<input type="hidden" name="longitude" id="longitude" value="<?php echo $form['longitude']; ?>">
 		<input type="hidden" name="country_name" id="country_name" value="<?php echo $form['country_name']; ?>" />
 		<input type="hidden" name="incident_zoom" id="incident_zoom" value="<?php echo $form['incident_zoom']; ?>" />
-		<div class="big-block" >
+		<div class="big-block">
 			<h1><?php echo Kohana::lang('ui_main.reports_submit_new'); ?></h1>
 			<?php if ($form_error): ?>
 			<!-- red-box -->
@@ -143,6 +143,14 @@
 					<div class="report_row">
 						<h4><?php echo Kohana::lang('ui_main.reports_email'); ?></h4>
 						<?php print form::input('person_email', $form['person_email'], ' class="text long"'); ?>
+					</div>
+					<div class="report_row">
+						<h4><?php echo Kohana::lang('wtm.phone'); ?></h4>
+						<?php print form::input('person_phone', $form['person_phone'], ' class="text long" placeholder="'.Kohana::lang('wtm.phoneNum').'"'); ?>
+					</div>
+					<div class="report_row">
+						<h4><?php echo Kohana::lang('wtm.facebook'); ?></h4>
+						<?php print form::input('person_facebook', $form['person_facebook'], ' class="text long"'); ?>
 					</div>
 					<?php
 					// Action::report_form_optional - Runs in the optional information of the report form

@@ -448,7 +448,17 @@
 										<span><?php echo Kohana::lang('ui_main.email_address');?></span>
 										<?php print form::input('person_email', $form['person_email'], ' class="text"'); ?>
 									</label>
+									<label>
+										<span><?php echo Kohana::lang('wtm.phone');?></span>
+										<?php print form::input('person_phone', $form['person_phone'], ' class="text" placeholder="'.Kohana::lang('wtm.phoneNum').'"'); ?>
+									</label>
 								</div>
+								<div class="row">
+									<label>
+										<span><?php echo Kohana::lang('wtm.facebook');?></span>
+										<?php print form::input('person_facebook', $form['person_facebook'], ' class="text"'); ?>
+									</label>
+									</div>
 							</div>
 							<!-- f-col-bottom-1 -->
 							<div class="f-col-bottom-1">

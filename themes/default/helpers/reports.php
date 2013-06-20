@@ -660,6 +660,8 @@ class reports_Core {
 		$person->person_first = $post->person_first;
 		$person->person_last = $post->person_last;
 		$person->person_email = $post->person_email;
+		$person->person_phone = $post->person_phone;
+		$person->person_facebook = $post->person_facebook;
 		$person->person_date = date("Y-m-d H:i:s",time());
 		$person->save();		
 	}

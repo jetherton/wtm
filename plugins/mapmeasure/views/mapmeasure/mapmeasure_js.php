@@ -30,7 +30,7 @@
 					zoomButtons();
 				}
 				else{
-					$('#rulerControl').show();
+					$('#toolbarControl').show();
 				}
 				map_expand = true;
 			}
@@ -38,7 +38,7 @@
 		$('a.list').click(function(){
 			if(map_expand){
 				map_expand = false;
-				$('#rulerControl').hide();
+				$('#toolbarControl').hide();
 			}
 		});
 	});

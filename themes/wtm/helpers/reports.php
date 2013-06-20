@@ -140,6 +140,22 @@ class reports_Core {
 		{
 			$post->person_email = '';
 		}
+		if ( ! empty($post->person_phone))
+		{
+			$post->add_rules('person_phone', 'length[5,13]');
+		}
+		else
+		{
+			$post->person_phone = '';
+		}
+		if ( ! empty($post->person_facebook))
+		{
+			$post->add_rules('person_facebook', 'length[2,100]');
+		}
+		else
+		{
+			$post->person_facebook = '';
+		}
 		
 		$post->add_rules('location_id','numeric');
 		$post->add_rules('incident_active', 'between[0,1]');
@@ -660,6 +676,8 @@ class reports_Core {
 		$person->person_first = $post->person_first;
 		$person->person_last = $post->person_last;
 		$person->person_email = $post->person_email;
+		$person->person_phone = $post->person_phone;
+		$person->person_facebook = $post->person_facebook;
 		$person->person_date = date("Y-m-d H:i:s",time());
 		$person->save();		
 	}

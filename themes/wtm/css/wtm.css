@@ -61,7 +61,7 @@ div#middle {background : none;}
 div.content-container {background:none;}
 
 
-.big-block {   }
+.big-block { }
 .page-main #main { padding:0px 0px; }
 
 /* top-bar */
@@ -286,6 +286,7 @@ table.table-list thead th.date { width:20%; }
 /* single report page */
 div#main { padding:15px 10px; }
 #main .left-col { background:#EEEDEA; position:relative; padding:35px 10px 10px; margin:4px 0 0 18px; width:525px; }
+
 
 
 .left-col h1.report-title { float:left; position:absolute; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5; color:#fff; }

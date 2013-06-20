@@ -271,6 +271,8 @@ class Reports_Controller extends Main_Controller {
 			'person_first' => '',
 			'person_last' => '',
 			'person_email' => '',
+			'person_phone' => '',
+			'person_facebook' => '',
 			'form_id'	  => '',
 			'custom_field' => array()
 		);

@@ -5,4 +5,7 @@ $lang = array(
 		'none'=>'None',
 		'investigations' => 'Investigations',
 		'submit' => 'How to Report',
+		'phone' => 'Phone Number',
+		'facebook' => 'Name on Facebook',
+		'phoneNum' => 'XXX-XXX-XXXX',
 );
