@@ -7,7 +7,7 @@
  */
 
 
-class Uploadlayers_Install {
+class Defaultcategories_Install {
 
     /**
 	 * Function: __construct
@@ -41,20 +41,18 @@ class Uploadlayers_Install {
 	{
 	
 		//check to see if the column already exists if the plugin is activated more than once	
-		$sql = false;
+		$sql = true;
 		try{
 			$sql = $this->db->query(
-					'SELECT `data_uploaded` FROM `layer`');
+					'SELECT `category_default` FROM `category`');
 		}
 		catch(Exception $e){
 			if($e){
-				$this->db->query('ALTER TABLE `layer` ADD  `data_uploaded` DATE NOT NULL;
-								  ALTER TABLE `layer` ADD `report_id` INT NOT NULL DEFAULT 0');
+				$this->db->query('ALTER TABLE  `category` ADD  `category_default` BOOLEAN NOT NULL DEFAULT FALSE;');
 			}
 		}
 		if (!$sql){		
-			$this->db->query('ALTER TABLE `layer` ADD  `data_uploaded` DATE NOT NULL;
-						  	  ALTER TABLE `layer` ADD `report_id` INT NOT NULL DEFAULT 0');
+			$this->db->query('ALTER TABLE  `category` ADD  `category_default` BOOLEAN NOT NULL DEFAULT FALSE;');
 		}
 		
 		

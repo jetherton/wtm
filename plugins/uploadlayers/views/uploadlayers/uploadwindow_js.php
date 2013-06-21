@@ -34,7 +34,7 @@
 <script type="text/javascript">	
 
 $(document).ready(function(){  
-
+	
 	var errorHandler = function(event, id, fileName, reason) {
         qq.log("id: " + id + ", fileName: " + fileName + ", reason: " + reason);
     };
@@ -43,7 +43,8 @@ $(document).ready(function(){
 	    var manualuploader = new qq.FineUploader({
 	      element: $('#manual-fine-uploader')[0],
 	      request: {
-	    	  endpoint: "<?php echo url::base();?>parseFiles/submitFiles"
+	    	  endpoint: "<?php echo url::base();?>parseFiles/submitFiles",
+	    	  
 	      },
 	      autoUpload: false,
 	      text: {
@@ -52,6 +53,12 @@ $(document).ready(function(){
 	    });
 	 
 	    $('#triggerUpload').click(function() {
+		  manualuploader.setParams({
+				 layer_url : $('#layer_url').val(),
+				 layer_name : $('#layer_name').val(),
+				 layer_color : $('#layer_color').val(),
+				 meta_data : $('#meta_data').val()
+	    	  });
 	      manualuploader.uploadStoredFiles();
 	    });
 	  });
