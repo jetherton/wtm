@@ -1,0 +1,35 @@
+.apple_overlay{
+	width:600px;
+	height:200px;
+	background-image:url(../img/white.png);
+}
+#uploadWindow{
+	padding: 30px;
+	overflow: auto;
+}
+.btn
+{
+    background-color: #f87436;
+    background-image: -moz-linear-gradient(center top , #f88d5a, #f87436);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f88d5a), to(#f87436));
+    background-image: -webkit-linear-gradient(top, #f88d5a, #f87436);
+    background-image: -ms-linear-gradient(top, #f88d5a, #f87436);
+    color:#fff;
+    text-shadow:none;
+	width: 87px;
+	height: 14px;
+	padding: 10px;
+}
+.btn:hover,
+.btn:active,
+.btn.active,
+.btn.disabled,
+.btn[disabled]
+{
+    background-color: #f87436;
+    color:#fff;
+}
+.btn a:hover
+{
+    color:#fff;
+}

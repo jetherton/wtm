@@ -7,54 +7,39 @@
 * This javascript is to make fields that are labeled as private to not not appear.
 *************************************************************/
 ?>
+<!-- Javascript files for popup window -->
+<script type="text/javascript" src="<?php echo URL::base(); ?>plugins/uploadlayers/media/js/jquery.tools.min.js"> </script>
+<script type="text/javascript" src="<?php echo URL::base(); ?>plugins/uploadlayers/media/js/jquery-ui.min.js"> </script>
+<link rel="stylesheet" href="<?php echo URL::base(); ?>plugins/uploadlayers/media/css/jquery-ui.css" />
+<link rel="stylesheet" href="<?php echo URL::base(); ?>plugins/uploadlayers/media/css/uploadlayersCSS.css" />
 
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/header.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/util.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/version.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/features.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/promise.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/button.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/upload-data.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/ajax.requester.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/deletefile.ajax.requester.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/handler.base.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/handler.base.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/window.receive.message.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/handler.form.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/handler.xhr.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/paste.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/dnd.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/uploader.basic.js"></script>
-<script src="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/js/uploader.js"></script>
-
-<link rel="stylesheet" type="text/css" href="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/fineuploader.css"/>
 
 <script type="text/javascript">	
 
 $(document).ready(function(){  
 	$('.report_left').append('<div class="report_row">\
-								<h4>Upload a layer</h4>\
-								<div id="upload_button" class="qq-uploader"></div>\
-								<div id="upload_trigger">Trigger</div>\
+								<h4><a id="uploadLayer" rel="#overlay" href="<?php echo url::base(); ?>parseFiles/parseWindow" >\
+									Upload a Layer\
+								</a></h4>\
 							</div>');
-
-	var errorHandler = function(event, id, fileName, reason) {
-        qq.log("id: " + id + ", fileName: " + fileName + ", reason: " + reason);
-    };
-	var uploader = new qq.FineUploader({
-        element: $('#upload_button')[0],
-        autoUpload: false,
-        uploadButtonText: "Select Files",
-        request: {
-            endpoint: "<?php echo url::base();?>uploadlayers/parseFiles"
-        },
-        callbacks: {
-            onError: errorHandler
+	$('#footer').append('<div class="apple_overlay" id="overlay" style="display:none">\
+							<div class="contentWrap">\
+								<img class="contentWrapWaiter" src="<?php echo URL::base();?>plugins/uploadlayers/media/img/waiter_barber.gif"/>\
+							</div>\
+						</div>');
+	//initialize the apple overlay effect
+	$("a[rel]").overlay({
+		mask: 'grey',
+		effect: 'apple',
+		onBeforeLoad: function() {
+			 
+            // grab wrapper element inside content
+            var wrap = this.getOverlay().find(".contentWrap");
+ 
+            // load the page specified in the trigger
+            wrap.load(this.getTrigger().attr("href"));
         }
-    });
-	$('#upload_trigger').click(function() {
-        uploader.uploadStoredFiles();
-    });
+	});
 });
 	
 </script>
