@@ -13,6 +13,7 @@
 	<h4><?php echo Kohana::lang('ui_main.layers'); ?> </h4>
 	<div class="report_category" id="submit_layers">
 	<?php		
+	if(isset($layers[0])){
 	    $top_level_layers = sizeof($layers[0]);
 	    $start = 0;
 	    $stop = intval($top_level_layers/2);
@@ -41,6 +42,7 @@
 		$stop =  $top_level_layers;
 		$column_count++;
 	    }
+	}
 	?>
 	
 
