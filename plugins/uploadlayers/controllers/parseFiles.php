@@ -1,16 +1,12 @@
 <?php
 
 class ParseFiles_Controller extends Controller{
+	
 	public function submitFiles(){
 
 			// Fetch the submitted data
 			$post_data = array_merge($_POST, $_FILES);
 			$layer_date = date('Y-m-d');
-// 			$fp = fopen('file.txt', 'w');
-// 			 		fwrite($fp, print_r($layer_date, TRUE));
-// // 			// 		fwrite($fp, print_r($_FILES, TRUE));
-//  		fclose($fp);
-// // 					exit;
 		
 			// Layer instance for the actions
 			$layer = (isset($post_data['layer_id']) AND Layer_Model::is_valid_layer($post_data['layer_id']))
@@ -103,14 +99,7 @@ class ParseFiles_Controller extends Controller{
 						$layer->save();
 					}
 		
-					$form_saved = TRUE;
-					$form_action = utf8::strtoupper(Kohana::lang('ui_admin.added_edited'));
-				
-			}
-		
-		
-
-		echo '{"success" : true}';
+		echo '{"success" : true, "newUuid" : "'.$layer->id.'"}';
 	}
 	
 	public function parseWindow(){

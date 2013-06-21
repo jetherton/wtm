@@ -33,24 +33,27 @@
 
 <script type="text/javascript">	
 
-$(document).ready(function(){  
-	
-	var errorHandler = function(event, id, fileName, reason) {
-        qq.log("id: " + id + ", fileName: " + fileName + ", reason: " + reason);
-    };
-    
+var manualuploader = new qq.FineUploader({
+    element: $('#manual-fine-uploader')[0],
+    request: {
+  	  endpoint: "<?php echo url::base();?>parseFiles/submitFiles",
+    },
+    multiple: false,
+    autoUpload: false,
+    text: {
+      uploadButton: '<i class="icon-plus icon-white"></i> Select Files'
+    },
+    validation: {
+			allowedExtensions : ['kml', 'kmz']
+    },
+    callbacks : {
+			onComplete: function(){
+				setLayerId();
+			}
+    }
+  });
+  
 	$(document).ready(function() {
-	    var manualuploader = new qq.FineUploader({
-	      element: $('#manual-fine-uploader')[0],
-	      request: {
-	    	  endpoint: "<?php echo url::base();?>parseFiles/submitFiles",
-	    	  
-	      },
-	      autoUpload: false,
-	      text: {
-	        uploadButton: '<i class="icon-plus icon-white"></i> Select Files'
-	      }
-	    });
 	 
 	    $('#triggerUpload').click(function() {
 		  manualuploader.setParams({
@@ -62,6 +65,13 @@ $(document).ready(function(){
 	      manualuploader.uploadStoredFiles();
 	    });
 	  });
-});
+
+	  function setLayerId(){
+		  var id = manualuploader.getUploads()[0].uuid;
+		  $('#user_kml_ids').val(id);
+		  alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
+		  $("a[rel]").overlay().close();	  
+	  }
+
 	
 </script>

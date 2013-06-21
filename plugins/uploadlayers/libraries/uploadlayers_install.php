@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * @author     John Etherton <john@ethertontech.com>
- * @package    Private Fields, Ushahidi Plugin - https://github.com/jetherton/wtm
+ * @author     Dylan Gillespie <dylan@ethertontech.com>
+ * @package    Upload Layers, Ushahidi Plugin - https://github.com/jetherton/wtm
  *
  * Developed by Etherton Technologies Ltd.
  */

@@ -25,8 +25,8 @@ class uploadlayersevents {
 		elseif(strpos($url, 'reports/submit') !== false){
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}
-		//Event::add('ushahidi_action.report_submit_admin', array($this, 'parseSubmitAdmin'));
-		//Event::add('ushahidi_action.report_submit', array($this, 'parseSubmit'));
+		Event::add('ushahidi_action.report_submit_admin', array($this, 'parseSubmitAdmin'));
+		Event::add('ushahidi_action.report_submit', array($this, 'parseSubmit'));
 
 	}
 	
@@ -41,15 +41,15 @@ class uploadlayersevents {
 	}
 	
 	public function parseSubmit(){
-		$view = new View('uploadlayers/uploadsubmit');
-		$view->post = $_POST;
-		echo $view;
+		$post = $_POST;
+		print_r($post);
+		//exit;
 	}
 	
 	public function parseSubmitAdmin(){
-		$view = new View('uploadlayers/uploadsubmitadmin');
-		$view->post = $_POST;
-		echo $view;
+		$post = $_POST;
+		print_r($post);
+		//exit;
 	}
 
 }

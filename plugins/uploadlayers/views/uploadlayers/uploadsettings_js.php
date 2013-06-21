@@ -24,11 +24,12 @@ $(document).ready(function(){
 									Upload a Layer\
 								</a></h4>\
 							</div>');
-	$('#uploadLayer').append('<div class="apple_overlay" id="overlay" style="display:none">\
+	$('#uploadLayer').after('<div class="apple_overlay" id="overlay" style="display:none">\
 							<div class="contentWrap">\
 								<img class="contentWrapWaiter" src="<?php echo URL::base();?>plugins/uploadlayers/media/img/waiter_barber.gif"/>\
 							</div>\
 						</div>');
+	$('#submit').before('<input type="hidden" id="user_kml_ids" name="user_kml_ids"/>');
 	//initialize the apple overlay effect
 	$("a[rel]").overlay({
 		mask: 'grey',
