@@ -232,6 +232,10 @@ class Reports_Controller extends Main_Controller {
 	 */
 	public function submit($id = FALSE, $saved = FALSE)
 	{
+		if($_POST){
+		    print_r($_POST);
+		    exit;
+		}
 		$db = new Database();
 
 		// First, are we allowed to submit new reports?

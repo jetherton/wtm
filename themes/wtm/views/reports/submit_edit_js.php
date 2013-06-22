@@ -101,7 +101,7 @@
 				strokeColor: "#CC0000",
 				strokeWidth: 2.5,
 				graphicZIndex: 1,
-				externalGraphic: "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>",
+				externalGraphic: "${icon}",
 				graphicOpacity: 1,
 				graphicWidth: 21,
 				graphicHeight: 25,
@@ -116,6 +116,7 @@
 				labelOutlineColor: "white",
 				labelOutlineWidth: 2
 			});
+			
 			style2 = new OpenLayers.Style({
 				pointRadius: "8",
 				fillColor: "#30E900",
@@ -142,7 +143,7 @@
 			var vlayerStyles = new OpenLayers.StyleMap({
 				"default": style1,
 				"select": style2,
-				"temporary": style3
+				"temporary": style3,
 			});
 			
 			// Create Vector/Drawing layer
@@ -244,6 +245,7 @@
 						vlayer.drawFeature(feature);
 					    }	
 					}
+					console.log(event);
 					refreshFeatures(event);
 					
 				},
@@ -282,6 +284,7 @@
 				OpenLayers.Projection.transform(point, proj_4326, map.getProjectionObject());
 				var origFeature = new OpenLayers.Feature.Vector(point);
 				origFeature.attributes.label = "";
+				origFeature.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>"
 				vlayer.addFeatures(origFeature);
 				<?php
 			}
@@ -320,10 +323,20 @@
 			    OpenLayers.Handler.RegularPolygon,
 			    {handlerOptions: {sides:40, irregular: true},
 			    'displayClass': 'elipse'});
-			
+			    
+			var textControl = new OpenLayers.Control.DrawFeature(vlayer,
+			     OpenLayers.Handler.Point,
+			     {'displayClass': 'olControlDrawFeaturePoint',
+			      'featureAdded': function(e){
+				e.renderIntent = "styleText";
+				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/clear_rect32x14.png' ;?>";
+				e.attributes.label = "text";
+				vlayer.drawFeature(e);
+			      }
+			      });
 			
 			var panelControls = [
-			 
+			 textControl,
 			 new OpenLayers.Control.DragPan(),
 			 circleControl,
 			 new OpenLayers.Control.DrawFeature(vlayer,
@@ -334,7 +347,11 @@
 			     {'displayClass': 'olControlDrawFeaturePath'}),
 			 new OpenLayers.Control.DrawFeature(vlayer,
 			     OpenLayers.Handler.Point,
-			     {'displayClass': 'olControlDrawFeaturePoint'})
+			     {'displayClass': 'olControlDrawFeaturePoint',
+			      'featureAdded':function(e){
+				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>";
+				vlayer.drawFeature(e);
+			      }})
 			];
 			var panel = new OpenLayers.Control.Panel({
 			   div:container,
@@ -357,7 +374,7 @@
 			 * the selectCtrl. Previously selectCtrl was not being re-activated
 			 * after new features were added.
 			 */
-			navigationCtrl = panel.controls[0];
+			navigationCtrl = panel.controls[1];
 			navigationCtrl.navActivate = panel.controls[0].activate;
 			navigationCtrl.navDeactivate = panel.controls[0].deactivate;
 			navigationCtrl.activate = function () {
@@ -380,7 +397,8 @@
 			     var mapCenter = map.getCenter();
 			     var newPoint = new OpenLayers.Geometry.Point(mapCenter.lon, mapCenter.lat);
 			     var newFeature = new OpenLayers.Feature.Vector(newPoint);
-			     newFeature.attributes = { label: ""};
+			     newFeature.attributes = { label: "",
+			     icon:"<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>"};
 			     vlayer.addFeatures([newFeature]);
 			     refreshFeatures();
 			     //set this feature as what's active
@@ -1080,6 +1098,15 @@
 					var lat = '';
 					var color = '';
 					var strokewidth = '';
+					var icon = '';
+					
+					if ( typeof(vlayer.features[i].icon) != 'undefined') {
+						icon = vlayer.features[i].icon;
+					} else if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
+					    icon = vlayer.features[i].attributes.icon;
+					    icon = icon.substr(icon.lastIndexOf('/')+1);
+					}
+					
 					if ( typeof(vlayer.features[i].label) != 'undefined') {
 						label = vlayer.features[i].label;
 					}
@@ -1098,7 +1125,7 @@
 					if ( typeof(vlayer.features[i].strokewidth) != 'undefined') {
 						strokewidth = vlayer.features[i].strokewidth;
 					}
-					geometryAttributes = JSON.stringify({ geometry: geometry, label: label, comment: comment,lat: lat, lon: lon, color: color, strokewidth: strokewidth});
+					geometryAttributes = JSON.stringify({ icon:icon, geometry: geometry, label: label, comment: comment,lat: lat, lon: lon, color: color, strokewidth: strokewidth});
 					$('#reportForm').append($('<input></input>').attr('name','geometry[]').attr('type','hidden').attr('value',geometryAttributes));
 				}
 			}
