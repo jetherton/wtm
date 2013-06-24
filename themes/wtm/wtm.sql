@@ -14,3 +14,7 @@ ALTER TABLE  `layer` ADD  `icon` CHAR( 255 ) NULL DEFAULT NULL;
 
 /** Dylan Gillespie 2013-06-20 - Add facebook field to incident_person **/
 ALTER TABLE  `incident_person` ADD  `person_facebook` VARCHAR( 200 ) NOT NULL;
+
+/** John Etherton 2013-06-24 - Add a field to store the kind of icon a point uses on the map**/
+ALTER TABLE  `geometry` ADD  `geometry_icon` CHAR( 255 ) NULL DEFAULT NULL;
+

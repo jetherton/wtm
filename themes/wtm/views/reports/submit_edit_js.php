@@ -284,7 +284,7 @@
 				OpenLayers.Projection.transform(point, proj_4326, map.getProjectionObject());
 				var origFeature = new OpenLayers.Feature.Vector(point);
 				origFeature.attributes.label = "";
-				origFeature.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>"
+				origFeature.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>";
 				vlayer.addFeatures(origFeature);
 				<?php
 			}
@@ -296,10 +296,12 @@
 					echo "wktFeature = wkt.read('$geometry->geometry');\n";
 					echo "wktFeature.geometry.transform(proj_4326,proj_900913);\n";
 					echo "wktFeature.label = ".json_encode($geometry->label).";\n";
-					echo "wktFeature.attributes.label = '$geometry->label';\n";
+					echo "wktFeature.attributes.label = ".json_encode($geometry->label).";\n";
 					echo "wktFeature.comment = ".json_encode($geometry->comment).";\n";
 					echo "wktFeature.color = '$geometry->color';\n";
 					echo "wktFeature.strokewidth = '$geometry->strokewidth';\n";
+					echo "wktFeature.icon = ".json_encode(url::file_loc('img').'media/img/openlayers/'.$geometry->icon).";\n";
+					echo "wktFeature.attributes.icon = ".json_encode(url::file_loc('img').'media/img/openlayers/'.$geometry->icon).";\n";
 					echo "vlayer.addFeatures(wktFeature);\n";
 					echo "var color = '$geometry->color';if (color) {updateFeature(wktFeature, color, '');};\n";
 					echo "var strokewidth = '$geometry->strokewidth';if (strokewidth) {updateFeature(wktFeature, '', strokewidth);};\n";
@@ -329,7 +331,7 @@
 			     {'displayClass': 'olControlDrawFeaturePoint',
 			      'featureAdded': function(e){
 				e.renderIntent = "styleText";
-				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/clear_rect32x14.png' ;?>";
+				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/clear_rect32x14.png' ;?>";
 				e.attributes.label = "text";
 				vlayer.drawFeature(e);
 			      }
@@ -1100,9 +1102,7 @@
 					var strokewidth = '';
 					var icon = '';
 					
-					if ( typeof(vlayer.features[i].icon) != 'undefined') {
-						icon = vlayer.features[i].icon;
-					} else if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
+					if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
 					    icon = vlayer.features[i].attributes.icon;
 					    icon = icon.substr(icon.lastIndexOf('/')+1);
 					}

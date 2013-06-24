@@ -699,6 +699,8 @@ class Json_Controller extends Template_Controller {
 				$strokewidth = ($item->geometry_strokewidth) ? $item->geometry_strokewidth : "3";
 				
 				$label = ($item->geometry_label == "" || $item->geometry_label == null) ? "" : $item->geometry_label;
+				
+				$icon = ($item->geometry_icon) ? url::file_loc('img').'media/img/openlayers/'.$item->geometry_icon : url::file_loc('img').'media/img/openlayers/marker.png';
 
 				$json_item = array();
 				$json_item['type'] = 'Feature';
@@ -709,7 +711,7 @@ class Json_Controller extends Template_Controller {
 					'label'=> $label,
 					'description' => $item->geometry_comment,
 					'color' => $fillcolor,
-					'icon' => '',
+					'icon' => $icon,
 					'strokecolor' => $strokecolor,
 					'strokewidth' => $strokewidth,
 					'link' => $incident_link,
@@ -742,7 +744,7 @@ class Json_Controller extends Template_Controller {
 		$db = new Database();
 		// Get Incident Geometries via SQL query as ORM can't handle Spatial Data
 		$sql = "SELECT id, incident_id, AsText(geometry) as geometry, geometry_label, 
-			geometry_comment, geometry_color, geometry_strokewidth FROM ".$this->table_prefix."geometry";
+			geometry_comment, geometry_color, geometry_strokewidth, geometry_icon FROM ".$this->table_prefix."geometry";
 		
 		$query = $db->query($sql);
 		foreach ( $query as $item )

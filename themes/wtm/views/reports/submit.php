@@ -13,7 +13,7 @@
 		<input type="hidden" name="longitude" id="longitude" value="<?php echo $form['longitude']; ?>">
 		<input type="hidden" name="country_name" id="country_name" value="<?php echo $form['country_name']; ?>" />
 		<input type="hidden" name="incident_zoom" id="incident_zoom" value="<?php echo $form['incident_zoom']; ?>" />
-		<div class="big-block">
+		<div class="big-block" style="height:1200px;">
 			<h1><?php echo Kohana::lang('ui_main.reports_submit_new'); ?></h1>
 			<?php if ($form_error): ?>
 			<!-- red-box -->
@@ -172,7 +172,7 @@
 								<div id="geometryLabelComment">
 									<span id="geometryLabel">
 										<label><?php echo Kohana::lang('ui_main.geometry_label');?>:</label> 
-										<?php print form::input('geometry_label', '', ' class="lbl_text"'); ?>
+										<?php print form::textarea('geometry_label', '', ' class="lbl_text" style="width:200px;"'); ?>
 									</span>
 									<span id="geometryComment">
 										<label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> 

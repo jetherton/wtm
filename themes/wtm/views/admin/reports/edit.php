@@ -224,7 +224,10 @@
 									<div id="geometryLabelerHolder" class="olControlNoSelect">
 										<div id="geometryLabeler">
 											<div id="geometryLabelComment">
-												<span id="geometryLabel"><label><?php echo Kohana::lang('ui_main.geometry_label');?>:</label> <?php print form::input('geometry_label', '', ' class="lbl_text"'); ?></span>
+												<span id="geometryLabel">
+												    <label><?php echo Kohana::lang('ui_main.geometry_label');?>:</label> 
+												    <?php print form::textarea('geometry_label', '', ' class="lbl_text" style="width:200px;"'); ?>
+												</span>
 												<span id="geometryComment"><label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> <?php print form::input('geometry_comment', '', ' class="lbl_text2"'); ?></span>
 											</div>
 											<div>

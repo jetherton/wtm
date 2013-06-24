@@ -62,7 +62,7 @@ jQuery(window).load(function() {
 		strokeOpacity: "0.7",
 		strokeWidth: "${strokewidth}",
 		graphicZIndex: 1,
-		externalGraphic: "${graphic}",
+		externalGraphic: "${icon}",
 		graphicOpacity: 1,
 		graphicWidth: 21,
 		graphicHeight: 25,

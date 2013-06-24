@@ -48,7 +48,7 @@
 		$('.report_right').css({"position":"relative", "top":"445px"});
 		$('#divMap').parent().css({'margin':'0'});
 		$('.report_optional').prependTo($('.btn_submit').parent());
-		$('.big-block').height(1050);
+		
 		//Tell the map that it has a new siez to update the center
 		map.updateSize();
 	}
