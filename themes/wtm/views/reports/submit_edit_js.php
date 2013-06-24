@@ -328,7 +328,7 @@
 			    
 			var textControl = new OpenLayers.Control.DrawFeature(vlayer,
 			     OpenLayers.Handler.Point,
-			     {'displayClass': 'olControlDrawFeaturePoint',
+			     {'displayClass': 'olControlDrawTextPoint',
 			      'featureAdded': function(e){
 				e.renderIntent = "styleText";
 				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/clear_rect32x14.png' ;?>";

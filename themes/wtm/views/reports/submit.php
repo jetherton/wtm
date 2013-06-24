@@ -221,10 +221,8 @@
 						</div>
 						<div id="panel" class="olControlEditingToolbar"></div>
 						<div class="btns">
-							<ul>
-								<li><a title="Delete last item added." href="#" class="btn_del_last"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_last'));?></a></li>
-								<li><a title="Delete selected item." href="#" class="btn_del_sel"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_selected'));?></a></li>
-							</ul>
+							<a title="Delete last item added." href="#" class="btn_del_last">&nbsp;</a>
+							<a title="Delete selected item." href="#" class="btn_del_sel">&nbsp;</a>
 						</div>
 						<div style="clear:both;"></div>
 						<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>

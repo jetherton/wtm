@@ -614,6 +614,14 @@ div.report-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoo
 	background: url('../images/edit_submit_selected_icons.png') 0px 0px;
 }
 
+div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -180px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -180px 0px;
+}
+
+
 #geometryLabeler input.short_input{
     width: 50px;
 }
@@ -622,4 +630,31 @@ div.report-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoo
     margin-top:10px;
 }
 
+.report-find-location .btns{
+    padding:0px;
+    margin: 5px 5px 0 0;
+}
 
+.report-find-location .btns a{
+    border:none;
+    height:31px;
+    width:36px;
+    border-right: solid 1px #9e9e9c;
+    padding: 0px;
+    margin: 0 0 0 0;
+    float:left;
+    display:block;
+}
+
+.report-find-location .btns a.btn_del_last{
+    background: url('../images/edit_submit_nonselect_icons.png') -341px 0px;
+}
+
+.report-find-location .btns a.btn_del_sel{
+    background: url('../images/edit_submit_nonselect_icons.png') -374px 0px;
+}
+
+
+div.report-find-location #panel{
+    margin: 5px 5px 0 0;
+}
