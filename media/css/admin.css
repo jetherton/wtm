@@ -2250,7 +2250,7 @@ ul.map-toggles li a:active { display:inline-block; padding:3px 5px 3px 17px; out
 			right:0;
 			width:18px;
 			height:18px;
-			background: url("../../img/openlayers/layer-switcher-minimize.png") no-repeat;
+			background: url("../img/openlayers/layer-switcher-minimize.png") no-repeat;
 			cursor: pointer;
 		}
 		
@@ -2626,4 +2626,88 @@ div.dp-popup td.disabled {
 	font-size: 10px;
 	line-height: 12px;
 	color: #a1a1a1;
+}
+
+
+
+div.incident-find-location div.olControlEditingToolbar div.olButton{
+	
+	height:31px;
+	width:36px;
+	border-right: solid 1px #9e9e9c;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeaturePointItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -34px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeaturePointItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -34px 0px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -70px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -70px 0px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -106px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -106px 0px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.elipseItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -142px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.elipseItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -142px 0px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlDragPanItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -214px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlDragPanItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -214px 0px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoordPointItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') 0px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoordPointItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') 0px 0px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawTextPointItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -180px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlDrawTextPointItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -180px 0px;
+}
+
+
+.incident-find-location #deletePanel{
+    padding:0px;
+    margin: 5px 5px 0 0;
+}
+
+.incident-find-location #deletePanel a{
+    border:none;
+    height:31px;
+    width:36px;
+    border-right: solid 1px #9e9e9c;
+    padding: 0px;
+    margin: 0 0 0 0;
+    float:left;
+    display:block;
+    text-decoration: none;
+}
+
+.incident-find-location #deletePanel a.btn_del_last{
+    background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -341px 0px;
+}
+
+.incident-find-location #deletePanel a.btn_del_sel{
+    background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -374px 0px;
 }

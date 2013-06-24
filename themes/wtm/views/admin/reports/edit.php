@@ -226,9 +226,12 @@
 											<div id="geometryLabelComment">
 												<span id="geometryLabel">
 												    <label><?php echo Kohana::lang('ui_main.geometry_label');?>:</label> 
-												    <?php print form::textarea('geometry_label', '', ' class="lbl_text" style="width:200px;"'); ?>
+												    <?php print form::textarea('geometry_label', '', ' class="lbl_text" style="width:200px;height:20px;float:none;"'); ?>
 												</span>
-												<span id="geometryComment"><label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> <?php print form::input('geometry_comment', '', ' class="lbl_text2"'); ?></span>
+												<span id="geometryComment">
+												    <label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> 
+												    <?php print form::textarea('geometry_comment', '', ' class="lbl_text2" style="width:200px;height:20px;float:none;"'); ?>
+												</span>
 											</div>
 											<div>
 												<span id="geometryColor"><label><?php echo Kohana::lang('ui_main.geometry_color');?>:</label> <?php print form::input('geometry_color', '', ' class="lbl_text"'); ?></span>
@@ -243,12 +246,9 @@
 							</div>
 							<div class="incident-find-location">
 								<div id="panel" class="olControlEditingToolbar"></div>
-								<div class="btns" style="float:left;">
-									<ul style="padding:4px;">
-										<li><a href="#" class="btn_del_last"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_last'));?></a></li>
-										<li><a href="#" class="btn_del_sel"><?php echo utf8::strtoupper(Kohana::lang('ui_main.delete_selected'));?></a></li>
-										<li><a href="#" class="btn_clear"><?php echo utf8::strtoupper(Kohana::lang('ui_main.clear_map'));?></a></li>
-									</ul>
+								<div id="deletePanel" class="btns" style="float:left;">
+										<a href="#" class="btn_del_last">&nbsp;</a>
+										<a href="#" class="btn_del_sel">&nbsp;</a>
 								</div>
 								<div style="clear:both;"></div>
 								<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>

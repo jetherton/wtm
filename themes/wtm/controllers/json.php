@@ -689,7 +689,7 @@ class Json_Controller extends Template_Controller {
 				$geom = $wkt->read($item->geometry);
 				$geom_array = $geom->getGeoInterface();
 
-				$title = ($item->geometry_comment) ? $item->geometry_comment : $incident_title;
+				$title = ($item->geometry_comment) ? nl2br($item->geometry_comment) : $incident_title;
 				$item_name = $this->get_title($title, $incident_link);
 					
 				$fillcolor = ($item->geometry_color) ? $item->geometry_color : "ffcc66";
