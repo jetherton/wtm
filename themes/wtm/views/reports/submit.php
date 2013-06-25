@@ -176,7 +176,7 @@
 									</span>
 									<span id="geometryComment">
 										<label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> 
-										<?php print form::input('geometry_comment', '', ' class="lbl_text2"'); ?>
+										<?php print form::textarea('geometry_comment', '', ' class="lbl_text2" style="width:200px;"'); ?>
 									</span>
 								</div>
 								<div>

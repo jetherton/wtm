@@ -239,7 +239,7 @@ class Json_Controller extends Template_Controller {
 				    'link' => $link,
 				    'category' => array($category_id),
 				    'color' => $color,
-				    'icon' => $icon,
+				    'icon' => url::file_loc('img').'media/img/openlayers/marker.png',
 				    'thumb' => $thumb,
 				    'timestamp' => strtotime($marker->incident_date),
 				    'count' => 1,
