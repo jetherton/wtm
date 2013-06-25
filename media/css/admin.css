@@ -2711,3 +2711,17 @@ div.incident-find-location div.olControlEditingToolbar div.olControlDrawTextPoin
 .incident-find-location #deletePanel a.btn_del_sel{
     background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -374px 0px;
 }
+
+table.defaultCats .show{
+    border: solid 1px #00699b;
+    width: 15px;
+    display: block;
+    text-align: center;
+}
+
+table.defaultCats .category-icon{
+    width: 25px;
+    height: 25px;
+    border: black 1px solid;
+    margin:2px;
+}

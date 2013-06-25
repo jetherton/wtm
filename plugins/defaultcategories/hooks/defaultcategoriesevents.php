@@ -41,7 +41,14 @@ class defaultcategoriesevents {
 	
 	public function render_javascript(){
 		$view = new View('defaultcategories/defaultcategories_js');
-		$view->categories = json_encode($this->makeCategories());
+		
+		//way simplier way of sending the cats that need to be on
+		$onCats = ORM::factory('category')->where('category_visible',1)->where('category_default')->find_all();
+		$catsThatAreOn = array();
+		foreach($onCats as $onCat){
+		    $catsThatAreOn[] = $onCat->id;
+		}
+		$view->categories = json_encode($catsThatAreOn);
 		echo $view;
 	}
 	
@@ -92,13 +99,7 @@ class defaultcategoriesevents {
 			<h4><a href='#' class='tooltip' title='$hovertext'>$category_filter</a></h4>
 			</div>
 		
-			<table id=\"category_switch\" class=\"category_table\">
-				
-			<tr><td>
-			<span $color_css>$all_cat_image</span></td>
-			<td><span class=\"category-title\">$all_categories</span></td>
-			<td><input type='checkbox' name=\"$all\" id=\"$all\"/>
-			</td></tr>";
+			<table id=\"category_switch\" class=\"category_table\">";
 			foreach ($categories as $category => $category_info)
 			{
 			$category_title = html::escape($category_info[0]);
@@ -120,7 +121,7 @@ class defaultcategoriesevents {
 									    . '<span '.$color_css.'>'.$category_image.'</span></td>'
 										    		. '<td><span class="category-title">'.$category_title.'</span></td>';
 			if(sizeof($category_info[3]) == 0){
-				$checkbox = "<td><input type='checkbox' name='".str_replace(' ', '_', $category_title)."' id='".str_replace(' ', '_', $category_title)."' value='$category_title'";
+				$checkbox = "<td><input type='checkbox' name='defaultCats[$category]' id='Cats_$category' value='defaultCats[$category]'";
 				if($category_info[4] == 1){
 					$checkbox .= ' checked';
 				}
@@ -156,7 +157,7 @@ class defaultcategoriesevents {
 												$string .= '<tr style="display:none" class="child_'.$category.'"><td></td>'
 												. '<td><span '.$color_css.'>'.$child_image.'</span>       '
 												. '        <span class="category-title">'.$child_title.'</span></td>';
-												$checkbox = "<td><input type='checkbox' name='$child_name' id='$child_name' value='$child_name'";
+												$checkbox = "<td><input type='checkbox' name='defaultCats[$child]' id='defaultCats[$child]' value='$child_name'";
 											if($child_info[3] == 1){
 												$checkbox .= ' checked';
 					}

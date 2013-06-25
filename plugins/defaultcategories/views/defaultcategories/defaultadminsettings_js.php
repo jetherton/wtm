@@ -15,7 +15,9 @@ var path_info = '<?php echo url::current();?>';
 	var globalData = jQuery.parseJSON(<?php echo $categories ?>);
 
 
-	$(document).ready(function(){$('.has_border_first').next().next().next().append(<?php echo $categoryDiv ?>);});
+	$(document).ready(function(){var item = $('.has_border_first').next().next().next().append(<?php echo $categoryDiv ?>);				    
+				     $('#category_switch').addClass('defaultCats');
+				 });
 
 
 	function change(){

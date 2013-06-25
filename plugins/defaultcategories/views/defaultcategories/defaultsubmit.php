@@ -8,37 +8,21 @@
 *************************************************************/
 
 
-if($post){
-	foreach($categories as $key=>$parent){
-		
-		$cat = str_replace(' ', '_', $parent[0]);
-		$category = ORM::factory('category', $key);
 
-		if(isset($post[$cat])){
-				$category->category_default = 1;
-				$category->save();
-		}
-		else{
-			$category->category_default = 0;
-			$category->save();
-		}
-		
-		foreach($parent[3] as $val=>$child){
-			$cat = str_replace(' ', '_', $child[0]);
-			$category = ORM::factory('category', $val);
-			
-			if(isset($post[$cat])){
-				$category->category_default = 1;
-				$category->save();
-			}
-			else{
-				$category->category_default = 0;
-				$category->save();
-			}
-		}
-		
-		
+if(isset($post['defaultCats'])){
+    
+	//first turn off category_default for all categories that have it on
+	$allCats = ORM::factory('category')->where('category_default',1)->find_all();
+	foreach($allCats as $cat){
+	    $cat->category_default = 0;
+	    $cat->save();
 	}
-	//print_r($post);
-	//exit;
+	
+	//now turn it back on for those that are in the POST
+	foreach($post['defaultCats'] as $dbId=>$cat_item){
+	    $cat = ORM::factory('category')->where('id',$dbId)->find();
+	    $cat->category_default = 1;
+	    $cat->save();
+	}
+    
 }

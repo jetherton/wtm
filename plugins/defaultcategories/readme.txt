@@ -1,15 +1,15 @@
 === About ===
 name: Default Categories
-website: http://www.ushahidi.com
-description: Search the map for addresses and navigational coordinates
-version: 0.1
-requires: 2.1
-tested up to: 2.1
+website: http://ethertontech.com
+description: Makes certain categories turn on by default when the home page is loaded
+version: 1.0
+requires: 2.7
+tested up to: 2.7
 author: Dylan Gillespie
-author website: http://www.ushahidi.com
+author website: http://ethertontech.com
 
 == Description ==
-Adds the option for the default categories to appear when a map loads.
+Makes certain categories turn on by default when the home page is loaded
 
 == Installation ==
 1. Copy the entire /defaultcategories/ directory into your /plugins/ directory.
