@@ -249,7 +249,34 @@ div#right { position:absolute; z-index:1000; }
 /* home page map */
 div.map { width:auto; border:1px solid #fff; border-top:0; position:relative; }
 div.map.timeline-enabled {height:529px; }
-#mapStatus { width:auto; float:none; overflow:auto; border:1px solid #fff; }
+#mapStatus { 
+    width:270px; float:none; overflow:auto; 
+    position: relative;
+    top: -68px;
+    left:400px;
+    font-family:Agile-Light;
+    font-weight:bold;
+    font-size:13px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.75);
+
+}
+
+div#mapStatus div{
+    padding: 6px;
+}
+div#mapStatus div#mapProjection{
+    display:none;
+}
+
+div#mapStatus div#mapOutput{
+    display:none;
+}
+
+div#mapStatus div#mapMousePosition{
+    border:none;
+}
+
 
 /* home page timeline */
 div.slider-holder,
@@ -657,4 +684,86 @@ div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointI
 
 div.report-find-location #panel{
     margin: 5px 5px 0 0;
+}
+
+div#report-type-filter{
+    position:relative;
+    top:-100px;
+}
+
+div#report-type-filter ul li {
+    float: left;
+    margin-right: 0px;
+}
+
+div#report-type-filter ul li a{
+    font-family:Agile-Light;
+    height:28px;
+    display:block;
+    width:32px;
+    background: rgba(255,255,255,0.75);
+    margin:0px;
+    padding:0px;
+}
+div#report-type-filter ul li a:hover{
+    border:none;
+    -moz-border-radius:none;
+    -webkit-border-radius: none;
+}
+
+div#report-type-filter ul li div{
+    font-family:Agile-Light;
+    height:22px;
+    display:block;
+    width:53px;
+    background: rgba(255,255,255,0.75);
+    margin:0px;
+    font-size: 13px;
+    padding-top: 6px;
+    padding-left: 8px;
+    color:#333;
+    font-weight: bold;
+    border-right:1px solid #a7a3a2;
+}
+
+div#report-type-filter ul li a#media_0{
+    height:22px;    
+    padding-top: 6px;
+    padding-left: 6px;
+    color:#333;
+}
+
+div#report-type-filter ul li a#media_0 span{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+div#report-type-filter ul li a#media_4{
+    background-image: url('../images/media_filter_sprite.png');
+    background-position: 0px -2px;
+}
+div#report-type-filter ul li a#media_1{
+    background-image: url('../images/media_filter_sprite.png');
+    background-position: -35px -1px;
+}
+div#report-type-filter ul li a#media_2{
+    background-image: url('../images/media_filter_sprite.png');
+    background-position: -78px -1px;
+}
+
+div.slider-holder {
+    width:939px;
+    background: rgba(255,255,255,0.75);
+    margin-top: 0px;
+    top: -40px;
+    position: relative;
+    padding-right: 11px;
+}
+
+div.graph-holder{
+    width:960px;
+    top: -45px;
+    position: relative;
+    background: rgba(255,255,255,0.75);
 }
