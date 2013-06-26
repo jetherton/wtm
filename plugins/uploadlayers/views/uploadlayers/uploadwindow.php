@@ -20,17 +20,6 @@
 					<!-- tab -->
 					<div class="a">
 						<div class="tab_form">
-<<<<<<< HEAD
-							<strong><?php echo Kohana::lang('ui_main.layer_name');?>:</strong>
-							<?php print form::input('layer_name', '', ' class="text" id="layer_name"'); ?>
-						</div>
-						<div class="tab_form">
-							<strong><?php echo Kohana::lang('ui_main.layer_url');?>:</strong>
-							<?php print form::input('layer_url', '', ' class="text long" id="layer_url"'); ?>
-						</div>
-						<div class="tab_form">
-							<strong><?php echo Kohana::lang('ui_main.color');?>:</strong>
-=======
 
 							<strong><?php echo Kohana::lang('ui_main.layer_name');?>:</strong><br />
 							<?php print form::input('layer_name', '', ' class="text" id="layer_name"'); ?>
@@ -41,7 +30,6 @@
 						</div>
 						<div class="tab_form">
 							<strong><?php echo Kohana::lang('ui_main.color');?>:</strong><br />
->>>>>>> 2feb1f37c18c9aaaeff9a8db9d433eeffed94ac8
 							<?php print form::input('layer_color', '', ' class="text" id="layer_color"'); ?>
 							<script type="text/javascript" charset="utf-8">
 								$(document).ready(function() {
@@ -63,11 +51,7 @@
 							</script>
 						</div>
 						<div class="tab_form">
-<<<<<<< HEAD
-							<strong><?php echo Kohana::lang('wtm.Layer Meta-Data');?>:</strong>
-=======
 							<strong><?php echo Kohana::lang('wtm.Layer Meta-Data');?>:</strong><br />
->>>>>>> 2feb1f37c18c9aaaeff9a8db9d433eeffed94ac8
 							<?php print form::textarea('meta_data','', 'style="width:500px;height:380x;" id="meta_data"');?>
 						</div>
 						<div style="clear:both"></div>
