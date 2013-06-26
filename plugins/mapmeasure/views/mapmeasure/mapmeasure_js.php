@@ -20,7 +20,11 @@
 	//variables to hold map zooming listeners
 	var clickOut;
 	var clickIn;
+	//conversion for nautical miles
 	var nautMile = 0.539957;
+	var order = 1;
+	var nautChecked = false;
+	var kiloChecked = false;
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
@@ -143,6 +147,36 @@
 		$('#areaDraw').val('polygon');
 		$('#noDraw').click(function(){
 			deactivateAll();
+		});
+		$('#nautMile').click(function(){
+			if(!nautChecked){
+				nautChecked = true;
+				kiloChecked = false;
+				var dis = parseFloat($('#output').text().substring(10));
+				dis *= nautMile;
+				var out = '';
+				if(order == 1) {
+		            out += "Distance: " + dis + " NM";
+		        } else {
+		        	 out += "Distance: " + dis + " NM" + "<sup>2</sup>";
+		        }
+				document.getElementById('output').innerHTML = out;
+			}
+		});	
+		$('#kilometers').click(function(){
+			if(!kiloChecked){
+				kiloChecked = true;
+				nautChecked = false;
+				var dis = parseFloat($('#output').text().substring(10));
+				dis /= nautMile;
+				var out = '';
+				if(order == 1) {
+		            out += "Distance: " + dis + " km";
+		        } else {
+		        	 out += "Distance: " + dis + " km" + "<sup>2</sup>";
+		        }
+				document.getElementById('output').innerHTML = out;
+			}
 		});		
 	}
 
@@ -195,7 +229,7 @@
     
     function handleMeasurements(event) {
         var units = ($('#kilometers').is(':checked')) ? event.units : 'NM';
-        var order = event.order;
+        order = event.order;
         var measure = event.measure;
         var element = document.getElementById('output');
         var out = "";

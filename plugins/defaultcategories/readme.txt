@@ -13,8 +13,7 @@ Makes certain categories turn on by default when the home page is loaded
 
 == Installation ==
 1. Copy the entire /defaultcategories/ directory into your /plugins/ directory.
-2. Copy the SQL from /sql/defaultcategories.sql into database.
-3. Activate the plugin.
+2. Activate the plugin.
 
 == Changelog ==
 0.1
