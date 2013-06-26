@@ -16,18 +16,18 @@
 			
 	</div>
 				<!-- tabs -->
-				<div class="tabs">					
+				<div class="t">					
 					<!-- tab -->
-					<div class="tab">
-						<div class="tab_form_item">
+					<div class="a">
+						<div class="tab_form">
 							<strong><?php echo Kohana::lang('ui_main.layer_name');?>:</strong><br />
 							<?php print form::input('layer_name', '', ' class="text" id="layer_name"'); ?>
 						</div>
-						<div class="tab_form_item">
+						<div class="tab_form">
 							<strong><?php echo Kohana::lang('ui_main.layer_url');?>:</strong><br />
 							<?php print form::input('layer_url', '', ' class="text long" id="layer_url"'); ?>
 						</div>
-						<div class="tab_form_item">
+						<div class="tab_form">
 							<strong><?php echo Kohana::lang('ui_main.color');?>:</strong><br />
 							<?php print form::input('layer_color', '', ' class="text" id="layer_color"'); ?>
 							<script type="text/javascript" charset="utf-8">
@@ -49,7 +49,7 @@
 								});
 							</script>
 						</div>
-						<div class="tab_form_item">
+						<div class="tab_form">
 							<strong><?php echo Kohana::lang('wtm.Layer Meta-Data');?>:</strong><br />
 							<?php print form::textarea('meta_data','', 'style="width:500px;height:380x;" id="meta_data"');?>
 						</div>
