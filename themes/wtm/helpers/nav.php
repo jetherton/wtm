@@ -47,15 +47,15 @@ class nav_Core {
 		{
 			if (Kohana::config('settings.allow_reports'))
 			{
-				$menu .= "<li><a href=\"".url::site()."reports/submit\" ";
+				$menu .= "<li><a href=\"".url::site()."page/index/4\" ";
 				$menu .= ($this_page == 'reports_submit') ? " class=\"active\"":"";
-			 	$menu .= ">".Kohana::lang('wtm.submit')."</a></li>";
+			 	$menu .= ">".Kohana::lang('wtm.How to Report')."</a></li>";
 			}
 		}
 		// Investigations Page
 		if( ! in_array('investigations',$dontshow))
 		{
-			$menu .= "<li><a href=\"".url::site()."reports/investigations\" ";
+			$menu .= "<li><a href=\"".url::site()."page/index/5\" ";
 			$menu .= ($this_page == 'investigations') ? " class=\"active\"":"";
 			$menu .= ">".Kohana::lang('wtm.investigations')."</a></li>";
 		}

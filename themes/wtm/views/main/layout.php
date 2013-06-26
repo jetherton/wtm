@@ -251,7 +251,10 @@ $(function(){
 
 				<!-- Web Form -->
 				<p>
-					<a href="<?php echo url::site() . 'reports/submit/'; ?>"><?php echo Kohana::lang('ui_main.report_option_4'); ?></a>
+					<a href="<?php echo url::site() . 'reports/submit/'; ?>">
+					    <?php echo Kohana::lang('ui_main.report_option_4'); ?>
+					    <img style="margin-top:10px;" src="<?php echo url::base();?>themes/wtm/images/submit_a_report.png"/>
+					</a>
 				</p>
 
 
