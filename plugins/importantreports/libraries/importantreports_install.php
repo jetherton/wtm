@@ -1,13 +1,13 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * @author     Dylan Gillespie <dylan@ethertontech.com>
- * @package    Upload Layers, Ushahidi Plugin - https://github.com/jetherton/wtm
+ * @package    Important Reports, Ushahidi Plugin - https://github.com/jetherton/wtm
  *
  * Developed by Etherton Technologies Ltd.
  */
 
 
-class Uploadlayers_Install {
+class Importantreports_Install {
 
     /**
 	 * Function: __construct
@@ -23,9 +23,6 @@ class Uploadlayers_Install {
 		$this->db = Database::instance();
 	}
 
-	
-	
-	
 	
 	
 	/**
@@ -44,17 +41,15 @@ class Uploadlayers_Install {
 		$sql = false;
 		try{
 			$sql = $this->db->query(
-					'SELECT `date_uploaded` FROM `layer`');
+					'SELECT `incident_important` FROM `incident`');
 		}
 		catch(Exception $e){
 			if($e){
-				$this->db->query('ALTER TABLE `layer` ADD  `date_uploaded` DATE NOT NULL;
-								  ALTER TABLE `layer` ADD `report_id` INT NOT NULL DEFAULT 0');
+				$this->db->query('ALTER TABLE  `incident` ADD  `incident_important` BOOLEAN NOT NULL DEFAULT FALSE');
 			}
 		}
 		if (!$sql){		
-			$this->db->query('ALTER TABLE `layer` ADD  `date_uploaded` DATE NOT NULL;
-						  	  ALTER TABLE `layer` ADD `report_id` INT NOT NULL DEFAULT 0');
+			$this->db->query('ALTER TABLE  `incident` ADD  `incident_important` BOOLEAN NOT NULL DEFAULT FALSE');
 		}
 		
 		

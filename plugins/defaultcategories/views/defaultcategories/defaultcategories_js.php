@@ -14,7 +14,6 @@
 
 	function startDefaultCategories(){
 			var data = <?php echo $categories?>;
-			console.log(data);
 			for(var i in data){
 			    var catId = data[i];
 			    $("#cat_"+catId).click();

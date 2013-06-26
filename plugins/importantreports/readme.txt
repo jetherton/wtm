@@ -1,7 +1,7 @@
 === About ===
-name: All Layers Available
+name: Important Reports
 website: http://ethertontech.com
-description: Put all map providers on a map.
+description: Allows for certain reports to be marked as important.
 version: 0.1
 requires: 2.1
 tested up to: 2.1
@@ -9,10 +9,10 @@ author: Dylan Gillespie
 author website: http://ethertontech.com
 
 == Description ==
-Adds all of the provider layers into the maps present in the Ushahidi framework.
+Gives the option to highlight an important or new report as important.
 
 == Installation ==
-1. Copy the entire /allmaps/ directory into your /plugins/ directory.
+1. Copy the entire /importantreports/ directory into your /plugins/ directory.
 2. Activate the plugin.
 
 == Changelog ==
