@@ -38,18 +38,23 @@ class importantreportsevents {
 	 */
 	public function render_javascript(){
 		$view = new View('importantreports/importantreports_js');
+<<<<<<< HEAD
 		
 		$importants = ORM::factory('incident')->
 		where('incident_important', 1)->
 		find_all();
 		
 		$view->importants = $importants;
+=======
+		$view->url = url::current();
+>>>>>>> 2feb1f37c18c9aaaeff9a8db9d433eeffed94ac8
 		echo $view;
 	}
 	/**
 	 * Pulls the javascript for the admin pages
 	 */
 	public function render_admin_javascript(){
+<<<<<<< HEAD
 		$view = new View('importantreports/importantadmin_js');
 		$report = intval(substr(url::current(),19));
 		$import = ORM::factory('incident', $report);
@@ -64,6 +69,14 @@ class importantreportsevents {
 		
 		$import->incident_important = $_POST['incident_important'];
 		$import->save();
+=======
+		
+	}
+	
+	public function parseSubmitAdmin(){
+		print_r($_POST);
+		exit;
+>>>>>>> 2feb1f37c18c9aaaeff9a8db9d433eeffed94ac8
 	}
 }
 new importantreportsevents;

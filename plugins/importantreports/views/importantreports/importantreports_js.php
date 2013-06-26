@@ -9,9 +9,14 @@
 ?>
 
 <script type="text/javascript">	
+<<<<<<< HEAD
 $(document).ready(function(){
 	var reportsLayer = map._olMap.getLayersByName("Reports");
 	console.log(reportsLayer);
 });
+=======
+	
+
+>>>>>>> 2feb1f37c18c9aaaeff9a8db9d433eeffed94ac8
 	
 </script>

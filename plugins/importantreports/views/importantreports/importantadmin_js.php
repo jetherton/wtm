@@ -1,6 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /***********************************************************
+<<<<<<< HEAD
 * importantadmin_js.php - Javascript for Important Reports plugin
+=======
+ * importantadmin_js.php - Javascript for Important Reports plugin
+>>>>>>> 2feb1f37c18c9aaaeff9a8db9d433eeffed94ac8
 * This software is copy righted by WatchTheMed 2013
 * Writen by Dylan Gillespie, Etherton Technologies <http://ethertontech.com>
 * Started on 2013-26-06
@@ -9,6 +13,7 @@
 ?>
 
 <script type="text/javascript">	
+<<<<<<< HEAD
 	$(document).ready(function(){
 		var imp = '';
 		imp += '<div class="row"><div class="f-col-bottom-1-col"><?php echo Kohana::lang('importantreports.make_important')?></div>';
@@ -24,6 +29,9 @@
 			$('#notImportant')[0].checked = true;
 		}
 	});
+=======
+	
+>>>>>>> 2feb1f37c18c9aaaeff9a8db9d433eeffed94ac8
 
 	
 </script>
