@@ -25,6 +25,7 @@ class importantreportsevents {
 		//The last blank case happens when the webpage first loads, so the main page
 		if($url == 'main'){
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
+			Event::add('ushahidi_filter.get_incidents_set_select_params', array($this, 'get_important_dots'));
 		}
 		elseif(strpos($url, 'admin/reports/edit') !== false){
 			Event::add('ushahidi_action.header_scripts_admin', array($this, 'render_admin_javascript'));
@@ -32,6 +33,7 @@ class importantreportsevents {
 		if(Router::$controller == "reports"){
 		    Event::add('ushahidi_action.report_edit', array($this, 'parseSubmitAdmin'));
 		}
+		
 		
 	}
 	
@@ -67,6 +69,9 @@ class importantreportsevents {
 		$report->incident_important = $_POST['incident_important'];
 		$report->save();
 	    }
+	}
+	
+	public function get_important_dots(){
 		
 	}
 	
