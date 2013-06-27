@@ -167,12 +167,17 @@
 				<?php endif; ?>
 				<div class="report_row">
 					<div id="divMap" class="report_map">
-						<div id="geometryLabelerHolder" class="olControlNoSelect">
+						<div id="geometryLabelerHolder" class="olControlNoSelect">						    
 							<div id="geometryLabeler">
 								<div id="geometryLabelComment">
 									<span id="geometryLabel">
 										<label><?php echo Kohana::lang('ui_main.geometry_label');?>:</label> 
 										<?php print form::textarea('geometry_label', '', ' class="lbl_text" style="width:200px;"'); ?>
+									</span>
+									<span id="geometryShowLabel">
+									    <label>Show Label:</label>
+									    <?php print form::checkbox('geometry_showlabel', 'show', false, 'style="margin-right:20px;"');?>
+									    
 									</span>
 									<span id="geometryComment">
 										<label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> 

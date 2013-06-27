@@ -2725,3 +2725,8 @@ table.defaultCats .category-icon{
     border: black 1px solid;
     margin:2px;
 }
+
+#geometryLabeler #geometryLabelComment textarea{
+    height:30px;
+    float:none;
+}

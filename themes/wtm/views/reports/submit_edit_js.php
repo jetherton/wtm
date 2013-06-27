@@ -243,7 +243,7 @@
 					    if(typeof feature.attributes.label == "undefined"){
 						feature.attributes.label = "";
 						vlayer.drawFeature(feature);
-					    }	
+					    }						    
 					}
 					console.log(event);
 					refreshFeatures(event);
@@ -296,7 +296,12 @@
 					echo "wktFeature = wkt.read('$geometry->geometry');\n";
 					echo "wktFeature.geometry.transform(proj_4326,proj_900913);\n";
 					echo "wktFeature.label = ".json_encode($geometry->label).";\n";
-					echo "wktFeature.attributes.label = ".json_encode($geometry->label).";\n";
+					echo "wktFeature.showLabel = ". ($geometry->showLabel ? 'true' : 'false'). ";\n";
+					if($geometry->showLabel){
+					    echo "wktFeature.attributes.label = ".json_encode($geometry->label).";\n";
+					} else {
+					    echo "wktFeature.attributes.label = \"\";\n";
+					}
 					echo "wktFeature.comment = ".json_encode($geometry->comment).";\n";
 					echo "wktFeature.color = '$geometry->color';\n";
 					echo "wktFeature.strokewidth = '$geometry->strokewidth';\n";
@@ -333,6 +338,7 @@
 				e.renderIntent = "styleText";
 				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/clear_rect32x14.png' ;?>";
 				e.attributes.label = "text";
+				e.showLabel = true;
 				vlayer.drawFeature(e);
 			      }
 			      });
@@ -652,10 +658,23 @@
 			
 			
 			// Prevent Map Effects in the Geometry Labeler
+			/*
 			$('#geometryLabelerHolder').click(function(evt) {
 				var e = evt ? evt : window.event; 
 				OpenLayers.Event.stop(e);
-				return false;
+				return true;
+			});
+			*/
+			
+			$('#geometry_showlabel').change(function(){			    
+			    var isChecked = $(this).is(':checked');
+			    console.log(isChecked);
+			    for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.label = isChecked ? selectedFeatures[f].label : "";
+					selectedFeatures[f].showLabel = isChecked;
+					vlayer.drawFeature(selectedFeatures[f]);
+				}
+				refreshFeatures();
 			});
 			
 			// Geometry Label Text Boxes
@@ -665,7 +684,9 @@
 			}).bind("change keyup blur", function(){
 				for (f in selectedFeatures) {
 					selectedFeatures[f].label = this.value;
-					selectedFeatures[f].attributes.label = $(this).val();
+					if(selectedFeatures[f].showLabel){
+					    selectedFeatures[f].attributes.label = $(this).val();
+					}
 					vlayer.drawFeature(selectedFeatures[f]);
 				}
 				refreshFeatures();
@@ -1014,6 +1035,19 @@
 				if ( typeof(feature.label) != 'undefined') {
 					$('#geometry_label').val(feature.label);
 				}
+				
+				if(typeof(feature.showLabel) != 'undefined'){				
+				    if(feature.showLabel){
+					console.log('show');
+					$('#geometry_showlabel').attr('checked','checked');
+				    } else {
+					console.log('hide');
+					$('#geometry_showlabel').removeAttr('checked');
+				    }					
+				} else {
+				    console.log('hide');
+				    $('#geometry_showlabel').removeAttr('checked');
+				}
 				if ( typeof(feature.comment) != 'undefined') {
 					$('#geometry_comment').val(feature.comment);
 				}
@@ -1043,6 +1077,7 @@
 			$('#geometry_color').val("");
 			$('#geometry_lat').val("");
 			$('#geometry_lon').val("");
+			$('#geometry_showlabel').removeAttr('checked');
 			selectCtrl.deactivate();
 			selectCtrl.activate();
 			$('#geometry_color').ColorPickerHide();
@@ -1095,6 +1130,7 @@
 					var format = new OpenLayers.Format.WKT();
 					var geometry = format.write(newFeature);
 					var label = '';
+					var showLabel = false;
 					var comment = '';
 					var lon = '';
 					var lat = '';
@@ -1109,6 +1145,9 @@
 					
 					if ( typeof(vlayer.features[i].label) != 'undefined') {
 						label = vlayer.features[i].label;
+					}
+					if(typeof(vlayer.features[i].showLabel) != 'undefined') {
+					    showLabel = vlayer.features[i].showLabel;
 					}
 					if ( typeof(vlayer.features[i].comment) != 'undefined') {
 						comment = vlayer.features[i].comment;
@@ -1125,7 +1164,7 @@
 					if ( typeof(vlayer.features[i].strokewidth) != 'undefined') {
 						strokewidth = vlayer.features[i].strokewidth;
 					}
-					geometryAttributes = JSON.stringify({ icon:icon, geometry: geometry, label: label, comment: comment,lat: lat, lon: lon, color: color, strokewidth: strokewidth});
+					geometryAttributes = JSON.stringify({ icon:icon, geometry: geometry, label: label, showLabel: showLabel, comment: comment,lat: lat, lon: lon, color: color, strokewidth: strokewidth});
 					$('#reportForm').append($('<input></input>').attr('name','geometry[]').attr('type','hidden').attr('value',geometryAttributes));
 				}
 			}

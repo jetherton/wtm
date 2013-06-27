@@ -723,7 +723,7 @@ class Reports_Controller extends Admin_Controller {
 
 					// Get Geometries via SQL query as ORM can't handle Spatial Data
 					$sql = "SELECT AsText(geometry) as geometry, geometry_label,
-						geometry_comment, geometry_color, geometry_strokewidth, geometry_icon 
+						geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel 
 						FROM ".Kohana::config('database.default.table_prefix')."geometry
 						WHERE incident_id = ?";
 					$query = $db->query($sql, $id);
@@ -735,7 +735,8 @@ class Reports_Controller extends Admin_Controller {
 								"comment" => $item->geometry_comment,
 								"color" => $item->geometry_color,
 								"strokewidth" => $item->geometry_strokewidth,
-								"icon"=>$item->geometry_icon
+								"icon"=>$item->geometry_icon,
+								"showLabel"=>$item->geometry_showlabel
 							);
 						$form['geometry'][] = json_encode($geometry);
 					}

@@ -221,27 +221,58 @@
 									<li><a href="#" class="shorter-map"><?php echo Kohana::lang('ui_main.shorter_map'); ?></a></li>
 								</ul>
 								<div id="divMap" class="map_holder_reports">
-									<div id="geometryLabelerHolder" class="olControlNoSelect">
-										<div id="geometryLabeler">
-											<div id="geometryLabelComment">
-												<span id="geometryLabel">
-												    <label><?php echo Kohana::lang('ui_main.geometry_label');?>:</label> 
-												    <?php print form::textarea('geometry_label', '', ' class="lbl_text" style="width:200px;height:20px;float:none;"'); ?>
-												</span>
-												<span id="geometryComment">
-												    <label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> 
-												    <?php print form::textarea('geometry_comment', '', ' class="lbl_text2" style="width:200px;height:20px;float:none;"'); ?>
-												</span>
-											</div>
-											<div>
-												<span id="geometryColor"><label><?php echo Kohana::lang('ui_main.geometry_color');?>:</label> <?php print form::input('geometry_color', '', ' class="lbl_text"'); ?></span>
-												<span id="geometryStrokewidth"><label><?php echo Kohana::lang('ui_main.geometry_strokewidth');?>:</label> <?php print form::dropdown('geometry_strokewidth', $stroke_width_array, ''); ?></span>
-												<span id="geometryLat"><label><?php echo Kohana::lang('ui_main.latitude');?>:</label> <?php print form::input('geometry_lat', '', ' class="lbl_text"'); ?></span>
-												<span id="geometryLon"><label><?php echo Kohana::lang('ui_main.longitude');?>:</label> <?php print form::input('geometry_lon', '', ' class="lbl_text"'); ?></span>
-											</div>
-										</div>
-										<div id="geometryLabelerClose"></div>
+									<div id="geometryLabelerHolder" class="olControlNoSelect">						    
+							<div id="geometryLabeler">
+								<div id="geometryLabelComment">
+									<span id="geometryLabel">
+										<label><?php echo Kohana::lang('ui_main.geometry_label');?>:</label> 
+										<?php print form::textarea('geometry_label', '', ' class="lbl_text" style="width:200px;"'); ?>
+									</span>
+									<span id="geometryShowLabel">
+									    <label>Show Label:</label>
+									    <?php print form::checkbox('geometry_showlabel', 'show', false, 'style="margin-right:20px;"');?>
+									    
+									</span>
+									<span id="geometryComment">
+										<label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> 
+										<?php print form::textarea('geometry_comment', '', ' class="lbl_text2" style="width:200px;"'); ?>
+									</span>
+								</div>
+								<div>
+									<span id="geometryColor">
+										<label><?php echo Kohana::lang('ui_main.geometry_color');?>:</label> 
+										<?php print form::input('geometry_color', '', ' class="lbl_text"'); ?>
+									</span>
+									<span id="geometryStrokewidth">
+										<label><?php echo Kohana::lang('ui_main.geometry_strokewidth');?>:</label> 
+										<?php print form::dropdown('geometry_strokewidth', $stroke_width_array, ''); ?>
+									</span>
+									<span id="geometryLat">
+										<label><?php echo Kohana::lang('ui_main.latitude');?>(DD.DD):</label> 
+										<?php print form::input('geometry_lat', '', ' class="lbl_text"'); ?>
+									</span>
+									<span id="geometryLon">
+										<label><?php echo Kohana::lang('ui_main.longitude');?>(DD.DD):</label> 
+										<?php print form::input('geometry_lon', '', ' class="lbl_text"'); ?>
+									</span>
+									<div id="hoursMinsSeconds">
+									    <span id="geometryLatDegrees">
+										    <label><?php echo Kohana::lang('ui_main.latitude');?>(DD MM SS):</label> 
+										    <?php print form::input('geometry_lat_degrees', '', ' class="lbl_text short_input"'); ?> 
+										    <?php print form::input('geometry_lat_minutes', '', ' class="lbl_text short_input"'); ?> 
+										    <?php print form::input('geometry_lat_seconds', '', ' class="lbl_text short_input"'); ?>
+									    </span>
+									    <span id="geometryLonDegrees">
+										    <label><?php echo Kohana::lang('ui_main.longitude');?>(DD MM SS):</label> 
+										    <?php print form::input('geometry_lon_degrees', '', ' class="lbl_text short_input"'); ?>
+										    <?php print form::input('geometry_lon_minutes', '', ' class="lbl_text short_input"'); ?>
+										    <?php print form::input('geometry_lon_seconds', '', ' class="lbl_text short_input"'); ?>
+									    </span>
 									</div>
+								</div>
+							</div>
+							<div id="geometryLabelerClose"></div>
+						</div>
 								</div>
 							</div>
 							<div class="incident-find-location">

@@ -393,12 +393,13 @@ class reports_Core {
 					$color = (isset($item->color)) ? $db->escape_str(substr($item->color, 0, 6)) : "";
 					$strokewidth = (isset($item->strokewidth) AND (float) $item->strokewidth) ? (float) $item->strokewidth : "2.5";
 					$icon = (isset($item->icon)) ? $db->escape_str($item->icon) : "openlayers/marker.png";
+					$showLabel = (isset($item->showLabel)) ? ($item->showLabel ? 1 : 0) : 0;
 					if ($geometry)
 					{
 						// 	Format the SQL string
 						$sql = "INSERT INTO ".Kohana::config('database.default.table_prefix')."geometry "
-							. "(incident_id, geometry, geometry_label, geometry_comment, geometry_color, geometry_strokewidth, geometry_icon)"
-							. "VALUES(".$incident->id.", GeomFromText('".$geometry."'), '".$label."', '".$comment."', '".$color."', ".$strokewidth.", '".$icon."')";
+							. "(incident_id, geometry, geometry_label, geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel)"
+							. "VALUES(".$incident->id.", GeomFromText('".$geometry."'), '".$label."', '".$comment."', '".$color."', ".$strokewidth.", '".$icon."', $showLabel)";
 						Kohana::log('debug', $sql);
 						// Execute the query
 						$db->query($sql);

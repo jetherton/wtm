@@ -18,3 +18,5 @@ ALTER TABLE  `incident_person` ADD  `person_facebook` VARCHAR( 200 ) NOT NULL;
 /** John Etherton 2013-06-24 - Add a field to store the kind of icon a point uses on the map**/
 ALTER TABLE  `geometry` ADD  `geometry_icon` CHAR( 255 ) NULL DEFAULT NULL;
 
+/** John Etherton 2013-06-27 - Added a field to store if the label of an element should be seen on the map**/
+ALTER TABLE  `geometry` ADD  `geometry_showlabel` BOOLEAN NOT NULL DEFAULT FALSE;
