@@ -25,10 +25,6 @@
 							<?php print form::input('layer_name', '', ' class="text" id="layer_name"'); ?>
 						</div>
 						<div class="tab_form">
-							<strong><?php echo Kohana::lang('ui_main.layer_url');?>:</strong><br />
-							<?php print form::input('layer_url', '', ' class="text long" id="layer_url"'); ?>
-						</div>
-						<div class="tab_form">
 							<strong><?php echo Kohana::lang('ui_main.color');?>:</strong><br />
 							<?php print form::input('layer_color', '', ' class="text" id="layer_color"'); ?>
 							<script type="text/javascript" charset="utf-8">

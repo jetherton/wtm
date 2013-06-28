@@ -9,25 +9,25 @@
 ?>
 
 <!-- Javascript files for the uploader -->
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/header.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/util.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/version.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/features.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/promise.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/button.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/upload-data.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/ajax.requester.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/deletefile.ajax.requester.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/handler.base.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/handler.base.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/window.receive.message.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/handler.form.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/handler.xhr.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/paste.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/dnd.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/uploader.basic.js"></script>
-<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/fine-uploader/client/js/uploader.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo URL::base();?>/plugins/uploadlayers/media/js/fine-uploader/client/fineuploader.css"/>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/header.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/util.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/version.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/features.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/promise.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/button.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/upload-data.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/ajax.requester.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/deletefile.ajax.requester.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/handler.base.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/handler.base.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/window.receive.message.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/handler.form.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/handler.xhr.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/paste.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/dnd.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/uploader.basic.js"></script>
+<script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/uploader.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo URL::base();?>/plugins/uploadlayers/media/css/fineuploader.css"/>
 
 
 

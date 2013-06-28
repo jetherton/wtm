@@ -12,7 +12,7 @@
 
 $(document).ready(function(){
 	var reportsLayer = map._olMap.getLayersByName("Reports");
-	console.log(reportsLayer);
+	//console.log(reportsLayer);
 });
 
 	

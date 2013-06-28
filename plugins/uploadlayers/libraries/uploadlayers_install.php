@@ -41,22 +41,17 @@ class Uploadlayers_Install {
 	{
 	
 		//check to see if the column already exists if the plugin is activated more than once	
-		$sql = false;
+		$sql = true;
 		try{
 			$sql = $this->db->query(
 					'SELECT `date_uploaded` FROM `layer`');
 		}
 		catch(Exception $e){
 			if($e){
-				$this->db->query('ALTER TABLE `layer` ADD  `date_uploaded` DATE NOT NULL;
-								  ALTER TABLE `layer` ADD `report_id` INT NOT NULL DEFAULT 0');
+				$this->db->query('ALTER TABLE `layer` ADD  `date_uploaded` DATE NOT NULL');
 			}
 		}
-		if (!$sql){		
-			$this->db->query('ALTER TABLE `layer` ADD  `date_uploaded` DATE NOT NULL;
-						  	  ALTER TABLE `layer` ADD `report_id` INT NOT NULL DEFAULT 0');
-		}
-		
+	
 		
 	}
 

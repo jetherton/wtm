@@ -1,4 +1,11 @@
-<?php
+<?php defined('SYSPATH') or die('No direct script access.');
+/***********************************************************
+* parseFiles_Controller.php - Handles post and opening of popup
+* This software is copy righted by WatchTheMed 2013
+* Writen by Dylan Gillespie, Etherton Technologies <http://ethertontech.com>
+* Started on 2013-20-06
+*************************************************************/
+
 
 class ParseFiles_Controller extends Controller{
 	
@@ -93,13 +100,23 @@ class ParseFiles_Controller extends Controller{
 						$layer->layer_name = isset($post_data['layer_name']) ? $post_data['layer_name'] : null;
 						$layer->layer_color = isset($post_data['layer_color']) ? $post_data['layer_color'] : null;
 						$layer->layer_url = isset($post_data['layer_url']) ? $post_data['layer_url'] : null;
-						$layer->data_uploaded = $layer_date;
+						$layer->date_uploaded = $layer_date;
 						$layer->meta_data = isset($post_data['meta_data']) ? $post_data['meta_data'] : null;
 						
 						$layer->save();
+						
+						//get rid of old uploads before we set this one into the database
+						upload_helper::check_old_uploads();
+						
+						$reportlayers = ORM::factory('reportslayers');
+						$reportlayers->layer_id = $layer->id;
+						$reportlayers->report_id = 0;
+						$reportlayers->save();
+						
+						echo '{"success" : true, "newUuid" : "'.$layer->id.'"}';
 					}
 		
-		echo '{"success" : true, "newUuid" : "'.$layer->id.'"}';
+		
 	}
 	
 	public function parseWindow(){
