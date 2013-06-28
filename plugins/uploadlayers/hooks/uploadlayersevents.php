@@ -25,8 +25,8 @@ class uploadlayersevents {
 		elseif(strpos($url, 'reports/submit') !== false){
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}
-		Event::add('ushahidi_action.report_submit_admin', array($this, 'parseSubmitAdmin'));
-		Event::add('ushahidi_action.report_submit', array($this, 'parseSubmit'));
+		Event::add('ushahidi_action.report_edit', array($this, 'parseSubmit'));
+		Event::add('ushahidi_action.report_add', array($this, 'parseSubmit'));
 
 	}
 	
@@ -41,16 +41,15 @@ class uploadlayersevents {
 	}
 	
 	public function parseSubmit(){
+		$incident = Event::$data;
 		$post = $_POST;
-		print_r($post);
-		//exit;
+		
+		$reportlayers = ORM::factory('reportslayers')->
+		where('layer_id', $post['user_kml_ids'])->
+		find();
+		
+		$reportlayers->report_id = $incident->id;
+		$reportlayers->save();
 	}
-	
-	public function parseSubmitAdmin(){
-		$post = $_POST;
-		print_r($post);
-		//exit;
-	}
-
 }
 new uploadlayersevents;

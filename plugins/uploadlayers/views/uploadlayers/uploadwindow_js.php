@@ -27,7 +27,7 @@
 <script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/dnd.js"></script>
 <script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/uploader.basic.js"></script>
 <script src="<?php echo URL::base();?>plugins/uploadlayers/media/js/uploader.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo URL::base();?>/plugins/uploadlayers/media/css/fineuploader.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo URL::base();?>plugins/uploadlayers/media/css/fineuploader.css"/>
 
 
 
@@ -41,7 +41,7 @@ var manualuploader = new qq.FineUploader({
     multiple: false,
     autoUpload: false,
     text: {
-      uploadButton: '<i class="icon-plus icon-white"></i> Select Files'
+      uploadButton: '<i class="icon-plus icon-white"></i> Select File'
     },
     validation: {
 			allowedExtensions : ['kml', 'kmz']
@@ -56,13 +56,21 @@ var manualuploader = new qq.FineUploader({
 	$(document).ready(function() {
 	 
 	    $('#triggerUpload').click(function() {
-		  manualuploader.setParams({
-				 layer_url : $('#layer_url').val(),
-				 layer_name : $('#layer_name').val(),
-				 layer_color : $('#layer_color').val(),
-				 meta_data : $('#meta_data').val()
-	    	  });
-	      manualuploader.uploadStoredFiles();
+	    	if(!$('.qq-upload-list').children().length){
+				alert('<?php echo Kohana::lang('uploadlayers.listAlert')?>');
+			}
+	    	else if($('#layer_name').val() == null || $('#layer_name').val() == ''){
+		    	alert('<?php echo Kohana::lang('uploadlayers.nameAlert')?>');
+		    }
+		    else{
+				manualuploader.setParams({
+					 layer_name : $('#layer_name').val(),
+					 layer_color : $('#layer_color').val(),
+					 meta_data : $('#meta_data').val()
+		    	  });
+		      manualuploader.uploadStoredFiles();
+		    }
+		   
 	    });
 	  });
 

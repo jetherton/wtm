@@ -39,3 +39,6 @@ img .contentWrapWaiter{
 	top : -40px;
 	left : -40px;
 }
+.colorpicker{
+	z-index:30000;
+}
