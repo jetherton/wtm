@@ -72,6 +72,7 @@ class importantreportsevents {
 	
 	public function get_important_dots(){
 		$sql = Event::$data;
+
 		//had to have a space after important to allow database to say FROM, took a while to see that
 		$sql .= ', i.incident_important ';
 		Event::$data = $sql;
