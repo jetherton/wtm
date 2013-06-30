@@ -33,7 +33,7 @@
 	position:relative;
 }
 #output{
-	width: 167px;
+	width: 177px;
 	background-color: rgb(225, 226, 228);
 	position:relative;
 	top: -8px;
@@ -55,7 +55,8 @@
 	height: 23px;
 }
 #distanceOptionsDiv{
-	width:167px;	
+	clear:both;
+	width:177px;	
 	background-color: rgb(225, 226, 228);
 	position : relative;
 	top : 7px;
