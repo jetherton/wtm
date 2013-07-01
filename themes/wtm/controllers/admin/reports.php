@@ -1247,7 +1247,7 @@ class Reports_Controller extends Admin_Controller {
 				$(\"#incident_date\").datepicker({
 				showOn: \"both\",
 				buttonImage: \"" . url::base() . "media/img/icon-calendar.gif\",
-				buttonImageOnly: TRUE
+				buttonImageOnly: true
 				});
 				});
 			</script>";
