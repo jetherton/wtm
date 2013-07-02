@@ -13,3 +13,5 @@ tests/phpunit/phpunit.xml
 .settings\
 /nbproject
 plugins/enhancedmap
+media/js/OpenLayers
+media/js/OpenLayers_max.js
