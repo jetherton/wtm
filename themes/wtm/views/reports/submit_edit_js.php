@@ -182,7 +182,7 @@
                                     }
                             });
     
-                            var title = $(this, "strong").text();
+                            var title = "sl_"+layerId;
                             //remove the layer if it was clicked again
                             if(isCurrentLayer){
                                     var kmlLayer = map.getLayersByName(title);
