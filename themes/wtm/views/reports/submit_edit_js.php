@@ -111,7 +111,7 @@
 				label : '${label}',                    
 				
 				fontSize: "12px",
-				fontFamily: "Courier New, monospace",
+				fontFamily: "Arial, Helvetica, sans-serif",
 				fontWeight: "bold",
 				labelOutlineColor: "white",
 				labelOutlineWidth: 2
@@ -124,12 +124,12 @@
 				strokeColor: "#197700",
 				strokeWidth: 2.5,
 				graphicZIndex: 1,
-				externalGraphic: "<?php echo url::file_loc('img').'media/img/openlayers/marker-green.png' ;?>",
-				graphicOpacity: 1,
-				graphicWidth: 21,
-				graphicHeight: 25,
-				graphicXOffset: -14,
-				graphicYOffset: -27
+				graphicOpacity: 0.5,
+				graphicWidth: 26,
+				graphicHeight: 31,
+				graphicXOffset: -16,
+				graphicYOffset: -30
+				
 			});
 			style3 = new OpenLayers.Style({
 				pointRadius: "8",
@@ -245,7 +245,6 @@
 						vlayer.drawFeature(feature);
 					    }						    
 					}
-					console.log(event);
 					refreshFeatures(event);
 					
 				},
@@ -668,10 +667,10 @@
 			
 			$('#geometry_showlabel').change(function(){			    
 			    var isChecked = $(this).is(':checked');
-			    console.log(isChecked);
 			    for (f in selectedFeatures) {
 					selectedFeatures[f].attributes.label = isChecked ? selectedFeatures[f].label : "";
 					selectedFeatures[f].showLabel = isChecked;
+					selectedFeatures[f].style = null;
 					vlayer.drawFeature(selectedFeatures[f]);
 				}
 				refreshFeatures();
@@ -687,6 +686,7 @@
 					if(selectedFeatures[f].showLabel){
 					    selectedFeatures[f].attributes.label = $(this).val();
 					}
+					selectedFeatures[f].style = null;
 					vlayer.drawFeature(selectedFeatures[f]);
 				}
 				refreshFeatures();
@@ -808,6 +808,17 @@
 				}
 			});
 			
+			
+			// Event on Icon Change
+			$('#geometry_icon').bind("change",function(){
+			    var iconPath = $(this).val();
+			    for (f in selectedFeatures) {
+				selectedFeatures[f].attributes.icon = iconPath;
+				selectedFeatures[f].style = null;
+				vlayer.drawFeature(selectedFeatures[f]);
+			    }
+			    refreshFeatures();
+			});
 							
 			// Event on Color Change
 			$('#geometry_color').ColorPicker({
@@ -1035,17 +1046,24 @@
 				if ( typeof(feature.label) != 'undefined') {
 					$('#geometry_label').val(feature.label);
 				}
-				
+				if(typeof(feature.attributes.icon) != 'undefined'){
+				    if(feature.attributes.icon.indexOf("clear_rect32x14.png") == -1){
+					$('#geometry_icon').val(feature.attributes.icon);
+					$('#geometry_icon').change();
+					$('#geometryIcon').show();
+				    } else {
+					$('#geometryIcon').hide();
+				    }				    
+				} else {
+				    $('#geometryIcon').hide();
+				}				
 				if(typeof(feature.showLabel) != 'undefined'){				
 				    if(feature.showLabel){
-					console.log('show');
 					$('#geometry_showlabel').attr('checked','checked');
 				    } else {
-					console.log('hide');
 					$('#geometry_showlabel').removeAttr('checked');
 				    }					
 				} else {
-				    console.log('hide');
 				    $('#geometry_showlabel').removeAttr('checked');
 				}
 				if ( typeof(feature.comment) != 'undefined') {

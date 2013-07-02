@@ -237,6 +237,30 @@
 										<label><?php echo Kohana::lang('ui_main.geometry_comments');?>:</label> 
 										<?php print form::textarea('geometry_comment', '', ' class="lbl_text2" style="width:200px;"'); ?>
 									</span>
+									<span id="geometryIcon">
+										    <?php //create the icons array
+											$icons = array('marker.png'=>'w',
+											    'marker-red.png'=>'r',
+											    'marker-blue.png'=>'b',
+											    'marker-green.png'=>'g',
+											    'marker-gold'=>'d');
+										    ?>
+										    <label><?php echo Kohana::lang('wtm.Icon');?>:</label> 
+										    <?php 
+											print '<select name="geometry_icon" id="geometry_icon" class="lbl_text">';
+											foreach($icons as $file=>$name){
+											    $path = url::base().'media/img/openlayers/'.$file;
+											    print '<option value="'.$path.'" data-image="'.$path.'" > </option>';
+											}
+											print '</select>';
+										    ?>
+										    <script language="javascript">
+											$(document).ready(function(e) {
+											    $("#geometry_icon").msDropDown();  
+											    $("#geometry_icon_msdd").css('width','62px');
+											});
+										    </script>
+									</span>
 								</div>
 								<div>
 									<span id="geometryColor">

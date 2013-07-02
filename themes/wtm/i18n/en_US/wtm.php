@@ -8,4 +8,5 @@ $lang = array(
 		'phone' => 'Phone Number',
 		'facebook' => 'Name on Facebook',
 		'phoneNum' => 'XXX-XXX-XXXX',
+		'Icon'=>'Icon',
 );
