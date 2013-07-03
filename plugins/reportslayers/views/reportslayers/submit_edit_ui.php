@@ -9,7 +9,7 @@
 ?>
 
 
-<div class="report_row">
+<div class="report_row" id="reportslayers_ui">
 	<h4><?php echo Kohana::lang('ui_main.layers'); ?> </h4>
 	<div class="report_category" id="submit_layers">
 	<?php		
