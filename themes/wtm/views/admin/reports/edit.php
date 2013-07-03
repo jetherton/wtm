@@ -307,7 +307,7 @@
 								</div>
 								<div style="clear:both;"></div>
 								<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
-								<div class="btns" style="float:left;">
+								<div class="btns"  style="float:left;">
 									<ul>
 										<li><a href="#" class="btn_find"><?php echo utf8::strtoupper(Kohana::lang('ui_main.find_location'));?></a></li>
 									</ul>

@@ -681,6 +681,11 @@ div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointI
     background: url('../images/edit_submit_nonselect_icons.png') -374px 0px;
 }
 
+.report-find-location .btns a.btn_kml_up{
+    background: url('../images/edit_submit_nonselect_icons.png') -250px 0px;
+    width:90px;
+}
+
 
 div.report-find-location #panel{
     margin: 5px 5px 0 0;

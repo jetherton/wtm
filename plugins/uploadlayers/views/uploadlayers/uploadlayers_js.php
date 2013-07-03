@@ -17,11 +17,12 @@
 <script type="text/javascript">	
 
 $(document).ready(function(){  
-	$('.report_left').append('<div class="report_row">\
-								<h4><a id="uploadLayer" rel="#overlay" href="<?php echo url::base(); ?>parseFiles/parseWindow" >\
-									Upload a Layer\
-								</a></h4>\
-							</div>');
+	//$('.report_left').append('<div class="report_row">\
+	$('#secondPanel').prepend('\
+								<a class="btn_kml_up" title="Upload a KML file" id="uploadLayer" rel="#overlay" href="<?php echo url::base(); ?>parseFiles/parseWindow" >\
+									\
+								</a>\
+							');
 	$('#uploadLayer').after('<div class="apple_overlay" id="overlay" style="display:none">\
 							<div class="contentWrap">\
 								<img class="contentWrapWaiter" src="<?php echo URL::base();?>plugins/uploadlayers/media/img/waiter_barber.gif"/>\

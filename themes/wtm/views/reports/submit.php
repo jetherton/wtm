@@ -250,7 +250,7 @@
 						    <div id="pointCoords" class="olControlDrawFeatureCoordPointItemInactive olButton"></div>
 						</div>
 						<div id="panel" class="olControlEditingToolbar"></div>
-						<div class="btns">
+						<div class="btns" id="secondPanel">
 							<a title="Delete last item added." href="#" class="btn_del_last">&nbsp;</a>
 							<a title="Delete selected item." href="#" class="btn_del_sel">&nbsp;</a>
 						</div>

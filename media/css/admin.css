@@ -2730,3 +2730,12 @@ table.defaultCats .category-icon{
     height:30px;
     float:none;
 }
+
+.incident-find-location #deletePanel a.btn_kml_up{
+    background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -250px 0px;
+    width:90px;
+}
+
+div.apple_overlay div.contentWrap input.text {
+    float: none;
+}

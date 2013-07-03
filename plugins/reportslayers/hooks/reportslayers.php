@@ -98,14 +98,32 @@ class reportslayers {
 	 * user is viewing a report on the front end
 	 */
 	public function _add_view_ui(){
+		$id = Event::$data;
 		// Get all active Layers (KMZ/KML)
 		$layers = array();
 		$config_layers = Kohana::config('map.layers'); 
 		if ($config_layers == $layers) {
-			foreach (ORM::factory('layer')
+		    $standard_layers_orm = ORM::factory('layer')
 					->where('layer_visible', 1)
+					->where('date_uploaded', '0000-00-00')
 					->orderby('layer_name', 'asc')
-					->find_all() as $layer)
+					->find_all();
+		    $standard_layers = array();
+		    foreach($standard_layers_orm as $orm){
+			$standard_layers[] = $orm;
+		    }
+		    $special_layers_orm = ORM::factory('layer')
+			    ->join('reportslayers', 'reportslayers.layer_id', 'layer.id','INNER')
+			    ->where('reportslayers.report_id',$id)
+			    ->where('date_uploaded <> \'0000-00-00\'')
+			    ->orderby('layer_name', 'asc')
+			    ->find_all();
+		    $special_layers = array();
+		    foreach($special_layers_orm as $orm){
+			$special_layers[] = $orm;
+		    }
+		    $all_layers = array_merge($special_layers, $standard_layers);
+			foreach ( $all_layers as $layer)
 			{
 				if(!isset($layers[$layer->parent_id])){
 					$layers[$layer->parent_id] = array();
@@ -137,10 +155,31 @@ class reportslayers {
 	    $layers = array();
 	    $config_layers = Kohana::config('map.layers'); 
 	    if ($config_layers == $layers) {
-		foreach (ORM::factory('layer')
-		    ->where('layer_visible', 1)
-		    ->orderby('layer_name', 'asc')
-		    ->find_all() as $layer){
+		
+		  $standard_layers_orm = ORM::factory('layer')
+					->where('layer_visible', 1)
+					->where('date_uploaded', '0000-00-00')
+					->orderby('layer_name', 'asc')
+					->find_all();
+		    $standard_layers = array();
+		    foreach($standard_layers_orm as $orm){
+			$standard_layers[] = $orm;
+		    }
+
+		    $special_layers_orm = ORM::factory('layer')
+			    ->join('reportslayers', 'reportslayers.layer_id', 'layer.id','INNER')
+			    ->where('reportslayers.report_id',$id)
+			    ->where('date_uploaded <> \'0000-00-00\'')
+			    ->orderby('layer_name', 'asc')
+			    ->find_all();
+		    $special_layers = array();
+		    foreach($special_layers_orm as $orm){
+			$special_layers[] = $orm;
+		    }
+		    $all_layers = array_merge($special_layers, $standard_layers);
+		
+		
+		foreach ($all_layers as $layer){
 		    if(!isset($layers[$layer->parent_id])){ 
 			$layers[$layer->parent_id] = array();
 		    }

@@ -239,6 +239,7 @@ class Main_Controller extends Template_Controller {
 		if ($config_layers == $layers) {
 			foreach (ORM::factory('layer')
 					  ->where('layer_visible', 1)
+					  ->where('date_uploaded', '0000-00-00')
 					  ->orderby('layer_name', 'asc')
 					  ->find_all() as $layer)
 			{
