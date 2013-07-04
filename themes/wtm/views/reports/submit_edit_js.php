@@ -23,6 +23,9 @@
 		var highlightCtrl;
 		var selectCtrl;
 		var selectedFeatures = [];
+		var controls = null;
+		var featureStyle = null;
+		
 		
 		// jQuery Textbox Hints Plugin
 		// Will move to separate file later or attach to forms plugin
@@ -94,6 +97,8 @@
 			map.addControl(new OpenLayers.Control.ZoomBox());
 			
 			// Vector/Drawing Layer Styles
+			
+			// Vector/Drawing Layer Styles
 			style1 = new OpenLayers.Style({
 				pointRadius: "8",
 				fillColor: "#ffcc66",
@@ -103,10 +108,10 @@
 				graphicZIndex: 1,
 				externalGraphic: "${icon}",
 				graphicOpacity: 1,
-				graphicWidth: 21,
-				graphicHeight: 25,
-				graphicXOffset: -14,
-				graphicYOffset: -27,
+				graphicWidth: "${iconWidth}",
+				graphicHeight: "${iconHeight}",
+				graphicXOffset: "${iconOffsetX}",
+				graphicYOffset: "${iconOffsetY}",
 				
 				label : '${label}',                    
 				
@@ -115,7 +120,56 @@
 				fontWeight: "bold",
 				labelOutlineColor: "white",
 				labelOutlineWidth: 2
+			},{
+				context: {
+				    label: function(feature) {
+						if(typeof feature.attributes.label == "undefined"){
+						    return "";
+						} else {
+						    return feature.attributes.label;
+						}
+						
+					},
+				    icon: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return "<?php echo url::base();?>themes/wtm/images/greendot.png";
+						} else {
+						    return feature.attributes.icon;
+						}	
+					},
+				    iconWidth: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return 20;
+						} else {
+						    return 21;
+						}	
+					},
+				    iconHeight: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return 20;
+						} else {
+						    return 25;
+						}	
+					},
+				    iconOffsetX: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return -10;
+						} else {
+						    return -14;
+						}	
+					},
+				    iconOffsetY: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return -10;
+						} else {
+						    return -27;
+						}	
+					}							    
+				}
 			});
+			
+			
+			
 			
 			style2 = new OpenLayers.Style({
 				pointRadius: "8",
@@ -131,6 +185,18 @@
 				graphicYOffset: -30
 				
 			});
+			
+			vertexStyle = new OpenLayers.Style({
+				pointRadius: "8",
+				fillColor: "#30E900",
+				fillOpacity: "0.7",
+				strokeColor: "#197700",
+				strokeWidth: 2.5,
+				externalGraphic: null,
+				label: null
+				
+			});
+			
 			style3 = new OpenLayers.Style({
 				pointRadius: "8",
 				fillColor: "#30E900",
@@ -144,6 +210,7 @@
 				"default": style1,
 				"select": style2,
 				"temporary": style3,
+				"vertex": vertexStyle
 			});
 			
 			// Create Vector/Drawing layer
@@ -240,6 +307,7 @@
 					//set the label to blank
 					for(i in event.features){
 					    var feature = event.features[i];
+					    feature.style = featureStyle;
 					    if(typeof feature.attributes.label == "undefined"){
 						feature.attributes.label = "";
 						vlayer.drawFeature(feature);
@@ -341,25 +409,106 @@
 				vlayer.drawFeature(e);
 			      }
 			      });
+			var editVerticiesControl = new OpenLayers.Control.ModifyFeature(vlayer,
+			    {
+				'displayClass': 'olControlModifyVert',
+				vertexRenderIntent: "vertex",
+				createVertices: true,
+				virtualStyle:
+				{
+				    pointRadius: "8",
+				    fillColor: "#0030E9",
+				    fillOpacity: "0.7",
+				    strokeColor: "#001977",
+				    strokeWidth: 2.5,
+				    externalGraphic: null,
+				    label: null
+				}
+			    }
+			);
+			editVerticiesControl.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
+			
+			var rotateControl = new OpenLayers.Control.ModifyFeature(vlayer,
+			    {
+				'displayClass': 'olControlModifyRotate',
+				vertexRenderIntent: "vertex",
+				createVertices: true,
+				virtualStyle:
+				{
+				    pointRadius: "8",
+				    fillColor: "#0030E9",
+				    fillOpacity: "0.7",
+				    strokeColor: "#001977",
+				    strokeWidth: 2.5,
+				    externalGraphic: null,
+				    label: null
+				}
+			    }
+			);
+			rotateControl.mode = OpenLayers.Control.ModifyFeature.ROTATE;
+			
+			
+			var resizeControl = new OpenLayers.Control.ModifyFeature(vlayer,
+			    {
+				'displayClass': 'olControlModifyResize',
+				vertexRenderIntent: "vertex",
+				createVertices: true,
+				virtualStyle:
+				{
+				    pointRadius: "8",
+				    fillColor: "#0030E9",
+				    fillOpacity: "0.7",
+				    strokeColor: "#001977",
+				    strokeWidth: 2.5,
+				    externalGraphic: null,
+				    label: null
+				}
+			    }
+			);
+			resizeControl.mode = OpenLayers.Control.ModifyFeature.RESIZE;
+			
+			controls = { text : textControl,
+			     drag : new OpenLayers.Control.DragPan(),
+			     editVerticies: editVerticiesControl,
+			     rotate:rotateControl,
+			     resize:resizeControl,
+			     circle : circleControl,
+			     polygon : new OpenLayers.Control.DrawFeature(vlayer,
+				 OpenLayers.Handler.Polygon,
+				 {'displayClass': 'olControlDrawFeaturePolygon'}),
+			     line : new OpenLayers.Control.DrawFeature(vlayer,
+				 OpenLayers.Handler.Path,
+				 {'displayClass': 'olControlDrawFeaturePath'}),
+			     point : new OpenLayers.Control.DrawFeature(vlayer,
+				 OpenLayers.Handler.Point,
+				 {'displayClass': 'olControlDrawFeaturePoint',
+				  'featureAdded':function(e){
+				    e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>";
+				    vlayer.drawFeature(e);
+			     }})
+			};
 			
 			var panelControls = [
-			 textControl,
-			 new OpenLayers.Control.DragPan(),
-			 circleControl,
-			 new OpenLayers.Control.DrawFeature(vlayer,
-			     OpenLayers.Handler.Polygon,
-			     {'displayClass': 'olControlDrawFeaturePolygon'}),
-			 new OpenLayers.Control.DrawFeature(vlayer,
-			     OpenLayers.Handler.Path,
-			     {'displayClass': 'olControlDrawFeaturePath'}),
-			 new OpenLayers.Control.DrawFeature(vlayer,
-			     OpenLayers.Handler.Point,
-			     {'displayClass': 'olControlDrawFeaturePoint',
-			      'featureAdded':function(e){
-				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>";
-				vlayer.drawFeature(e);
-			      }})
+			 controls.text,	
+			 controls.editVerticies,
+			 controls.rotate,
+			 controls.resize,
+			 controls.drag,
+			 controls.circle,
+			 controls.polygon,
+			 controls.line,
+			 controls.point
 			];
+			
+			
+			turnOffControls = function(){
+			    controls.editVerticies.deactivate();
+			    controls.rotate.deactivate();
+			    controls.resize.deactivate();
+			    controls.drag.deactivate();
+			    drag.deactivate();
+			}
+			
 			var panel = new OpenLayers.Control.Panel({
 			   div:container,
 			   displayClass: 'olControlEditingToolbar'
@@ -374,6 +523,27 @@
 			highlightCtrl.activate();
 			selectCtrl.activate();
 			
+			/** turn off other controls when editing verticies**/
+			controls.editVerticies.editActivate = controls.editVerticies.activate;
+			controls.editVerticies.activate = function(){
+			    turnOffControls();
+			    controls.editVerticies.editActivate();			    
+			}
+			
+			/** turn off other controls when rotating**/
+			controls.rotate.myActivate = controls.rotate.activate;
+			controls.rotate.activate = function(){
+			    turnOffControls();
+			    controls.rotate.myActivate();			    
+			}
+			
+			/** turn off other controls when resizing**/
+			controls.resize.myActivate = controls.resize.activate;
+			controls.resize.activate = function(){
+			    turnOffControls();
+			    controls.resize.myActivate();			    
+			}
+			
 			/**
 			 * Hack to make sure selectControl always works 
 			 *
@@ -381,21 +551,26 @@
 			 * the selectCtrl. Previously selectCtrl was not being re-activated
 			 * after new features were added.
 			 */
-			navigationCtrl = panel.controls[1];
-			navigationCtrl.navActivate = panel.controls[0].activate;
-			navigationCtrl.navDeactivate = panel.controls[0].deactivate;
+			 
+			navigationCtrl = controls.drag;
+			navigationCtrl.navActivate = controls.drag.activate;
+			navigationCtrl.navDeactivate = controls.drag.deactivate;
 			navigationCtrl.activate = function () {
+				turnOffControls();
 				this.navActivate();
 				selectCtrl.activate();
+				drag.activate();
+				
 			};
 			navigationCtrl.deactivate = function () {
 				this.navDeactivate();
 				selectCtrl.deactivate();
 			};
 			map.events.register("click", map, function(e){
-				selectCtrl.deactivate();
-				selectCtrl.activate();
+				//selectCtrl.deactivate();
+				//selectCtrl.activate();
 			});
+			
 			
 			//click on the coord button puts a dot in the center
 			//of the view window selects it, and then opens up the

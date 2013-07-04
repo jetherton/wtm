@@ -189,7 +189,7 @@
 											    'marker-red.png'=>'r',
 											    'marker-blue.png'=>'b',
 											    'marker-green.png'=>'g',
-											    'marker-gold'=>'d');
+											    'marker-gold.png'=>'d');
 										    ?>
 										    <label><?php echo Kohana::lang('wtm.Icon');?>:</label> 
 										    <?php 
@@ -255,10 +255,12 @@
 							<a title="Delete selected item." href="#" class="btn_del_sel">&nbsp;</a>
 						</div>
 						<div style="clear:both;"></div>
-						<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
-						<input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" />
-						<div id="find_loading" class="report-find-loading"></div>
-						<div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
+						<!--
+						    <?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
+						    <input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" />
+						    <div id="find_loading" class="report-find-loading"></div>
+						    <div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
+						-->
 					</div>
 				</div>
 				<?php Event::run('ushahidi_action.report_form_location', $id); ?>

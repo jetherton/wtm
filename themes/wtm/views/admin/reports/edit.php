@@ -243,7 +243,7 @@
 											    'marker-red.png'=>'r',
 											    'marker-blue.png'=>'b',
 											    'marker-green.png'=>'g',
-											    'marker-gold'=>'d');
+											    'marker-gold.png'=>'d');
 										    ?>
 										    <label><?php echo Kohana::lang('wtm.Icon');?>:</label> 
 										    <?php 
