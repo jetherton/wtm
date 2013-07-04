@@ -648,6 +648,29 @@ div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointI
 	background: url('../images/edit_submit_selected_icons.png') -180px 0px;
 }
 
+div.report-find-location div.olControlEditingToolbar div.olControlModifyResizeItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -472px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlModifyResizeItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -472px 0px;
+}
+
+div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -450px 0px;
+	width:26px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -450px 0px;
+	width:26px;
+}
+
+div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItemInactive{
+	background: url('../images/edit_submit_nonselect_icons.png') -502px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItemActive{
+	background: url('../images/edit_submit_selected_icons.png') -502px 0px;
+}
+
 
 #geometryLabeler input.short_input{
     width: 50px;
