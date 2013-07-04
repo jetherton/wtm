@@ -9,6 +9,7 @@
 
 class ParseFiles_Controller extends Controller{
 	
+	//handle incoming report layers
 	public function submitFiles(){
 
 			// Fetch the submitted data
@@ -113,12 +114,13 @@ class ParseFiles_Controller extends Controller{
 						$reportlayers->report_id = 0;
 						$reportlayers->save();
 						
-						echo '{"success" : true, "newUuid" : "'.$layer->id.'"}';
+						echo '{"success": "true", "newUuid" : "'.$layer->id.'"}';
 					}
 		
 		
 	}
 	
+	//create the pop up window
 	public function parseWindow(){
 		$view = new View('uploadlayers/uploadwindow');
 		$js = new View('uploadlayers/uploadwindow_js');
@@ -128,6 +130,19 @@ class ParseFiles_Controller extends Controller{
 		$view->colorpicker_enabled = TRUE;
 
 		echo $view;
+	}
+	
+	//get the details of the new layer to add to the report
+	public function getLayerDetails(){
+		$layer = ORM::factory('layer')->
+		where('id', $_POST['layer'])->
+		find();
+		
+		//$return['label'] = $layer->layer_name;
+		//$return['color'] = $layer->layer_color;
+		
+		//return json_encode($return, true);
+		echo '{"label" : "'.$layer->layer_name.'", "color": "'.$layer->layer_color.'"}';
 	}
 }
 ?>
