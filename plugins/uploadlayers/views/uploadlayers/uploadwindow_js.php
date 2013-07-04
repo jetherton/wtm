@@ -75,10 +75,37 @@ var manualuploader = new qq.FineUploader({
 	  });
 
 	  function setLayerId(){
+		  //submit and edit pages have different set up of the divs
+		  var url = '<?php echo strpos(url::current(), 'admin/reports/edit') !== false ? 'edit' : 'submit'?>';
 		  var id = manualuploader.getUploads()[0].uuid;
 		  $('#user_kml_ids').val(id);
+		  console.log(url);
+		  
+		  $.post('<?php echo url::base();?>/parseFiles/getLayerDetails', {'layer' : id}, 
+				  function(data){
+					  if(url == 'edit'){
+						  $('#submit_layers').children('.category-column-2').append('<li\
+							        title="'+data.label+'" class="last"><label><input\
+							        type="checkbox" name="reportslayers[]" value="'+id+'"\
+							        class="check-box layer_switcher" id="layer_'+id+'"><span\
+							        class="swatch"\
+							        style="background-color:#' + data.color + '"></span><span\
+									class="layer-name">'+data.label+'</span></label></li>');
+					  }
+					  else{
+						  $('#custom_forms').append('<ul class="category-column category-column-1 treeview" id="category-column-1"><li\
+							        title="'+data.label+'" class="last"><label><input\
+							        type="checkbox" name="reportslayers[]" value="'+id+'"\
+							        class="check-box layer_switcher" id="layer_'+id+'"><span\
+							        class="swatch"\
+							        style="background-color:#' + data.color + '"></span><span\
+									class="layer-name">'+data.label+'</span></label></li></ul>');
+					  }
+						  $('#layer_'+id).click();
+		  }, 'json');
+		  
 		  alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
-		  $("a[rel]").overlay().close();	  
+		  $("a[rel]").overlay().close();
 	  }
 
 	
