@@ -154,13 +154,17 @@
 				    iconOffsetX: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return -10;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
+						    return -10;
 						} else {
-						    return -14;
-						}	
+						   return -14;
+						}
 					},
 				    iconOffsetY: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return -10;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
+						    return -15;
 						} else {
 						    return -27;
 						}	
@@ -220,6 +224,14 @@
 			});
 			map.addLayer(vlayer);
 			
+			
+			 // configure the snapping agent
+			snap = new OpenLayers.Control.Snapping({
+			    layer: vlayer,
+			    targets: [vlayer],
+			    greedy: false
+			});
+			snap.activate();
 			
 			// Drag Control
 			var drag = new OpenLayers.Control.DragFeature(vlayer, {
@@ -502,13 +514,12 @@
 			
 			
 			turnOffControls = function(){
-			    controls.editVerticies.deactivate();
-			    controls.rotate.deactivate();
-			    controls.resize.deactivate();
-			    controls.drag.deactivate();
+			    
+			    for(i in controls){
+				controls[i].deactivate();
+			    }
 			    selectCtrl.deactivate();
-			    drag.deactivate();
-			    console.log("turning stuff off");
+			    drag.deactivate();			    
 			}
 			
 			var panel = new OpenLayers.Control.Panel({
@@ -524,6 +535,28 @@
 			drag.activate();
 			highlightCtrl.activate();
 			selectCtrl.activate();
+			
+			/** turn off other controls when drawing lines**/
+			controls.line.myActivate = controls.line.activate;
+			controls.line.activate = function(){
+			    turnOffControls();
+			    controls.line.myActivate();			    
+			}
+			
+			/** turn off other controls when polygons lines**/
+			controls.polygon.myActivate = controls.polygon.activate;
+			controls.polygon.activate = function(){
+			    turnOffControls();
+			    controls.polygon.myActivate();			    
+			}
+			
+			/** turn off other controls when circles lines**/
+			controls.circle.myActivate = controls.circle.activate;
+			controls.circle.activate = function(){
+			    turnOffControls();
+			    controls.circle.myActivate();			    
+			}
+			
 			
 			/** turn off other controls when editing verticies**/
 			controls.editVerticies.editActivate = controls.editVerticies.activate;
