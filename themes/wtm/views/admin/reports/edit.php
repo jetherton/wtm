@@ -306,6 +306,7 @@
 										<a href="#" class="btn_del_sel">&nbsp;</a>
 								</div>
 								<div style="clear:both;"></div>
+								<!--
 								<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
 								<div class="btns"  style="float:left;">
 									<ul>
@@ -314,6 +315,7 @@
 								</div>
 								<div id="find_loading" class="incident-find-loading"></div>
 								<div style="clear:both;"><?php echo Kohana::lang('ui_main.pinpoint_location');?>.</div>
+								-->
 							</div>
 							<?php Event::run('ushahidi_action.report_form_admin_location', $id); ?>
 							<div class="row">

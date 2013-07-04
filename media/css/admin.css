@@ -2687,6 +2687,29 @@ div.incident-find-location div.olControlEditingToolbar div.olControlDrawTextPoin
 }
 
 
+div.incident-find-location div.olControlEditingToolbar div.olControlModifyResizeItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -472px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlModifyResizeItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -472px 0px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlModifyRotateItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -450px 0px;
+	width:26px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlModifyRotateItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -450px 0px;
+	width:26px;
+}
+
+div.incident-find-location div.olControlEditingToolbar div.olControlModifyVertItemInactive{
+	background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -502px 0px;
+}
+div.incident-find-location div.olControlEditingToolbar div.olControlModifyVertItemActive{
+	background: url('../../themes/wtm/images/edit_submit_selected_icons.png') -502px 0px;
+}
+
 .incident-find-location #deletePanel{
     padding:0px;
     margin: 5px 5px 0 0;
