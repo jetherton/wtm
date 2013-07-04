@@ -506,7 +506,9 @@
 			    controls.rotate.deactivate();
 			    controls.resize.deactivate();
 			    controls.drag.deactivate();
+			    selectCtrl.deactivate();
 			    drag.deactivate();
+			    console.log("turning stuff off");
 			}
 			
 			var panel = new OpenLayers.Control.Panel({
@@ -557,9 +559,10 @@
 			navigationCtrl.navDeactivate = controls.drag.deactivate;
 			navigationCtrl.activate = function () {
 				turnOffControls();
+				drag.activate();
 				this.navActivate();
 				selectCtrl.activate();
-				drag.activate();
+				
 				
 			};
 			navigationCtrl.deactivate = function () {
