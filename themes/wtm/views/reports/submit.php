@@ -241,6 +241,24 @@
 									    </span>
 									</div>
 								</div>
+								<div>
+									<span id="fontSize">
+										<label><?php echo Kohana::lang('wtm.font_size')?>:</label>
+										<?php print form::dropdown('font_size', $font_size_array, '12');?>
+									</span>
+									<span id="fontColor">
+										<label><?php echo Kohana::lang('wtm.font_color')?>:</label>
+										<?php print form::input('font_color', '', ' class="lbl_text"'); ?>
+									</span>
+									<span id="outlineWidth">
+										<label><?php echo Kohana::lang('wtm.outline_width')?>:</label>
+										<?php print form::dropdown('outline_width', $outline_size_array, '2');?>
+									</span>
+									<span id="outlineColor">
+										<label><?php echo Kohana::lang('wtm.outline_color')?>:</label>
+										<?php print form::input('outline_color', '', ' class="lbl_text"'); ?>
+									</span>
+								</div>
 							</div>
 							<div id="geometryLabelerClose"></div>
 						</div>

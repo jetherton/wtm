@@ -115,11 +115,11 @@
 				
 				label : '${label}',                    
 				
-				fontSize: "12px",
+				fontSize: '${fontSize}',
 				fontFamily: "Arial, Helvetica, sans-serif",
 				fontWeight: "bold",
-				labelOutlineColor: "white",
-				labelOutlineWidth: 2
+				labelOutlineColor: '${labelOutlineColor}',
+				labelOutlineWidth: '${labelOutlineWidth}'
 			},{
 				context: {
 				    label: function(feature) {
@@ -168,7 +168,13 @@
 						} else {
 						    return -27;
 						}	
-					}							    
+					},
+					labelOutlineColor: function(feature){
+						return "white";
+					},
+					labelOutlineWidth: function(feature){
+						return 2;
+					}					    
 				}
 			});
 			
@@ -1066,12 +1072,104 @@
 				refreshFeatures();
 			});
 			
+			// Event on Color Change
+			$('#font_color').ColorPicker({
+				onSubmit: function(hsb, hex, rgb) {
+					$('#font_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontColor = hex;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+					refreshFeatures();
+				},
+				onChange: function(hsb, hex, rgb) {
+					$('#font_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontColor = hex;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+					refreshFeatures();
+				},
+				onBeforeShow: function () {
+					$(this).ColorPickerSetColor(this.value);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontColor = this.value;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+					refreshFeatures();
+				}
+			}).bind('keyup', function(){
+				$(this).ColorPickerSetColor(this.value);
+				for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.fontColor = this.value;
+					vlayer.drawFeature(selectedFeatures[f]);
+			    }
+				refreshFeatures();
+			});
+			
+			// Event on Color Change
+			$('#outline_color').ColorPicker({
+				onSubmit: function(hsb, hex, rgb) {
+					$('#outline_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineColor = hex;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+					refreshFeatures();
+				},
+				onChange: function(hsb, hex, rgb) {
+					$('#outline_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineColor = hex;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+					refreshFeatures();
+				},
+				onBeforeShow: function () {
+					$(this).ColorPickerSetColor(this.value);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineColor = this.value;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+					refreshFeatures();
+				}
+			}).bind('keyup', function(){
+				$(this).ColorPickerSetColor(this.value);
+				for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.labelOutlineColor = this.value;
+					vlayer.drawFeature(selectedFeatures[f]);
+			    }
+				refreshFeatures();
+			});
+			
 			// Event on StrokeWidth Change
 			$('#geometry_strokewidth').bind("change keyup", function() {
 				if (parseFloat(this.value) && parseFloat(this.value) <= 8) {
 					for (f in selectedFeatures) {
 						selectedFeatures[f].strokewidth = this.value;
 						updateFeature(selectedFeatures[f], '', parseFloat(this.value));
+					}
+					refreshFeatures();
+				}
+			});
+			
+			// Event on Fontsize Change
+			$('#font_size').bind("change keyup", function() {
+				if (parseFloat(this.value) && parseFloat(this.value) <= 20) {
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontSize = this.value;
+						vlayer.drawFeature(selectedFeatures[f]);
+					}
+					refreshFeatures();
+				}
+			});
+			
+			// Event on Outlinewidth Change
+			$('#outline_width').bind("change keyup", function() {
+				if (parseFloat(this.value) && parseFloat(this.value) <= 10) {
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineWidth = this.value;
+						vlayer.drawFeature(selectedFeatures[f]);
 					}
 					refreshFeatures();
 				}
@@ -1247,12 +1345,22 @@
 					$("#geometry_lon_minutes").val(decimalLonToMinutes(thisPoint.geometry.x));
 					$("#geometry_lon_seconds").val(decimalLonToSeconds(thisPoint.geometry.x));
 					
+					$('#fontColor').show();
+					$('#fontSize').show();
+					$('#outlineSize').show();
+					$('#outlineColor').show();
+					
+					
 				} else {
 					$('#geometryLat').hide();
 					$('#geometryLon').hide();
 					$('#hoursMinsSeconds').hide();
 					$('#geometryColor').show();
 					$('#geometryStrokewidth').show();
+					$('#fontColor').hide();
+					$('#fontSize').hide();
+					$('#outlineSize').hide();
+					$('#outlineColor').hide();
 				}
 				if ( typeof(feature.label) != 'undefined') {
 					$('#geometry_label').val(feature.label);
@@ -1293,6 +1401,18 @@
 					$('#geometry_strokewidth').val(feature.strokewidth);
 				} else {
 					$('#geometry_strokewidth').val("2.5");
+				}
+				if(typeof(feature.attributes.fontSize) != 'undefined'){
+					$('#font_size').val(feature.attributes.fontSize);
+				}
+				if(typeof(feature.labelOutlineWidth) != 'undefined'){
+					$('#outline_width').val(feature.labelOutlineWidth);
+				}
+				if(typeof(feature.labelOutlineColor) != 'undefined'){
+					$('#outline_color').val(feature.labelOutlineColor);
+				}
+				if(typeof(feature.fonteColor) != 'undefined'){
+					$('#font_color').val(feature.fontColor);
 				}
 			}
 		}
@@ -1410,7 +1530,6 @@
 		}
 		
 		function updateFeature(feature, color, strokeWidth){
-		
 			// Create a symbolizer from exiting stylemap
 			var symbolizer = feature.layer.styleMap.createSymbolizer(feature);
 			
