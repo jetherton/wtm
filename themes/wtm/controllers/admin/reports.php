@@ -404,7 +404,10 @@ class Reports_Controller extends Admin_Controller {
 
 		$this->template->content->stroke_width_array = $this->_stroke_width_array();
 		$this->template->content->font_size_array = $this->_font_size_array();
+<<<<<<< HEAD
 		$this->template->content->outline_size_array = $this->_outline_size_array();
+=======
+>>>>>>> 46ab4126c055439bb68a64aee92245fe42c43f97
 
 		// Get Countries
 		$countries = array();
@@ -1225,6 +1228,7 @@ class Reports_Controller extends Admin_Controller {
 		}
 		return $font_size_array;
 	}
+<<<<<<< HEAD
 	
 	private function _outline_size_array(){
 		for($i = 0; $i <= 10; $i += 1){
@@ -1232,6 +1236,8 @@ class Reports_Controller extends Admin_Controller {
 		}
 		return $outline_size_array;
 	}
+=======
+>>>>>>> 46ab4126c055439bb68a64aee92245fe42c43f97
 
 	// Javascript functions
 	private function _color_picker_js()

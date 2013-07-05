@@ -1346,6 +1346,7 @@
 					$("#geometry_lon_minutes").val(decimalLonToMinutes(thisPoint.geometry.x));
 					$("#geometry_lon_seconds").val(decimalLonToSeconds(thisPoint.geometry.x));
 					
+
 					
 				} else {
 					$('#geometryLat').hide();
