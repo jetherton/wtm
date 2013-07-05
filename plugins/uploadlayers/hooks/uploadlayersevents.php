@@ -26,7 +26,7 @@ class uploadlayersevents {
 			Event::add('ushahidi_action.header_scripts', array($this, 'render_javascript'));
 		}
 		//Event::add('ushahidi_action.report_edit', array($this, 'parseSubmit'));
-		//Event::add('ushahidi_action.report_add', array($this, 'parseSubmit'));
+		Event::add('ushahidi_action.report_add', array($this, 'parseSubmit'));
 
 	}
 	

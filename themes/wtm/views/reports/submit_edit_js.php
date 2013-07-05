@@ -115,11 +115,11 @@
 				
 				label : '${label}',                    
 				
-				fontSize: "12px",
+				fontSize: '${fontSize}',
 				fontFamily: "Arial, Helvetica, sans-serif",
 				fontWeight: "bold",
-				labelOutlineColor: "white",
-				labelOutlineWidth: 2
+				labelOutlineColor: '${labelOutlineColor}',
+				labelOutlineWidth: '${labelOutlineWidth}'
 			},{
 				context: {
 				    label: function(feature) {
@@ -168,7 +168,13 @@
 						} else {
 						    return -27;
 						}	
-					}							    
+					},
+					labelOutlineColor: function(feature){
+						return "white";
+					},
+					labelOutlineWidth: function(feature){
+						return 2;
+					}					    
 				}
 			});
 			
@@ -1066,11 +1072,104 @@
 				refreshFeatures();
 			});
 			
+			// Event on Color Change
+			$('#font_color').ColorPicker({
+				onSubmit: function(hsb, hex, rgb) {
+					$('#font_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+				    }
+					refreshFeatures();
+				},
+				onChange: function(hsb, hex, rgb) {
+					$('#font_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+				    }
+					refreshFeatures();
+				},
+				onBeforeShow: function () {
+					$(this).ColorPickerSetColor(this.value);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontColor = "#"+this.value;
+						updateFeature(selectedFeatures[f], this.value, '');
+				    }
+					refreshFeatures();
+				}
+			}).bind('keyup', function(){
+				$(this).ColorPickerSetColor(this.value);
+				for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.fontColor = "#"+this.value;
+					updateFeature(selectedFeatures[f], this.value, '');
+			    }
+				refreshFeatures();
+			});
+			
+			// Event on Color Change
+			$('#outline_color').ColorPicker({
+				onSubmit: function(hsb, hex, rgb) {
+					$('#outline_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+				    }
+					refreshFeatures();
+				},
+				onChange: function(hsb, hex, rgb) {
+					$('#outline_color').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+				    }
+					refreshFeatures();
+				},
+				onBeforeShow: function () {
+					$(this).ColorPickerSetColor(this.value);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineColor = "#"+this.value;
+						updateFeature(selectedFeatures[f], this.value, '');
+				    }
+					refreshFeatures();
+				}
+			}).bind('keyup', function(){
+				$(this).ColorPickerSetColor(this.value);
+				for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.labelOutlineColor = "#"+this.value;
+					updateFeature(selectedFeatures[f], this.value, '');
+			    }
+				refreshFeatures();
+			});
+			
 			// Event on StrokeWidth Change
 			$('#geometry_strokewidth').bind("change keyup", function() {
 				if (parseFloat(this.value) && parseFloat(this.value) <= 8) {
 					for (f in selectedFeatures) {
 						selectedFeatures[f].strokewidth = this.value;
+						updateFeature(selectedFeatures[f], '', parseFloat(this.value));
+					}
+					refreshFeatures();
+				}
+			});
+			
+			// Event on Fontsize Change
+			$('#font_size').bind("change keyup", function() {
+				if (parseFloat(this.value) && parseFloat(this.value) <= 20) {
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.fontSize = this.value;
+						updateFeature(selectedFeatures[f], '', parseFloat(this.value));
+					}
+					refreshFeatures();
+				}
+			});
+			
+			// Event on Outlinewidth Change
+			$('#outline_width').bind("change keyup", function() {
+			console.log('outline');
+				if (parseFloat(this.value) && parseFloat(this.value) <= 10) {
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineWidth = this.value;
 						updateFeature(selectedFeatures[f], '', parseFloat(this.value));
 					}
 					refreshFeatures();
@@ -1247,6 +1346,7 @@
 					$("#geometry_lon_minutes").val(decimalLonToMinutes(thisPoint.geometry.x));
 					$("#geometry_lon_seconds").val(decimalLonToSeconds(thisPoint.geometry.x));
 					
+					
 				} else {
 					$('#geometryLat').hide();
 					$('#geometryLon').hide();
@@ -1410,7 +1510,6 @@
 		}
 		
 		function updateFeature(feature, color, strokeWidth){
-		
 			// Create a symbolizer from exiting stylemap
 			var symbolizer = feature.layer.styleMap.createSymbolizer(feature);
 			
