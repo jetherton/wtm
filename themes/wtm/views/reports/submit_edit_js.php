@@ -1077,32 +1077,52 @@
 				onSubmit: function(hsb, hex, rgb) {
 					$('#font_color').val(hex);
 					for (f in selectedFeatures) {
+<<<<<<< HEAD
 						selectedFeatures[f].attributes.fontColor = hex;
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+						selectedFeatures[f].attributes.fontColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 				    }
 					refreshFeatures();
 				},
 				onChange: function(hsb, hex, rgb) {
 					$('#font_color').val(hex);
 					for (f in selectedFeatures) {
+<<<<<<< HEAD
 						selectedFeatures[f].attributes.fontColor = hex;
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+						selectedFeatures[f].attributes.fontColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 				    }
 					refreshFeatures();
 				},
 				onBeforeShow: function () {
 					$(this).ColorPickerSetColor(this.value);
 					for (f in selectedFeatures) {
+<<<<<<< HEAD
 						selectedFeatures[f].attributes.fontColor = this.value;
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+						selectedFeatures[f].attributes.fontColor = "#"+this.value;
+						updateFeature(selectedFeatures[f], this.value, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 				    }
 					refreshFeatures();
 				}
 			}).bind('keyup', function(){
 				$(this).ColorPickerSetColor(this.value);
 				for (f in selectedFeatures) {
+<<<<<<< HEAD
 					selectedFeatures[f].attributes.fontColor = this.value;
 					vlayer.drawFeature(selectedFeatures[f]);
+=======
+					selectedFeatures[f].attributes.fontColor = "#"+this.value;
+					updateFeature(selectedFeatures[f], this.value, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 			    }
 				refreshFeatures();
 			});
@@ -1112,32 +1132,52 @@
 				onSubmit: function(hsb, hex, rgb) {
 					$('#outline_color').val(hex);
 					for (f in selectedFeatures) {
+<<<<<<< HEAD
 						selectedFeatures[f].attributes.labelOutlineColor = hex;
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+						selectedFeatures[f].attributes.labelOutlineColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 				    }
 					refreshFeatures();
 				},
 				onChange: function(hsb, hex, rgb) {
 					$('#outline_color').val(hex);
 					for (f in selectedFeatures) {
+<<<<<<< HEAD
 						selectedFeatures[f].attributes.labelOutlineColor = hex;
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+						selectedFeatures[f].attributes.labelOutlineColor = "#"+hex;
+						updateFeature(selectedFeatures[f], hex, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 				    }
 					refreshFeatures();
 				},
 				onBeforeShow: function () {
 					$(this).ColorPickerSetColor(this.value);
 					for (f in selectedFeatures) {
+<<<<<<< HEAD
 						selectedFeatures[f].attributes.labelOutlineColor = this.value;
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+						selectedFeatures[f].attributes.labelOutlineColor = "#"+this.value;
+						updateFeature(selectedFeatures[f], this.value, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 				    }
 					refreshFeatures();
 				}
 			}).bind('keyup', function(){
 				$(this).ColorPickerSetColor(this.value);
 				for (f in selectedFeatures) {
+<<<<<<< HEAD
 					selectedFeatures[f].attributes.labelOutlineColor = this.value;
 					vlayer.drawFeature(selectedFeatures[f]);
+=======
+					selectedFeatures[f].attributes.labelOutlineColor = "#"+this.value;
+					updateFeature(selectedFeatures[f], this.value, '');
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 			    }
 				refreshFeatures();
 			});
@@ -1158,7 +1198,11 @@
 				if (parseFloat(this.value) && parseFloat(this.value) <= 20) {
 					for (f in selectedFeatures) {
 						selectedFeatures[f].attributes.fontSize = this.value;
+<<<<<<< HEAD
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+						updateFeature(selectedFeatures[f], '', parseFloat(this.value));
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 					}
 					refreshFeatures();
 				}
@@ -1166,10 +1210,18 @@
 			
 			// Event on Outlinewidth Change
 			$('#outline_width').bind("change keyup", function() {
+<<<<<<< HEAD
 				if (parseFloat(this.value) && parseFloat(this.value) <= 10) {
 					for (f in selectedFeatures) {
 						selectedFeatures[f].attributes.labelOutlineWidth = this.value;
 						vlayer.drawFeature(selectedFeatures[f]);
+=======
+			console.log('outline');
+				if (parseFloat(this.value) && parseFloat(this.value) <= 10) {
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.labelOutlineWidth = this.value;
+						updateFeature(selectedFeatures[f], '', parseFloat(this.value));
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 					}
 					refreshFeatures();
 				}
@@ -1345,11 +1397,15 @@
 					$("#geometry_lon_minutes").val(decimalLonToMinutes(thisPoint.geometry.x));
 					$("#geometry_lon_seconds").val(decimalLonToSeconds(thisPoint.geometry.x));
 					
+<<<<<<< HEAD
 					$('#fontColor').show();
 					$('#fontSize').show();
 					$('#outlineSize').show();
 					$('#outlineColor').show();
 					
+=======
+
+>>>>>>> bef2143fc5603b092515f093eb461d82e424f7e1
 					
 				} else {
 					$('#geometryLat').hide();
