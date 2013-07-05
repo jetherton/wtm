@@ -403,6 +403,7 @@ class Reports_Controller extends Admin_Controller {
 		$this->template->content->ampm_array = $this->_ampm_array();
 
 		$this->template->content->stroke_width_array = $this->_stroke_width_array();
+		$this->template->content->font_size_array = $this->_font_size_array();
 
 		// Get Countries
 		$countries = array();
@@ -1215,6 +1216,13 @@ class Reports_Controller extends Admin_Controller {
 			$stroke_width_array["$i"] = $i;
 		}
 		return $stroke_width_array;
+	}
+	
+	private function _font_size_array(){
+		for($i = 5; $i <= 20; $i += 1){
+			$font_size_array[$i] = $i.'px';
+		}
+		return $font_size_array;
 	}
 
 	// Javascript functions

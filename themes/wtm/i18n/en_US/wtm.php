@@ -9,4 +9,5 @@ $lang = array(
 		'facebook' => 'Name on Facebook',
 		'phoneNum' => 'XXX-XXX-XXXX',
 		'Icon'=>'Icon',
+		'font_size' => 'Font Size',
 );

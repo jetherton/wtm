@@ -115,7 +115,7 @@
 				
 				label : '${label}',                    
 				
-				fontSize: "12px",
+				fontSize: '${fontSize}',
 				fontFamily: "Arial, Helvetica, sans-serif",
 				fontWeight: "bold",
 				labelOutlineColor: "white",
@@ -168,7 +168,7 @@
 						} else {
 						    return -27;
 						}	
-					}							    
+					}					    
 				}
 			});
 			
@@ -1246,6 +1246,8 @@
 					$("#geometry_lon_degrees").val(decimalLonToHours(thisPoint.geometry.x));
 					$("#geometry_lon_minutes").val(decimalLonToMinutes(thisPoint.geometry.x));
 					$("#geometry_lon_seconds").val(decimalLonToSeconds(thisPoint.geometry.x));
+					
+					$('#fontSize').show();
 					
 				} else {
 					$('#geometryLat').hide();

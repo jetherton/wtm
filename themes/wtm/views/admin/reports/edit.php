@@ -294,6 +294,12 @@
 									    </span>
 									</div>
 								</div>
+								<div>
+									<span id="fontSize">
+										<label><?php echo Kohana::lang('wtm.font_size')?>:</label>
+										<?php print form::dropdown('font_size', $font_size_array, '10');?>
+									</span>
+								</div>
 							</div>
 							<div id="geometryLabelerClose"></div>
 						</div>
