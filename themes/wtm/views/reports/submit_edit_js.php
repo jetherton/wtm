@@ -1019,6 +1019,35 @@
 				}
 			});
 			
+			$('#geometryEditPoints').bind("click",function(){
+			    $('#geometryPointsHolder').show();
+			    //remove all the options
+			    $("#pointsListHolder option").each(function() {
+				$(this).remove();
+			    });
+			    for (f in selectedFeatures) {
+				if(selectedFeatures[f].geometry.componentTypes[0] == "OpenLayers.Geometry.LinearRing"){
+				    for(i in selectedFeatures[f].geometry.components[0].components){
+					var component = selectedFeatures[f].geometry.components[0].components[i];
+					var id = component.id;
+					var x = component.x;
+					var y = component.y;
+					var lonLat = new OpenLayers.LonLat(x, y);
+					x = lonLat.lat;
+					y = lonLat.lon;
+					 $('#pointsListHolder')
+					    .append($("<option></option>")
+					    .attr("value",id)
+					    .text(x + ", " + y)); 
+				    }
+				    break;
+				}				
+			    }
+			});
+			
+			$('#geometryPointsClose').bind("click",function(){
+			    $('#geometryPointsHolder').hide();
+			});
 			
 			// Event on Icon Change
 			$('#geometry_icon').bind("change",function(){
@@ -1235,6 +1264,7 @@
 					$('#hoursMinsSeconds').show();
 					$('#geometryColor').hide();
 					$('#geometryStrokewidth').hide();
+					$('#geometryEditPoints').hide();
 					thisPoint = feature.clone();
 					thisPoint.geometry.transform(proj_900913,proj_4326);
 					$('#geometry_lat').val(thisPoint.geometry.y);
@@ -1253,6 +1283,7 @@
 					$('#hoursMinsSeconds').hide();
 					$('#geometryColor').show();
 					$('#geometryStrokewidth').show();
+					$('#geometryEditPoints').show();
 				}
 				if ( typeof(feature.label) != 'undefined') {
 					$('#geometry_label').val(feature.label);
