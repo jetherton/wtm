@@ -183,14 +183,14 @@
 					    } else {
 						return feature.attributes.fontColor;
 					    }
-					}
+					},
 				labelOutlineColor : function(feature){
 					    if(typeof feature.attributes.labelOutlineColor == "undefined"){
 						return '#000000';
 					    } else {
 						return feature.attributes.labelOutlineColor;
 					    }
-					}
+					},
 				labelOutlineWidth: function(feature){
 					    if(typeof feature.attributes.labelOutlineWidth == "undefined"){
 						return '2';
