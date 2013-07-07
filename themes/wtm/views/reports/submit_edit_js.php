@@ -1608,7 +1608,7 @@
 					$('#geometry_label').val(feature.label);
 				}
 				if(typeof(feature.attributes.icon) != 'undefined'){
-				    if(feature.attributes.icon.indexOf("clear_rect32x14.png") == -1){
+				    if(feature.attributes.icon.indexOf("clear_rect32x14.png") == -1 && feature.geometry.CLASS_NAME == "OpenLayers.Geometry.Point"){
 					$('#geometry_icon').val(feature.attributes.icon);
 					$('#geometry_icon').change();
 					$('#geometryIcon').show();

@@ -2762,3 +2762,38 @@ table.defaultCats .category-icon{
 div.apple_overlay div.contentWrap input.text {
     float: none;
 }
+
+
+
+#geometryPointsHolder {
+position: absolute;
+bottom: 0;
+display: none;
+width: 100%;
+background-color: #00008b;
+opacity: 1.0;
+z-index: 5002;
+height: 140px;
+}
+
+#geometryPointsClose{
+    z-index: 5004;
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    background: url("../img/openlayers/layer-switcher-minimize.png") no-repeat;
+    cursor: pointer;
+}
+
+#pointsEditHolder{
+    padding:20px;
+}
+#pointsEditHolder label{
+    color: white;
+}
+
+#pointsEditHolder .short_input{
+    width:50px;
+}

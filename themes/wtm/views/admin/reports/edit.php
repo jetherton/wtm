@@ -271,6 +271,9 @@
 										<label><?php echo Kohana::lang('ui_main.geometry_strokewidth');?>:</label> 
 										<?php print form::dropdown('geometry_strokewidth', $stroke_width_array, ''); ?>
 									</span>
+									<span id="geometryEditPoints">										
+										<input type="button" id="geometry_editpoints" value="Edit Points"/>
+									</span>
 									<span id="geometryLat">
 										<label><?php echo Kohana::lang('ui_main.latitude');?>(DD.DD):</label> 
 										<?php print form::input('geometry_lat', '', ' class="lbl_text"'); ?>
@@ -315,6 +318,64 @@
 								</div>
 							</div>
 							<div id="geometryLabelerClose"></div>
+						</div>
+                                                <div id="geometryPointsHolder" class="olControlNoSelect">	
+						    <table>
+							<tr>
+							    <td >
+								<select name="editVertex" id="pointsListHolder" style="height:100px; width:300px;" multiple>
+								    
+								</select>
+							    </td>
+							    <td id="pointsEditHolder">
+								<table>
+								    <tr>
+									<td>
+									    <label><?php echo Kohana::lang('ui_main.latitude');?>(DD.DD):</label> 
+									</td>
+									<td>
+									    <?php print form::input('point_geometry_lat', '', ' class="lbl_text"'); ?>
+									</td>
+									<td>
+									    <label><?php echo Kohana::lang('ui_main.longitude');?>(DD.DD):</label> 
+									</td>
+									<td>
+									<?php print form::input('point_geometry_lon', '', ' class="lbl_text"'); ?>
+									</td>
+								    </tr>
+								
+								    <tr>
+									<td>
+									    <label><?php echo Kohana::lang('ui_main.latitude');?>(DD MM SS):</label> 
+									</td>
+									<td>
+									    <?php print form::input('pointGeometry_lat_degrees', '', ' class="lbl_text short_input"'); ?> 
+									    <?php print form::input('pointGeometry_lat_minutes', '', ' class="lbl_text short_input"'); ?> 
+									    <?php print form::input('pointGeometry_lat_seconds', '', ' class="lbl_text short_input"'); ?>
+									</td>
+									<td></td><td></td>
+								    </tr>
+								    <tr>
+									<td>
+									    <label><?php echo Kohana::lang('ui_main.longitude');?>(DD MM SS):</label> 
+									</td>
+									<td>
+									    <?php print form::input('pointGeometry_lon_degrees', '', ' class="lbl_text short_input"'); ?>
+									    <?php print form::input('pointGeometry_lon_minutes', '', ' class="lbl_text short_input"'); ?>
+									    <?php print form::input('pointGeometry_lon_seconds', '', ' class="lbl_text short_input"'); ?>
+									</td>
+									<td>
+									    <input type="button" id="removePointGeometry" value="Remove Point"/>
+									</td>
+									<td>
+									    <input type="button" id="addPointGeometry" value="Add Point"/>
+									</td>
+								    </tr>
+								</table>
+							    </td>
+							</tr>
+						    </table>
+						    <div id="geometryPointsClose"></div>
 						</div>
 								</div>
 							</div>
