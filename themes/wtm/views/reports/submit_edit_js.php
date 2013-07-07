@@ -1062,8 +1062,9 @@
 					var x = component.x;
 					var y = component.y;
 					var lonLat = new OpenLayers.LonLat(x, y);
-					x = lonLat.lat;
-					y = lonLat.lon;
+					var point2 =  lonLat.transform(proj_900913, proj_4326);
+					x = point2.lat;
+					y = point2.lon;
 					 $('#pointsListHolder')
 					    .append($("<option></option>")
 					    .attr("value",id)
