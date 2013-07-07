@@ -394,12 +394,22 @@ class reports_Core {
 					$strokewidth = (isset($item->strokewidth) AND (float) $item->strokewidth) ? (float) $item->strokewidth : "2.5";
 					$icon = (isset($item->icon)) ? $db->escape_str($item->icon) : "openlayers/marker.png";
 					$showLabel = (isset($item->showLabel)) ? ($item->showLabel ? 1 : 0) : 0;
+					
+					$fontSize = (isset($item->fontSize)) ? $item->fontSize : 12;
+					$fontColor = (isset($item->fontColor)) ? $db->escape_str(substr($item->fontColor, 0, 6)) : "ffffff";
+					$labelOutlineWidth = (isset($item->labelOutlineWidth)) ? $item->labelOutlineWidth : 2;
+					$labelOutlineColor = (isset($item->labelOutlineColor)) ? $db->escape_str(substr($item->labelOutlineColor, 0, 6)) : "000000";
+					    
 					if ($geometry)
 					{
 						// 	Format the SQL string
 						$sql = "INSERT INTO ".Kohana::config('database.default.table_prefix')."geometry "
-							. "(incident_id, geometry, geometry_label, geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel)"
-							. "VALUES(".$incident->id.", GeomFromText('".$geometry."'), '".$label."', '".$comment."', '".$color."', ".$strokewidth.", '".$icon."', $showLabel)";
+							. "(incident_id, geometry, geometry_label, geometry_comment, "
+							. "geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel, "
+							. "geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor)"
+							. "VALUES(".$incident->id.", GeomFromText('".$geometry."'), '".$label."', '".$comment."', '"
+							. $color."', ".$strokewidth.", '".$icon."', $showLabel, "
+							. "$fontSize, '$fontColor', $labelOutlineWidth, '$labelOutlineColor')";
 						Kohana::log('debug', $sql);
 						// Execute the query
 						$db->query($sql);

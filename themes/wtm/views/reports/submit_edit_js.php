@@ -416,6 +416,11 @@
 					echo "wktFeature.strokewidth = '$geometry->strokewidth';\n";
 					echo "wktFeature.icon = ".json_encode(url::file_loc('img').'media/img/openlayers/'.$geometry->icon).";\n";
 					echo "wktFeature.attributes.icon = ".json_encode(url::file_loc('img').'media/img/openlayers/'.$geometry->icon).";\n";
+					echo "wktFeature.attributes.fontSize = ".$geometry->fontSize.";\n";
+					echo "wktFeature.attributes.fontColor = '#".$geometry->fontColor."';\n";
+					echo "wktFeature.attributes.labelOutlineWidth = ".$geometry->labelOutlineWidth.";\n";
+					echo "wktFeature.attributes.labelOutlineColor = '#".$geometry->labelOutlineColor."';\n";
+					
 					echo "vlayer.addFeatures(wktFeature);\n";
 					echo "var color = '$geometry->color';if (color) {updateFeature(wktFeature, color, '');};\n";
 					echo "var strokewidth = '$geometry->strokewidth';if (strokewidth) {updateFeature(wktFeature, '', strokewidth);};\n";
@@ -662,6 +667,8 @@
 					vlayer.removeFeatures(vlayer.features[x]);
 				}
 				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
 				$('#geometryLabelerHolder').hide(400);
 				selectCtrl.activate();
 				return false;
@@ -674,6 +681,8 @@
 				}
 				selectedFeatures = [];
 				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
 				$('#geometryLabelerHolder').hide(400);
 				selectCtrl.activate();
 				return false;
@@ -691,6 +700,10 @@
 				$('#geometry_lat').val("");
 				$('#geometry_lon').val("");
 				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
+				$('#font_color').val('');
+				$('#outline_color').val('');
 				$('#geometryLabelerHolder').hide(400);
 				selectCtrl.activate();
 				return false;
@@ -922,6 +935,8 @@
 			$('#geometry_label').click(function() {
 				$('#geometry_label').focus();
 				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				for (f in selectedFeatures) {
 					selectedFeatures[f].label = this.value;
@@ -937,6 +952,8 @@
 			$('#geometry_comment').click(function() {
 				$('#geometry_comment').focus();
 				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				for (f in selectedFeatures) {
 					selectedFeatures[f].comment = this.value;
@@ -947,6 +964,8 @@
 			$('#geometry_lat').click(function() {
 				$('#geometry_lat').focus();
 				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				//update the hours minutes seconds
 				$("#geometry_lat_degrees").val(decimalLatToHours(parseFloat(this.value)));
@@ -961,6 +980,8 @@
 			$('#geometry_lon').click(function() {
 				$('#geometry_lon').focus();
 				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				$("#geometry_lon_degrees").val(decimalLonToHours(parseFloat(this.value)));
 				$("#geometry_lon_minutes").val(decimalLonToMinutes(parseFloat(this.value)));
@@ -1344,38 +1365,14 @@
 			
 			// Event on Color Change
 			$('#outline_color').ColorPicker({
-				onSubmit: function(hsb, hex, rgb) {
-					$('#outline_color').val(hex);
-					for (f in selectedFeatures) {
-						selectedFeatures[f].attributes.labelOutlineColor = hex;
-						vlayer.drawFeature(selectedFeatures[f]);
-				    }
-					refreshFeatures();
-				},
 				onChange: function(hsb, hex, rgb) {
 					$('#outline_color').val(hex);
 					for (f in selectedFeatures) {
-						selectedFeatures[f].attributes.labelOutlineColor = hex;
-						vlayer.drawFeature(selectedFeatures[f]);
-				    }
-					refreshFeatures();
-				},
-				onBeforeShow: function () {
-					$(this).ColorPickerSetColor(this.value);
-					for (f in selectedFeatures) {
-						selectedFeatures[f].attributes.labelOutlineColor = this.value;
+						selectedFeatures[f].attributes.labelOutlineColor = '#'+hex;
 						vlayer.drawFeature(selectedFeatures[f]);
 				    }
 					refreshFeatures();
 				}
-			}).bind('keyup', function(){
-				$(this).ColorPickerSetColor(this.value);
-				for (f in selectedFeatures) {
-					selectedFeatures[f].attributes.labelOutlineColor = this.value;
-					vlayer.drawFeature(selectedFeatures[f]);
-
-			    }
-				refreshFeatures();
 			});
 			
 			// Event on StrokeWidth Change
@@ -1644,19 +1641,21 @@
 				} else {
 					$('#geometry_strokewidth').val("2.5");
 				}
-				if(typeof(feature.attributes.fontSize) != 'undefined'){
-					$('#font_size').val(feature.attributes.fontSize);
-				}
-				if(typeof(feature.labelOutlineWidth) != 'undefined'){
-					$('#outline_width').val(feature.labelOutlineWidth);
-				}
-				if(typeof(feature.labelOutlineColor) != 'undefined'){
-					$('#outline_color').val(feature.labelOutlineColor);
-				}
-				if(typeof(feature.attribute) != 'undefined'){
+
+				if(typeof(feature.attributes) != 'undefined'){
 				
-				    if(typeof(feature.attribute.fontColor) != 'undefined'){
-				    	$('#font_color').val(feature.attribute.fontColor);
+				    if(typeof(feature.attributes.fontColor) != 'undefined'){
+				    	$('#font_color').val(feature.attributes.fontColor);
+				    }
+				    
+				    if(typeof(feature.attributes.fontSize) != 'undefined'){
+					$('#font_size').val(feature.attributes.fontSize);
+				    }
+				    if(typeof(feature.attributes.labelOutlineWidth) != 'undefined'){
+					    $('#outline_width').val(feature.attributes.labelOutlineWidth);
+				    }
+				    if(typeof(feature.attributes.labelOutlineColor) != 'undefined'){
+					    $('#outline_color').val(feature.attributes.labelOutlineColor);
 				    }
 				}
 			}
@@ -1675,6 +1674,8 @@
 			selectCtrl.deactivate();
 			selectCtrl.activate();
 			$('#geometry_color').ColorPickerHide();
+			$('#font_color').ColorPickerHide();
+			$('#outline_color').ColorPickerHide();
 		}
 
 		/* Feature starting to move */
@@ -1732,15 +1733,25 @@
 					var strokewidth = '';
 					var icon = '';
 					var fontSize = 12;
-					var fontColor = '#ffffff';
+					var fontColor = 'ffffff';
+					var labelOutlineColor = '000000';
+					var labelOutlineWidth = '2';
 					
 					if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
 					    icon = vlayer.features[i].attributes.icon;
 					    icon = icon.substr(icon.lastIndexOf('/')+1);
 					}
 					
+					if ( typeof(vlayer.features[i].attributes.labelOutlineColor) != 'undefined') {
+						labelOutlineColor = vlayer.features[i].attributes.labelOutlineColor.substring(1);
+					}
+					
+					if ( typeof(vlayer.features[i].attributes.labelOutlineWidth) != 'undefined') {
+						labelOutlineWidth = vlayer.features[i].attributes.labelOutlineWidth;
+					}
+					
 					if ( typeof(vlayer.features[i].attributes.fontColor) != 'undefined') {
-						fontColor = vlayer.features[i].attributes.fontColor;
+						fontColor = vlayer.features[i].attributes.fontColor.substring(1);
 					}
 					
 					if ( typeof(vlayer.features[i].attributes.fontSize) != 'undefined') {
@@ -1779,7 +1790,9 @@
 					    color: color, 
 					    strokewidth: strokewidth,
 					    fontSize: fontSize,
-					    fontColor: fontColor
+					    fontColor: fontColor,
+					    labelOutlineWidth: labelOutlineWidth,
+					    labelOutlineColor: labelOutlineColor
 					    });
 					$('#reportForm').append($('<input></input>').attr('name','geometry[]').attr('type','hidden').attr('value',geometryAttributes));
 				}

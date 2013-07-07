@@ -260,7 +260,6 @@
 									<span id="outlineColor">
 										<label><?php echo Kohana::lang('wtm.outline_color')?>:</label>
 										<?php print form::input('outline_color', '', ' class="lbl_text"'); ?>
-										<?php print form::dropdown('font_size', $font_size_array, '10');?>
 									</span>
 								</div>
 							</div>

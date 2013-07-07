@@ -702,6 +702,11 @@ class Json_Controller extends Template_Controller {
 				$label = $item->geometry_showlabel ? $label : "";
 				
 				$icon = ($item->geometry_icon) ? url::file_loc('img').'media/img/openlayers/'.$item->geometry_icon : url::file_loc('img').'media/img/openlayers/marker.png';
+				
+				$fontSize = ($item->geometry_fontsize) ? $item->geometry_fontsize : 12;
+				$fontColor = ($item->geometry_fontcolor) ? $item->geometry_fontcolor : "ffffff";
+				$labelOutlineColor = ($item->geometry_labeloutlinecolor) ? $item->geometry_labeloutlinecolor : '000000';
+				$labelOutlineWidth = ($item->geometry_labeloutlinewidth) ? $item->geometry_labeloutlinewidth : 2;
 
 				
 				$json_item = array();
@@ -719,6 +724,10 @@ class Json_Controller extends Template_Controller {
 					'link' => $incident_link,
 					'category' => array(0),
 					'timestamp' => strtotime($incident_date),
+					'fontSize' => $fontSize.'px',
+					'fontColor'=> '#'.$fontColor,
+					'labelOutlineColor' => '#'.$labelOutlineColor,
+					'labelOutlineWidth' => $labelOutlineWidth
 				);
 				$json_item['geometry'] = $geom_array;
 
@@ -746,7 +755,9 @@ class Json_Controller extends Template_Controller {
 		$db = new Database();
 		// Get Incident Geometries via SQL query as ORM can't handle Spatial Data
 		$sql = "SELECT id, incident_id, AsText(geometry) as geometry, geometry_label, 
-			geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel FROM ".$this->table_prefix."geometry";
+			geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel, 
+			geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor 
+			FROM ".$this->table_prefix."geometry";
 		
 		$query = $db->query($sql);
 		foreach ( $query as $item )

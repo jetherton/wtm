@@ -55,78 +55,106 @@ jQuery(window).load(function() {
 
 	// Set Feature Styles
 	var style1 = new OpenLayers.Style({
-		pointRadius: "8",
-		fillColor: "${fillcolor}",
-		fillOpacity: "0.7",
-		strokeColor: "${strokecolor}",
-		strokeOpacity: "0.7",
-		strokeWidth: "${strokewidth}",
-		graphicZIndex: 1,
-		externalGraphic: "${icon}",
-		graphicOpacity: 1,
-		graphicWidth: 21,
-		graphicHeight: 25,
-		graphicXOffset: -14,
-		graphicYOffset: -27,
-		
-		label : '${label}',                    
-
-		fontSize: "12px",
-		fontFamily: "Courier New, monospace",
-		fontWeight: "bold",
-		labelOutlineColor: "white",
-		labelOutlineWidth: 2
-	},
-	{
-		context: 
-		{
-		
-			graphic: function(feature) {
-				if (typeof(feature) != 'undefined' && 
-					feature.data.id == <?php echo $incident_id; ?>)
-				{
-					return "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>";
+				pointRadius: "8",
+				fillColor: "#ffcc66",
+				fillOpacity: "0.7",
+				strokeColor: "#CC0000",
+				strokeWidth: 2.5,
+				graphicZIndex: 1,
+				externalGraphic: "${icon}",
+				graphicOpacity: 1,
+				graphicWidth: "${iconWidth}",
+				graphicHeight: "${iconHeight}",
+				graphicXOffset: "${iconOffsetX}",
+				graphicYOffset: "${iconOffsetY}",
+				
+				label : '${label}',                    
+				
+				fontSize: '${fontSize}',
+				fontColor: '${fontColor}',
+				fontFamily: "Arial, Helvetica, sans-serif",
+				fontWeight: "bold",
+				labelOutlineColor: '${labelOutlineColor}',
+				labelOutlineWidth: '${labelOutlineWidth}'
+			},{
+				context: {
+				    label: function(feature) {
+						if(typeof feature.attributes.label == "undefined"){
+						    return "";
+						} else {
+						    return feature.attributes.label;
+						}
+						
+					},
+				    icon: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return "<?php echo url::base();?>themes/wtm/images/greendot.png";
+						} else {
+						    return feature.attributes.icon;
+						}	
+					},
+				    iconWidth: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return 20;
+						} else {
+						    return 21;
+						}	
+					},
+				    iconHeight: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return 20;
+						} else {
+						    return 25;
+						}	
+					},
+				    iconOffsetX: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return -10;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
+						    return -10;
+						} else {
+						   return -14;
+						}
+					},
+				    iconOffsetY: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return -10;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
+						    return -15;
+						} else {
+						    return -27;
+						}	
+					},
+				    fontSize: function(feature){
+					    if(typeof feature.attributes.fontSize == "undefined"){
+						return 12;
+					    } else {
+						return feature.attributes.fontSize;
+					    }
+					},
+				    fontColor: function(feature){
+					    if(typeof feature.attributes.fontColor == "undefined"){
+						return '#ffffff';
+					    } else {
+						return feature.attributes.fontColor;
+					    }
+					},
+				labelOutlineColor : function(feature){
+					    if(typeof feature.attributes.labelOutlineColor == "undefined"){
+						return '#000000';
+					    } else {
+						return feature.attributes.labelOutlineColor;
+					    }
+					},
+				labelOutlineWidth: function(feature){
+					    if(typeof feature.attributes.labelOutlineWidth == "undefined"){
+						return '2';
+					    } else {
+						return feature.attributes.labelOutlineWidth;
+					    }
+					}
 				}
-				else
-				{
-					return "<?php echo url::file_loc('img').'media/img/openlayers/marker-gold.png' ;?>";
-				}
-			},
-			fillcolor: function(feature) {
-				if ( typeof(feature.attributes.color) != 'undefined' && 
-					feature.attributes.color != '' )
-				{
-					return "#"+feature.attributes.color;
-				}
-				else
-				{
-					return "#ffcc66";
-				}
-			},
-			strokecolor: function(feature) {
-				if ( typeof(feature.attributes.strokecolor) != 'undefined' && 
-					feature.attributes.strokecolor != '')
-				{
-					return "#"+feature.attributes.strokecolor;
-				}
-				else
-				{
-					return "#CC0000";
-				}
-			},					
-			strokewidth: function(feature) {
-				if ( typeof(feature.attributes.strokewidth) != 'undefined' && 
-					feature.attributes.strokewidth != '')
-				{
-					return feature.attributes.strokewidth;
-				}
-				else
-				{
-					return "3";
-				}
-			}
-		}
-	});
+			});
 
 	var style2 = new OpenLayers.Style({
 		pointRadius: "8",
