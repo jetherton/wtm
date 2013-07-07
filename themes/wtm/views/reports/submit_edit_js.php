@@ -102,10 +102,12 @@
 			// Vector/Drawing Layer Styles
 			style1 = new OpenLayers.Style({
 				pointRadius: "8",
-				fillColor: "#ffcc66",
-				fillOpacity: "0.7",
-				strokeColor: "#CC0000",
-				strokeWidth: 2.5,
+				fillColor: "${fillColor}",
+				fillOpacity: "${fillOpacity}",
+				strokeColor: "${strokeColor}",
+				strokeWidth: "${strokeWidth}",
+				strokeOpacity: "${strokeOpacity}",
+				strokeDashstyle: "${strokeDashstyle}",
 				graphicZIndex: 1,
 				externalGraphic: "${icon}",
 				graphicOpacity: 1,
@@ -198,6 +200,48 @@
 					    } else {
 						return feature.attributes.labelOutlineWidth;
 					    }
+					},
+				strokeColor : function(feature){
+					    if(typeof feature.attributes.strokeColor == "undefined"){
+						return '#CC0000';
+					    } else {
+						return feature.attributes.strokeColor;
+					    }
+					},
+				fillOpacity : function(feature){
+					    if(typeof feature.attributes.fillOpacity == "undefined"){
+						return '0.7';
+					    } else {
+						return feature.attributes.fillOpacity;
+					    }
+					},
+				strokeOpacity : function(feature){
+					    if(typeof feature.attributes.strokeOpacity == "undefined"){
+						return '1';
+					    } else {
+						return feature.attributes.strokeOpacity;
+					    }
+					},
+				fillColor : function(feature){
+					    if(typeof feature.attributes.fillColor == "undefined"){
+						return '#ffcc66';
+					    } else {
+						return feature.attributes.fillColor;
+					    }
+					},
+				strokeWidth : function(feature){
+					    if(typeof feature.attributes.strokeWidth == "undefined"){
+						return 2.5;
+					    } else {
+						return feature.attributes.strokeWidth;
+					    }
+					},
+				strokeDashstyle : function(feature){
+					    if(typeof feature.attributes.strokeDashstyle == "undefined"){
+						return 'solid';
+					    } else {
+						return feature.attributes.strokeDashstyle;
+					    }
 					}
 				}
 			});
@@ -207,10 +251,10 @@
 			
 			style2 = new OpenLayers.Style({
 				pointRadius: "8",
-				fillColor: "#30E900",
-				fillOpacity: "0.7",
-				strokeColor: "#197700",
-				strokeWidth: 2.5,
+				//fillColor: "#30E900",
+				//fillOpacity: "0.7",
+				//strokeColor: "#197700",
+				//strokeWidth: 2.5,
 				graphicZIndex: 1,
 				graphicOpacity: 0.5,
 				graphicWidth: 26,
@@ -413,7 +457,9 @@
 					}
 					echo "wktFeature.comment = ".json_encode($geometry->comment).";\n";
 					echo "wktFeature.color = '$geometry->color';\n";
+					echo "wktFeature.attributes.fillColor  = '$geometry->color';\n";
 					echo "wktFeature.strokewidth = '$geometry->strokewidth';\n";
+					echo "wktFeature.attributes.strokeWidth = '$geometry->strokewidth';\n";
 					echo "wktFeature.icon = ".json_encode(url::file_loc('img').'media/img/openlayers/'.$geometry->icon).";\n";
 					echo "wktFeature.attributes.icon = ".json_encode(url::file_loc('img').'media/img/openlayers/'.$geometry->icon).";\n";
 					echo "wktFeature.attributes.fontSize = ".$geometry->fontSize.";\n";
@@ -422,8 +468,6 @@
 					echo "wktFeature.attributes.labelOutlineColor = '#".$geometry->labelOutlineColor."';\n";
 					
 					echo "vlayer.addFeatures(wktFeature);\n";
-					echo "var color = '$geometry->color';if (color) {updateFeature(wktFeature, color, '');};\n";
-					echo "var strokewidth = '$geometry->strokewidth';if (strokewidth) {updateFeature(wktFeature, '', strokewidth);};\n";
 				}
 			}
 			?>
@@ -1322,7 +1366,8 @@
 					$('#geometry_color').val(hex);
 					for (f in selectedFeatures) {
 						selectedFeatures[f].color = hex;
-						updateFeature(selectedFeatures[f], hex, '');
+						selectedFeatures[f].attributes.fillColor = "#"+hex;
+						vlayer.drawFeature(selectedFeatures[f]);
 				    }
 					refreshFeatures();
 				},
@@ -1330,7 +1375,8 @@
 					$('#geometry_color').val(hex);
 					for (f in selectedFeatures) {
 						selectedFeatures[f].color = hex;
-						updateFeature(selectedFeatures[f], hex, '');
+						selectedFeatures[f].attributes.fillColor = "#"+hex;
+						vlayer.drawFeature(selectedFeatures[f]);
 				    }
 					refreshFeatures();
 				},
@@ -1338,7 +1384,8 @@
 					$(this).ColorPickerSetColor(this.value);
 					for (f in selectedFeatures) {
 						selectedFeatures[f].color = this.value;
-						updateFeature(selectedFeatures[f], this.value, '');
+						selectedFeatures[f].attributes.fillColor = "#"+this.value;
+						vlayer.drawFeature(selectedFeatures[f]);
 				    }
 					refreshFeatures();
 				}
@@ -1346,10 +1393,45 @@
 				$(this).ColorPickerSetColor(this.value);
 				for (f in selectedFeatures) {
 					selectedFeatures[f].color = this.value;
-					updateFeature(selectedFeatures[f], this.value, '');
+					selectedFeatures[f].attributes.fillColor = "#"+this.value;
+					vlayer.drawFeature(selectedFeatures[f]);
 			    }
 				refreshFeatures();
 			});
+			
+			
+			
+			// Event on Color Change
+			$('#geometry_strokeColor').ColorPicker({
+
+				onChange: function(hsb, hex, rgb) {
+					$('#geometry_strokeColor').val(hex);
+					for (f in selectedFeatures) {
+						selectedFeatures[f].attributes.strokeColor = "#"+hex;
+						vlayer.drawFeature(selectedFeatures[f]);
+				    }
+					refreshFeatures();
+				}
+			});
+			
+			/************************************
+			 * Change the style of the line
+			 ***********************************/
+			$('#geometry_lineStyle').bind("change", function(){
+				for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.strokeDashstyle = this.value;
+					vlayer.drawFeature(selectedFeatures[f]);
+				}
+				refreshFeatures();
+			});
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			// Event on Color Change
 			$('#font_color').ColorPicker({				
@@ -1380,10 +1462,36 @@
 				if (parseFloat(this.value) && parseFloat(this.value) <= 8) {
 					for (f in selectedFeatures) {
 						selectedFeatures[f].strokewidth = this.value;
-						updateFeature(selectedFeatures[f], '', parseFloat(this.value));
+						selectedFeatures[f].attributes.strokeWidth = this.value;
+						vlayer.drawFeature(selectedFeatures[f]);
 					}
 					refreshFeatures();
 				}
+			});
+			
+			$('#geometry_opacity').bind("change", function(){
+			    var opacity = parseFloat($(this).val())/100;
+			    for (f in selectedFeatures) {
+				    selectedFeatures[f].attributes.fillOpacity = opacity;
+				    vlayer.drawFeature(selectedFeatures[f]);
+				    
+			    }
+			    refreshFeatures();
+			});
+			
+			
+			/**********************************
+			 * Change the opacity of the stroke
+			 **********************************/
+			$('#geometry_strokeOpacity').bind("change", function(){
+			    var opacity = parseFloat($(this).val())/100;
+			    for (f in selectedFeatures) {
+				    console.log(opacity);
+				    selectedFeatures[f].attributes.strokeOpacity = opacity;
+				    vlayer.drawFeature(selectedFeatures[f]);
+				    
+			    }
+			    refreshFeatures();
 			});
 			
 			// Event on Fontsize Change
@@ -1584,7 +1692,7 @@
 					
 					$('#fontColor').show();
 					$('#fontSize').show();
-					$('#outlineSize').show();
+					$('#outlineWidth').show();
 					$('#outlineColor').show();
 					
 					
@@ -1597,7 +1705,7 @@
 					$('#geometryEditPoints').show();
 					$('#fontColor').hide();
 					$('#fontSize').hide();
-					$('#outlineSize').hide();
+					$('#outlineWidth').hide();
 					$('#outlineColor').hide();
 
 				}
@@ -1736,10 +1844,31 @@
 					var fontColor = 'ffffff';
 					var labelOutlineColor = '000000';
 					var labelOutlineWidth = '2';
+					var strokeColor = 'ff0000';
+					var fillOpacity = '0.7';
+					var strokeOpacity = '1';
+					var strokeDashstyle = 'solid';
 					
 					if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
 					    icon = vlayer.features[i].attributes.icon;
 					    icon = icon.substr(icon.lastIndexOf('/')+1);
+					}
+					
+					if ( typeof(vlayer.features[i].attributes.strokeDashstyle) != 'undefined') {
+						strokeDashstyle = vlayer.features[i].attributes.strokeDashstyle;
+					}
+					
+					if ( typeof(vlayer.features[i].attributes.fillOpacity) != 'undefined') {
+						fillOpacity = vlayer.features[i].attributes.fillOpacity;
+					}
+					
+					if ( typeof(vlayer.features[i].attributes.strokeOpacity) != 'undefined') {
+						fillOpacity = vlayer.features[i].attributes.strokeOpacity;
+					}
+					
+					
+					if ( typeof(vlayer.features[i].attributes.strokeColor) != 'undefined') {
+						strokeColor = vlayer.features[i].attributes.strokeColor.substring(1);
 					}
 					
 					if ( typeof(vlayer.features[i].attributes.labelOutlineColor) != 'undefined') {
@@ -1792,7 +1921,11 @@
 					    fontSize: fontSize,
 					    fontColor: fontColor,
 					    labelOutlineWidth: labelOutlineWidth,
-					    labelOutlineColor: labelOutlineColor
+					    labelOutlineColor: labelOutlineColor,
+					    strokeColor: strokeColor,
+					    fillOpacity: fillOpacity,
+					    strokeOpacity: strokeOpacity,
+					    strokeDashstyle: strokeDashstyle
 					    });
 					$('#reportForm').append($('<input></input>').attr('name','geometry[]').attr('type','hidden').attr('value',geometryAttributes));
 				}
@@ -1809,38 +1942,7 @@
 			$("#incident_zoom").val(map.getZoom());
 		}
 		
-		function updateFeature(feature, color, strokeWidth){
-			// Create a symbolizer from exiting stylemap
-			var symbolizer = feature.layer.styleMap.createSymbolizer(feature);
-			
-			// Color available?
-			if (color) {
-				symbolizer['fillColor'] = "#"+color;
-				symbolizer['strokeColor'] = "#"+color;
-				symbolizer['fillOpacity'] = "0.7";
-			} else {
-				if ( typeof(feature.color) != 'undefined' && feature.color != '' ) {
-					symbolizer['fillColor'] = "#"+feature.color;
-					symbolizer['strokeColor'] = "#"+feature.color;
-					symbolizer['fillOpacity'] = "0.7";
-				}
-			}
-			
-			// Stroke available?
-			if (parseFloat(strokeWidth)) {
-				symbolizer['strokeWidth'] = parseFloat(strokeWidth);
-			} else if ( typeof(feature.strokewidth) != 'undefined' && feature.strokewidth !='' ) {
-				symbolizer['strokeWidth'] = feature.strokewidth;
-			} else {
-				symbolizer['strokeWidth'] = "2.5";
-			}
-			
-			// Set the unique style to the feature
-			feature.style = symbolizer;
-
-			// Redraw the feature with its new style
-			feature.layer.drawFeature(feature);
-		}
+		
 		
 		// Reverse GeoCoder
 		function reverseGeocode(latitude, longitude) {		
