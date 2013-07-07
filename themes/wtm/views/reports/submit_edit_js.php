@@ -457,7 +457,7 @@
 					}
 					echo "wktFeature.comment = ".json_encode($geometry->comment).";\n";
 					echo "wktFeature.color = '$geometry->color';\n";
-					echo "wktFeature.attributes.fillColor  = '$geometry->color';\n";
+					echo "wktFeature.attributes.fillColor  = '#$geometry->color';\n";
 					echo "wktFeature.strokewidth = '$geometry->strokewidth';\n";
 					echo "wktFeature.attributes.strokeWidth = '$geometry->strokewidth';\n";
 					echo "wktFeature.icon = ".json_encode(url::file_loc('img').'media/img/openlayers/'.$geometry->icon).";\n";
@@ -466,6 +466,11 @@
 					echo "wktFeature.attributes.fontColor = '#".$geometry->fontColor."';\n";
 					echo "wktFeature.attributes.labelOutlineWidth = ".$geometry->labelOutlineWidth.";\n";
 					echo "wktFeature.attributes.labelOutlineColor = '#".$geometry->labelOutlineColor."';\n";
+					
+					echo "wktFeature.attributes.strokeColor = '#".$geometry->strokeColor."';\n";
+					echo "wktFeature.attributes.fillOpacity = ".$geometry->fillOpacity.";\n";
+					echo "wktFeature.attributes.strokeOpacity = ".$geometry->strokeOpacity.";\n";
+					echo "wktFeature.attributes.strokeDashstyle = '".$geometry->strokeDashstyle."';\n";
 					
 					echo "vlayer.addFeatures(wktFeature);\n";
 				}
@@ -713,6 +718,7 @@
 				$('#geometry_color').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
 				$('#outline_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
 				$('#geometryLabelerHolder').hide(400);
 				selectCtrl.activate();
 				return false;
@@ -726,6 +732,7 @@
 				selectedFeatures = [];
 				$('#geometry_color').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
 				$('#outline_color').ColorPickerHide();
 				$('#geometryLabelerHolder').hide(400);
 				selectCtrl.activate();
@@ -744,6 +751,7 @@
 				$('#geometry_lat').val("");
 				$('#geometry_lon').val("");
 				$('#geometry_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
 				$('#outline_color').ColorPickerHide();
 				$('#font_color').val('');
@@ -981,6 +989,7 @@
 				$('#geometry_color').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
 				$('#outline_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				for (f in selectedFeatures) {
 					selectedFeatures[f].label = this.value;
@@ -998,6 +1007,7 @@
 				$('#geometry_color').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
 				$('#outline_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				for (f in selectedFeatures) {
 					selectedFeatures[f].comment = this.value;
@@ -1010,6 +1020,7 @@
 				$('#geometry_color').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
 				$('#outline_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				//update the hours minutes seconds
 				$("#geometry_lat_degrees").val(decimalLatToHours(parseFloat(this.value)));
@@ -1026,6 +1037,7 @@
 				$('#geometry_color').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
 				$('#outline_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
 			}).bind("change keyup blur", function(){
 				$("#geometry_lon_degrees").val(decimalLonToHours(parseFloat(this.value)));
 				$("#geometry_lon_minutes").val(decimalLonToMinutes(parseFloat(this.value)));
@@ -1695,6 +1707,10 @@
 					$('#outlineWidth').show();
 					$('#outlineColor').show();
 					
+					$('#geometryStrokeColor').hide();
+					$('#geometryOpacity').hide();
+					$('#geometryStrokeOpacity').hide();
+					$('#geometryLineStyle').hide();
 					
 				} else {
 					$('#geometryLat').hide();
@@ -1703,10 +1719,20 @@
 					$('#geometryColor').show();
 					$('#geometryStrokewidth').show();
 					$('#geometryEditPoints').show();
-					$('#fontColor').hide();
-					$('#fontSize').hide();
-					$('#outlineWidth').hide();
-					$('#outlineColor').hide();
+					$('#fontColor').show();
+					$('#fontSize').show();
+					$('#outlineWidth').show();
+					$('#outlineColor').show();
+					
+					$('#geometryStrokeColor').show();
+					$('#geometryOpacity').show();
+					$('#geometryStrokeOpacity').show();
+					$('#geometryLineStyle').show();
+					
+					$('#geometry_strokeColor').val('cc0000');
+					$('#geometry_opacity').val('70');
+					$('#geometry_strokeOpacity').val(100);
+					$('#geometry_lineStyle').val('solid');
 
 				}
 				if ( typeof(feature.label) != 'undefined') {
@@ -1743,6 +1769,8 @@
 				}
 				if ( typeof(feature.color) != 'undefined') {
 					$('#geometry_color').val(feature.color);
+				} else {
+				    $('#geometry_color').val('ffcc66'); 
 				}
 				if ( typeof(feature.strokewidth) != 'undefined' && feature.strokewidth != '') {
 					$('#geometry_strokewidth').val(feature.strokewidth);
@@ -1751,7 +1779,8 @@
 				}
 
 				if(typeof(feature.attributes) != 'undefined'){
-				
+				    console.log(feature.attributes);
+				    
 				    if(typeof(feature.attributes.fontColor) != 'undefined'){
 				    	$('#font_color').val(feature.attributes.fontColor);
 				    }
@@ -1764,6 +1793,19 @@
 				    }
 				    if(typeof(feature.attributes.labelOutlineColor) != 'undefined'){
 					    $('#outline_color').val(feature.attributes.labelOutlineColor);
+				    }
+
+				    if(typeof(feature.attributes.strokeColor) != 'undefined'){
+					    $('#geometry_strokeColor').val(feature.attributes.strokeColor.substring(1));
+				    }
+				    if(typeof(feature.attributes.fillOpacity) != 'undefined'){
+					    $('#geometry_opacity').val(feature.attributes.fillOpacity*100);
+				    }
+				    if(typeof(feature.attributes.strokeOpacity) != 'undefined'){
+					    $('#geometry_strokeOpacity').val(feature.attributes.strokeOpacity*100);
+				    }
+				    if(typeof(feature.attributes.strokeDashstyle) != 'undefined'){
+					    $('#geometry_lineStyle').val(feature.attributes.strokeDashstyle);
 				    }
 				}
 			}
@@ -1784,6 +1826,7 @@
 			$('#geometry_color').ColorPickerHide();
 			$('#font_color').ColorPickerHide();
 			$('#outline_color').ColorPickerHide();
+			$('#geometry_strokeColor').ColorPickerHide();
 		}
 
 		/* Feature starting to move */
@@ -1818,6 +1861,11 @@
 			reverseGeocode(latitude, longitude);
 		}
 		
+		
+		/*****************************************************
+		 * This function is used to store all the features as
+		 * JSON in an hidden input field
+		 ****************************************************/
 		function refreshFeatures(event) {
 			var geoCollection = new OpenLayers.Geometry.Collection;
 			$('input[name="geometry[]"]').remove();
@@ -1844,7 +1892,7 @@
 					var fontColor = 'ffffff';
 					var labelOutlineColor = '000000';
 					var labelOutlineWidth = '2';
-					var strokeColor = 'ff0000';
+					var strokeColor = 'cc0000';
 					var fillOpacity = '0.7';
 					var strokeOpacity = '1';
 					var strokeDashstyle = 'solid';

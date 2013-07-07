@@ -20,3 +20,14 @@ ALTER TABLE  `geometry` ADD  `geometry_icon` CHAR( 255 ) NULL DEFAULT NULL;
 
 /** John Etherton 2013-06-27 - Added a field to store if the label of an element should be seen on the map**/
 ALTER TABLE  `geometry` ADD  `geometry_showlabel` BOOLEAN NOT NULL DEFAULT FALSE;
+
+/** John Etherton 2013-07-07 - Added fields for lots of text and polygon features**/
+ALTER TABLE  `geometry` ADD  `geometry_fontsize` INT(11) NOT NULL;
+ALTER TABLE  `geometry` ADD  `geometry_fontcolor` CHAR(8) NOT NULL;
+ALTER TABLE  `geometry` ADD  `geometry_labeloutlinewidth` INT(11) NOT NULL;
+ALTER TABLE  `geometry` ADD  `geometry_labeloutlinecolor` CHAR(8) NOT NULL;
+
+ALTER TABLE  `geometry` ADD  `geometry_strokeColor` CHAR( 8 ) NOT NULL ,
+ADD  `geometry_fillOpacity` FLOAT NOT NULL ,
+ADD  `geometry_strokeOpacity` FLOAT NOT NULL ,
+ADD  `geometry_strokeDashstyle` CHAR( 20 ) NOT NULL;

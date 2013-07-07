@@ -399,6 +399,11 @@ class reports_Core {
 					$fontColor = (isset($item->fontColor)) ? $db->escape_str(substr($item->fontColor, 0, 6)) : "ffffff";
 					$labelOutlineWidth = (isset($item->labelOutlineWidth)) ? $item->labelOutlineWidth : 2;
 					$labelOutlineColor = (isset($item->labelOutlineColor)) ? $db->escape_str(substr($item->labelOutlineColor, 0, 6)) : "000000";
+					
+					$strokeColor  = (isset($item->strokeColor)) ? $db->escape_str(substr($item->strokeColor, 0, 6)) : "cc0000";
+					$fillOpacity = (isset($item->fillOpacity)) ? $item->fillOpacity : 0.7;
+					$strokeOpacity = (isset($item->strokeOpacity)) ? $item->strokeOpacity : 1.0;
+					$strokeDashstyle = (isset($item->strokeDashstyle)) ? $item->strokeDashstyle :'solid';
 					    
 					if ($geometry)
 					{
@@ -406,10 +411,12 @@ class reports_Core {
 						$sql = "INSERT INTO ".Kohana::config('database.default.table_prefix')."geometry "
 							. "(incident_id, geometry, geometry_label, geometry_comment, "
 							. "geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel, "
-							. "geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor)"
+							. "geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor, "
+							. "geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle)"
 							. "VALUES(".$incident->id.", GeomFromText('".$geometry."'), '".$label."', '".$comment."', '"
 							. $color."', ".$strokewidth.", '".$icon."', $showLabel, "
-							. "$fontSize, '$fontColor', $labelOutlineWidth, '$labelOutlineColor')";
+							. "$fontSize, '$fontColor', $labelOutlineWidth, '$labelOutlineColor', "
+							. "'$strokeColor', $fillOpacity, $strokeOpacity, '$strokeDashstyle')";
 						Kohana::log('debug', $sql);
 						// Execute the query
 						$db->query($sql);

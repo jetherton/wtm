@@ -56,10 +56,12 @@ jQuery(window).load(function() {
 	// Set Feature Styles
 	var style1 = new OpenLayers.Style({
 				pointRadius: "8",
-				fillColor: "#ffcc66",
-				fillOpacity: "0.7",
-				strokeColor: "#CC0000",
-				strokeWidth: 2.5,
+				fillColor: "${fillColor}",
+				fillOpacity: "${fillOpacity}",
+				strokeColor: "${strokeColor}",
+				strokeWidth: "${strokeWidth}",
+				strokeOpacity: "${strokeOpacity}",
+				strokeDashstyle: "${strokeDashstyle}",
 				graphicZIndex: 1,
 				externalGraphic: "${icon}",
 				graphicOpacity: 1,
@@ -151,6 +153,48 @@ jQuery(window).load(function() {
 						return '2';
 					    } else {
 						return feature.attributes.labelOutlineWidth;
+					    }
+					},
+				strokeColor : function(feature){
+					    if(typeof feature.attributes.strokeColor == "undefined"){
+						return '#CC0000';
+					    } else {
+						return feature.attributes.strokeColor;
+					    }
+					},
+				fillOpacity : function(feature){
+					    if(typeof feature.attributes.fillOpacity == "undefined"){
+						return '0.7';
+					    } else {
+						return feature.attributes.fillOpacity;
+					    }
+					},
+				strokeOpacity : function(feature){
+					    if(typeof feature.attributes.strokeOpacity == "undefined"){
+						return '1';
+					    } else {
+						return feature.attributes.strokeOpacity;
+					    }
+					},
+				fillColor : function(feature){
+					    if(typeof feature.attributes.fillColor == "undefined"){
+						return '#ffcc66';
+					    } else {
+						return feature.attributes.fillColor;
+					    }
+					},
+				strokeWidth : function(feature){
+					    if(typeof feature.attributes.strokeWidth == "undefined"){
+						return 2.5;
+					    } else {
+						return feature.attributes.strokeWidth;
+					    }
+					},
+				strokeDashstyle : function(feature){
+					    if(typeof feature.attributes.strokeDashstyle == "undefined"){
+						return 'solid';
+					    } else {
+						return feature.attributes.strokeDashstyle;
 					    }
 					}
 				}

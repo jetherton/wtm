@@ -707,6 +707,11 @@ class Json_Controller extends Template_Controller {
 				$fontColor = ($item->geometry_fontcolor) ? $item->geometry_fontcolor : "ffffff";
 				$labelOutlineColor = ($item->geometry_labeloutlinecolor) ? $item->geometry_labeloutlinecolor : '000000';
 				$labelOutlineWidth = ($item->geometry_labeloutlinewidth) ? $item->geometry_labeloutlinewidth : 2;
+				
+				$strokeColor  = (isset($item->geometry_strokeColor)) ? $item->geometry_strokeColor : "cc0000";
+				$fillOpacity = (isset($item->geometry_fillOpacity)) ? $item->geometry_fillOpacity : 0.7;
+				$strokeOpacity = (isset($item->geometry_strokeOpacity)) ? $item->geometry_strokeOpacity : 1.0;
+				$strokeDashstyle = (isset($item->geometry_strokeDashstyle)) ? $item->geometry_strokeDashstyle :'solid';
 
 				
 				$json_item = array();
@@ -717,17 +722,20 @@ class Json_Controller extends Template_Controller {
 					'name' => $item_name,
 					'label'=> $label,
 					'description' => $item->geometry_comment,
-					'color' => $fillcolor,
+					'fillColor' => '#'.$fillcolor,
 					'icon' => $icon,
-					'strokecolor' => $strokecolor,
-					'strokewidth' => $strokewidth,
+					'strokeColor' => '#'.$strokeColor,
+					'strokeWidth' => $strokewidth,
 					'link' => $incident_link,
 					'category' => array(0),
 					'timestamp' => strtotime($incident_date),
 					'fontSize' => $fontSize.'px',
 					'fontColor'=> '#'.$fontColor,
 					'labelOutlineColor' => '#'.$labelOutlineColor,
-					'labelOutlineWidth' => $labelOutlineWidth
+					'labelOutlineWidth' => $labelOutlineWidth,
+					'fillOpacity' => $fillOpacity,
+					'strokeOpacity' => $strokeOpacity,
+					'strokeDashstyle' => $strokeDashstyle
 				);
 				$json_item['geometry'] = $geom_array;
 
@@ -756,7 +764,8 @@ class Json_Controller extends Template_Controller {
 		// Get Incident Geometries via SQL query as ORM can't handle Spatial Data
 		$sql = "SELECT id, incident_id, AsText(geometry) as geometry, geometry_label, 
 			geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel, 
-			geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor 
+			geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor, 
+			geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle
 			FROM ".$this->table_prefix."geometry";
 		
 		$query = $db->query($sql);

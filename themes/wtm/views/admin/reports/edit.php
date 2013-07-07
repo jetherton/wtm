@@ -263,13 +263,45 @@
 									</span>
 								</div>
 								<div>
+								    <?php 
+									    $opacityArray = array();
+									    for($i = 0; $i <= 100; $i++){
+										$opacityArray[$i] = $i;
+									    }
+									    
+									    $lineStyle = array(
+										'solid'=>'Solid',
+										'dot'=>'Dot',
+										'dash'=>'Dash',
+										'dashdot'=>'Dash Dot',
+										'longdash'=>'Long Dash',
+										'longdashdot'=>'Long Dash Dot',										
+									    );
+									?>
 									<span id="geometryColor">
 										<label><?php echo Kohana::lang('ui_main.geometry_color');?>:</label> 
 										<?php print form::input('geometry_color', '', ' class="lbl_text"'); ?>
 									</span>
+								        <span id="geometryStrokeColor">
+										<label>Line <?php echo Kohana::lang('ui_main.geometry_color');?>:</label> 
+										<?php print form::input('geometry_strokeColor', '', ' class="lbl_text"'); ?>
+									</span>
+									<span id="geometryOpacity">
+										<label>Fill Opacity:</label> 
+										<?php print form::dropdown('geometry_opacity', $opacityArray,70); ?>
+									</span>
+									<span id="geometryStrokeOpacity">
+										<label>Stroke Opacity:</label> 
+										<?php print form::dropdown('geometry_strokeOpacity', $opacityArray,100); ?>
+									</span>
 									<span id="geometryStrokewidth">
 										<label><?php echo Kohana::lang('ui_main.geometry_strokewidth');?>:</label> 
 										<?php print form::dropdown('geometry_strokewidth', $stroke_width_array, ''); ?>
+									</span>
+									<span id="geometryLineStyle">
+										<br/>
+										<label>Line Style:</label> 
+										<?php print form::dropdown('geometry_lineStyle', $lineStyle, 'solid'); ?>
 									</span>
 									<span id="geometryEditPoints">										
 										<input type="button" id="geometry_editpoints" value="Edit Points"/>
