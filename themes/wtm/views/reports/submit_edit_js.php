@@ -25,6 +25,7 @@
 		var selectedFeatures = [];
 		var controls = null;
 		var featureStyle = null;
+		var polygonEditPoint = null;
 		
 		
 		// jQuery Textbox Hints Plugin
@@ -671,6 +672,7 @@
 				for(var y=0; y < selectedFeatures.length; y++) {
 					vlayer.removeFeatures(selectedFeatures);
 				}
+				selectedFeatures = [];
 				$('#geometry_color').ColorPickerHide();
 				$('#geometryLabelerHolder').hide(400);
 				selectCtrl.activate();
@@ -1048,15 +1050,32 @@
 				}
 			});
 			
+			
+			/***********************************
+			 * When the user clicks edit points
+			 * This populates the edit points UI
+			 ************************************/
 			$('#geometryEditPoints').bind("click",function(){
 			    $('#geometryPointsHolder').show();
 			    //remove all the options
 			    $("#pointsListHolder option").each(function() {
 				$(this).remove();
 			    });
+			    //clear out the text fields
+			    $('#point_geometry_lat').val('');
+			    $('#point_geometry_lon').val('');
+			    $('#pointGeometry_lat_degrees').val('');
+			    $('#pointGeometry_lat_minutes').val('');
+			    $('#pointGeometry_lat_seconds').val('');
+			    $('#pointGeometry_lon_degrees').val('');
+			    $('#pointGeometry_lon_minutes').val('');
+			    $('#pointGeometry_lon_seconds').val('');
+			    
+			    
 			    for (f in selectedFeatures) {
 				if(selectedFeatures[f].geometry.componentTypes[0] == "OpenLayers.Geometry.LinearRing"){
 				    for(i in selectedFeatures[f].geometry.components[0].components){
+					if(i == 0){continue;}
 					var component = selectedFeatures[f].geometry.components[0].components[i];
 					var id = component.id;
 					var x = component.x;
@@ -1077,6 +1096,192 @@
 			
 			$('#geometryPointsClose').bind("click",function(){
 			    $('#geometryPointsHolder').hide();
+			});
+			
+			
+			/*******************************************
+			 * Updates the point input boxes when
+			 * a new point is selected
+			 ******************************************/
+			$('#pointsListHolder').bind("change",function(){
+			    var coords = $('#pointsListHolder option:selected').text();
+			    coords = coords.split(", ");
+			    var lat = parseFloat(coords[0]);
+			    var lon = parseFloat(coords[1]);
+			    $("#point_geometry_lat").val(lat);
+			    $("#point_geometry_lon").val(lon);
+			    
+			    pointDecimalToHMS();
+			});
+			
+			//update a point when the user changes the lat
+			$("#point_geometry_lat").bind("change keyup blur",function(){			 
+			    pointDecimalToHMS();
+			    updateEditPoint();
+			});
+			
+			//update a point when the user changes the lon
+			$("#point_geometry_lon").bind("change keyup blur",function(){			 
+			    pointDecimalToHMS();
+			    updateEditPoint();
+			});
+			
+			
+			function pointHMStoDecimal(){
+			    var lat_d = $("#pointGeometry_lat_degrees").val();
+			    var lat_m = $("#pointGeometry_lat_minutes").val();
+			    var lat_s = $("#pointGeometry_lat_seconds").val();
+			    if(lat_d == '' || lat_m == '' || lat_s == ''){return;}
+			    lat_d = parseFloat(lat_d);
+			    lat_m = parseFloat(lat_m);
+			    lat_s = parseFloat(lat_s);
+			    if(isNaN(lat_d) || Math.abs(lat_d) > 90){alert("Invalid latitude degree"); return;}
+			    if(isNaN(lat_m)){alert("Invalid latitude minute"); return;}
+			    if(isNaN(lat_s)){alert("Invalid latitude second"); return;}
+			    
+			    var lon_d = $("#pointGeometry_lon_degrees").val();
+			    var lon_m = $("#pointGeometry_lon_minutes").val();
+			    var lon_s = $("#pointGeometry_lon_seconds").val();
+			    lon_d = parseFloat(lon_d);
+			    lon_m = parseFloat(lon_m);
+			    lon_s = parseFloat(lon_s);
+			    if(lon_d == '' || lon_m == '' || lon_s == ''){return;}
+			    if(isNaN(lon_d)){alert("Invalid longitude degree"); return;}
+			    if(isNaN(lon_m)){alert("Invalid longitude minute"); return;}
+			    if(isNaN(lon_s)){alert("Invalid longitude second"); return;}
+			    
+			    $("#point_geometry_lat").val(hmsToDecimal(lat_d, lat_m, lat_s));
+			    $("#point_geometry_lon").val(hmsToDecimal(lon_d, lon_m, lon_s));
+			    
+			}
+			
+			$('#pointGeometry_lon_degrees, #pointGeometry_lon_minutes, #pointGeometry_lon_seconds, #pointGeometry_lat_degrees, #pointGeometry_lat_minutes, #pointGeometry_lat_seconds').bind("change keyup", function(){
+			    pointHMStoDecimal();
+			    updateEditPoint();
+			});
+			
+			function pointDecimalToHMS(){
+			    var lat = parseFloat($("#point_geometry_lat").val());
+			    if(isNaN(lat) || Math.abs(lat) > 90){
+				return;
+			    }			
+			    var lon = parseFloat($("#point_geometry_lon").val());
+			    if(isNaN(lon)){
+				return;
+			    }
+			    
+			    $("#pointGeometry_lat_degrees").val(decimalLatToHours(lat));
+			    $("#pointGeometry_lat_minutes").val(decimalLatToMinutes(lat));
+			    $("#pointGeometry_lat_seconds").val(decimalLatToSeconds(lat));
+			    
+			    $("#pointGeometry_lon_degrees").val(decimalLonToHours(lon));
+			    $("#pointGeometry_lon_minutes").val(decimalLonToMinutes(lon));
+			    $("#pointGeometry_lon_seconds").val(decimalLonToSeconds(lon));
+			}
+			
+			/*******************************************
+			 * Update an individual point in a polygon
+			 ********************************************/
+			function updateEditPoint(){
+			    var lat = $("#point_geometry_lat").val();
+			    var lon = $("#point_geometry_lon").val();
+			    
+			    if(lat == '' || lon == ''){ return;}
+			    lat = parseFloat(lat);
+			    lon = parseFloat(lon);
+			    if(isNaN(lat) || Math.abs(lat)>90){
+				alert("Invalid Latitude");
+				return;
+			    }			
+			    
+			    if(isNaN(lon)){
+				alert("Invalid Longitude");
+				return;
+			    }
+			    
+			    $('#pointsListHolder option:selected').text(lat + ", " + lon);
+			    
+			    var currentPoint = $("#pointsListHolder").val();
+			    //loop over points and find the current one
+			     for (f in selectedFeatures) {
+				if(selectedFeatures[f].geometry.componentTypes[0] == "OpenLayers.Geometry.LinearRing"){
+				    for(i in selectedFeatures[f].geometry.components[0].components){
+					var component = selectedFeatures[f].geometry.components[0].components[i];
+					var id = component.id;
+					if( id == currentPoint){					    
+					    var lonLat = new OpenLayers.LonLat(lon, lat);
+					    var point2 =  lonLat.transform( proj_4326,proj_900913);
+					    component.y = point2.lat;
+					    component.x = point2.lon;
+					    break;
+					}
+				    }
+				    vlayer.drawFeature(selectedFeatures[f]);
+				    refreshFeatures();
+				    break;
+				}				
+			    }
+			}
+			
+			/*******************************
+			 * Add a new point to a polygon
+			 ********************************/
+			$('#addPointGeometry').bind("click",function(){
+			    for (f in selectedFeatures) {
+				if(selectedFeatures[f].geometry.componentTypes[0] == "OpenLayers.Geometry.LinearRing"){
+				    
+				    var point = new OpenLayers.Geometry.Point(0,0);	
+				    var id = point.id;
+				    selectedFeatures[f].geometry.components[0].components.splice(1,0,point);
+				    $('#pointsListHolder option').removeAttr("selected");
+				    $('#pointsListHolder option:first')
+					    .after($("<option></option>")
+					    .attr("value",id)
+					    .attr("selected","selected")
+					    .text("0, 0")); 
+				    $('#pointsListHolder').change();
+				    
+				    vlayer.drawFeature(selectedFeatures[f]);
+				    refreshFeatures(); 
+				    break;
+				}				
+			    }
+			});
+			
+			
+			/*******************************
+			 * Remove a point from a polygon
+			 ********************************/
+			$('#removePointGeometry').bind("click",function(){
+			
+			    var currentPoint = $("#pointsListHolder").val();
+			    if(currentPoint == null){
+				alert("No point selected");
+				return;
+			    }
+			    
+			     for (f in selectedFeatures) {
+				if(selectedFeatures[f].geometry.componentTypes[0] == "OpenLayers.Geometry.LinearRing"){
+				    for(i in selectedFeatures[f].geometry.components[0].components){
+					var component = selectedFeatures[f].geometry.components[0].components[i];
+					var id = component.id;
+					if( id == currentPoint){	
+					    if(selectedFeatures[f].geometry.components[0].components.length == 2){
+						alert("A polygon must have at least 2 points");
+						return;
+					    }
+					    console.log("i: " + i + " length: "+ selectedFeatures[f].geometry.components[0].components.length);
+					    selectedFeatures[f].geometry.components[0].components.splice(i,1);					    
+					}
+				    }
+				    vlayer.drawFeature(selectedFeatures[f]);
+				    refreshFeatures();
+				    break;
+				}				
+			    }
+			    
+			    $('#pointsListHolder option:selected').remove();
+			    
 			});
 			
 			// Event on Icon Change
@@ -1448,8 +1653,11 @@
 				if(typeof(feature.labelOutlineColor) != 'undefined'){
 					$('#outline_color').val(feature.labelOutlineColor);
 				}
-				if(typeof(feature.attribute.fontColor) != 'undefined'){
-					$('#font_color').val(feature.fontColor);
+				if(typeof(feature.attribute) != 'undefined'){
+				
+				    if(typeof(feature.attribute.fontColor) != 'undefined'){
+				    	$('#font_color').val(feature.attribute.fontColor);
+				    }
 				}
 			}
 		}
