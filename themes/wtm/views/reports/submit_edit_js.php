@@ -1886,7 +1886,7 @@
 					var lon = '';
 					var lat = '';
 					var color = 'ffcc66';
-					var strokewidth = '';
+					var strokewidth = '2';
 					var icon = '';
 					var fontSize = 12;
 					var fontColor = 'ffffff';
