@@ -185,11 +185,11 @@
 									</span>
 									<span id="geometryIcon">
 										    <?php //create the icons array
-											$icons = array('marker.png'=>'w',
-											    'marker-red.png'=>'r',
-											    'marker-blue.png'=>'b',
-											    'marker-green.png'=>'g',
-											    'marker-gold.png'=>'d');
+											$icons = array('marker_s.png'=>'w',
+											    'marker-red_s.png'=>'r',
+											    'marker-blue_s.png'=>'b',
+											    'marker-green_s.png'=>'g',
+											    'marker-gold_s.png'=>'d');
 										    ?>
 										    <label><?php echo Kohana::lang('wtm.Icon');?>:</label> 
 										    <?php 

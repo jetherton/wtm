@@ -97,32 +97,32 @@ jQuery(window).load(function() {
 					},
 				    iconWidth: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return 20;
+						    return 11;
 						} else {
-						    return 21;
+						    return 11;
 						}	
 					},
 				    iconHeight: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return 20;
+						    return 11;
 						} else {
-						    return 25;
+						    return 13;
 						}	
 					},
 				    iconOffsetX: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return -10;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
-						    return -10;
+						    return -5;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
+						    return -5;
 						} else {
-						   return -14;
+						   return -7;
 						}
 					},
 				    iconOffsetY: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return -10;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
-						    return -15;
+						    return -5;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
+						    return -7;
 						} else {
 						    return -27;
 						}	

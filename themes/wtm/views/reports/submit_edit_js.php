@@ -143,32 +143,32 @@
 					},
 				    iconWidth: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return 20;
+						    return 11;
 						} else {
-						    return 21;
+						    return 11;
 						}	
 					},
 				    iconHeight: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return 20;
+						    return 11;
 						} else {
-						    return 25;
+						    return 13;
 						}	
 					},
 				    iconOffsetX: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return -10;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
-						    return -10;
+						    return -5;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
+						    return -5;
 						} else {
-						   return -14;
+						   return -7;
 						}
 					},
 				    iconOffsetY: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return -10;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker.png") {
-						    return -15;
+						    return -5;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
+						    return -7;
 						} else {
 						    return -27;
 						}	
@@ -437,7 +437,7 @@
 				OpenLayers.Projection.transform(point, proj_4326, map.getProjectionObject());
 				var origFeature = new OpenLayers.Feature.Vector(point);
 				origFeature.attributes.label = "";
-				origFeature.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>";
+				origFeature.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker_s.png' ;?>";
 				vlayer.addFeatures(origFeature);
 				<?php
 			}
@@ -579,7 +579,7 @@
 				 OpenLayers.Handler.Point,
 				 {'displayClass': 'olControlDrawFeaturePoint',
 				  'featureAdded':function(e){
-				    e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>";
+				    e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker_s.png' ;?>";
 				    vlayer.drawFeature(e);
 			     }})
 			};
@@ -700,7 +700,7 @@
 			     var newPoint = new OpenLayers.Geometry.Point(mapCenter.lon, mapCenter.lat);
 			     var newFeature = new OpenLayers.Feature.Vector(newPoint);
 			     newFeature.attributes = { label: "",
-			     icon:"<?php echo url::file_loc('img').'media/img/openlayers/marker.png' ;?>"};
+			     icon:"<?php echo url::file_loc('img').'media/img/openlayers/marker_s.png' ;?>"};
 			     vlayer.addFeatures([newFeature]);
 			     refreshFeatures();
 			     //set this feature as what's active
