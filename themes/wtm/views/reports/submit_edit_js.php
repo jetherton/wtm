@@ -1885,7 +1885,7 @@
 					var comment = '';
 					var lon = '';
 					var lat = '';
-					var color = '';
+					var color = 'ffcc66';
 					var strokewidth = '';
 					var icon = '';
 					var fontSize = 12;
@@ -1893,8 +1893,8 @@
 					var labelOutlineColor = '000000';
 					var labelOutlineWidth = '2';
 					var strokeColor = 'cc0000';
-					var fillOpacity = '0.7';
-					var strokeOpacity = '1';
+					var fillOpacity = 0.7;
+					var strokeOpacity = 1;
 					var strokeDashstyle = 'solid';
 					
 					if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
@@ -1907,11 +1907,11 @@
 					}
 					
 					if ( typeof(vlayer.features[i].attributes.fillOpacity) != 'undefined') {
-						fillOpacity = vlayer.features[i].attributes.fillOpacity;
+						fillOpacity = parseFloat(vlayer.features[i].attributes.fillOpacity);
 					}
 					
 					if ( typeof(vlayer.features[i].attributes.strokeOpacity) != 'undefined') {
-						fillOpacity = vlayer.features[i].attributes.strokeOpacity;
+						strokeOpacity = parseFloat(vlayer.features[i].attributes.strokeOpacity);
 					}
 					
 					
@@ -1975,6 +1975,7 @@
 					    strokeOpacity: strokeOpacity,
 					    strokeDashstyle: strokeDashstyle
 					    });
+					    console.log(geometryAttributes);
 					$('#reportForm').append($('<input></input>').attr('name','geometry[]').attr('type','hidden').attr('value',geometryAttributes));
 				}
 			}

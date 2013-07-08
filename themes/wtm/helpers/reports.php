@@ -401,8 +401,8 @@ class reports_Core {
 					$labelOutlineColor = (isset($item->labelOutlineColor)) ? $db->escape_str(substr($item->labelOutlineColor, 0, 6)) : "000000";
 					
 					$strokeColor  = (isset($item->strokeColor)) ? $db->escape_str(substr($item->strokeColor, 0, 6)) : "cc0000";
-					$fillOpacity = (isset($item->fillOpacity)) ? $item->fillOpacity : 0.7;
-					$strokeOpacity = (isset($item->strokeOpacity)) ? $item->strokeOpacity : 1.0;
+					$fillOpacity = (isset($item->fillOpacity)) ? floatval($item->fillOpacity) : 0.7;
+					$strokeOpacity = (isset($item->strokeOpacity)) ? floatval($item->strokeOpacity) : 1.0;
 					$strokeDashstyle = (isset($item->strokeDashstyle)) ? $item->strokeDashstyle :'solid';
 					    
 					if ($geometry)
