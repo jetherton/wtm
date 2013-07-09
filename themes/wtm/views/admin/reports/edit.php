@@ -263,6 +263,12 @@
 									</span>
 								</div>
 								<div>
+									
+								</div>
+								<div>
+									
+								</div>
+								<div>
 								    <?php 
 									    $opacityArray = array();
 									    for($i = 0; $i <= 100; $i++){
@@ -313,6 +319,12 @@
 									<span id="geometryLon">
 										<label><?php echo Kohana::lang('ui_main.longitude');?>(DD.DD):</label> 
 										<?php print form::input('geometry_lon', '', ' class="lbl_text"'); ?>
+									</span>
+									<span id="moveFront" title="<?php echo Kohana::lang('wtm.moveFront');?>">
+										<label> <?php echo Kohana::lang('wtm.front')?></label>
+									</span>
+									<span id="moveBack" title="<?php echo Kohana::lang('wtm.moveBack');?>">
+										<label><?php echo Kohana::lang('wtm.back')?></label>
 									</span>
 									<div id="hoursMinsSeconds">
 									    <span id="geometryLatDegrees">

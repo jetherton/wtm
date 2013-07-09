@@ -123,7 +123,8 @@
 				fontFamily: "Arial, Helvetica, sans-serif",
 				fontWeight: "bold",
 				labelOutlineColor: '${labelOutlineColor}',
-				labelOutlineWidth: '${labelOutlineWidth}'
+				labelOutlineWidth: '${labelOutlineWidth}',
+				graphicZIndex : '${graphicZIndex}'
 			},{
 				context: {
 				    label: function(feature) {
@@ -242,6 +243,14 @@
 					    } else {
 						return feature.attributes.strokeDashstyle;
 					    }
+					},
+				graphicZIndex : function(feature){
+					if(typeof feature.attributes.graphicZIndex == "undefined"){
+							return 0;
+						}
+						else{
+							return feature.attributes.graphicZIndex;
+						}
 					}
 				}
 			});
@@ -1203,6 +1212,37 @@
 			    updateEditPoint();
 			});
 			
+			//move graphic object to the front
+			$('#moveFront').click(function(){
+				moveAllBack();
+				for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.graphicZIndex = 100;
+					vlayer.drawFeature(selectedFeatures[f]);
+				}
+				refreshFeatures();
+				console.log('Front');
+			});
+			//move graphic object to the front
+			$('#moveBack').click(function(){
+				moveAllForward();
+				for (f in selectedFeatures) {
+					selectedFeatures[f].attributes.graphicZIndex = 0;
+					vlayer.drawFeature(selectedFeatures[f]);
+				}
+				console.log('Back');
+			});
+			
+			function moveAllBack(){
+				for(f in vlayer.features){
+					//try to only get the text objects
+					if(vlayer.features[f].attributes.icon == "<?php echo url::base()?>media/img/openlayers/clear_rect32x14.png"){
+						vlayer.features[f].attributes.graphiZIndex = 0;
+						vlayer.drawFeature(vlayer.features[f]);
+					}
+					console.log( "<?php echo url::base()?>media/img/openlayers/clear_rect32x14.png");
+				}
+				refreshFeatures();
+			}
 			
 			function pointHMStoDecimal(){
 			    var lat_d = $("#pointGeometry_lat_degrees").val();
@@ -1707,6 +1747,8 @@
 					$('#outlineWidth').show();
 					$('#outlineColor').show();
 					
+					$('#moveFront').show();
+					
 					$('#geometryStrokeColor').hide();
 					$('#geometryOpacity').hide();
 					$('#geometryStrokeOpacity').hide();
@@ -1719,6 +1761,7 @@
 					$('#geometryColor').show();
 					$('#geometryStrokewidth').show();
 					$('#geometryEditPoints').show();
+					$('#moveFront').show();
 					$('#fontColor').show();
 					$('#fontSize').show();
 					$('#outlineWidth').show();
@@ -1896,6 +1939,7 @@
 					var fillOpacity = 0.7;
 					var strokeOpacity = 1;
 					var strokeDashstyle = 'solid';
+					var graphicZIndex = 0;
 					
 					if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
 					    icon = vlayer.features[i].attributes.icon;
@@ -1933,6 +1977,10 @@
 					
 					if ( typeof(vlayer.features[i].attributes.fontSize) != 'undefined') {
 						fontSize = vlayer.features[i].attributes.fontSize;
+					}
+					
+					if ( typeof(vlayer.features[i].attributes.graphicZIndex) != 'undefined') {
+						graphicZIndex = vlayer.features[i].attributes.graphicZIndex;
 					}
 					
 					if ( typeof(vlayer.features[i].label) != 'undefined') {
@@ -1973,7 +2021,8 @@
 					    strokeColor: strokeColor,
 					    fillOpacity: fillOpacity,
 					    strokeOpacity: strokeOpacity,
-					    strokeDashstyle: strokeDashstyle
+					    strokeDashstyle: strokeDashstyle,
+					    graphicZIndex : graphicZIndex
 					    });
 					    console.log(geometryAttributes);
 					$('#reportForm').append($('<input></input>').attr('name','geometry[]').attr('type','hidden').attr('value',geometryAttributes));

@@ -31,3 +31,6 @@ ALTER TABLE  `geometry` ADD  `geometry_strokeColor` CHAR( 8 ) NOT NULL ,
 ADD  `geometry_fillOpacity` FLOAT NOT NULL ,
 ADD  `geometry_strokeOpacity` FLOAT NOT NULL ,
 ADD  `geometry_strokeDashstyle` CHAR( 20 ) NOT NULL;
+
+/** Dylan Gillespie 2013-07-09 - Added zindex field **/
+ALTER TABLE  `geometry` ADD  `geometry_zindex` INT(11) NOT NULL DEFAULT  '0';

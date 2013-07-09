@@ -209,6 +209,16 @@
 									</span>
 								</div>
 								<div>
+									<span id="moveFront" title="<?php echo Kohana::lang('wtm.moveFront');?>">
+										<label> <?php echo Kohana::lang('wtm.front')?></label>
+									</span>
+								</div>
+								<div>
+									<span id="moveBack" title="<?php echo Kohana::lang('wtm.moveBack');?>">
+										<label><?php echo Kohana::lang('wtm.back')?></label>
+									</span>
+								</div>
+								<div>
 									<?php 
 									    $opacityArray = array();
 									    for($i = 0; $i <= 100; $i++){

@@ -13,4 +13,8 @@ $lang = array(
 		'font_color' => 'Font Color',
 		'outline_width' => 'Outline Width',
 		'outline_color' => 'Outline Color',
+		'front' => 'Front',
+		'moveFront' => 'Move to the front.',
+		'back' => 'Back',
+		'moveBack' => 'Move to the back.'
 );
