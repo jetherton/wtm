@@ -26,6 +26,7 @@
 	var order = 1;
 	var nautChecked = false;
 	var kiloChecked = false;
+	var measureDeactivateAll = null;
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
@@ -107,7 +108,7 @@
     };
 
     //turn off all listeners
-    function deactivateAll(){
+    function deactivateAll(runRemotely){
 		clickOut.deactivate();
 		clickIn.deactivate();
 		zoomBox.deactivate();
@@ -121,7 +122,13 @@
 		    control.deactivate();
 		    my_map.removeControl(control);
 	        }
+		//incase we are on the edit or submit page
+		if( typeof turnOffControls != "undefined" && turnOffControls != null && typeof runRemotely == "undefined"){
+		    turnOffControls(true);
+		}
     }
+    
+    measureDeactivateAll = deactivateAll;
 
 	function createRuler(){
 		//create the ruler buttons

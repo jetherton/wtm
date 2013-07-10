@@ -2731,6 +2731,18 @@ div.incident-find-location div.olControlEditingToolbar div.olControlModifyVertIt
     background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -341px 0px;
 }
 
+.incident-find-location #deletePanel a.btn_undel_last{
+    background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -341px 0px;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    border-left: solid 1px #9e9e9c;
+    border-right:none;
+}
+
 .incident-find-location #deletePanel a.btn_del_sel{
     background: url('../../themes/wtm/images/edit_submit_nonselect_icons.png') -374px 0px;
 }

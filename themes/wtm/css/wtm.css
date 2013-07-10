@@ -700,6 +700,18 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
     background: url('../images/edit_submit_nonselect_icons.png') -341px 0px;
 }
 
+.report-find-location .btns a.btn_undel_last{
+    background: url('../images/edit_submit_nonselect_icons.png') -341px 0px;
+     -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    border-left: solid 1px #9e9e9c;
+    border-right:none;
+}
+
 .report-find-location .btns a.btn_del_sel{
     background: url('../images/edit_submit_nonselect_icons.png') -374px 0px;
 }

@@ -368,12 +368,14 @@
 					</div>
 					<div class="report-find-location">
 						<div id="pointPanel" class="olControlEditingToolbar" style="margin-right:0px;">
-						    <div id="pointCoords" class="olControlDrawFeatureCoordPointItemInactive olButton"></div>
+						    <div id="pointCoords" title="Add a Point With Coordinates"class="olControlDrawFeatureCoordPointItemInactive olButton"></div>
 						</div>
 						<div id="panel" class="olControlEditingToolbar"></div>
 						<div class="btns" id="secondPanel">
 							<a title="Delete last item added." href="#" class="btn_del_last">&nbsp;</a>
+							<a title="Re-add last deleted item." href="#" class="btn_undel_last">&nbsp;</a>
 							<a title="Delete selected item." href="#" class="btn_del_sel">&nbsp;</a>
+							
 						</div>
 						<div style="clear:both;"></div>
 						<!--

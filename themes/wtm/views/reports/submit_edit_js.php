@@ -14,6 +14,7 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 ?>
+		var turnOffControls = null;
 		var map;
 		var myMap = null;
 		var thisLayer;
@@ -26,6 +27,7 @@
 		var controls = null;
 		var featureStyle = null;
 		var polygonEditPoint = null;
+		var redoStack = new Array();
 		
 		
 		// jQuery Textbox Hints Plugin
@@ -500,12 +502,16 @@
 			
 			var circleControl = new OpenLayers.Control.DrawFeature(vlayer,
 			    OpenLayers.Handler.RegularPolygon,
-			    {handlerOptions: {sides:40, irregular: true},
-			    'displayClass': 'elipse'});
+			    {
+				handlerOptions: {sides:40, irregular: true},
+				'displayClass': 'elipse',
+				'title':'Add Circle'
+			});
 			    
 			var textControl = new OpenLayers.Control.DrawFeature(vlayer,
 			     OpenLayers.Handler.Point,
 			     {'displayClass': 'olControlDrawTextPoint',
+			      'title' : 'Add Text',
 			      'featureAdded': function(e){
 				e.renderIntent = "styleText";
 				e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/clear_rect32x14.png' ;?>";
@@ -517,6 +523,7 @@
 			var editVerticiesControl = new OpenLayers.Control.ModifyFeature(vlayer,
 			    {
 				'displayClass': 'olControlModifyVert',
+				'title':'Edit Vertices',
 				vertexRenderIntent: "vertex",
 				createVertices: true,
 				virtualStyle:
@@ -537,6 +544,7 @@
 			    {
 				'displayClass': 'olControlModifyRotate',
 				vertexRenderIntent: "vertex",
+				'title':'Rotate Control',
 				createVertices: true,
 				virtualStyle:
 				{
@@ -558,6 +566,7 @@
 				'displayClass': 'olControlModifyResize',
 				vertexRenderIntent: "vertex",
 				createVertices: true,
+				title: 'Resize Control',
 				virtualStyle:
 				{
 				    pointRadius: "8",
@@ -573,20 +582,21 @@
 			resizeControl.mode = OpenLayers.Control.ModifyFeature.RESIZE;
 			
 			controls = { text : textControl,
-			     drag : new OpenLayers.Control.DragPan(),
+			     drag : new OpenLayers.Control.DragPan({'title':'Select Control'}),
 			     editVerticies: editVerticiesControl,
 			     rotate:rotateControl,
 			     resize:resizeControl,
 			     circle : circleControl,
 			     polygon : new OpenLayers.Control.DrawFeature(vlayer,
 				 OpenLayers.Handler.Polygon,
-				 {'displayClass': 'olControlDrawFeaturePolygon'}),
+				 {'title':'Add Polygon', 'displayClass': 'olControlDrawFeaturePolygon'}),
 			     line : new OpenLayers.Control.DrawFeature(vlayer,
 				 OpenLayers.Handler.Path,
-				 {'displayClass': 'olControlDrawFeaturePath'}),
+				 {'title':'Add Line', 'displayClass': 'olControlDrawFeaturePath'}),
 			     point : new OpenLayers.Control.DrawFeature(vlayer,
 				 OpenLayers.Handler.Point,
-				 {'displayClass': 'olControlDrawFeaturePoint',
+				 {'title':'Add Point',
+				  'displayClass': 'olControlDrawFeaturePoint',
 				  'featureAdded':function(e){
 				    e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker_s.png' ;?>";
 				    vlayer.drawFeature(e);
@@ -606,13 +616,17 @@
 			];
 			
 			
-			turnOffControls = function(){
+			turnOffControls = function(runRemotely){
 			    
 			    for(i in controls){
 				controls[i].deactivate();
 			    }
 			    selectCtrl.deactivate();
-			    drag.deactivate();			    
+			    drag.deactivate();		
+			    //in case the map measure plugin is being used
+			    if(typeof measureDeactivateAll != "undefined" && measureDeactivateAll != null && typeof runRemotely == "undefined"){
+				measureDeactivateAll(true);
+			    }
 			}
 			
 			var panel = new OpenLayers.Control.Panel({
@@ -722,6 +736,7 @@
 			$('.btn_del_last').on('click', function () {
 				if (vlayer.features.length > 0) {
 					x = vlayer.features.length - 1;
+					redoStack.push(vlayer.features[x]);
 					vlayer.removeFeatures(vlayer.features[x]);
 				}
 				$('#geometry_color').ColorPickerHide();
@@ -736,9 +751,36 @@
 			// Delete Selected Features
 			$('.btn_del_sel').on('click', function () {
 				for(var y=0; y < selectedFeatures.length; y++) {
+					redoStack.push(vlayer.features[x]);
 					vlayer.removeFeatures(selectedFeatures);
 				}
 				selectedFeatures = [];
+				$('#geometry_color').ColorPickerHide();
+				$('#font_color').ColorPickerHide();
+				$('#geometry_strokeColor').ColorPickerHide();
+				$('#outline_color').ColorPickerHide();
+				$('#geometryLabelerHolder').hide(400);
+				selectCtrl.activate();
+				return false;
+			});
+			
+			/***********************************************
+			 * Re add last deleted item
+			 ********************************************/
+			$('.btn_undel_last').on('click', function () {
+				
+				if(redoStack.length == 0){
+				    return false;
+				}
+				
+				var feature = redoStack.pop(vlayer.features[x]);
+					
+				
+				selectedFeatures = [];
+				
+				vlayer.addFeatures([feature]);
+				refreshFeatures();
+				
 				$('#geometry_color').ColorPickerHide();
 				$('#font_color').ColorPickerHide();
 				$('#geometry_strokeColor').ColorPickerHide();

@@ -424,10 +424,14 @@
 								</div>
 							</div>
 							<div class="incident-find-location">
+								<div id="pointPanel" class="olControlEditingToolbar" style="margin-right:0px;">
+								    <div id="pointCoords" title="Add a Point With Coordinates"class="olControlDrawFeatureCoordPointItemInactive olButton"></div>
+								</div>
 								<div id="panel" class="olControlEditingToolbar"></div>
 								<div id="deletePanel" class="btns" style="float:left;">
-										<a href="#" class="btn_del_last">&nbsp;</a>
-										<a href="#" class="btn_del_sel">&nbsp;</a>
+										<a href="#" title="Delete last item added." class="btn_del_last">&nbsp;</a>
+										<a title="Re-add last deleted item." href="#" class="btn_undel_last">&nbsp;</a>
+										<a href="#" title="Delete selected item."class="btn_del_sel">&nbsp;</a>
 								</div>
 								<div style="clear:both;"></div>
 								<!--
