@@ -16,6 +16,7 @@ class ParseFiles_Controller extends Controller{
 			$post_data = array_merge($_POST, $_FILES);
 			$layer_date = date('Y-m-d');
 		
+		
 			// Layer instance for the actions
 			$layer = (isset($post_data['layer_id']) AND Layer_Model::is_valid_layer($post_data['layer_id']))
 			? new Layer_Model($post_data['layer_id'])
@@ -120,6 +121,66 @@ class ParseFiles_Controller extends Controller{
 		
 	}
 	
+	//submit the icon seperatly as it's a different upload bar
+	public function submitIcon(){
+		// Upload Image/Icon
+			$filename = $_FILES['qqfile']['tmp_name'];
+			$layer = ORM::factory('layer')->
+			where('id', $_POST['layer_id'])->
+			find();
+			
+			$new_filename = "layer_".$layer->id."_".time();
+		
+			// Name the files for the DB
+			$layer_img_file = $new_filename.".png";
+			$layer_img_thumb_file = $new_filename."_16x16.png";
+		
+			// Resize Image to 32px if greater
+			Image::factory($filename)->resize(32,32,Image::HEIGHT)
+			->save(Kohana::config('upload.directory', TRUE) . $layer_img_file);
+			// Create a 16x16 version too
+			Image::factory($filename)->resize(16,16,Image::HEIGHT)
+			->save(Kohana::config('upload.directory', TRUE) . $layer_img_thumb_file);
+		
+			// Okay, now we have these three different files on the server, now check to see
+			//   if we should be dropping them on the CDN
+		
+			if (Kohana::config("cdn.cdn_store_dynamic_content"))
+			{
+				$layer_img_file = cdn::upload($layer_img_file);
+				$layer_img_thumb_file = cdn::upload($layer_img_thumb_file);
+					
+				// We no longer need the files we created on the server. Remove them.
+				$local_directory = rtrim(Kohana::config('upload.directory', TRUE), '/').'/';
+				unlink($local_directory.$new_filename.".png");
+				unlink($local_directory.$new_filename."_16x16.png");
+			}
+		
+			// Remove the temporary file
+			unlink($filename);
+		
+			// Delete Old Image
+			$layer_old_image = $layer->icon;
+			if ( ! empty($layer_old_image))
+			{
+				if (file_exists(Kohana::config('upload.directory', TRUE).$layer_old_image))
+				{
+					unlink(Kohana::config('upload.directory', TRUE).$layer_old_image);
+				}
+				elseif (Kohana::config("cdn.cdn_store_dynamic_content") AND valid::url($layer_old_image))
+				{
+					cdn::delete($layer_old_image);
+				}
+			}
+		
+			// Save
+			$layer->icon = $layer_img_file;
+			$layer->layer_icon_thumb = $layer_img_thumb_file;
+			$layer->save();
+			
+			echo '{"success": "true"}';
+	}
+	
 	//create the pop up window
 	public function parseWindow(){
 		$view = new View('uploadlayers/uploadwindow');
@@ -138,11 +199,13 @@ class ParseFiles_Controller extends Controller{
 		where('id', $_POST['layer'])->
 		find();
 		
-		//$return['label'] = $layer->layer_name;
-		//$return['color'] = $layer->layer_color;
-		
-		//return json_encode($return, true);
-		echo '{"label" : "'.$layer->layer_name.'", "color": "'.$layer->layer_color.'"}';
+		echo '{';
+		echo  "\"label\": \"$layer->layer_name\",";
+		echo "\"color\" : \"$layer->layer_color\",";
+		if($layer->icon != null){
+			echo "\"icon\" : \"$layer->layer_icon_thumb\"";
+		}
+		echo '}';
 	}
 }
 ?>

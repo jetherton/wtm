@@ -4,6 +4,7 @@ $lang = array(
 		'success' => 'The file was successfully loaded.',
 		'nameAlert' => 'The name cannot be empty.',
 		'listAlert' => 'Please choose a file.',
+		'icon' => 'Icon image for the layer (Optional)'
 );
 
 ?>

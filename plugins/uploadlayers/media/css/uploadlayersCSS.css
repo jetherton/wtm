@@ -42,3 +42,7 @@ img .contentWrapWaiter{
 .colorpicker{
 	z-index:30000;
 }
+
+#meta_data{
+	height: 180px;
+}

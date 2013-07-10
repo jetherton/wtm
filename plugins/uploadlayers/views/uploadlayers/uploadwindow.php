@@ -50,6 +50,10 @@
 							<strong><?php echo Kohana::lang('wtm.Layer Meta-Data');?>:</strong><br />
 							<?php print form::textarea('meta_data','', 'style="width:500px;height:380x;" id="meta_data"');?>
 						</div>
+						<div class="tab_form">
+							<strong><?php echo Kohana::lang('uploadlayers.icon')?>:</strong></br>
+							<div id="layer_image"></div>
+						</div>
 						<div style="clear:both"></div>
 												
 					</div>

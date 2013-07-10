@@ -33,6 +33,7 @@
 
 <script type="text/javascript">	
 
+
 var manualuploader = new qq.FineUploader({
     element: $('#manual-fine-uploader')[0],
     request: {
@@ -43,6 +44,12 @@ var manualuploader = new qq.FineUploader({
     text: {
       uploadButton: '<i class="icon-plus icon-white"></i> Select File'
     },
+    deleteFile: {
+		enabled: false
+    },
+    retry : {
+		showButton: false
+    },
     validation: {
 			allowedExtensions : ['kml', 'kmz']
     },
@@ -51,6 +58,32 @@ var manualuploader = new qq.FineUploader({
 				setLayerId();
 			}
     }
+  });
+
+var iconuploader = new qq.FineUploader({
+    element: $('#layer_image')[0],
+    request: {
+  	  endpoint: "<?php echo url::base();?>parseFiles/submitIcon",
+    },
+    multiple: false,
+    autoUpload: false,
+    text: {
+      uploadButton: '<i class="icon-plus icon-white"></i> Select File'
+    },
+    deleteFile: {
+		enabled: false
+    },
+    retry : {
+		showButton: false
+    },
+    validation: {
+			allowedExtensions : ['gif', 'png', 'jpeg', 'jpg']
+    },
+    callbacks : {
+		onComplete: function(){
+			endUpload();
+		}
+}
   });
   
 	$(document).ready(function() {
@@ -69,21 +102,52 @@ var manualuploader = new qq.FineUploader({
 					 meta_data : $('#meta_data').val()
 		    	  });
 		      manualuploader.uploadStoredFiles();
+		      
 		    }
 		   
 	    });
 	  });
 
 	  function setLayerId(){
+		  if(iconuploader._netUploadedOrQueued > 0){
+			  var id = manualuploader.getUploads()[0].uuid;
+			  console.log('setting id');
+			  iconuploader.setParams({
+					layer_id : id
+			  });
+			 iconuploader.uploadStoredFiles();
+	  		}
+		  else{
+			  setId();
+			  if(manualuploader.getUploads()[0].success == 'true'){
+				  alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
+				  $("a[rel]").overlay().close();
+			  }
+		  }
+	  }
+
+	  function endUpload(){
+		  setId();
+		  if(iconuploader.getUploads()[0].success == 'true'){
+		  	alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
+		  	$("a[rel]").overlay().close();
+		  }
+	  }
+
+	  function setId(){
 		  //submit and edit pages have different set up of the divs
 		  var url = '<?php echo strpos(url::current(), 'admin/reports/edit') !== false ? 'edit' : 'submit'?>';
 		  var id = manualuploader.getUploads()[0].uuid;
-		  $('#user_kml_ids').val(id);
-		  console.log(url);
-		  
+		  //$('#user_kml_ids').val(id);
+		  console.log('right before post');
 		  $.post('<?php echo url::base();?>/parseFiles/getLayerDetails', {'layer' : id}, 
 				  function(data){
+			  /*
 					  if(url == 'edit'){
+						console.log(data.icon);
+						  if(typeof(data.icon) != 'undefined'){
+								console.log(data.icon);
+						  }
 						  $('#submit_layers').children('.category-column-2').append('<li\
 							        title="'+data.label+'" class="last"><label><input\
 							        type="checkbox" name="reportslayers[]" value="'+id+'"\
@@ -93,19 +157,27 @@ var manualuploader = new qq.FineUploader({
 									class="layer-name">'+data.label+'</span></label></li>');
 					  }
 					  else{
-						  $('#custom_forms').append('<ul class="category-column category-column-1 treeview" id="category-column-1"><li\
+						  */
+						  if(typeof(data.icon) != 'undefined'){
+							  $('#custom_forms').append('<ul class="category-column category-column-1 treeview" id="category-column-1"><li\
+								        title="'+data.label+'" class="last"><label><input\
+								        type="checkbox" name="reportslayers[]" value="'+id+'"\
+								        class="check-box layer_switcher" id="layer_'+id+'">\
+								        <img src="<?php echo url::base();?>media\\uploads\\'+data.icon+'"></img>\
+								        <span\
+										class="layer-name">'+data.label+'</span></label></li></ul>');
+						  }
+						  else {
+							  $('#custom_forms').append('<ul class="category-column category-column-1 treeview" id="category-column-1"><li\
 							        title="'+data.label+'" class="last"><label><input\
 							        type="checkbox" name="reportslayers[]" value="'+id+'"\
 							        class="check-box layer_switcher" id="layer_'+id+'"><span\
 							        class="swatch"\
 							        style="background-color:#' + data.color + '"></span><span\
 									class="layer-name">'+data.label+'</span></label></li></ul>');
-					  }
+					 }
 						  $('#layer_'+id).click();
 		  }, 'json');
-		  
-		  alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
-		  $("a[rel]").overlay().close();
 	  }
 
 	

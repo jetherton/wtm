@@ -48,7 +48,8 @@ class Uploadlayers_Install {
 		}
 		catch(Exception $e){
 			if($e){
-				$this->db->query('ALTER TABLE `layer` ADD  `date_uploaded` DATE NOT NULL');
+				$this->db->query('ALTER TABLE `layer` ADD  `date_uploaded` DATE NOT NULL;
+								  ALTER TABLE  `layer` ADD  `layer_icon_thumb` CHAR( 255 ) NOT NULL');
 			}
 		}
 	
