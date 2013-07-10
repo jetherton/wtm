@@ -20,6 +20,7 @@
 	//variables to hold map zooming listeners
 	var clickOut;
 	var clickIn;
+	var zoomBox;
 	//conversion for nautical miles
 	var nautMile = 0.539957;
 	var order = 1;
@@ -109,17 +110,17 @@
     function deactivateAll(){
 		clickOut.deactivate();
 		clickIn.deactivate();
+		zoomBox.deactivate();
 		$('#'+map_div).css({
 			'cursor': "default"
 		});
 		$('#output').hide();
 		$('#distanceOptionsDiv').hide();
 		for(key in measureControls) {
-            var control = measureControls[key];
-            control.deactivate();
-            my_map.removeControl(control);
-            //control.destroy();
-        }
+		    var control = measureControls[key];
+		    control.deactivate();
+		    my_map.removeControl(control);
+	        }
     }
 
 	function createRuler(){
@@ -224,6 +225,10 @@
             var control = measureControls[key];
             control.setImmediate(true);
         }
+	
+	
+	
+
 
     }
     
@@ -267,13 +272,35 @@
 
   //create the ZoomButtons
 	function zoomButtons(){
-		$('.olControlZoom').hide();
+	    $('.olControlZoom').hide();
 
-		$('#lineDraw').before(
-			'<div id="clickIn" title="Zoom in"><img class="zoomInIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
-			<div id="clickOut" title="Zoom out"><img class="zoomOutIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
-			'
-  		);
+	    $('#lineDraw').before(
+		    '<div id="clickIn" title="Zoom in"><img class="zoomInIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
+		    <div id="clickOut" title="Zoom out"><img class="zoomOutIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
+		    <div id="ZoomBoxHolder" class="olControlEditingToolbar"></div>'
+	    );
+		    
+	    zoomBox =  new OpenLayers.Control.ZoomBox();	
+	    
+	    var panelControls = [ zoomBox ];	
+	    var container = document.getElementById("ZoomBoxHolder");
+	    var panel2 = new OpenLayers.Control.Panel({
+			       div:container,
+			       displayClass: 'olControlEditingToolbar'
+			    });
+	    panel2.addControls(panelControls);	
+	    my_map.addControl(panel2);
+	    
+	    $("#ZoomBoxHolder div").click(function (){
+		deactivateAll();
+		zoomBox.activate();
+		console.log("hey");
+		$('#'+map_div).css({
+		    'cursor': "crosshair"
+		});
+		
+	    });
+	    
 
         OpenLayers.Control.ClickOut = OpenLayers.Class(OpenLayers.Control, {                
             defaultHandlerOptions: {
@@ -340,6 +367,7 @@
         $('#clickOut').click(function(){
         	deactivateAll();
 			clickOut.activate();
+			
 			$('#'+map_div).css({
 				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/mouseZoomOut.png'), -moz-zoom-out"
 			});

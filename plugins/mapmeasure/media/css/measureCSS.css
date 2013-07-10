@@ -1,5 +1,5 @@
 #toolbarControl{
-	width: 170px;
+	width: 190px;
 	z-index: 2000;
 	position: relative;
 	left: 14px;
@@ -28,10 +28,25 @@
 	float:left;
 	position:relative;
 }
-#areaDraw{
+#areaDraw, #ZoomBoxHolder{
 	float:left;
 	position:relative;
+	
 }
+#ZoomBoxHolder{
+    width:27px;
+    height:23px;
+    margin:0px 0px 0px 0px;
+}
+
+#ZoomBoxHolder div{
+    width:31px;
+    height:23px;
+    margin: 0px 0px 0px 0px;
+    float:none;
+    background: url('../img/toolbar.png') -220px -2px;	
+}
+
 #output{
 	width: 177px;
 	background-color: rgb(225, 226, 228);
@@ -62,3 +77,5 @@
 	top : 7px;
 	display: none;
 }
+
+
