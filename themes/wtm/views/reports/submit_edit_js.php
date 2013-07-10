@@ -147,14 +147,18 @@
 				    iconWidth: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return 11;
-						} else {
+						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
+						    return 42;
+						}else {
 						    return 11;
 						}	
 					},
 				    iconHeight: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return 11;
-						} else {
+						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
+						    return 17;
+						}else {
 						    return 13;
 						}	
 					},
@@ -163,6 +167,8 @@
 						    return -5;
 						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
 						    return -5;
+						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
+						    return -20;
 						} else {
 						   return -7;
 						}
@@ -172,6 +178,8 @@
 						    return -5;
 						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
 						    return -7;
+						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
+						    return -10;
 						} else {
 						    return -27;
 						}	
