@@ -90,6 +90,7 @@
 										$layer_visible = $layer->layer_visible;
 										$meta_data = $layer->meta_data;
 										$parent_id = $layer->parent_id;
+										$icon = $layer->icon;
 										?>
 										<tr>
 											<td class="col-1">&nbsp;</td>
@@ -117,7 +118,7 @@
 												</ul>
 											</td>
 											<td class="col-3">
-											<?php echo "<img src=\"".url::base()."swatch/?c=".$layer_color."&w=30&h=30\">"; ?>
+											<?php echo $icon != null ? "<img src=\"".url::base()."media\uploads\\".$icon."\">" : "<img src=\"".url::base()."swatch/?c=".$layer_color."&w=30&h=30\">"; ?>
 											</td>
 											<td class="col-4">
 												<ul>
@@ -193,6 +194,10 @@
 							<div class="tab_form_item">
 							<strong><?php echo Kohana::lang('wtm.parent layer');?>:</strong><br />
 							<?php print form::dropdown('parent_id', $parents_array); ?>
+						</div>
+							<div class="tab_form_item">
+							<strong><?php echo Kohana::lang('wtm.iconUpload')?>:</strong><br/>
+							<?php print form::upload('layer_icon', '', 'id="layer_icon"')?>
 						</div>
 						<div style="clear:both"></div>
 						<div class="tab_form_item">

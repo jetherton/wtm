@@ -16,5 +16,6 @@ $lang = array(
 		'front' => 'Front',
 		'moveFront' => 'Move to the front.',
 		'back' => 'Back',
-		'moveBack' => 'Move to the back.'
+		'moveBack' => 'Move to the back.',
+		'iconUpload' => 'Icon (Optional)',
 );

@@ -758,6 +758,9 @@ class Manage_Controller extends Admin_Controller
 				// Extract the layer file for upload validation
 				$other_data = arr::extract($post_data, 'layer_file');
 				
+				//extract icon data
+				$icon_data = arr::extract($post_data, 'layer_icon');
+				
 				// Set up validation for the layer file
 				$post = Validation::factory($other_data)
 						->pre_filter('trim', TRUE)
@@ -830,6 +833,59 @@ class Manage_Controller extends Admin_Controller
 						// Set the final variables for the DB
 						$layer->layer_url = $layer_url;
 						$layer->layer_file = $layer_file;
+						
+						//do an icon upload
+						$filename = $icon_data['layer_icon']['tmp_name'];
+						if($filename){
+							$new_filename = "layer_".$layer->id."_".time();
+							
+							// Name the files for the DB
+							$layer_img_file = $new_filename.".png";
+							$layer_img_thumb_file = $new_filename."_16x16.png";
+							
+							// Resize Image to 32px if greater
+							Image::factory($filename)->resize(32,32,Image::HEIGHT)
+							->save(Kohana::config('upload.directory', TRUE) . $layer_img_file);
+							// Create a 16x16 version too
+							Image::factory($filename)->resize(16,16,Image::HEIGHT)
+							->save(Kohana::config('upload.directory', TRUE) . $layer_img_thumb_file);
+							
+							// Okay, now we have these three different files on the server, now check to see
+							//   if we should be dropping them on the CDN
+							
+							if (Kohana::config("cdn.cdn_store_dynamic_content"))
+							{
+								$layer_img_file = cdn::upload($layer_img_file);
+								$layer_img_thumb_file = cdn::upload($layer_img_thumb_file);
+									
+								// We no longer need the files we created on the server. Remove them.
+								$local_directory = rtrim(Kohana::config('upload.directory', TRUE), '/').'/';
+								unlink($local_directory.$new_filename.".png");
+								unlink($local_directory.$new_filename."_16x16.png");
+							}
+							
+							// Remove the temporary file
+							unlink($filename);
+							
+							// Delete Old Image
+							$layer_old_image = $layer->icon;
+							if ( ! empty($layer_old_image))
+							{
+								if (file_exists(Kohana::config('upload.directory', TRUE).$layer_old_image))
+								{
+									unlink(Kohana::config('upload.directory', TRUE).$layer_old_image);
+								}
+								elseif (Kohana::config("cdn.cdn_store_dynamic_content") AND valid::url($layer_old_image))
+								{
+									cdn::delete($layer_old_image);
+								}
+							}
+							
+							// Save
+							$layer->icon = $layer_img_file;
+							$layer->layer_icon_thumb = $layer_img_thumb_file;
+						}
+						
 						$layer->save();
 					}
 					elseif (isset($_POST['layer_file_old']) AND $_POST['layer_file_old'] != ""){
