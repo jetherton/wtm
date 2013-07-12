@@ -18,6 +18,7 @@
 	var my_map = null;
 	var map_search = false;
 	var search_exists = false;
+	var searchLayer = null;
     
 
 	$(document).ready(function(){
@@ -47,15 +48,13 @@
 				'<div style="position:absolute;">\
 				<div id="searchControl">\
 					<img class="searchIcon" src="<?php echo URL::base();?>plugins/searchlocation/media/img/img_trans.gif" width="1" height="1"/>\
-						<div id="searchButtons" style="display:none">\
-							<form name="searchForm" action="<?php echo $_SERVER['PHP_SELF']?>">\
+						<div id="searchButtons" style="display:none;padding:5px;">\
 								<input type="text" id="coordinates" placeholder="1234 S Main St, New York, New York" name="coordinates"/>\
-									<input type="submit" value="Submit"/></br>\
+									<input type="button" value="search" onclick="searchLocation();"/> <input type="button" value="clear" onclick="clearSearch();"/></br>\
 								<input type="radio" checked name="search" id="Address" title="Search by address." value="Address"/>Address</br>\
 								<input type="radio" name="search" id="LatLong" title="Seach by Latitude and Longitude." value="LatLong"/>Longitude and Latitude</br>\
 								<input type="radio" name="search" id="DMS" title="Search by DMS" value="DMS"/>Degrees, minutes, seconds</br>\
 								<input type="radio" name="search" id="Minutes" title="Search for DM." value="Minutes"/>Degrees, decimal minutes</br>\
-							</form>\
 						</div>\
 				</div>\
 				');
@@ -68,26 +67,44 @@
 			$('#coordinates').attr('placeholder', '1234 S Main St, New York, New York...');
 		});
 		$('#LatLong').click(function(){
-			$('#coordinates').attr('placeholder', '45 23 54N 62 12 34E');
+			$('#coordinates').attr('placeholder', 'DD.DDDD, DD.DDDD');
 		});
 		$('#DMS').click(function(){
-			$('#coordinates').attr('placeholder', 'DD MM SS');
+			$('#coordinates').attr('placeholder', 'DD MM SS, DD MM SS');
 		});
 		$('#Minutes').click(function(){
-			$('#coordinates').attr('placeholder', 'DD.ddd MM.mmm');
+			$('#coordinates').attr('placeholder', 'DD.ddd MM.mmm, DD.ddd MM.mmm');
 		});
 		map_search = true;
+		
+		var template = {
+		    pointRadius: "10", // using context.getSize(feature)
+		    fillColor: "#333333", // using context.getColor(feature)
+		    strokeWidth:"2",
+		    strokeColor:"#ffffff"
+		};
+		var style = new OpenLayers.Style(template);
+		
+		searchLayer = new OpenLayers.Layer.Vector( "Search Layer", {
+		    styleMap: new OpenLayers.StyleMap(style)
+		});
+				
+
+		my_map.addLayer(searchLayer);
 	}
 
 
+	function clearSearch(){
+	    searchLayer.removeAllFeatures();
+	}
 
-	function searchLocation(location, searchType){
+	function searchLocation(){
 		//transform variables for coordinates
 		var proj4326 = new OpenLayers.Projection("EPSG:4326");
 		var projmerc = new OpenLayers.Projection("EPSG:900913");
 		var orgCenter = my_map.center;
-		
-
+		var location = $("#coordinates").val();
+		var searchType = $('input:radio[name=search]:checked').val();		
 		if(searchType == ''){
 			alert('Please select a location type.');
 		}
@@ -102,6 +119,11 @@
 									var lonlat = new OpenLayers.LonLat(m[1]['lon'], m[0]['lat']);
 									lonlat.transform(proj4326, projmerc);
 									my_map.setCenter(lonlat, my_map.zoom);
+									var point = new OpenLayers.Feature.Vector(										
+									    new OpenLayers.Geometry.Point(
+										lonlat.lon, lonlat.lat)
+									);
+									searchLayer.addFeatures([point]);
 									
 									var newCenter = my_map.center;
 									//error check if the center was changed, if not then the location was not parsed.
@@ -116,19 +138,28 @@
 					var lonlat = new OpenLayers.LonLat(result['lon'],result['lat']);
 					lonlat.transform(proj4326, projmerc);
 					my_map.setCenter(lonlat, my_map.zoom);
-					
+					var point = new OpenLayers.Feature.Vector(										
+					    new OpenLayers.Geometry.Point(
+						lonlat.lon, lonlat.lat)
+					);
+					searchLayer.addFeatures([point]);
 					var newCenter = my_map.center;
 					//error check if the center was changed, if not then the location was not parsed.
 					if(newCenter == orgCenter){
 						alert('Sorry, can\'t find ' + location + '.');
 					}
 					break;
-				case 'DMS':
+				case 'DMS':				    
 					var result = DMS(location);
 					if(result !== false){
 						var lonlat = new OpenLayers.LonLat(result['lon'],result['lat']);
 						lonlat.transform(proj4326, projmerc);
 						my_map.setCenter(lonlat, my_map.zoom);
+						var point = new OpenLayers.Feature.Vector(										
+						    new OpenLayers.Geometry.Point(
+							lonlat.lon, lonlat.lat)
+						);
+						searchLayer.addFeatures([point]);
 					}
 					break;
 				case 'Minutes':
@@ -137,6 +168,11 @@
 						var lonlat = new OpenLayers.LonLat(result['lon'],result['lat']);
 						lonlat.transform(proj4326, projmerc);
 						my_map.setCenter(lonlat, my_map.zoom);
+						var point = new OpenLayers.Feature.Vector(										
+						    new OpenLayers.Geometry.Point(
+							lonlat.lon, lonlat.lat)
+						);
+						searchLayer.addFeatures([point]);
 					}
 					break;
 			}
@@ -148,12 +184,12 @@
 	function latLong(loc){
 		var lat, lon;
 		if(loc.indexOf(',') != -1){
-			lon = parseFloat(loc.substring(0, loc.indexOf(',')));
-			lat = parseFloat(loc.substring(loc.indexOf(',')+1));
+			lat = parseFloat(loc.substring(0, loc.indexOf(',')));
+			lon = parseFloat(loc.substring(loc.indexOf(',')+1));
 		}
 		else{
-			lon = parseFloat(loc.substring(0, loc.indexOf(' ')));
-			lat = parseFloat(loc.substring(loc.indexOf(' ')+1));
+			lat = parseFloat(loc.substring(0, loc.indexOf(' ')));
+			lon = parseFloat(loc.substring(loc.indexOf(' ')+1));
 		}
 		var results = new Array();
 		results['lat'] = lat;
@@ -166,13 +202,19 @@
 	function DMS(loc){
 		var values;
 		
-		if(loc.indexOf('%2C') != -1){
-			values = loc.split('%2C');
+		if(loc.indexOf(' ') != -1){
+			values = loc.split(' ');
 		}
 		else{
 			//just putting ' ' didn't work for spaces
-			values = loc.split('+');
+			alert("Sorry, I don't recognize your formatting");
+			return false;
 		}
+		if(values.length != 6){
+		    	alert("Sorry, I don't recognize your formatting");
+			return false;
+		}
+		console.log(values);
 
 		if(values.length > 1){
 			var Latdeg = (values[0].toLowerCase().indexOf('n') != -1 || (values[0].toLowerCase().indexOf('s') != -1)) ? values[0] : parseInt(values[0]);
