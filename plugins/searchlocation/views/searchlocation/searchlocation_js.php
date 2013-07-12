@@ -214,7 +214,7 @@
 		    	alert("Sorry, I don't recognize your formatting");
 			return false;
 		}
-		console.log(values);
+		
 
 		if(values.length > 1){
 			var Latdeg = (values[0].toLowerCase().indexOf('n') != -1 || (values[0].toLowerCase().indexOf('s') != -1)) ? values[0] : parseInt(values[0]);
