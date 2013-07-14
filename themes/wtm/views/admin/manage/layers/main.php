@@ -118,7 +118,7 @@
 												</ul>
 											</td>
 											<td class="col-3">
-											<?php echo $icon != null ? "<img src=\"".url::base()."media/uploads/s".$icon."\">" : "<img src=\"".url::base()."swatch/?c=".$layer_color."&w=30&h=30\">"; ?>
+											<?php echo $icon != null ? "<img src=\"".url::base()."media/uploads/".$icon."\">" : "<img src=\"".url::base()."swatch/?c=".$layer_color."&w=30&h=30\">"; ?>
 											</td>
 											<td class="col-4">
 												<ul>
