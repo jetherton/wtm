@@ -997,6 +997,7 @@ class Manage_Controller extends Admin_Controller
 
 		// Javascript Header
 		$this->themes->colorpicker_enabled = TRUE;
+		$this->themes->editor_enabled = TRUE;
 		$this->themes->js = new View('admin/manage/layers/layers_js');
 	}
 
