@@ -34,3 +34,6 @@ ADD  `geometry_strokeDashstyle` CHAR( 20 ) NOT NULL;
 
 /** Dylan Gillespie 2013-07-09 - Added zindex field **/
 ALTER TABLE  `geometry` ADD  `geometry_zindex` INT(11) NOT NULL DEFAULT  '0';
+
+/** Etherton 2013-07-14 - Added a field to store the icon of a layer*/
+ALTER TABLE  `layer` ADD  `layer_icon_thumb` CHAR( 255 ) NULL DEFAULT NULL;

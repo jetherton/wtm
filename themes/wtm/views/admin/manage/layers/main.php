@@ -233,6 +233,7 @@ function render_child_layers($layer_id,$indent_level)	{
 		$layer_name = $child_layer->layer_name;
 		$layer_color = $child_layer->layer_color;
 		$layer_url = $child_layer->layer_url;
+		$icon = $child_layer->icon;
 		$layer_file = $child_layer->layer_file;
 		$layer_visible = $child_layer->layer_visible;
 		$meta_data = $child_layer->meta_data;
@@ -264,7 +265,7 @@ function render_child_layers($layer_id,$indent_level)	{
 						</ul>
 					</td>
 					<td class="col-3">
-					<?php echo "<img src=\"".url::base()."swatch/?c=".$layer_color."&w=30&h=30\">"; ?>
+					    <?php echo $icon != null ? "<img src=\"".url::base()."media\uploads\\".$icon."\">" : "<img src=\"".url::base()."swatch/?c=".$layer_color."&w=30&h=30\">"; ?>
 					</td>
 					<td class="col-4">
 						<ul>

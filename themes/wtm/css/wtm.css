@@ -858,3 +858,7 @@ height: 140px;
     display:none;
 }
 
+li a span.swatch img{
+    width:16px;
+    height: 16px;
+}
