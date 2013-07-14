@@ -433,6 +433,10 @@
 										<a title="Re-add last deleted item." href="#" class="btn_undel_last">&nbsp;</a>
 										<a href="#" title="Delete selected item."class="btn_del_sel">&nbsp;</a>
 								</div>
+								<div id="followAspectRatioDiv">
+								    Keep Aspect Ratio 
+								    <input type="checkbox" checked="checked" name="keepAspectRatio" id="keepAspectRatio" value="yes" onchange="setKeepAspectRatio();"/>
+								</div>
 								<div style="clear:both;"></div>
 								<!--
 								<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>

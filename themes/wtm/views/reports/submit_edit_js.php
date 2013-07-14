@@ -691,7 +691,13 @@
 			controls.resize.myActivate = controls.resize.activate;
 			controls.resize.activate = function(){
 			    turnOffControls();
-			    controls.resize.myActivate();			    
+			    controls.resize.myActivate();		
+			    $("#followAspectRatioDiv").show();
+			}
+			controls.resize.myDeactivate = controls.resize.deactivate;
+			controls.resize.deactivate = function(){
+			    controls.resize.myDeactivate();		
+			    $("#followAspectRatioDiv").hide();
 			}
 			
 			/**
@@ -1270,7 +1276,6 @@
 					vlayer.drawFeature(selectedFeatures[f]);
 				}
 				refreshFeatures();
-				console.log('Front');
 			});
 			//move graphic object to the front
 			$('#moveBack').click(function(){
@@ -1279,7 +1284,6 @@
 					selectedFeatures[f].attributes.graphicZIndex = 0;
 					vlayer.drawFeature(selectedFeatures[f]);
 				}
-				console.log('Back');
 			});
 			
 			function moveAllBack(){
@@ -1289,7 +1293,6 @@
 						vlayer.features[f].attributes.graphiZIndex = 0;
 						vlayer.drawFeature(vlayer.features[f]);
 					}
-					console.log( "<?php echo url::base()?>media/img/openlayers/clear_rect32x14.png");
 				}
 				refreshFeatures();
 			}
@@ -1437,7 +1440,6 @@
 						alert("A polygon must have at least 2 points");
 						return;
 					    }
-					    console.log("i: " + i + " length: "+ selectedFeatures[f].geometry.components[0].components.length);
 					    selectedFeatures[f].geometry.components[0].components.splice(i,1);					    
 					}
 				    }
@@ -1588,7 +1590,6 @@
 			$('#geometry_strokeOpacity').bind("change", function(){
 			    var opacity = parseFloat($(this).val())/100;
 			    for (f in selectedFeatures) {
-				    console.log(opacity);
 				    selectedFeatures[f].attributes.strokeOpacity = opacity;
 				    vlayer.drawFeature(selectedFeatures[f]);
 				    
@@ -1614,7 +1615,7 @@
 						selectedFeatures[f].attributes.labelOutlineWidth = this.value;
 						vlayer.drawFeature(selectedFeatures[f]);
 
-			console.log('outline');
+			
 
 					}
 					refreshFeatures();
@@ -1872,7 +1873,7 @@
 				}
 
 				if(typeof(feature.attributes) != 'undefined'){
-				    console.log(feature.attributes);
+				    
 				    
 				    if(typeof(feature.attributes.fontColor) != 'undefined'){
 				    	$('#font_color').val(feature.attributes.fontColor);
@@ -2074,7 +2075,7 @@
 					    strokeDashstyle: strokeDashstyle,
 					    graphicZIndex : graphicZIndex
 					    });
-					    console.log(geometryAttributes);
+					    
 					$('#reportForm').append($('<input></input>').attr('name','geometry[]').attr('type','hidden').attr('value',geometryAttributes));
 				}
 			}
@@ -2169,4 +2170,16 @@
 		    var decimal = Math.round(absdlat + (absmlat/60.) + (absslat/3600.) ) * latsign/1000000;
 			
 		    return decimal;
+		}
+		
+		
+		
+		function setKeepAspectRatio(){
+		    var keepAspectRatio = document.getElementById("keepAspectRatio").checked;
+		    if (keepAspectRatio) {
+			controls.resize.mode = OpenLayers.Control.ModifyFeature.RESIZE;			
+		    } else {
+			controls.resize.mode = OpenLayers.Control.ModifyFeature.RESHAPE | OpenLayers.Control.ModifyFeature.RESIZE;
+		    }
+		    controls.resize.activate();
 		}
