@@ -404,6 +404,8 @@ class reports_Core {
 					$fillOpacity = (isset($item->fillOpacity)) ? floatval($item->fillOpacity) : 0.7;
 					$strokeOpacity = (isset($item->strokeOpacity)) ? floatval($item->strokeOpacity) : 1.0;
 					$strokeDashstyle = (isset($item->strokeDashstyle)) ? $item->strokeDashstyle :'solid';
+					
+					$zindex = (isset($item->graphicZIndex)) ? $item->graphicZIndez : 1;
 					    
 					if ($geometry)
 					{
@@ -412,11 +414,11 @@ class reports_Core {
 							. "(incident_id, geometry, geometry_label, geometry_comment, "
 							. "geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel, "
 							. "geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor, "
-							. "geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle)"
+							. "geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle, geometry_zindex)"
 							. "VALUES(".$incident->id.", GeomFromText('".$geometry."'), '".$label."', '".$comment."', '"
 							. $color."', ".$strokewidth.", '".$icon."', $showLabel, "
 							. "$fontSize, '$fontColor', $labelOutlineWidth, '$labelOutlineColor', "
-							. "'$strokeColor', $fillOpacity, $strokeOpacity, '$strokeDashstyle')";
+							. "'$strokeColor', $fillOpacity, $strokeOpacity, '$strokeDashstyle', '$zindex')";
 						Kohana::log('debug', $sql);
 						// Execute the query
 						$db->query($sql);

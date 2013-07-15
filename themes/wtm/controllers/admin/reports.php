@@ -727,7 +727,7 @@ class Reports_Controller extends Admin_Controller {
 					$sql = "SELECT AsText(geometry) as geometry, geometry_label,
 						geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel, 
 						geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor,
-						geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle
+						geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle, geometry_zindex
 						FROM ".Kohana::config('database.default.table_prefix')."geometry
 						WHERE incident_id = ?";
 					$query = $db->query($sql, $id);
@@ -748,7 +748,8 @@ class Reports_Controller extends Admin_Controller {
 								"strokeColor"=>$item->geometry_strokeColor,
 								"fillOpacity"=>$item->geometry_fillOpacity,
 								"strokeOpacity"=>$item->geometry_strokeOpacity,
-								"strokeDashstyle"=>$item->geometry_strokeDashstyle
+								"strokeDashstyle"=>$item->geometry_strokeDashstyle,
+								"graphicZIndex" =>$item->geometry_zindex
 							);
 						$form['geometry'][] = json_encode($geometry);
 					}
