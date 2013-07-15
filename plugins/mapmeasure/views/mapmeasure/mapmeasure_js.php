@@ -27,6 +27,7 @@
 	var nautChecked = false;
 	var kiloChecked = false;
 	var measureDeactivateAll = null;
+	var measureControls = null;
 
 	$(document).ready(function(){
 		$('a.map').click(function(){
@@ -116,6 +117,7 @@
 			'cursor': "default"
 		});
 		$('#output').hide();
+		
 		$('#distanceOptionsDiv').hide();
 		for(key in measureControls) {
 		    var control = measureControls[key];
@@ -126,6 +128,12 @@
 		if( typeof turnOffControls != "undefined" && turnOffControls != null && typeof runRemotely == "undefined"){
 		    turnOffControls(true);
 		}
+		$('#clickOut').removeClass("active");
+		$('#clickIn').removeClass("active");
+		$('#lineDraw').removeClass("active");
+		$('#areaDraw').removeClass("active");
+		$('#noDraw').removeClass("active");
+		
     }
     
     measureDeactivateAll = deactivateAll;
@@ -141,7 +149,7 @@
 						<div title="<?php echo Kohana::lang('mapmeasure.areaMeasure')?>" id="areaDraw" onclick="toggleControl(this)">\
 							<img class="areaIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 						</div>\
-						<div value="None" title="<?php echo Kohana::lang('mapmeasure.noMeasure')?>" id="noDraw">\
+						<div value="None" title="<?php echo Kohana::lang('mapmeasure.noMeasure')?>" id="noDraw" class="active">\
 							<img class="dragIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/>\
 						</div>\
 						</br><div id="distanceOptionsDiv">\
@@ -371,24 +379,56 @@
 
         my_map.addControl(clickOut);
         my_map.addControl(clickIn);
-        $('#clickOut').click(function(){
-        	deactivateAll();
-			clickOut.activate();
-			
-			$('#'+map_div).css({
-				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/mouseZoomOut.png'), -moz-zoom-out"
-			});
-			//console.log(my_map);
-		});	
-		$('#clickIn').click(function(){
-			deactivateAll();
-			clickIn.activate();
-			$('#'+map_div).css({
-				'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/mouseZoomIn.png'), -moz-zoom-in"
-			});
-			
-		});	
-  	}
+        $('#clickOut').click(function(){		
+	    deactivateAll();
+	    clickOut.activate();
+	    $(this).addClass("active");
+	    $('#'+map_div).css({
+		    'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomOut.png'), -moz-zoom-out"
+	    });
+		
+	});	
+	$('#clickIn').click(function(){
+	    deactivateAll();
+	    clickIn.activate();
+	    $(this).addClass("active");
+	    $('#'+map_div).css({
+		    'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomIn.png'), -moz-zoom-in"
+	    });
+	});	
+	
+	$('#lineDraw').click(function() {
+	    deactivateAll();
+	    measureControls.line.activate();
+	    $(this).addClass("active");
+	    $('#'+map_div).css({
+		    'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/rulerLine.png'), -moz-zoom-in"
+	    });
+	});
+	
+	$('#areaDraw').click(function() {
+	    deactivateAll();
+	    measureControls.polygon.activate();
+	    $(this).addClass("active");
+	    $('#'+map_div).css({
+		    'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/rulerPoly.png'), -moz-zoom-in"
+	    });
+	});
+	
+	$('#ZoomBoxHolder').click(function() {
+	    deactivateAll();
+	    zoomBox.activate();
+	    $('#'+map_div).css({
+		    'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomToBox.png'), -moz-zoom-in"
+	    });
+	});
+	
+	$('#noDraw').click(function() {
+	    deactivateAll();
+	    $(this).addClass("active");
+	});
+  	
+	}
     
 
 jQuery(window).load(function() {

@@ -186,7 +186,7 @@ div#mainmenu a{
 }
 
 /* filter box */
-#report-map-filter-box { position:absolute; z-index:1000; }
+#report-map-filter-box { position:absolute; z-index:1000; left:100px; }
 
 
 
@@ -859,6 +859,14 @@ height: 140px;
 }
 
 li a span.swatch img{
-    width:16px;
-    height: 16px;
+    width:20px;
+    height: 20px;
+    border:none;
+}
+
+.swatch{
+    height:20px;
+    width:20px;
+    margin:5px;
+    border:none;
 }

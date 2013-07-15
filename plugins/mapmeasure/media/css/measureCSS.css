@@ -1,25 +1,100 @@
 #toolbarControl{
-	width: 190px;
+	width: 220px;
 	z-index: 2000;
 	position: relative;
 	left: 14px;
 	top: 22px;
 }
 #toolbarControl img.rulerIcon{
-	background: url('../img/toolbar.png') -100px -2px;	
-	width:32px;
-	height:23px;
+	background: url('../img/toolbar.png') -104px 0px;	
+	width:33px;
+	height:29px;
+	border-right: solid 1px #9c9c9e;
 }
 #toolbarControl img.areaIcon{
-	background: url('../img/toolbar.png') -190px -1px;	
-	width:27px;
-	height:23px;
+	background: url('../img/toolbar.png') -138px 0px;	
+	width:40px;
+	height:29px;
+	border-right: solid 1px #9c9c9e;
 }
 #toolbarControl img.dragIcon{
-	background: url('../img/toolbar.png') -158px -2px;	
-	width:26px;
-	height:23px;
+	background: url('../img/toolbar.png') -179px 0px;	
+	width:36px;
+	height:29px;
 }
+#ZoomBoxHolder div{
+    width:39px;
+    height:29px;
+    margin: 0px 0px 0px 0px;
+    float:none;
+    background: url('../img/toolbar.png') -64px 0px;	
+    border-right: solid 1px #9c9c9e;
+}
+#clickOut img.zoomOutIcon{
+	background: url('../img/toolbar.png') -31px 0px;
+	width : 32px;
+	height: 29px;
+	border-right: solid 1px #9c9c9e;
+}
+#clickIn img.zoomInIcon{
+	background: url('../img/toolbar.png') 0px 0px;
+	width : 30px;
+	height: 29px;
+	border-right: solid 1px #9c9c9e;
+}
+
+/*hover*/
+#toolbarControl img.rulerIcon:hover{
+	background: url('../img/toolbar_hover.png') -104px 0px;		
+	cursor:pointer;
+}
+#toolbarControl img.areaIcon:hover{
+	background: url('../img/toolbar_hover.png') -138px 0px;		
+	cursor:pointer;
+}
+#toolbarControl img.dragIcon:hover{
+	background: url('../img/toolbar_hover.png') -179px 0px;	
+	cursor:pointer;
+}
+#ZoomBoxHolder div:hover{    
+	background: url('../img/toolbar_hover.png') -64px 0px;	
+	cursor:pointer;
+}
+#clickOut img.zoomOutIcon:hover{
+	background: url('../img/toolbar_hover.png') -31px 0px;	
+	cursor:pointer;
+}
+#clickIn img.zoomInIcon:hover{
+	background: url('../img/toolbar_hover.png') 0px 0px;	
+	cursor:pointer;
+}
+
+/*active*/
+#toolbarControl div.active img.rulerIcon{
+	background: url('../img/toolbar_active.png') -104px 0px;		
+	cursor:pointer;
+}
+#toolbarControl div.active img.areaIcon{
+	background: url('../img/toolbar_active.png') -138px 0px;		
+	cursor:pointer;
+}
+#toolbarControl div.active img.dragIcon{
+	background: url('../img/toolbar_active.png') -179px 0px;	
+	cursor:pointer;
+}
+#ZoomBoxHolder div.olControlZoomBoxItemActive{    
+	background: url('../img/toolbar_active.png') -64px 0px;	
+	cursor:pointer;
+}
+#clickOut.active img.zoomOutIcon{
+	background: url('../img/toolbar_active.png') -31px 0px;	
+	cursor:pointer;
+}
+#clickIn.active img.zoomInIcon{
+	background: url('../img/toolbar_active.png') 0px 0px;	
+	cursor:pointer;
+}
+
 #lineDraw{
 	float:left;
 	position:relative;
@@ -34,18 +109,11 @@
 	
 }
 #ZoomBoxHolder{
-    width:27px;
-    height:23px;
+    
     margin:0px 0px 0px 0px;
 }
 
-#ZoomBoxHolder div{
-    width:31px;
-    height:23px;
-    margin: 0px 0px 0px 0px;
-    float:none;
-    background: url('../img/toolbar.png') -220px -2px;	
-}
+
 
 #output{
 	width: 177px;
@@ -59,16 +127,7 @@
 #clickIn{
 	float:left;
 }
-#clickOut img.zoomOutIcon{
-	background: url('../img/toolbar.png') -65px -2px;
-	width : 35px;
-	height: 23px;
-}
-#clickIn img.zoomInIcon{
-	background: url('../img/toolbar.png') -29px -2px;
-	width : 34px;
-	height: 23px;
-}
+
 #distanceOptionsDiv{
 	clear:both;
 	width:177px;	
