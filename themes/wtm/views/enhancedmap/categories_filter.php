@@ -36,10 +36,9 @@
 
 <!-- category filters -->
 <div id="report-category-filter">
-    <h3 ><?php echo Kohana::lang("ui_main.categories"); ?></h3>
 			<ul id="<?php echo $categories_view_id;?>" class="category-filters cat_switch">
 				
-				<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo Kohana::config('settings.default_map_all');?>"></div><div class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></div></a></li>
+				<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:none;"></div><div class="category-title"><?php echo Kohana::lang('ui_main.all');?></div></a></li>
 				<?php
 					foreach ($categories as $category => $category_info)
 					{
@@ -51,7 +50,8 @@
 						if($category_info[2] != NULL ) {
 							$category_image = html::image(array(
 								'src'=>$category_info[2],
-								'style'=>'float:left;width:20px;height:20px;margin:5px;'
+								'style'=>'float:left;width:20px;height:20px;',
+								'class'=>'cat_icon'
 								));
 							$color_css = '';
 						}
@@ -59,13 +59,18 @@
 						if(count($category_info[3]) > 0)
 						{
 							echo '<li>';
-							echo '<a  href="#" id="cat_'. $category .'"><div '.$color_css.'>'.$category_image.'</div><div class="category-title">'.$category_title.'</div></a>';
-                                                        echo '<a style="float:right; text-align:center; width:15px; padding:2px 0px 1px 0px; " href="#" id="drop_cat_'.$category.'">+</a>';
+							echo '<a style="display:block; float:right; text-align:center; width:15px; padding:6px 0px 7px 0px; position:relative;" href="#" id="drop_cat_'.$category.'">+</a>';
+							echo '<a  style="width:205px;" href="#" id="cat_'. $category .'">';
+							echo '<div class="color_swatch" style="background: #'.$category_color.'"></div>';
+							echo '<div '.$color_css.'>'.$category_image.'</div><div class="category-title">'.$category_title.'</div></a>';
+							
 							
 						}
 						else
 						{
-							echo '<li><a href="#" id="cat_'. $category .'"><div '.$color_css.'>'.$category_image.'</div><div class="category-title">'.$category_title.'</div></a>';
+							echo '<li><a href="#" id="cat_'. $category .'">';
+							echo '<div class="color_swatch" style="background: #'.$category_color.'"></div>';
+							echo '<div '.$color_css.'>'.$category_image.'</div><div class="category-title">'.$category_title.'</div></a>';
 						}
 						// Get Children
 						echo '<div class="hide" id="child_'. $category .'"><ul>';
@@ -78,11 +83,14 @@
 							if($child_info[2] != NULL && file_exists(Kohana::config('upload.relative_directory').'/'.$child_info[2])) {
 								$child_image = html::image(array(
 									'src'=>Kohana::config('upload.relative_directory').'/'.$child_info[2],
-									'style'=>'float:left;padding-right:5px;'
+									'style'=>'float:left;padding-right:5px;',
+									'class'=>'cat_icon'
 									));
 								$color_css = '';
 							}
-							echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'" cat_parent="'.$category.'"><div '.$color_css.'>'.$child_image.'</div><div class="category-title">'.$child_title.'</div></a></li>';
+							echo '<li ><a href="#" id="cat_'. $child .'" cat_parent="'.$category.'">';
+							echo '<div class="color_swatch" style="background: #'.$child_color.'"></div>';
+							echo '<div '.$color_css.'>'.$child_image.'</div><div class="category-title">'.$child_title.'</div></a></li>';
 						}
 						echo '</ul></div></li>';
 					}

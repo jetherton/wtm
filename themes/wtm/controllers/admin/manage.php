@@ -170,10 +170,10 @@ class Manage_Controller extends Admin_Controller
 						$cat_img_thumb_file = $new_filename."_16x16.png";
 
 						// Resize Image to 32px if greater
-						Image::factory($filename)->resize(32,32,Image::HEIGHT)
+						Image::factory($filename)->resize(20,20,Image::HEIGHT)
 							->save(Kohana::config('upload.directory', TRUE) . $cat_img_file);
 						// Create a 16x16 version too
-						Image::factory($filename)->resize(16,16,Image::HEIGHT)
+						Image::factory($filename)->resize(20,20,Image::HEIGHT)
 							->save(Kohana::config('upload.directory', TRUE) . $cat_img_thumb_file);
 							
 						// Okay, now we have these three different files on the server, now check to see

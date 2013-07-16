@@ -22,11 +22,10 @@ $(function(){
 
 		<!-- right column -->
 		<div id="report-map-filter-box" class="clearingfix">
-			<a class="btn toggle" id="filter-menu-toggle" class="" href="#the-filters"><?php echo Kohana::lang('ui_main.categories'); ?><span class="btn-icon ic-right">&raquo;</span></a>
+			<a class="btn toggle" id="filter-menu-toggle" class="" href="#the-filters"><?php echo Kohana::lang('ui_main.categories'); ?><span id="show_cat_btn" class="btn-icon ic-right">&raquo;</span></a>
 			
 			<!-- filters box -->
 			<div id="the-filters" class="map-menu-box">
-			
 				<?php
 				// Action::main_sidebar_pre_filters - Add Items to the Entry Page before filters
 				Event::run('ushahidi_action.main_sidebar_pre_filters');
@@ -49,8 +48,9 @@ $(function(){
 				// Action::main_sidebar_post_filters - Add Items to the Entry Page after filters
 				Event::run('ushahidi_action.main_sidebar_post_filters');
 				?>
-						
+
 			</div>
+			<br/>
 			<!-- / filters box -->
 			
 			<?php
@@ -58,7 +58,7 @@ $(function(){
 			{
 				?>
 				<div id="layers-box">
-					<a class="btn toggle" id="layers-menu-toggle" class="" href="#kml_switch"><?php echo Kohana::lang('ui_main.layers');?> <span class="btn-icon ic-right">&raquo;</span></a>
+					<a class="btn toggle" id="layers-menu-toggle" class="" href="#kml_switch"><?php echo Kohana::lang('ui_main.layers');?> <span id="show_layers_btn" class="btn-icon ic-right">&raquo;</span></a>
 					<!-- Layers (KML/KMZ) -->
 					<ul id="kml_switch" class="category-filters map-menu-box">
 						<?php
