@@ -110,7 +110,7 @@
 				strokeWidth: "${strokeWidth}",
 				strokeOpacity: "${strokeOpacity}",
 				strokeDashstyle: "${strokeDashstyle}",
-				graphicZIndex: 1,
+				graphicZIndex: '${graphicZIndex}',
 				externalGraphic: "${icon}",
 				graphicOpacity: 1,
 				graphicWidth: "${iconWidth}",
@@ -126,7 +126,6 @@
 				fontWeight: "bold",
 				labelOutlineColor: '${labelOutlineColor}',
 				labelOutlineWidth: '${labelOutlineWidth}',
-				graphicZIndex : '${graphicZIndex}'
 			},{
 				context: {
 				    label: function(feature) {
@@ -256,7 +255,7 @@
 					},
 				graphicZIndex : function(feature){
 					if(typeof feature.attributes.graphicZIndex == "undefined"){
-							return 0;
+							return 1;
 						}
 						else{
 							return feature.attributes.graphicZIndex;
@@ -490,6 +489,7 @@
 					echo "wktFeature.attributes.fillOpacity = ".$geometry->fillOpacity.";\n";
 					echo "wktFeature.attributes.strokeOpacity = ".$geometry->strokeOpacity.";\n";
 					echo "wktFeature.attributes.strokeDashstyle = '".$geometry->strokeDashstyle."';\n";
+					echo "wktFeature.attributes.graphicZIndex = '".$geometry->zindex."';\n";
 					
 					echo "vlayer.addFeatures(wktFeature);\n";
 				}
@@ -1279,23 +1279,25 @@
 			});
 			//move graphic object to the front
 			$('#moveBack').click(function(){
-				moveAllForward();
+				moveAllBack();
 				for (f in selectedFeatures) {
-					selectedFeatures[f].attributes.graphicZIndex = 0;
+					selectedFeatures[f].attributes.graphicZIndex = 1;
 					vlayer.drawFeature(selectedFeatures[f]);
 				}
+				refreshFeatures();
 			});
-			
+			//move all other objects to the middle
 			function moveAllBack(){
 				for(f in vlayer.features){
 					//try to only get the text objects
 					if(vlayer.features[f].attributes.icon == "<?php echo url::base()?>media/img/openlayers/clear_rect32x14.png"){
-						vlayer.features[f].attributes.graphiZIndex = 0;
+						vlayer.features[f].attributes.graphicZIndex = 50;
 						vlayer.drawFeature(vlayer.features[f]);
 					}
 				}
 				refreshFeatures();
 			}
+			
 			
 			function pointHMStoDecimal(){
 			    var lat_d = $("#pointGeometry_lat_degrees").val();
@@ -1990,7 +1992,7 @@
 					var fillOpacity = 0.7;
 					var strokeOpacity = 1;
 					var strokeDashstyle = 'solid';
-					var graphicZIndex = 0;
+					var graphicZIndex = 1;
 					
 					if (typeof(vlayer.features[i].attributes.icon) != 'undefined'){
 					    icon = vlayer.features[i].attributes.icon;

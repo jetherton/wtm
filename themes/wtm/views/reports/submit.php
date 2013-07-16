@@ -212,8 +212,6 @@
 									<span id="moveFront" title="<?php echo Kohana::lang('wtm.moveFront');?>">
 										<label> <?php echo Kohana::lang('wtm.front')?></label>
 									</span>
-								</div>
-								<div>
 									<span id="moveBack" title="<?php echo Kohana::lang('wtm.moveBack');?>">
 										<label><?php echo Kohana::lang('wtm.back')?></label>
 									</span>
