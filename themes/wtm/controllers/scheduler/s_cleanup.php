@@ -26,7 +26,7 @@ class S_Cleanup_Controller extends Controller {
 	public function index()
 	{
 
-		$this->remove_orphan_images();
+		//$this->remove_orphan_images();
 		$this->remove_old_logs();
 
 		return TRUE;

@@ -944,7 +944,8 @@ li a span.swatch img{
     padding-left:33px;
 }
 span.layer-name{
-    margin-top:6px;
+    position:relative;
+    top:6px;
 }
 
 .color_swatch{
