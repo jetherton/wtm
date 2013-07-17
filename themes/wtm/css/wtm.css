@@ -216,7 +216,8 @@ div#right { position:absolute; z-index:1000; }
 #the-filters h3 { font-size:10px; color:#605f5d; text-transform:uppercase; margin-bottom:5px; }
   
   /* type and category toggle button */
-  #filter-menu-toggle { 
+  #filter-menu-toggle,
+  #layers-menu-toggle{ 
     position:relative; 
     top:0px; 
     left:0px; 
@@ -279,7 +280,6 @@ div#right { position:absolute; z-index:1000; }
 
   /* KML layers & Other Deployments */
   /*toggle buttons */
-  #layers-menu-toggle {   width:60px; }
   #other-deployments-menu-toggle { position:absolute; top:20px; left:322px; width:130px; }
   #how-to-report-menu-toggle { position:absolute; top:20px; left:780px; width:100px; }
   
@@ -442,7 +442,8 @@ ul#kml_switch li:hover div.layer_meta_data{
 	display:block;
 	}
 
-div#the-filters ul#category_switch li a{
+div#the-filters ul#category_switch li a,
+div#the-filters ul#kml_switch li a{
     width:220px;
 }
 

@@ -17,8 +17,29 @@
 ?>
 </script>
 <script type="text/javascript">
-
+var layer_top = null;
 $(document).ready(function() {
+    
+    layer_top = parseInt($("div#layers-box").css('top').replace("px"));
+
+    /**
+     * Handles moving the layers menu up and down as the
+     * categories menu is opened and closed
+     */    
+    $("#show_cat_btn").click(function(e){
+	
+	if($("#filter-menu-toggle").hasClass('active-toggle')){
+	    //about to hide the menu
+	    $("div#layers-box").css('top',layer_top+"px");
+	} else {
+	    //about to show the menu
+	    $("#the-filters").show();
+	    var height = $("#the-filters").outerHeight(true);	
+	    $("div#layers-box").css('top',(layer_top + height)+"px");
+	}
+	
+    });
+    
   $("[id^='layer_']").mouseover(function(){
   	var metaData = $(this).attr('meta_data');
   	if(metaData != ''){
@@ -573,6 +594,9 @@ $(window).resize(function () {
 // EK <emmanuel(at)ushahidi.com
 // TODO: Load the sidebar with the checkins - moving this to BackboneJS
 <?php endif; ?>
+    
+    
+    
 
 
 </script>

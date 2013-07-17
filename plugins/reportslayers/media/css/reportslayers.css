@@ -9,7 +9,6 @@
 
 
 #layers-box a#layers-menu-toggle{
-    top:200px;
     z-index:1000;
 }
 
@@ -20,11 +19,9 @@
 div.right-col div#layers-box{
     top: -350px;
     position: relative;
-    z-index: 1000;
-    left: 100px;
+    z-index: 1009;
+    left: 70px;
 }
 
-div.right-col div#layers-box span.btn-icon{
-    right: 260px;
-}
+
 

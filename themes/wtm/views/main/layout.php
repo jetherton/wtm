@@ -307,7 +307,7 @@ function render_child_layers($layer, $layers)	{
 	}
 	
 	$child_layers = $layers[$layer->id];
-	echo '<ul style="margin-left:20px;">';
+	echo '<ul >';
 	
 	foreach($child_layers as $child_layer){
 		
