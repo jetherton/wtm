@@ -14,6 +14,7 @@
 
 #layers-box ul#kml_switch{
     top:30px;
+    border:none;
 }
 
 div.right-col div#layers-box{

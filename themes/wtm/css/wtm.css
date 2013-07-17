@@ -245,13 +245,15 @@ div#right { position:absolute; z-index:1000; }
       background: none;
   }
     .page-main ul.category-filters li li { clear:left; overflow:hidden;}
-  .page-main ul.category-filters li a { 
+  .page-main ul.category-filters li a,
+  .right-col div#layers-box li a{ 
       border:none;
       border-top: solid 1px #666;
       overflow:visible;
       font-family:Agile-Light;
       font-weight: normal;
-      font-size:17px; 
+      font-size:12px; 
+      text-transform: none;
       padding:0px 0px 0px 0px; 
       -moz-border-radius: 0px; 
       -webkit-border-radius: 0px; 
@@ -262,11 +264,14 @@ div#right { position:absolute; z-index:1000; }
       border:none;
       -moz-border-radius: 0px; 
       -webkit-border-radius: 0px; }
-  .page-main ul.category-filters li a:hover{
+  
+  .page-main ul.category-filters li a:hover,
+  .right-col div#layers-box li a:hover{
       text-shadow:1px 1px #fff;
       color:black;      
   }
-  .page-main ul.category-filters li a.active { 
+  .page-main ul.category-filters li a.active,
+  .right-col div#layers-box li a.active{ 
       background:white;  
       color:black;      
   }
@@ -290,8 +295,25 @@ div#right { position:absolute; z-index:1000; }
   #how-to-report-box { left:724px; padding-top:10px; }
     #how-to-report-box ol { margin-left:22px; }
     #how-to-report-box ol li { margin-bottom:5px; }
- #kml_switch{width:250px;}
- #layer_meta_window{display:none;margin-top: 15px;border: solid 1px #333;padding: 3px;border-radius: 3px;}
+ #kml_switch{
+     width:220px;
+     padding:0px;
+ }
+ ul#kml_switch li{
+     padding-left: 0px;
+ }
+ ul#kml_switch li a{
+     width:220px;
+ }
+ #layer_meta_window{
+     display:none;
+     border: solid 1px #333;
+     padding: 3px;
+     width:217px;
+     border:none;
+     border-top: solid 1px #666;
+     background: #e1e2e4;
+ }
   
 
 /* home page map */
@@ -921,6 +943,9 @@ li a span.swatch img{
     margin-top:6px;
     padding-left:33px;
 }
+span.layer-name{
+    margin-top:6px;
+}
 
 .color_swatch{
     display:none;
@@ -940,6 +965,12 @@ a.active .color_swatch{
 }
 a.active .cat_icon, a.active .swatch{
     margin-left:0px;
+}
+
+.right-col div#layers-box li a.active .swatch,
+div#layers-box li a.active .swatch
+{
+    margin-left:5px;
 }
 
 div#layers-box{

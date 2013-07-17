@@ -18,15 +18,19 @@
 </script>
 <script type="text/javascript">
 var layer_top = null;
+var cat_height = null;
 $(document).ready(function() {
     
+    $("#the-filters").show();
     layer_top = parseInt($("div#layers-box").css('top').replace("px"));
+    cat_height = $("#the-filters").outerHeight(true);	
+    $("#the-filters").hide();
 
     /**
      * Handles moving the layers menu up and down as the
      * categories menu is opened and closed
      */    
-    $("#show_cat_btn").click(function(e){
+    $("#filter-menu-toggle").click(function(e){
 	
 	if($("#filter-menu-toggle").hasClass('active-toggle')){
 	    //about to hide the menu
@@ -34,8 +38,8 @@ $(document).ready(function() {
 	} else {
 	    //about to show the menu
 	    $("#the-filters").show();
-	    var height = $("#the-filters").outerHeight(true);	
-	    $("div#layers-box").css('top',(layer_top + height)+"px");
+	    //var height = $("#the-filters").outerHeight(true);	
+	    $("div#layers-box").css('top',(layer_top + cat_height)+"px");
 	}
 	
     });
