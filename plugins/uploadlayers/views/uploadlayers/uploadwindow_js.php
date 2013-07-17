@@ -111,7 +111,7 @@ var iconuploader = new qq.FineUploader({
 	  function setLayerId(){
 		  if(iconuploader._netUploadedOrQueued > 0){
 			  var id = manualuploader.getUploads()[0].uuid;
-			  console.log('setting id');
+			  console.log('setting id: ' + id );
 			  iconuploader.setParams({
 					layer_id : id
 			  });
@@ -119,7 +119,7 @@ var iconuploader = new qq.FineUploader({
 	  		}
 		  else{
 			  setId();
-			  if(manualuploader.getUploads()[0].success == 'true'){
+			  if(manualuploader.getUploads()[0].status == 'upload successful'){
 				  alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
 				  $("a[rel]").overlay().close();
 			  }
@@ -128,7 +128,8 @@ var iconuploader = new qq.FineUploader({
 
 	  function endUpload(){
 		  setId();
-		  if(iconuploader.getUploads()[0].success == 'true'){
+		  console.log("endUpload");
+		  if(iconuploader.getUploads()[0].status == 'upload successful'){
 		  	alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
 		  	$("a[rel]").overlay().close();
 		  }
@@ -158,12 +159,13 @@ var iconuploader = new qq.FineUploader({
 					  }
 					  else{
 						  */
+						 console.log(data);
 						  if(typeof(data.icon) != 'undefined'){
 							  $('#custom_forms').append('<ul class="category-column category-column-1 treeview" id="category-column-1"><li\
 								        title="'+data.label+'" class="last"><label><input\
 								        type="checkbox" name="reportslayers[]" value="'+id+'"\
 								        class="check-box layer_switcher" id="layer_'+id+'">\
-								        <img src="<?php echo url::base();?>media\\uploads\\'+data.icon+'"></img>\
+								        <img src="<?php echo url::base();?>media/uploads/'+data.icon+'"></img>\
 								        <span\
 										class="layer-name">'+data.label+'</span></label></li></ul>');
 						  }
@@ -176,7 +178,11 @@ var iconuploader = new qq.FineUploader({
 							        style="background-color:#' + data.color + '"></span><span\
 									class="layer-name">'+data.label+'</span></label></li></ul>');
 					 }
-						  $('#layer_'+id).click();
+				        
+						  
+					 addNewKMLChangeListener(id);
+					
+					$('#layer_'+id).click();
 		  }, 'json');
 	  }
 

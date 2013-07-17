@@ -2185,3 +2185,58 @@
 		    }
 		    controls.resize.activate();
 		}
+
+		
+		
+		function addNewKMLChangeListener(id){
+		     $('#layer_'+id).change(function(e) {
+                            // Get the layer id
+                            var layerId = this.id.substring(6);
+			    
+			    
+
+                            var isCurrentLayer = false;
+                            var context = this;
+
+                            // Remove all actively selected layers
+                            $("input.layer_switcher").each(function(i) {
+                                    if (!$(this).is(':checked')) {
+                                            if (this.id == context.id) {
+                                                    isCurrentLayer = true;
+                                            }
+                                    }
+                            });
+    
+                            var title = "sl_"+layerId;
+                            //remove the layer if it was clicked again
+                            if(isCurrentLayer){
+                                    var kmlLayer = map.getLayersByName(title);
+                                    map.removeLayer(kmlLayer[0]);                                    
+                                    $(this).removeClass("active");
+                            }
+
+                            // Was a different layer selected?
+                            if (!isCurrentLayer) {            
+                                    // Set the currently selected layer as the active one
+                                    
+                                    var kmlLayer = new OpenLayers.Layer.Vector(title, {
+                                        projection: new OpenLayers.Projection("EPSG:4326"),
+                                        strategies: [new OpenLayers.Strategy.Fixed()],
+                                        protocol: new OpenLayers.Protocol.HTTP({
+                                            url: "<?php echo url::base();?>json/layer/" + layerId,
+                                            format: new OpenLayers.Format.KML({
+                                                extractStyles: true, 
+                                                extractAttributes: true,
+                                                maxDepth: 5
+                                            })
+                                        })
+                                    });
+                                    
+                                     
+                                    map.addLayer(kmlLayer);
+                            }
+
+                            return true;
+                    });
+		
+		}

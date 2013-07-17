@@ -46,3 +46,17 @@ img .contentWrapWaiter{
 #meta_data{
 	height: 180px;
 }
+
+
+
+.report-find-location .btns a.qq-upload-cancel,
+.report-find-location .btns a.qq-upload-retry,
+.report-find-location .btns a.qq-upload-delete{
+    display:none;
+}
+
+.incident-find-location #deletePanel a.qq-upload-cancel,
+.incident-find-location #deletePanel a.qq-upload-retry,
+.incident-find-location #deletePanel a.qq-upload-delete{
+    display:none;
+}

@@ -201,9 +201,9 @@ class ParseFiles_Controller extends Controller{
 		
 		echo '{';
 		echo  "\"label\": \"$layer->layer_name\",";
-		echo "\"color\" : \"$layer->layer_color\",";
+		echo "\"color\" : \"$layer->layer_color\"";
 		if($layer->icon != null){
-			echo "\"icon\" : \"$layer->layer_icon_thumb\"";
+			echo ",\"icon\" : \"$layer->layer_icon_thumb\"";
 		}
 		echo '}';
 	}
