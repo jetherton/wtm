@@ -405,7 +405,8 @@ class reports_Core {
 					$strokeOpacity = (isset($item->strokeOpacity)) ? floatval($item->strokeOpacity) : 1.0;
 					$strokeDashstyle = (isset($item->strokeDashstyle)) ? $item->strokeDashstyle :'solid';
 					
-					$zindex = (isset($item->graphicZIndex)) ? $item->graphicZIndez : 1;
+					//$zindex = (isset($item->graphicZIndex)) ? $item->graphicZIndez : 1;
+					$zindex = 1;
 					    
 					if ($geometry)
 					{

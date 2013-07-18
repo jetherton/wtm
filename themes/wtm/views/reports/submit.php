@@ -185,11 +185,12 @@
 									</span>
 									<span id="geometryIcon">
 										    <?php //create the icons array
-											$icons = array('marker_s.png'=>'w',
-											    'marker-red_s.png'=>'r',
-											    'marker-blue_s.png'=>'b',
-											    'marker-green_s.png'=>'g',
-											    'marker-gold_s.png'=>'d');
+											$icons = array('incident_circle.png'=>'w',
+											    'location_square.png'=>'r',
+											    'wreck_cross.png'=>'b',
+											    'helicopter.png'=>'g',
+											    'aircraft.png'=>'g',
+											    'boatpatrol.png'=>'d');
 										    ?>
 										    <label><?php echo Kohana::lang('wtm.Icon');?>:</label> 
 										    <?php 
@@ -208,7 +209,7 @@
 										    </script>
 									</span>
 								</div>
-								<div>
+								<div style="display:none;">
 									<span id="moveFront" title="<?php echo Kohana::lang('wtm.moveFront');?>">
 										<label> <?php echo Kohana::lang('wtm.front')?></label>
 									</span>

@@ -239,11 +239,12 @@
 									</span>
 									<span id="geometryIcon">
 										    <?php //create the icons array
-											$icons = array('marker_s.png'=>'w',
-											    'marker-red_s.png'=>'r',
-											    'marker-blue_s.png'=>'b',
-											    'marker-green_s.png'=>'g',
-											    'marker-gold_s.png'=>'d');
+											$icons = array('incident_circle.png'=>'w',
+											    'location_square.png'=>'r',
+											    'wreck_cross.png'=>'b',
+											    'helicopter.png'=>'g',
+											    'aircraft.png'=>'g',
+											    'boatpatrol.png'=>'d');
 										    ?>
 										    <label><?php echo Kohana::lang('wtm.Icon');?>:</label> 
 										    <?php 
@@ -320,10 +321,10 @@
 										<label><?php echo Kohana::lang('ui_main.longitude');?>(DD.DD):</label> 
 										<?php print form::input('geometry_lon', '', ' class="lbl_text"'); ?>
 									</span>
-									<span id="moveFront" title="<?php echo Kohana::lang('wtm.moveFront');?>">
+									<span style="display:none;" id="moveFront" title="<?php echo Kohana::lang('wtm.moveFront');?>">
 										<label> <?php echo Kohana::lang('wtm.front')?></label>
 									</span>
-									<span id="moveBack" title="<?php echo Kohana::lang('wtm.moveBack');?>">
+									<span style="display:none;" id="moveBack" title="<?php echo Kohana::lang('wtm.moveBack');?>">
 										<label><?php echo Kohana::lang('wtm.back')?></label>
 									</span>
 									<div id="hoursMinsSeconds">

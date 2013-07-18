@@ -146,10 +146,14 @@
 				    iconWidth: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return 11;
+						} else if(feature.attributes.icon.indexOf("incident_circle") != -1 ||
+						    feature.attributes.icon.indexOf("location_square") != -1 ||
+						    feature.attributes.icon.indexOf("wreck_cross.png") != -1) {
+						    return 20;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return 42;
-						}else {
-						    return 11;
+						} else {
+						    return 40;
 						}	
 					},
 				    iconHeight: function(feature) {
@@ -157,14 +161,18 @@
 						    return 11;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return 17;
+						} else if(feature.attributes.icon.indexOf("incident_circle") != -1 ||
+						    feature.attributes.icon.indexOf("location_square") != -1 ||
+						    feature.attributes.icon.indexOf("wreck_cross.png") != -1) {
+						    return 20;
 						}else {
-						    return 13;
+						    return 30;
 						}	
 					},
 				    iconOffsetX: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return -5;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png") {
 						    return -5;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return -20;
@@ -175,7 +183,7 @@
 				    iconOffsetY: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return -5;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/marker_s.png") {
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png") {
 						    return -7;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return -10;
@@ -455,7 +463,7 @@
 				OpenLayers.Projection.transform(point, proj_4326, map.getProjectionObject());
 				var origFeature = new OpenLayers.Feature.Vector(point);
 				origFeature.attributes.label = "";
-				origFeature.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker_s.png' ;?>";
+				origFeature.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/incident_circle.png' ;?>";
 				vlayer.addFeatures(origFeature);
 				<?php
 			}
@@ -489,7 +497,8 @@
 					echo "wktFeature.attributes.fillOpacity = ".$geometry->fillOpacity.";\n";
 					echo "wktFeature.attributes.strokeOpacity = ".$geometry->strokeOpacity.";\n";
 					echo "wktFeature.attributes.strokeDashstyle = '".$geometry->strokeDashstyle."';\n";
-					echo "wktFeature.attributes.graphicZIndex = '".$geometry->zindex."';\n";
+					//echo "wktFeature.attributes.graphicZIndex = '".$geometry->zindex."';\n";
+					echo "wktFeature.attributes.graphicZIndex = 1;\n";
 					
 					echo "vlayer.addFeatures(wktFeature);\n";
 				}
@@ -606,7 +615,7 @@
 				 {'title':'Add Point',
 				  'displayClass': 'olControlDrawFeaturePoint',
 				  'featureAdded':function(e){
-				    e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/marker_s.png' ;?>";
+				    e.attributes.icon = "<?php echo url::file_loc('img').'media/img/openlayers/incident_circle.png' ;?>";
 				    vlayer.drawFeature(e);
 			     }})
 			};
@@ -737,7 +746,7 @@
 			     var newPoint = new OpenLayers.Geometry.Point(mapCenter.lon, mapCenter.lat);
 			     var newFeature = new OpenLayers.Feature.Vector(newPoint);
 			     newFeature.attributes = { label: "",
-			     icon:"<?php echo url::file_loc('img').'media/img/openlayers/marker_s.png' ;?>"};
+			     icon:"<?php echo url::file_loc('img').'media/img/openlayers/incident_circle.png' ;?>"};
 			     vlayer.addFeatures([newFeature]);
 			     refreshFeatures();
 			     //set this feature as what's active
