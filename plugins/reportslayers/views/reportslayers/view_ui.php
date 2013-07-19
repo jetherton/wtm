@@ -7,20 +7,31 @@
 						{
 							$layer_name = $layer->layer_name;
 							$layer_color = $layer->layer_color;
+							$layer_icon = $layer->icon;
 							$layer_url = $layer->layer_url;
 							$layer_file = $layer->layer_file;
 							$layer_meta_data = $layer->meta_data;
 							$layer_link = (!$layer_url) ?
 								url::base().Kohana::config('upload.relative_directory').'/'.$layer_file :
 								$layer_url;
-							echo '<li><a href="#" id="layer_'. $layer .'" meta_data="<strong>'.htmlentities($layer_name).':</strong><br/><br/>'.htmlentities($layer_meta_data).'">
-							<span class="swatch" style="background-color:#'.$layer_color.'"></span>
-							<span class="layer-name">'.$layer_name.'</span></a></li>';
+							echo '<li><a href="#" id="layer_'. $layer .'" >';    														
+							if($layer_icon != null OR $layer_icon != ""){
+							    echo '<span class="swatch" >';
+							    echo '<image src="'.url::base().'media/uploads/'.$layer_icon. '"/>';
+							} else {
+							    echo '<span class="swatch" style="background-color:#'.$layer_color.'">';
+							}
+							echo '</span>';
 							
-							render_child_layers($layer, $layers);
+							echo '<span class="layer-name">'.$layer_name.'</span>';
+							echo '<div class="layerMeta">';
+							echo $layer_meta_data;
+							echo '</div>';
+							echo '</a></li>';
+							
+							//render_child_layers($layer, $layers);
 						}
 						?>
-						<li id="layer_meta_window"></li>
 					</ul>
 				</div>
 				

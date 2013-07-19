@@ -42,7 +42,7 @@
 		<div id="searchbox">
 
 			<!-- languages -->
-			<?php echo $languages;?>
+			<?php //echo $languages;?>
 			<!-- / languages -->
 
 			<!-- searchform -->
@@ -79,6 +79,14 @@
 				// Action::main_sidebar - Add Items to the Entry Page Sidebar
 				Event::run('ushahidi_action.main_sidebar');
 			?>
+			
+			<div id="searchbox">
+
+			<!-- searchform -->
+			<?php echo $search; ?>
+			<!-- / searchform -->
+
+			</div>
 
 		</div>
 		<!-- / header -->
@@ -104,5 +112,13 @@
 						<?php nav::main_tabs($this_page); ?>
 					</ul>
 
+				</div>
+				
+				
+				
+				<div id="searchbox">
+				    <!-- searchform -->
+				    <?php echo $search; ?>
+				    <!-- / searchform -->
 				</div>
 				<!-- / mainmenu -->

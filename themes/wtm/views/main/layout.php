@@ -18,6 +18,9 @@ $(function(){
 </script>
 <!-- main body -->
 <div id="main" class="clearingfix">
+	<a id="submitAReport" href="<?php echo url::base();?>reports/submit">
+	    <img src="<?php echo url::base(); ?>themes/wtm/images/submitAReport.png"/>
+	</a>	
 	<div id="mainmiddle">
 
 		<!-- right column -->
@@ -73,7 +76,8 @@ $(function(){
 							$layer_link = (!$layer_url) ?
 								url::base().Kohana::config('upload.relative_directory').'/'.$layer_file :
 								$layer_url;
-							echo '<li><a href="#" id="layer_'. $layer .'" meta_data="<strong>'.htmlentities($layer_name).':</strong><br/><br/>'.htmlentities($layer_meta_data).'">';    														
+							echo '<li><a href="#" id="layer_'. $layer .'" >';
+							echo '<div class="color_swatch" style="background-color:#'.$layer_color.';"></div>';
 							if($layer_icon != null OR $layer_icon != ""){
 							    echo '<span class="swatch" >';
 							    echo '<image src="'.url::base().'media/uploads/'.$layer_icon. '"/>';
@@ -82,12 +86,15 @@ $(function(){
 							}
 							echo '</span>';
 							
-							echo '<span class="layer-name">'.$layer_name.'</span></a></li>';
+							echo '<span class="layer-name">'.$layer_name.'</span>';
+							echo '<div class="layerMeta">';
+							echo $layer_meta_data;
+							echo '</div>';
+							echo '</a></li>';
 							
-							render_child_layers($layer, $layers);
+							//render_child_layers($layer, $layers);
 						}
 						?>
-						<li id="layer_meta_window"></li>
 					</ul>
 				</div>
 				<!-- /Layers -->
