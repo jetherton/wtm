@@ -126,6 +126,7 @@
 				fontWeight: "bold",
 				labelOutlineColor: '${labelOutlineColor}',
 				labelOutlineWidth: '${labelOutlineWidth}',
+				labelYOffset: '${labelYOffset}'
 			},{
 				context: {
 				    label: function(feature) {
@@ -172,12 +173,14 @@
 				    iconOffsetX: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return -5;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png") {
-						    return -5;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png" ||
+						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/location_square.png" ||
+						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/wreck_cross.png") {
+						    return -10;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return -20;
 						} else {
-						   return -7;
+						   return -20;
 						}
 					},
 				    iconOffsetY: function(feature) {
@@ -188,7 +191,20 @@
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return -10;
 						} else {
-						    return -27;
+						    return -15;
+						}	
+					},
+				    labelYOffset: function(feature) {
+						if(typeof feature.attributes.icon == "undefined"){
+						    return -5;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png" ||
+						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/location_square.png" ||
+						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/wreck_cross.png") {
+						    return -20;
+						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
+						    return 0;
+						} else {
+						    return -25;
 						}	
 					},
 				    fontSize: function(feature){
@@ -281,12 +297,12 @@
 				//fillOpacity: "0.7",
 				//strokeColor: "#197700",
 				//strokeWidth: 2.5,
-				graphicZIndex: 1,
+				graphicZIndex: 100,
 				graphicOpacity: 0.5,
-				graphicWidth: 26,
-				graphicHeight: 31,
-				graphicXOffset: -16,
-				graphicYOffset: -30
+				//graphicWidth: 26,
+				//graphicHeight: 31,
+				//graphicXOffset: -16,
+				//graphicYOffset: -30
 				
 			});
 			
