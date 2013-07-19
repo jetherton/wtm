@@ -77,14 +77,19 @@ div.content-container {background:none;}
   margin:0 auto;
 }
 div#searchbox {
-  position: absolute;
-  right: 26px;
+  position: relative;
+  right: -765px;
   border: none;
   background: transparent;
   width: auto;
-  top:111px;
+  top:-3px;
   z-index: 10000;
 }
+
+div.search-form, div.search-form ul li{
+    float:none;
+}
+
 
 
 div#loggedin_user_action {
