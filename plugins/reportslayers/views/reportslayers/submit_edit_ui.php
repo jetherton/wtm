@@ -31,10 +31,10 @@
 		    echo '<label>';
 		    echo form::checkbox('reportslayers[]', $layer_id, in_array($layer_id, $selections), ' class="check-box layer_switcher" id="layer_'.$layer_id.'"');
 		    if(strpos(url::current(), 'admin/reports/edit') !== false){
-				echo $layer->icon != null ? '<span><img src="'.url::base().'media\uploads\\'.$layer->icon.'"\></span>' : '<span class="swatch" style="background-color:#'.$layer_color.'"></span>';
+				echo $layer->icon != null ? '<span><img src="'.url::base().'media/uploads/'.$layer->icon.'"\></span>' : '<span class="swatch" style="background-color:#'.$layer_color.'"></span>';
 			}
 			else{
-		    	echo $layer->layer_icon_thumb != null ? '<span><img src="'.url::base().'media\uploads\\'.$layer->layer_icon_thumb.'"\></span>' : '<span class="swatch" style="background-color:#'.$layer_color.'"></span>';
+		    	echo $layer->layer_icon_thumb != null ? '<span><img src="'.url::base().'media/uploads/'.$layer->layer_icon_thumb.'"\></span>' : '<span class="swatch" style="background-color:#'.$layer_color.'"></span>';
 		    }
 		    echo '<span class="layer-name">'.$layer_name.'</span>';
 		    echo '</label>';
