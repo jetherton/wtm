@@ -38,14 +38,20 @@
 						</a>
 					</li>
 					<?php endif; ?>
+					
+					<li>
+						<a href="<?php echo url::site()."contact"; ?>">
+							Impressum
+						</a>
+					</li>
 
-					<?php if (Kohana::config('settings.site_contact_page')): ?>
+					
 					<li>
 						<a href="<?php echo url::site()."contact"; ?>">
 							<?php echo Kohana::lang('ui_main.contact'); ?>
 						</a>
 					</li>
-					<?php endif; ?>
+					
 
 					<?php
 					// Action::nav_main_bottom - Add items to the bottom links

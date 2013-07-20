@@ -255,7 +255,7 @@ div#right { position:absolute; z-index:1000; }
     top:0px; 
     left:0px; 
     width:183px; 
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
     border-radius: 0px;
     -webkit-border-radius:px;
     border-radius:3px;
@@ -292,7 +292,7 @@ div#right { position:absolute; z-index:1000; }
       -moz-border-radius: 0px; 
       -webkit-border-radius: 0px; 
       float:left; 
-      background-color:rgba(255,255,255,0.75);
+      background-color:rgba(255,255,255,0.85);
       }
   
       
@@ -374,7 +374,7 @@ div.map.timeline-enabled {height:529px; }
     font-weight:bold;
     font-size:13px;
     text-transform: uppercase;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -452,6 +452,12 @@ div#footer {
   margin-top:20px;
   background: none;
 }
+
+.page-main #footer{
+    position:relative;
+    top:-80px;
+}
+
 div#underfooter { background:transparent; }
 
 
@@ -536,7 +542,7 @@ agile_light_1em{
 }
 
 .wtm_head_up{
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
     padding:14px;
     box-shadow: 1px 1px 2px #a6a29f;
 }
@@ -550,7 +556,7 @@ h1{
     font-family: Georgia;
     text-decoration: none;
     word-spacing: 0.1em;
-    font-size:23px;
+    font-size:24px;
       
 }
 h2{
@@ -588,8 +594,8 @@ h2{
     word-spacing: normal;
     text-align: left;
     letter-spacing: 0;
-    line-height: 1.6em;
-    font-size: 1em;
+    line-height: 13px;
+    font-size: 13px;
 }
 
 .front_teaser{
@@ -626,6 +632,10 @@ img.teaser_img{
     border-bottom: solid 6px #a6a29f;
 }
 
+#front_about p{
+    font-size:16px;
+}
+
 #how_to_report_box p {
     font-family: Agile-Light;
     color: #333;
@@ -647,9 +657,13 @@ img.teaser_img{
     font-weight: normal;
     font-size: 13px;
 }
+#how_to_report_box h2{
+    font-size:16px;
+}
 
 #front_social{
-    height:53px;
+    height:50px;
+    padding:0px;
 }
 
 #chicken_GroupDiv .infowindow .infowindow_image{
@@ -874,7 +888,7 @@ div#report-type-filter ul li a{
     height:29px;
     display:block;
     width:32px;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
     margin:0px;
     padding:0px;
 }
@@ -890,7 +904,7 @@ div#report-type-filter ul li div{
     height:23px;
     display:block;
     width:53px;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
     margin:0px;
     font-size: 13px;
     padding-top: 6px;
@@ -930,18 +944,34 @@ div#report-type-filter ul li a#media_2{
 
 div.slider-holder {
     width:939px;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
     margin-top: 0px;
-    top: -40px;
-    position: relative;
     padding-right: 11px;
+    top: -60px;
+    position:relative;
+}
+
+div#graphWrapper{
+    top: -50px;
+    position:relative;
+}
+
+div#graphSwitch{
+    background: rgba(150,150,150,0.85);
+    width: 100px;
+    padding: 8px;
+    border-radius: 3px;
+    margin-bottom:10px
+}
+div#graphSwitch:hover{
+    cursor:pointer;
 }
 
 div.graph-holder{
     width:960px;
-    top: -45px;
     position: relative;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.85);
+    display:none;
 }
 
 div.report_row div.report_map{
@@ -1066,4 +1096,14 @@ a.active div.layerMeta{
 
 div.olControlScaleLine{
     display:none;
+}
+
+#front-page-news h1 a{
+    font-family: "Georgia";
+    font-size:24px;
+}
+
+#front-page-news .front_teaser{
+    font-family: "Georgia";
+    font-size:13px;
 }

@@ -84,6 +84,9 @@ var endTime = <?php echo $active_endDate ?>;
 // To hold the Ushahidi.Map reference
 var map = null;
 
+var graphData = null;
+
+var graphColor = null;
 
 
 /******
@@ -180,7 +183,7 @@ function refreshTimeline(options) {
 			if (response != null && response[0].data.length < 2)
 				return;
 
-			var graphData = [];
+			graphData = [];
 			var raw = response[0].data;
 			for (var i=0; i<raw.length; i++) {
 				var date = new Date(raw[i][0]);
@@ -191,9 +194,20 @@ function refreshTimeline(options) {
 
 				graphData.push([dateStr, parseInt(raw[i][1])]);
 			}
-			var timeline = $.jqplot('graph', [graphData], {
+			graphColor = response[0].color;
+			reDrawGraph();
+		},
+		dataType: "json"
+	});
+	<?php }?>
+}
+
+
+
+function reDrawGraph(){
+    var timeline = $.jqplot('graph', [graphData], {
 				seriesDefaults: {
-					color: response[0].color,
+					color: graphColor,
 					lineWidth: 1.6,
 					markerOptions: {
 						show: false
@@ -218,10 +232,6 @@ function refreshTimeline(options) {
 				},
 				cursor: {show: false}
 			});
-		},
-		dataType: "json"
-	});
-	<?php }?>
 }
 
 

@@ -283,9 +283,11 @@ $(function(){
 			    <a class="social" href="<?php echo url::base();?>rss"><div id="social_rss"></div></a>
 			</div>
 			
+			<!--
 			<div id="tag cloud" class="wtm_head_up">
 			    <h1>Not sure what goes here</h1>
 			</div>
+			-->
 
 		    </li>
 		</ul>
