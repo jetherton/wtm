@@ -1223,7 +1223,10 @@ ul.link-toggle li a.next{
     
 }
 
-.r_details h3 span.r_verified{display:none;}
+.r_details h3 span.r_verified,
+.r_details h3 span.r_unverified{
+    display:none;
+}
 
 .r_media{
     width:auto;
@@ -1311,7 +1314,8 @@ p.r_location a{
     top: 0px;
 }
 
-#rb_list-view .verified{
+#rb_list-view .verified,
+#rb_list-view .unverified{
     border-left:none;
 }
 
