@@ -119,11 +119,11 @@ $(function(){
 				<div id="report-type-filter" class="filters">
 
 										<ul>
-											<li><div>filter</div></li>
+											<li class="left_most_filter"><div>filter</div></li>
 											<li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
 											<li><a id="media_4" href="#"></span></a></li>
 											<li><a id="media_1" href="#"></span></a></li>
-											<li><a id="media_2" href="#"></a></li>
+											<li class="right_most_filter" ><a id="media_2" href="#"></a></li>
 											
 										</ul>
 										<div class="floatbox">

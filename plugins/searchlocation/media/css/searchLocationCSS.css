@@ -4,13 +4,14 @@
 	top: 10px;
 	left: 235px;
 	background:#e0e1e3;
+	border-radius: 3px;
 }
 
 
 #searchControl img.searchIcon{
-	background: url(../img/searchIcon.png) -66px -4px;
+	background: url(../img/searchIcon.png) -66px -2px;
 	height: 30px;
-	width:167px;
+	width:167px;	
 }
 
 #searchButtons{

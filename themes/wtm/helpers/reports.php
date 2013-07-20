@@ -512,7 +512,7 @@ class reports_Core {
 								->save(Kohana::config('upload.directory', TRUE).$media_medium);
 							
 							// Thumbnail
-							Image::factory(Kohana::config('upload.directory', TRUE).$media_link)->resize(220,146,Image::HEIGHT)
+							Image::factory(Kohana::config('upload.directory', TRUE).$media_link)->resize(220,145,Image::HEIGHT)
 								->save(Kohana::config('upload.directory', TRUE).$media_thumb);
 						}
 						catch (Exception $e)
@@ -585,7 +585,7 @@ class reports_Core {
 						->save(Kohana::config('upload.directory', TRUE).$media_medium);
 
 					// Thumbnail
-					Image::factory($filename)->resize(89,59,Image::HEIGHT)
+					Image::factory($filename)->resize(220,145,Image::HEIGHT)
 						->save(Kohana::config('upload.directory', TRUE).$media_thumb);
 				}
 				catch (Kohana_Exception $e)

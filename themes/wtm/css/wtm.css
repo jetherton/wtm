@@ -369,12 +369,15 @@ div.map.timeline-enabled {height:529px; }
     width:270px; float:none; overflow:auto; 
     position: relative;
     top: -40px;
-    left:217px;
+    left:227px;
     font-family:Agile-Light;
     font-weight:bold;
     font-size:13px;
     text-transform: uppercase;
     background: rgba(255,255,255,0.75);
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 
 }
 
@@ -662,22 +665,27 @@ img.teaser_img{
 }
 
 .infowindow{
-	maring-top:15px;
-	margin-left:15px;
-	width:220px;
+
 }
 
 .infowindow .infowindow_content { 
-	width: 240px;
+	width: 220px;
 }
 .infowindow a, .infowindow a:hover{ 
 	color: #333;
 	text-decoration:none;
 	font-weight:normal;
+	font-size:13px;
+	font-family: Georgia;
 }
 
 .infowindow a .underline{ 
 	text-decoration:underline;
+}
+
+.infowindow a strong{
+    font-family: Agile-bold;
+    font-weight: normal;
 }
 
 .social{
@@ -842,7 +850,7 @@ div.report-find-location #panel{
 
 div#report-type-filter{
     position:relative;
-    top:-73px;
+    top:-74px;
     left:6px;
 }
 
@@ -851,9 +859,19 @@ div#report-type-filter ul li {
     margin-right: 0px;
 }
 
+div#report-type-filter ul li.left_most_filter{
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+}
+
+div#report-type-filter ul li.right_most_filter{
+    border-top-right-radius:3px;
+    border-bottom-right-radius:3px;
+}
+
 div#report-type-filter ul li a{
     font-family:Agile-Light;
-    height:28px;
+    height:29px;
     display:block;
     width:32px;
     background: rgba(255,255,255,0.75);
@@ -862,13 +880,14 @@ div#report-type-filter ul li a{
 }
 div#report-type-filter ul li a:hover{
     border:none;
-    -moz-border-radius:none;
-    -webkit-border-radius: none;
+    -moz-border-radius:0px;
+    -webkit-border-radius: 0px;
+    
 }
 
 div#report-type-filter ul li div{
     font-family:Agile-Light;
-    height:22px;
+    height:23px;
     display:block;
     width:53px;
     background: rgba(255,255,255,0.75);
@@ -882,7 +901,7 @@ div#report-type-filter ul li div{
 }
 
 div#report-type-filter ul li a#media_0{
-    height:22px;    
+    height:23px;    
     padding-top: 6px;
     padding-left: 6px;
     color:#333;
@@ -895,16 +914,18 @@ div#report-type-filter ul li a#media_0 span{
 
 
 div#report-type-filter ul li a#media_4{
-    background-image: url('../images/media_filter_sprite.png');
+    background-image: url('../images/news.png');
     background-position: 0px -2px;
 }
 div#report-type-filter ul li a#media_1{
-    background-image: url('../images/media_filter_sprite.png');
-    background-position: -35px -1px;
+    background-image: url('../images/photo.png');
+    background-position: -0px -2px;
+    width:35px;
 }
 div#report-type-filter ul li a#media_2{
-    background-image: url('../images/media_filter_sprite.png');
-    background-position: -78px -1px;
+    background-image: url('../images/video.png');
+    background-position: -0 -2px;
+    width:40px;
 }
 
 div.slider-holder {

@@ -165,16 +165,19 @@ class reportslayers {
 		    foreach($standard_layers_orm as $orm){
 			$standard_layers[] = $orm;
 		    }
-
-		    $special_layers_orm = ORM::factory('layer')
-			    ->join('reportslayers', 'reportslayers.layer_id', 'layer.id','INNER')
-			    ->where('reportslayers.report_id',$id)
-			    ->where('date_uploaded <> \'0000-00-00\'')
-			    ->orderby('layer_name', 'asc')
-			    ->find_all();
+		    
 		    $special_layers = array();
-		    foreach($special_layers_orm as $orm){
-			$special_layers[] = $orm;
+
+		    if($id){
+			$special_layers_orm = ORM::factory('layer')
+				->join('reportslayers', 'reportslayers.layer_id', 'layer.id','INNER')
+				->where('reportslayers.report_id',$id)
+				->where('date_uploaded <> \'0000-00-00\'')
+				->orderby('layer_name', 'asc')
+				->find_all();		    
+			foreach($special_layers_orm as $orm){
+			    $special_layers[] = $orm;
+			}
 		    }
 		    $all_layers = array_merge($special_layers, $standard_layers);
 		

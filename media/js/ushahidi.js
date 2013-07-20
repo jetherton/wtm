@@ -803,7 +803,7 @@
 		var image = "";
 		if (event.feature.attributes.thumb !== undefined && event.feature.attributes.thumb != '') {
 			image = "<div class=\"infowindow_image\"><a href='"+event.feature.attributes.link+"'>";
-			image += "<img src=\""+event.feature.attributes.thumb+"\" height=\"146\" width=\"220\" /></a></div><br/>";
+			image += "<img src=\""+event.feature.attributes.thumb+"\" height=\"145\" width=\"220\" /></a></div><br/>";
 		} else if (event.feature.attributes.image !== undefined && event.feature.attributes.image != '') {
 			image = "<div class=\"infowindow_image\">";
 			image += "<a href=\""+event.feature.attributes.link+"\" title=\""+event.feature.attributes.name+"\">";
@@ -831,7 +831,7 @@
 		// Create the popup
 		var popup = new OpenLayers.Popup.FramedCloud("chicken", 
 			event.feature.geometry.getBounds().getCenterLonLat(),
-			new OpenLayers.Size(250,100),
+			null,
 			content,
 			null, true, this.onPopupClose);
 		
@@ -848,6 +848,16 @@
 		$("#zoomOut", popup.contentDiv).click(
 			{context: this, latitude: lat, longitude: lon, zoomFactor: -1}, 
 			this.zoomToSelectedFeature);
+
+		$("#chicken_contentDiv").css("height", "auto");
+		$("#chicken_contentDiv").css("top", "19px");
+		$("#chicken_contentDiv").css("left", "7px");
+		
+		$("#chicken_FrameDecorationDiv_0").css("width", "240px");
+		$("#chicken_FrameDecorationDiv_0").css("height", "auto");
+		
+		$("#chicken_FrameDecorationDiv_2").css("display", "none");
+		
 	}
 
 	/**
@@ -1168,3 +1178,4 @@
 	}
 
 })();
+
