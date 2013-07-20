@@ -23,7 +23,7 @@
 									$all_cat_image = '&nbsp';
 									$all_cat_image = '';
 									if($default_map_all_icon != NULL) {
-										$all_cat_image = html::image(array('src'=>$default_map_all_icon));
+										//$all_cat_image = html::image(array('src'=>$default_map_all_icon));
 									}
 									?>
 									<span class="item-swatch" style="background:none;"><?php echo $all_cat_image ?></span>

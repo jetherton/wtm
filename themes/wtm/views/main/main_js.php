@@ -126,6 +126,7 @@ function toggleLayer(link, layer) {
  * Create a function that calculates the smart columns
  */
 function smartColumns() {
+	return;
 	//Reset column size to a 100% once view port has been adjusted
 	$("ul.content-column").css({ 'width' : "100%"});
 

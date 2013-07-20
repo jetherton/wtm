@@ -81,14 +81,15 @@ div#searchbox {
   right: 0px;
   border: none;
   background: transparent;
-  width: auto;
   top:-53px;
   z-index: 10000;
   height:30px;
+  width:960px;
 }
 div#searchbox div.search-form {
     left:765px;
     position:relative;
+    width:89px;
 }
 div.search-form, div.search-form ul li{
     float:none;
@@ -222,7 +223,7 @@ div#mainmenu a{
 }
 
 /* filter box */
-#report-map-filter-box { position:relative; z-index:1000; left:729px; top:68px; }
+#report-map-filter-box { position:relative; z-index:1000; left:729px; top:68px; width:220px; }
 
 
 
