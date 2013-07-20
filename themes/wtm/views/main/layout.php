@@ -144,12 +144,12 @@ $(function(){
 <!-- / main body -->
 
 <!-- content -->
-<div class="content-container" style="position: relative;top: -200px;">
+<div class="content-container" style="position: relative;top: -185px;">
 
 	<!-- content blocks -->
 	<div class="content-blocks clearingfix">
 		<ul class="content-column">
-		    <li id="front-page-news" class="wtm_head_up" style="width:612px;">
+		    <li id="front-page-news" class="wtm_head_up" style="width:620px;">
 			<h1>News</h1>
 			<table style="width:100%;">
 			    <?php
