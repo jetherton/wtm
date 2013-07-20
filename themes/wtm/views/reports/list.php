@@ -16,19 +16,24 @@
 		<div class="rb_nav-controls r-5">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
+					<!--
 					<td>
 						<ul class="link-toggle report-list-toggle lt-icons-and-text">
 							<li class="active"><a href="#rb_list-view" class="list"><?php echo Kohana::lang('ui_main.list'); ?></a></li>
 							<li><a href="#rb_map-view" class="map"><?php echo Kohana::lang('ui_main.map'); ?></a></li>
 						</ul>
 					</td>
-					<td><?php echo $pagination; ?></td>
+					<td><?php //echo $pagination; ?></td>
+					-->
+					<td style="width:150px;">Icon_here</td>
+					<td>
+					</td>
 					<td><?php echo $stats_breadcrumb; ?></td>
 					<td class="last">
 						<ul class="link-toggle lt-icons-only">
-							<?php //@todo Toggle the status of these links depending on the current page ?>
-							<li><a href="#page_<?php echo $previous_page; ?>" class="prev"><?php echo Kohana::lang('ui_main.previous'); ?></a></li>
-							<li><a href="#page_<?php echo $next_page; ?>" class="next"><?php echo Kohana::lang('ui_main.next'); ?></a></li>
+							<?php //@todo Toggle the status of these links depending on the current page ?>							
+							<li style="position:relative;left:-100px;"><a href="#page_<?php echo $previous_page; ?>" class="prev">&lt;</a></li>							
+							<li style="position:relative;left:-40px;" ><a href="#page_<?php echo $next_page; ?>" class="next">&gt;</a></li>
 						</ul>
 					</td>
 				</tr>
@@ -51,8 +56,8 @@
 					// Trim to 150 characters without cutting words
 					// XXX: Perhaps delcare 150 as constant
 
-					$incident_description = text::limit_chars(html::strip_tags($incident_description), 140, "...", true);
-					$incident_date = date('H:i M d, Y', strtotime($incident->incident_date));
+					$incident_description = text::limit_chars(html::strip_tags($incident_description), 380, "...", true);
+					$incident_date = date('d.m.Y / G:i', strtotime($incident->incident_date));
 					//$incident_time = date('H:i', strtotime($incident->incident_date));
 					$location_id = $incident->location_id;
 					$location_name = $incident->location_name;
@@ -85,59 +90,64 @@
 						}
 					}
 				?>
-				<div id="incident_<?php echo $incident_id ?>" class="rb_report <?php echo $incident_verified_class; ?>">
+				<div id="incident_<?php echo $incident_id ?>" class="rb_report ">
 					<div class="r_media">
-						<p class="r_photo"> <a href="<?php echo $incident_url; ?>">
+						<p class="r_photo <?php echo $incident_verified_class; ?>"> <a href="<?php echo $incident_url; ?>">
 							<img alt="<?php echo html::escape($incident_title); ?>" src="<?php echo $incident_thumb; ?>" /> </a>
 						</p>
 
 						<!-- Only show this if the report has a video -->
-						<p class="r_video" style="display:none;"><a href="#"><?php echo Kohana::lang('ui_main.video'); ?></a></p>
+						<!--
+						    <p class="r_video" style="display:none;"><a href="#"><?php echo Kohana::lang('ui_main.video'); ?></a></p>
+						-->
 
-						<!-- Category Selector -->
-						<div class="r_categories">
-							<h4><?php echo Kohana::lang('ui_main.categories'); ?></h4>
-							<?php
-							$categories = ORM::Factory('category')->join('incident_category', 'category_id', 'category.id')->where('incident_id', $incident_id)->find_all();
-							foreach ($categories as $category): ?>
-								
-								<?php // Don't show hidden categories ?>
-								<?php if($category->category_visible == 0) continue; ?>
 						
-								<?php if ($category->category_image_thumb): ?>
-									<?php $category_image = url::site(Kohana::config('upload.relative_directory')."/".$category->category_image_thumb); ?>
-									<a class="r_category" href="<?php echo url::site("reports/?c=$category->id") ?>">
-										<span class="r_cat-box"><img src="<?php echo $category_image; ?>" height="16" width="16" /></span> 
-										<span class="r_cat-desc"><?php echo Category_Lang_Model::category_title($category->id); ?></span>
-									</a>
-								<?php else:	?>
-									<a class="r_category" href="<?php echo url::site("reports/?c=$category->id") ?>">
-										<span class="r_cat-box" style="background-color:#<?php echo $category->category_color;?>;"></span> 
-										<span class="r_cat-desc"><?php echo Category_Lang_Model::category_title($category->id); ?></span>
-									</a>
-								<?php endif; ?>
-							<?php endforeach; ?>
-						</div>
 						<?php
 						// Action::report_extra_media - Add items to the report list in the media section
 						Event::run('ushahidi_action.report_extra_media', $incident_id);
 						?>
+						
+						<!-- Category Selector -->
+						    <div class="r_categories">
+							    <?php
+							    $categories = ORM::Factory('category')->join('incident_category', 'category_id', 'category.id')->where('incident_id', $incident_id)->find_all();
+							    foreach ($categories as $category): ?>
+
+								    <?php // Don't show hidden categories ?>
+								    <?php if($category->category_visible == 0) continue; ?>
+
+								    <?php if ($category->category_image_thumb): ?>
+									    <?php $category_image = url::site(Kohana::config('upload.relative_directory')."/".$category->category_image_thumb); ?>
+									    <a class="r_category" href="<?php echo url::site("reports/?c=$category->id") ?>">
+										    <span class="r_cat-box"><img src="<?php echo $category_image; ?>" height="20" width="20" /></span> 
+										    <span class="r_cat-desc"><?php echo Category_Lang_Model::category_title($category->id); ?></span>
+									    </a>
+								    <?php else:	?>
+									    <a class="r_category" href="<?php echo url::site("reports/?c=$category->id") ?>">
+										    <span class="r_cat-box" style="height:20px;width:20px;background-color:#<?php echo $category->category_color;?>;"></span> 
+										    <span class="r_cat-desc"><?php echo Category_Lang_Model::category_title($category->id); ?></span>
+									    </a>
+								    <?php endif; ?>
+							    <?php endforeach; ?>
+						    </div>
+					    <!-- end Category Selector -->
 					</div>
+				    
+					
 
 					<div class="r_details">
+						<p class="r_date r-3 bottom-cap"><?php echo $incident_date; ?> / <a class="date_location" href="<?php echo url::site("reports/?l=$location_id"); ?>"><?php echo html::specialchars($location_name); ?></a></p>
 						<h3><a class="r_title" href="<?php echo $incident_url; ?>">
 								<?php echo html::escape($incident_title); ?>
-							</a>
-							<a href="<?php echo "$incident_url#discussion"; ?>" class="r_comments">
-								<?php echo $comment_count; ?></a> 
+							</a>							
 								<?php echo $incident_verified; ?>
 							</h3>
-						<p class="r_date r-3 bottom-cap"><?php echo $incident_date; ?></p>
-						<div class="r_description"> <?php echo $incident_description; ?>  
-						  <a class="btn-show btn-more" href="#incident_<?php echo $incident_id ?>"><?php echo Kohana::lang('ui_main.more_information'); ?> &raquo;</a> 
-						  <a class="btn-show btn-less" href="#incident_<?php echo $incident_id ?>">&laquo; <?php echo Kohana::lang('ui_main.less_information'); ?></a> 
+						
+						<div class="r_description"> 
+						    <a href="<?php echo $incident_url; ?>">
+						    <?php echo $incident_description; ?>  <span class="description_more">more &gt;</span>						 
+						    </a>
 						</div>
-						<p class="r_location"><a href="<?php echo url::site("reports/?l=$location_id"); ?>"><?php echo html::specialchars($location_name); ?></a></p>
 						<?php
 						// Action::report_extra_details - Add items to the report list details section
 						Event::run('ushahidi_action.report_extra_details', $incident_id);
@@ -152,7 +162,8 @@
 		<!-- /Report listing -->
 		
 		<!-- Bottom paginator -->
-		<div class="rb_nav-controls r-5">
+
+		<div class="rb_nav-controls r-5 bottom">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td>

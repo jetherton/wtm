@@ -2,62 +2,12 @@
 	<div class="content-bg">
 		<!-- start reports block -->
 		<div class="big-block">
-			<h1 class="heading">
-				<?php echo Kohana::lang('ui_main.showing_reports_from', array(date('M d, Y', $oldest_timestamp), date('M d, Y', $latest_timestamp))); ?> 
-				<a href="#" class="btn-change-time ic-time"><?php echo Kohana::lang('ui_main.change_date_range'); ?></a>
-			</h1>
 			
-			<div id="tooltip-box">
-				<div class="tt-arrow"></div>
-				<ul class="inline-links">
-					<li>
-						<a title="<?php echo Kohana::lang('ui_main.all_time'); ?>" class="btn-date-range active" id="dateRangeAll" href="#">
-							<?php echo Kohana::lang('ui_main.all_time')?>
-						</a>
-					</li>
-					<li>
-						<a title="<?php echo Kohana::lang('ui_main.today'); ?>" class="btn-date-range" id="dateRangeToday" href="#">
-							<?php echo Kohana::lang('ui_main.today'); ?>
-						</a>
-					</li>
-					<li>
-						<a title="<?php echo Kohana::lang('ui_main.this_week'); ?>" class="btn-date-range" id="dateRangeWeek" href="#">
-							<?php echo Kohana::lang('ui_main.this_week'); ?>
-						</a>
-					</li>
-					<li>
-						<a title="<?php echo Kohana::lang('ui_main.this_month'); ?>" class="btn-date-range" id="dateRangeMonth" href="#">
-							<?php echo Kohana::lang('ui_main.this_month'); ?>
-						</a>
-					</li>
-				</ul>
-				
-				<p class="labeled-divider"><span><?php echo Kohana::lang('ui_main.choose_date_range'); ?>:</span></p>
-				<?php echo form::open(NULL, array('method' => 'get')); ?>
-					<table class="report-date-filter">
-						<tr>
-							<td><strong>
-								<?php echo Kohana::lang('ui_admin.from')?>:</strong><input id="report_date_from" type="text" />
-							</td>
-							<td>
-								<strong><?php echo ucfirst(strtolower(Kohana::lang('ui_admin.to'))); ?>:</strong>
-								<input id="report_date_to" type="text" />
-							</td>
-							<td valign="bottom">
-								<a href="#" id="applyDateFilter" class="filter-button"><?php echo Kohana::lang('ui_main.go')?></a>
-							</td>
-						</tr>
-					</table>
-				<?php echo form::close(); ?>
-			</div>
 
 			<div class="reports-content">
-				<!-- reports-box -->
-				<div id="reports-box">
-					<?php echo $report_listing_view; ?>
-				</div>
-				<!-- end #reports-box -->
-				
+			    
+			    
+			    <!-- Start Filter Box -->
 				<div id="filters-box">
 					<h2><?php echo Kohana::lang('ui_main.filter_reports_by'); ?></h2>
 					<div id="accordion">
@@ -76,8 +26,8 @@
 										$all_cat_image = html::image(array('src'=>$default_map_all_icon));
 									}
 									?>
-									<span class="item-swatch" style="background-color: #<?php echo Kohana::config('settings.default_map_all'); ?>"><?php echo $all_cat_image ?></span>
-									<span class="item-title"><?php echo Kohana::lang('ui_main.all_categories'); ?></span>
+									<span class="item-swatch" style="background:none;"><?php echo $all_cat_image ?></span>
+									<span class="item-title"><?php echo Kohana::lang('ui_main.all'); ?></span>
 									<span class="item-count" id="all_report_count"><?php echo $report_stats->total_reports; ?></span>
 									</a>
 								</li>
@@ -204,6 +154,83 @@
 					</div>          
 				</div>
 				<!-- end #filters-box -->
+			    
+			    
+			    
+			    <div id="reports_listing">
+			    
+			    
+			    
+			    <h1 class="heading">
+				Reports
+				<span id="date_range">
+				<?php echo date('d.m.Y', $oldest_timestamp). " - ". date('d.m.Y', $latest_timestamp); ?> 
+				</span>
+				<a href="#" class="btn-change-time ic-time"><?php echo Kohana::lang('ui_main.change_date_range'); ?></a>
+			</h1>
+			
+			<div id="tooltip-box">
+				<div class="tt-arrow"></div>
+				<ul class="inline-links">
+					<li>
+						<a title="<?php echo Kohana::lang('ui_main.all_time'); ?>" class="btn-date-range active" id="dateRangeAll" href="#">
+							<?php echo Kohana::lang('ui_main.all_time')?>
+						</a>
+					</li>
+					<li>
+						<a title="<?php echo Kohana::lang('ui_main.today'); ?>" class="btn-date-range" id="dateRangeToday" href="#">
+							<?php echo Kohana::lang('ui_main.today'); ?>
+						</a>
+					</li>
+					<li>
+						<a title="<?php echo Kohana::lang('ui_main.this_week'); ?>" class="btn-date-range" id="dateRangeWeek" href="#">
+							<?php echo Kohana::lang('ui_main.this_week'); ?>
+						</a>
+					</li>
+					<li>
+						<a title="<?php echo Kohana::lang('ui_main.this_month'); ?>" class="btn-date-range" id="dateRangeMonth" href="#">
+							<?php echo Kohana::lang('ui_main.this_month'); ?>
+						</a>
+					</li>
+				</ul>
+				
+				<p class="labeled-divider"><span><?php echo Kohana::lang('ui_main.choose_date_range'); ?>:</span></p>
+				<?php echo form::open(NULL, array('method' => 'get')); ?>
+					<table class="report-date-filter">
+						<tr>
+							<td><strong>
+								<?php echo Kohana::lang('ui_admin.from')?>:</strong><input id="report_date_from" type="text" />
+							</td>
+							<td>
+								<strong><?php echo ucfirst(strtolower(Kohana::lang('ui_admin.to'))); ?>:</strong>
+								<input id="report_date_to" type="text" />
+							</td>
+							<td valign="bottom">
+								<a href="#" id="applyDateFilter" class="filter-button"><?php echo Kohana::lang('ui_main.go')?></a>
+							</td>
+						</tr>
+					</table>
+				<?php echo form::close(); ?>
+			</div>
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+				<!-- reports-box -->
+				<div id="reports-box">
+					<?php echo $report_listing_view; ?>
+				</div>
+			    </div>
+				<!-- end #reports-box -->
+				
+				
 			</div>
       
 			<div class="report-stats-container">

@@ -200,13 +200,12 @@ class Reports_Controller extends Main_Controller {
 				// Show the total of report
 				// @todo This is only specific to the frontend reports theme
 				$report_listing->stats_breadcrumb = $pagination->current_first_item.'-'
-											. $pagination->current_last_item.' of '.$pagination->total_items.' '
-											. Kohana::lang('ui_main.reports');
+											. $pagination->current_last_item.' of '.$pagination->total_items;
 			}
 			else
 			{ 
 				// If we don't want to show pagination
-				$report_listing->stats_breadcrumb = $pagination->total_items.' '.Kohana::lang('ui_admin.reports');
+				$report_listing->stats_breadcrumb = $pagination->total_items;
 			}
 		}
 		else
