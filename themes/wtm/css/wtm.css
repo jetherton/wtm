@@ -65,7 +65,7 @@ div.content-container {background:none;}
 .page-main #main { 
     padding:0px 0px; 
     position:relative;
-    top: -91px;
+    top: -110px;
 }
 
 /* top-bar */
@@ -78,14 +78,18 @@ div.content-container {background:none;}
 }
 div#searchbox {
   position: relative;
-  right: -765px;
+  right: 0px;
   border: none;
   background: transparent;
   width: auto;
-  top:-3px;
+  top:-53px;
   z-index: 10000;
+  height:30px;
 }
-
+div#searchbox div.search-form {
+    left:765px;
+    position:relative;
+}
 div.search-form, div.search-form ul li{
     float:none;
 }
@@ -167,7 +171,7 @@ div.submit-incident a, .btn_submit {
 
 #submitAReport{
     position:relative;
-    top:46px;
+    top:-30px;
     
 }
 
@@ -277,6 +281,9 @@ div#right { position:absolute; z-index:1000; }
       margin: 0px;
       padding-left:5px;
       background: none;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 300px;
   }
     .page-main ul.category-filters li li { clear:left; overflow:hidden;}
   .page-main ul.category-filters li a,
@@ -334,6 +341,9 @@ div#right { position:absolute; z-index:1000; }
      width:220px;
      padding:0px;
      overflow:visible;
+    overflow-y: auto;
+    max-height: 300px;
+    overflow-x: hidden;
  }
  ul#kml_switch li{
      padding-left: 0px;
@@ -410,7 +420,7 @@ div.graph-holder {  }
 div.additional-content { display:none; }
 
 /* Home Page Twitter / Mainstream News blocks */
-div.content-container { background:transparent; padding:0px; }
+div.content-container { background:transparent; padding:0px; postio }
 
 div.content-block { position:relative; margin:0 18px; background:#eeedea; }
 div.content-block h5 { float:left; position:absolute; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5; }
@@ -455,7 +465,7 @@ div#footer {
 
 .page-main #footer{
     position:relative;
-    top:-80px;
+    top:-170px;
 }
 
 div#underfooter { background:transparent; }

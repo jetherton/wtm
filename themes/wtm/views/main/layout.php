@@ -18,9 +18,7 @@ $(function(){
 </script>
 <!-- main body -->
 <div id="main" class="clearingfix">
-	<a id="submitAReport" href="<?php echo url::base();?>reports/submit">
-	    <img src="<?php echo url::base(); ?>themes/wtm/images/submitAReport.png"/>
-	</a>	
+	
 	<div id="mainmiddle">
 
 		<!-- right column -->
@@ -146,7 +144,7 @@ $(function(){
 <!-- / main body -->
 
 <!-- content -->
-<div class="content-container" style="position: relative;top: -130px;">
+<div class="content-container" style="position: relative;top: -200px;">
 
 	<!-- content blocks -->
 	<div class="content-blocks clearingfix">
