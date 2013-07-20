@@ -24,6 +24,16 @@ class Reports_Controller extends Admin_Controller {
 		$this->params = array('all_reports' => TRUE);
 	}
 
+	
+	public function deletePhoto($id = 1){
+	    $this->auto_render = false;
+	    $this->template = null;
+	    ORM::factory('media')
+		->where('id',$id)
+		->delete_all();
+	    
+	    echo "droped that photo like a jacket in July";
+	}
 
 	/**
 	 * Lists the reports.

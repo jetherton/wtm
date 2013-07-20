@@ -328,7 +328,7 @@
 				$tt.css({
 					'left': ($(this).offset().left - 6),
 					'top': ($(this).offset().top - 27)
-				}).show();
+				}).hide();
 			}, 
 			
 			function () {

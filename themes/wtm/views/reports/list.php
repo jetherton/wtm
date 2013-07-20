@@ -56,7 +56,7 @@
 					// Trim to 150 characters without cutting words
 					// XXX: Perhaps delcare 150 as constant
 
-					$incident_description = text::limit_chars(html::strip_tags($incident_description), 380, "...", true);
+					$incident_description = text::limit_chars(html::strip_tags($incident_description), 280, "...", true);
 					$incident_date = date('d.m.Y / G:i', strtotime($incident->incident_date));
 					//$incident_time = date('H:i', strtotime($incident->incident_date));
 					$location_id = $incident->location_id;
@@ -117,7 +117,7 @@
 								    <?php if($category->category_visible == 0) continue; ?>
 
 								    <?php if ($category->category_image_thumb): ?>
-									    <?php $category_image = url::site(Kohana::config('upload.relative_directory')."/".$category->category_image_thumb); ?>
+									    <?php $category_image = url::base()."media/uploads/".$category->category_image_thumb; ?>
 									    <a class="r_category" href="<?php echo url::site("reports/?c=$category->id") ?>">
 										    <span class="r_cat-box"><img src="<?php echo $category_image; ?>" height="20" width="20" /></span> 
 										    <span class="r_cat-desc"><?php echo Category_Lang_Model::category_title($category->id); ?></span>

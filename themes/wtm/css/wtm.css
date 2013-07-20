@@ -1312,6 +1312,7 @@ p.r_location a{
     position: absolute;
     right: -30px;
     top: 0px;
+    margin-top: 0px;
 }
 
 #rb_list-view .verified,
@@ -1432,4 +1433,16 @@ a.filter-button:hover{
 }
 a.filter-button:hover{
     color:black;
+}
+
+a.r_category span.r_cat-box{
+    height:20px;
+    width:20px;    
+}
+
+a.r_category {
+    float:none;
+    width:20px;
+    height:20px;
+    margin-bottom:15px;
 }
