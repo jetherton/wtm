@@ -165,7 +165,7 @@ class VideoEmbed
 				// Check for autoplay
 				$you_auto = ($auto) ? "&autoplay=1" : "";
 				
-				$output = '<iframe id="ytplayer" type="text/html" width="320" height="265" '
+				$output = '<iframe id="ytplayer" type="text/html" width="310" height="265" '
 					. 'src="http://www.youtube.com/embed/'.html::escape($code).'?origin='.urlencode(url::base()).html::escape($you_auto).'" '
 					. 'frameborder="0"></iframe>';
 			break;

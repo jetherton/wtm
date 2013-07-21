@@ -256,6 +256,7 @@ class Reports_Controller extends Main_Controller {
 			'incident_hour' => '',
 			'incident_minute' => '',
 			'incident_ampm' => '',
+			'incident_timeZone' => '',
 			'latitude' => '',
 			'longitude' => '',
 			'geometry' => array(),
@@ -286,6 +287,7 @@ class Reports_Controller extends Main_Controller {
 		$form['incident_hour'] = date('g');
 		$form['incident_minute'] = date('i');
 		$form['incident_ampm'] = date('a');
+		$form['incident_timeZone'] = date('e');
 		$form['country_id'] = Kohana::config('settings.default_country');
 
 		// Initialize Default Value for Hidden Field Country Name, just incase Reverse Geo coding yields no result
@@ -618,7 +620,7 @@ class Reports_Controller extends Main_Controller {
 			$this->template->content->incident_location = $incident->location->location_name;
 			$this->template->content->incident_latitude = $incident->location->latitude;
 			$this->template->content->incident_longitude = $incident->location->longitude;
-			$this->template->content->incident_date = date('M j Y', strtotime($incident->incident_date));
+			$this->template->content->incident_date = date('d.m.Y', strtotime($incident->incident_date));
 			$this->template->content->incident_time = date('H:i', strtotime($incident->incident_date));
 			$this->template->content->incident_category = $incident->incident_category;
 
@@ -644,7 +646,7 @@ class Reports_Controller extends Main_Controller {
 				{
 					$incident_photo[] = array(
 						'large' => url::convert_uploaded_to_abs($media->media_link),
-						'thumb' => url::convert_uploaded_to_abs($media->media_thumb)
+						'thumb' => url::convert_uploaded_to_abs($media->media_medium)
 						);
 				}
 			}

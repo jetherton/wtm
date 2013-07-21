@@ -29,7 +29,13 @@ class category_Core {
 
 		$html .= "<label>";
 		$html .= form::checkbox($form_field.'[]', $cid, $category_checked, ' class="check-box"'.$disabled);
-		$html .= $category['category_title'];
+		
+		$cat = ORM::factory('category', $cid);
+		if($cat->category_image_thumb){
+		    $html .= '<img src="'.url::base().'media/uploads/'.$cat->category_image_thumb.'"/>';
+		}
+		
+		$html .= '<span class="labelStr">'.$category['category_title'].'</span>';
 		$html .= "</label>";
 
 		return $html;

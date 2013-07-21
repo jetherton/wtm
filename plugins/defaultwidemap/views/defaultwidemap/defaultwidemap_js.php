@@ -39,13 +39,13 @@
 		$('.report-find-location').prependTo($('.report_left'));
 		$('#divMap').parent().prependTo($('.report_left'));
 
-		$('#divMap').width(900);
-		$('.report-find-location').width(882);
-		$('.report-find-location').height(50);
+		$('#divMap').width(960);
+		$('.report-find-location').width(940);
+		$('.report-find-location').height(30);
 		$('#location_find').css({"float": "right","top": "-38px","position": "relative"});
 		$('#button').css({"float": "right","top": "-38px","position": "relative"});
 		$('#find_text').css({"position":"relative", "top":"-32px"});
-		$('.report_right').css({"position":"relative", "top":"445px"});
+		$('.report_right').css({"position":"relative", "top":"430px"});
 		$('#divMap').parent().css({'margin':'0'});
 		$('.report_optional').prependTo($('.btn_submit').parent());
 		

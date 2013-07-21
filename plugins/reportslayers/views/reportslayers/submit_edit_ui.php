@@ -39,7 +39,7 @@
 		    echo '<span class="layer-name">'.$layer_name.'</span>';
 		    echo '</label>';
 
-		    render_child_layers_edit_submit($layer, $layers);
+		    //render_child_layers_edit_submit($layer, $layers);
 		    echo '</li>';
 		}
 		echo '</ul>';

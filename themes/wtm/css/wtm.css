@@ -223,7 +223,12 @@ div#mainmenu a{
 }
 
 /* filter box */
-#report-map-filter-box { position:relative; z-index:1000; left:729px; top:68px; width:220px; }
+body.page-main #report-map-filter-box { 
+    position:relative; 
+    z-index:1000; 
+    left:730px; 
+    top:16px; 
+    width:220px; }
 
 
 
@@ -442,10 +447,13 @@ table.table-list thead th.date { width:20%; }
     border:none;
     margin:0px 0px; 
     background:none; 
-    padding:0px; }
+    padding:0px; 
+    overflow: visible;
+    height:auto;
+}
 
 #reports-box { 
-    width:630px; 
+    width:620px; 
     float:none;
 }
 
@@ -457,26 +465,100 @@ table.table-list thead th.date { width:20%; }
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-left: none;
+  padding-bottom: 10px;
 }
 
 
 
 /* single report page */
-div#main { padding:15px 10px; }
-#main .left-col { background:#EEEDEA; position:relative; padding:35px 10px 10px; margin:4px 0 0 18px; width:525px; }
+div#main.report_detail { padding:0px 0px; }
+#main .left-col { 
+    background:rgba(255,255,255,0.85); 
+    position:relative; 
+    padding:10px; 
+    margin:0px; 
+    width:620px; }
 
 
 
-.left-col h1.report-title { float:left; position:absolute; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5; color:#fff; }
+.left-col h1.report-title { 
+    float:none; 
+    position:inherit; 
+    border:none; 
+    background:none;
+    color:#333; 
+    font-family: Georgia;
+    font-size:24px;
+    border-bottom: 5px solid #a7e0fd;
+    padding-bottom: 5px;
+    margin:0px;
+}
 
-.report_detail .r_verified { position:absolute; top:10px; right:18px;  }
+.report_detail .r_verified,
+.report_detail .r_unverified{ 
+    position:absolute; 
+    top:46px; 
+    right:10px;  
+    font-family: Agile-Light;
+    font-size:13px;
+    color:#333;
+    background:none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border-bottom: 5px solid #93ba5f;
+    font-weight: normal;
+    width:120px;
+    text-align:right;
+    padding-right:0px;
+}
 
-div.report-additional-reports { background:#EEEDEA; position:relative; padding:35px 10px 10px; margin-left:18px; }
-div.report-additional-reports h4 { position:absolute; float:left; top:-18px; left:-18px; padding:5px; border:7px solid #fff; background:#529bf5; color:#fff; }
+.report_detail .r_unverified{ 
+    border-bottom: 5px solid #f00085;
+}
+
+
+div.report-additional-reports { 
+    background:rgba(255,255,255,0.85); 
+    position:relative; 
+    padding:10px; 
+    padding-bottom:0px;
+    margin-left:0px; 
+    box-shadow: 1px 1px 2px #a6a29f;
+    margin-bottom: 10px;
+}
+div.report-additional-reports h4 { 
+    position:relative;
+    float:none; 
+    padding:5px; 
+    border:none; 
+    background:none;
+    color:#333; 
+    font-family: Georgia;
+    font-size:16px;
+    border-bottom: solid 6px #a6a29f;
+    text-align: center;
+}
 div.report-additional-reports h5 { font-family: Arial, sans-serif;  }
 
 /* reports page */
-.report_right { width:450px;}
+.report_right { 
+    background: none;
+    margin-top:0px;
+    padding:0px;   
+    border:none;
+    width:470px;
+    left:40px;
+    
+}
+#right_top_half{
+    background: rgba(230,230,230,0.85);
+    box-shadow: 1px 1px 1px #999;
+    margin-top:0px;
+    padding:10px;   
+    border:none;
+    width:449px;
+}
 
 /* get alerts page */
 .step-1 h2 {
@@ -854,7 +936,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 
 .report-find-location .btns{
     padding:0px;
-    margin: 5px 5px 0 0;
+    margin: 0px 0px 0 0;
 }
 
 .report-find-location .btns a{
@@ -895,7 +977,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 
 
 div.report-find-location #panel{
-    margin: 5px 5px 0 0;
+    margin: 0px 0px 0 0;
 }
 
 div#report-type-filter{
@@ -1012,6 +1094,7 @@ div.graph-holder{
 
 div.report_row div.report_map{
     overflow:visible;
+    border:none;
 }
 
 #geometryPointsHolder {
@@ -1150,9 +1233,15 @@ div#content{
     top: -52px;
 }
 
+body.page-page-index div#content{
+    background: rgba(255,255,255,0.85);
+    box-shadow: 1px 1px 1px #999;
+    padding:10px;
+}
+
 span#date_range{
     font-family: Agile-light;
-    margin-left:70px
+    margin-left:40px
 }
 
 a.ic-time {
@@ -1169,7 +1258,7 @@ a.ic-time {
 }
 
 #reports_listing{
-    width:630px;
+    width:620px;
     background: rgba(255,255,255,0.85);
     box-shadow: 1px 1px 1px #999;
     padding:10px;
@@ -1177,7 +1266,7 @@ a.ic-time {
 
 #filters-box{
     margin-left: 10px;
-    width:280px;
+    width:290px;
     float:right;
     background: rgba(255,255,255,0.85);
     box-shadow: 1px 1px 1px #999;
@@ -1252,16 +1341,15 @@ ul.link-toggle li a.next{
     border:none;
 }
 .r_photo img{
-    max-width:222px;
-    max-height:146px;
+    max-width:150px;
+    max-height:none;
 }
 
 .r_details{
     float:none;
     width:auto;
     margin:0px;
-    padding-bottom: 10px;
-    min-height: 146px;
+    padding-bottom: 0px;
 }
 p.r_date{
     position:inherit;
@@ -1278,7 +1366,7 @@ p.r_date a.date_location{
 .r_details h3 a.r_title{
     color:#333;
     font-family:Georgia;
-    font-size:24px;
+    font-size:16px;
 }
 .r_details h3{
     width:auto;
@@ -1409,11 +1497,17 @@ ul.filter-list li a span.item-title{
 .ui-accordion .ui-accordion-content a.reset, .ui-accordion .ui-accordion-header a.reset, a.reset{
     color:#727272;
     font-family: Georgia;
-    font-size:16px;
+    font-size:13px;
 }
 
 a.filter-button,
-a.filter-button:hover{
+a.filter-button:hover,
+.btn_submit,
+.btn_submit:hover{
+    text-shadow: none;
+    text-transform: uppercase;
+    font-family: Agile-Light;
+    font-size: 16px;
     background:#a8e0ff;
     color:#333;
     box-shadow: 2px 2px 2px gray;
@@ -1432,7 +1526,8 @@ a.filter-button:hover{
   /* Opera 11.10+ */
   background: -o-linear-gradient(top, #a8e0ff, #a8e0ff);
 }
-a.filter-button:hover{
+a.filter-button:hover,
+.btn_submit:hover{
     color:black;
 }
 
@@ -1449,7 +1544,241 @@ a.r_category {
 }
 
 
-body#page div#content{
+
+
+div.report-category-list a span.r_cat-box{
+    height:20px;
+    width:20px;
+}
+
+div#main.report_detail{
+    position: relative;
+    top:-81px;
+    
+}
+
+div.report-category-list a{
+    background:none;
+    color:#333;
+    font-size:13px;
+    margin-bottom:0px;
+    
+}
+div.report-category-list{
+    border-top: none;
+    border-bottom: solid 1px #a6a29f;
+    padding:0px;
+}
+
+.report-when-where {
+    font-family: Agile-Bold;
+    font-size:13px;
+    color:#333;
+    border-bottom: solid 1px #a6a29f;
+    padding: 10px 0px;
+}
+
+.r_categories, .r_location,
+.report_detail .r_location{
+    display:inline;
+    padding:0px;
+    background:none;
+}
+.report_detail .r_date{
+    background:none;
+    padding:0px;
+}
+div.report-description-text{
+    font-family:Georgia;
+    font-size: 16px;
+    padding:0px;
+}
+div.report-description-text h5{
+    font-family:Georgia;
+    font-size: 18px;
+}
+div.report-description-text div.news_sources a{
+    font-size:13px;
+}
+#main .right-col{
+    padding:0px;
+    width:310px;
+}
+div.report-media {
+    padding:0px;
+    padding-bottom: 10px;
+}
+
+div.report-media .photothumb img{
+    max-width: 310px;
+}
+div.report-additional-reports .rb_report{
+    padding:10px 0px;
+}
+div.report-additional-reports .rb_report h5 a,
+div.report-additional-reports .rb_report .r_location,
+div.report-additional-reports .rb_report .r_date {
+    font-family: Georgia;
+    font-size:13px;    
+    background:none;
+    color:#333;
+    padding:0px;
+    margin:0px;
+    font-weight: normal;
+}
+div.report-additional-reports .rb_report h5 a{
+    text-decoration: underline;
+}
+
+div.realCredibility{
+    display:none;
+}
+div.comment-block{
+    display:none;
+}
+div.report-media-box-content{
+    padding:0px;
+}
+.report-find-location {
+    width:960px;
+}
+
+.report-find-location{
     background: rgba(255,255,255,0.85);
-    padding:10px;
+    box-shadow: 1px 1px 1px #999;
+    padding:10px;   
+    border:none;
+}
+
+.olControlEditingToolbar{
+    margin:0px;
+}
+
+div#submit_real_left{
+    background: rgba(230,230,230,0.85);
+    box-shadow: 1px 1px 1px #999;
+    margin-top:10px;
+    padding:10px;   
+    border:none;
+    width:450px;
+}
+
+div#submit_real_left h1{
+    font-family: Georgia;
+    font-weight: bold;
+    font-size:24px;
+    color:#333;
+    border-bottom: solid 5px #333;
+}
+
+.report_row h4 {
+    font-family: Agile-Bold;
+    font-size:13px;
+    color:#333;
+}
+
+span.required {
+    display: none;
+}
+
+.allowed-html {
+    font-family: Agile-Light;
+    font-size:13px;
+    color:#333;
+    margin-bottom: 5px;
+}
+.report_category ul li input.check-box {
+    width:20px;
+    height:20px;
+    background:white;
+    border:none;
+}
+.report_category ul li label{
+    color:#333;
+    font-size: 13px;
+}
+.report_category ul li label span.labelStr{
+    position: relative;
+    top:-5px;
+}
+.report_category ul li label img{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.report_category ul li {
+    margin-bottom:10px;
+}
+.report_category ul li label span.layer-name{
+    top:-5px;
+    margin-left:0px;
+}
+
+.report_category ul li label .swatch{
+    float:none;
+}
+
+a.add, a.rem {
+    margin: 0px 0 0 0px;
+    text-indent: -3000px;
+    overflow: hidden;
+    width: 30px;
+    height: 30px;
+    float: left;
+    background: white url(../images/ZoomIn.png) no-repeat;
+    background-position: 5px 4px;
+    position: relative;
+    right: -10px;
+}
+a.rem {
+    background: white url(../images/ZoomOut.png) no-repeat;
+    background-position: 5px,4px;
+    margin-left: 10px;
+}
+
+
+.long {
+width: 435px;
+border: none;
+height: 24px;
+}
+textarea.long{
+    height:150px;
+}
+
+.long2 {
+width: 395px;
+float: left;
+margin-bottom: 10px;
+border: none;
+height: 24px;
+}
+
+.link-row.second .long2 {
+    width: 355px;
+}
+
+input.file{
+    font-family: Agile-Bold;
+    font-size:13px;
+    color:#333;
+    width:410px;
+    
+}
+.link-row.second input.file{
+    width:370px;
+}
+.report_optional{
+    width: 438px;
+    margin-top: 10px;
+    background: rgba(230,230,230,0.85);
+    box-shadow: 1px 1px 1px #999;
+}
+.report_optional .long{
+    width: 430px;
+}
+
+.report_optional h3{
+    font-family: Georgia;
+    font-size:16px;
+    color:#333;
 }

@@ -994,13 +994,14 @@
                     
                     
                     
-		
+			<?php if(Router::$method == 'edit'){ ?>
 			// Category treeview
 			$(".category-column").treeview({
 			  persist: "location",
 			  collapsed: true,
 			  unique: false
 			});
+			<?php } ?>
 			
 			// Date Picker JS
 			$("#incident_date").datepicker({ 
@@ -1019,7 +1020,7 @@
 				{
 					case "wider-map":
 						$('.incident-location').insertBefore($('.f-col'));
-						$('.map_holder_reports').css({"height":"350px", "width": "935px"});
+						$('.map_holder_reports').css({"height":"310px", "width": "960px"});
 						$('.incident-location h4').css({"margin-left":"10px"});
 						$('.location-info').css({"margin-right":"14px"});
 						$('a[href=#report-map]').parent().hide();

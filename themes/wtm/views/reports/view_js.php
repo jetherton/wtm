@@ -359,7 +359,7 @@ jQuery(window).load(function() {
 		{
 			case "wider-map":
 				$('.report-map').insertBefore($('.left-col'));
-				$('.map-holder').css({"height":"350px", "width": "900px"});
+				$('.map-holder').css({"height":"310px", "width": "960px"});
 				$('a[href=#report-map]').parent().hide();
 				$('a.taller-map').parent().show();
 				$('a.smaller-map').parent().show();

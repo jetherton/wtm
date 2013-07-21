@@ -17,11 +17,12 @@
     border:none;
 }
 
-div.right-col div#layers-box{
-    top: -387px;
+
+body.page-reports-view div#layers-box{
+    top: 39px;
     position: relative;
     z-index: 1009;
-    left: 81px;
+    left: 731px;
 }
 
 

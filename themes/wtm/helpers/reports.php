@@ -581,11 +581,11 @@ class reports_Core {
 						->save(Kohana::config('upload.directory', TRUE).$media_link);
 
 					// Medium size
-					Image::factory($filename)->resize(400,300,Image::HEIGHT)
+					Image::factory($filename)->resize(400,300,Image::WIDTH)
 						->save(Kohana::config('upload.directory', TRUE).$media_medium);
 
 					// Thumbnail
-					Image::factory($filename)->resize(220,145,Image::HEIGHT)
+					Image::factory($filename)->resize(220,145,Image::WIDTH)
 						->save(Kohana::config('upload.directory', TRUE).$media_thumb);
 				}
 				catch (Kohana_Exception $e)
