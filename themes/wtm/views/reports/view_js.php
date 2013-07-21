@@ -98,9 +98,10 @@ jQuery(window).load(function() {
 					},
 				    iconWidth: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
-						    return 11;
+						    return 20;
 						} else if(feature.attributes.icon.indexOf("incident_circle") != -1 ||
 						    feature.attributes.icon.indexOf("location_square") != -1 ||
+						    feature.attributes.icon.indexOf("marker.png") != -1 ||
 						    feature.attributes.icon.indexOf("wreck_cross.png") != -1) {
 						    return 20;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
@@ -110,12 +111,13 @@ jQuery(window).load(function() {
 						}	
 					},
 				    iconHeight: function(feature) {
-						if(typeof feature.attributes.icon == "undefined"){
+						if(typeof feature.attributes.icon == "undefined"){						
 						    return 11;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return 17;
 						} else if(feature.attributes.icon.indexOf("incident_circle") != -1 ||
 						    feature.attributes.icon.indexOf("location_square") != -1 ||
+						    feature.attributes.icon.indexOf("marker.png") != -1 ||
 						    feature.attributes.icon.indexOf("wreck_cross.png") != -1) {
 						    return 20;
 						}else {

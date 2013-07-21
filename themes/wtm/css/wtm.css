@@ -1447,3 +1447,9 @@ a.r_category {
     height:20px;
     margin-bottom:15px;
 }
+
+
+body#page div#content{
+    background: rgba(255,255,255,0.85);
+    padding:10px;
+}
