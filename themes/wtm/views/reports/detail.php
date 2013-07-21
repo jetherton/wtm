@@ -126,7 +126,7 @@
 				}
 			}?>
 
-			<div class="credibility">
+			<div class="credibility realCredibility">
 				<table class="rating-table" cellspacing="0" cellpadding="0" border="0">
           <tr>
             <td><?php echo Kohana::lang('ui_main.credibility');?>:</td>
@@ -213,6 +213,10 @@
 			Event::run('ushahidi_action.report_view_sidebar', $incident_id);
 		?>
 
+		<div class="report-additional-reports">
+		    <h4>Additoinal Documents</h4>
+		    <?php Event::run('report_view.upload_files_display', $id); ?>
+		</div>
 		<div class="report-additional-reports">
 			<h4>Related Reports</h4>
 			<?php foreach($incident_neighbors as $neighbor) { ?>

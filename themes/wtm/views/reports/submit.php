@@ -514,6 +514,8 @@
 					<?php print form::input(array('name'=>'photo_id','type'=>'hidden','id'=>'photo_id'), $i); ?>
 				</div>
 				<div style="clear:both;">&nbsp;<br/></div>
+				<?php Event::run('ushahidi_action.file_upload'); ?>
+				<div style="clear:both;">&nbsp;<br/></div>
 			</div>		
 				
 				

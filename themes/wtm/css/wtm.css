@@ -1599,6 +1599,7 @@ div.report-description-text h5{
 }
 div.report-description-text div.news_sources a{
     font-size:13px;
+    word-break:break-all;
 }
 #main .right-col{
     padding:0px;
@@ -1781,4 +1782,50 @@ input.file{
     font-family: Georgia;
     font-size:16px;
     color:#333;
+}
+.file_upload_description{
+    display:none;
+}
+
+#divFileUpload input.fileuploadinput{
+    padding:0px;
+    font-family: Agile-Bold;
+    font-size:13px;
+    color:#333;
+}
+
+#divFileUpload a.add{
+    margin-right: 10px;
+}
+
+div.file_upload h4{
+    font-family: Agile-Bold;
+    font-size:13px;
+    color:#333;
+    margin-bottom: 4px;
+}
+
+div.file_upload div.second {
+    margin-top: 10px;
+}
+
+div.file_upload div.second a.rem{
+    margin-right:10px;
+    margin-left:0px;
+}
+div.file_upload div.second input.fileuploadinput{
+    width:355px;    
+}
+
+.file_upload_content ul{
+    list-style: none;
+}
+.file_upload_content ul li{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.file_upload_content ul li a{    
+    font-weight: bold;
+    font-family: Georgia;
+    font-size:13px;
 }
