@@ -860,7 +860,7 @@
 		    $("#chicken_FrameDecorationDiv_0").css("height", "auto");
 
 		    $("#chicken_FrameDecorationDiv_2").css("display", "none");
-		} else {
+		} else { //if the arrow is on the bottom do this
 		    $("#chicken_contentDiv .infowindow").css("margin", "0px");
 		    $("#chicken_FrameDecorationDiv_0").css("width", "240px");
 		    $("#chicken_FrameDecorationDiv_0").css("height", "auto");
