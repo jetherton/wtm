@@ -110,6 +110,10 @@
 
     //turn off all listeners
     function deactivateAll(runRemotely){
+	
+		//hide the Find Location stuff
+		$('#searchButtons').hide();
+		
 		clickOut.deactivate();
 		clickIn.deactivate();
 		zoomBox.deactivate();
