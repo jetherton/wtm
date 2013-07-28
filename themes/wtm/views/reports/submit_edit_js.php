@@ -1140,17 +1140,17 @@
 			});
 			
 			//bind changes in hh mm ss to decimal degress
-			$('#geometry_lat_degrees, #geometry_lat_minutes, #geometry_lat_seconds').bind("change keyup blur", function(){
+			$('#geometry_lat_degrees, #geometry_lat_minutes, #geometry_lat_seconds').bind("change keyup blur", function(e){
 			
 			    var newlat = hmsToDecimal(
 				parseFloat($("#geometry_lat_degrees").val()),
 				parseFloat($("#geometry_lat_minutes").val()),
-				parseFloat($("#geometry_lat_seconds").val()));
-			    $('#geometry_lat').val(newlat);
+				parseFloat($("#geometry_lat_seconds").val()));			    
 				
 				var newlon = $("#geometry_lon").val();
 				if (!isNaN(newlat) && !isNaN(newlon))
 				{
+					$('#geometry_lat').val(newlat);
 					var lonlat = new OpenLayers.LonLat(newlon, newlat);
 					lonlat.transform(proj_4326,proj_900913);
 					for (f in selectedFeatures) {
@@ -1163,34 +1163,39 @@
 				}
 				else
 				{
+				    if(e.type == 'blur'){
 					alert('Invalid value!')
+				    }
 				}
 			});
 			
-			$('#geometry_lon_degrees, #geometry_lon_minutes, #geometry_lon_seconds').bind("change keyup blur", function(){
+			$('#geometry_lon_degrees, #geometry_lon_minutes, #geometry_lon_seconds').bind("change keyup blur", function(e){
 			
 			    var newlon = hmsToDecimal(
 				parseFloat($("#geometry_lon_degrees").val()),
 				parseFloat($("#geometry_lon_minutes").val()),
 				parseFloat($("#geometry_lon_seconds").val()));
-			    $('#geometry_lon').val(newlon);
+			    
 				
 				var newlat = $("#geometry_lat").val();
 				if (!isNaN(newlat) && !isNaN(newlon))
 				{
-					var lonlat = new OpenLayers.LonLat(newlon, newlat);
-					lonlat.transform(proj_4326,proj_900913);
-					for (f in selectedFeatures) {
-						selectedFeatures[f].geometry.x = lonlat.lon;
-						selectedFeatures[f].geometry.y = lonlat.lat;
-						selectedFeatures[f].lon = newlat;
-						selectedFeatures[f].lat = newlon;
-						vlayer.drawFeature(selectedFeatures[f]);
+				    $('#geometry_lon').val(newlon);
+				    var lonlat = new OpenLayers.LonLat(newlon, newlat);
+				    lonlat.transform(proj_4326,proj_900913);
+				    for (f in selectedFeatures) {
+					    selectedFeatures[f].geometry.x = lonlat.lon;
+					    selectedFeatures[f].geometry.y = lonlat.lat;
+					    selectedFeatures[f].lon = newlat;
+					    selectedFeatures[f].lat = newlon;
+					    vlayer.drawFeature(selectedFeatures[f]);
 				    }
 				}
 				else
 				{
+				    if(e.type == 'blur'){
 					alert('Invalid value!')
+				    }
 				}
 				
 			});
