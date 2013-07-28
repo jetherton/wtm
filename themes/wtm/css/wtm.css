@@ -803,7 +803,8 @@ img.teaser_img{
 .infowindow .infowindow_content { 
 	width: 220px;
 }
-.infowindow a, .infowindow a:hover{ 
+.infowindow a, .infowindow a:hover,
+.infowindow a:visited{ 
 	color: #333;
 	text-decoration:none;
 	font-weight:normal;

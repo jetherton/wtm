@@ -180,7 +180,7 @@ $(function(){
 					    echo ' /';
 					?>
 				    </div>
-				    <h1><a href="<?php echo url::base().'/reports/view/'.$news_item->id;?>"><?php echo $news_item->incident_title; ?></a></h1>
+				    <h1><a href="<?php echo url::base().'reports/view/'.$news_item->id;?>"><?php echo $news_item->incident_title; ?></a></h1>
 				    <div class="front_teaser">
 					<?php
 					
