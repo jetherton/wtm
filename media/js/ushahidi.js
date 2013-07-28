@@ -835,7 +835,7 @@
 			content,
 			null, true, this.onPopupClose);
 		
-
+		popup.panMapIfOutOfView = true;
 		event.feature.popup = popup;
 		this._olMap.addPopup(popup);
 		popup.show();
@@ -849,14 +849,31 @@
 			{context: this, latitude: lat, longitude: lon, zoomFactor: -1}, 
 			this.zoomToSelectedFeature);
 
-		$("#chicken_contentDiv").css("height", "auto");
-		$("#chicken_contentDiv").css("top", "19px");
-		$("#chicken_contentDiv").css("left", "7px");
+		//if the arrow is on top, do these things:
+		var img4Left = $("#chicken_FrameDecorationImg_4").css("left");
+		if(img4Left == "-311px" || img4Left == "-101px"){
+		    $("#chicken_contentDiv").css("height", "auto");
+		    $("#chicken_contentDiv").css("top", "19px");
+		    $("#chicken_contentDiv").css("left", "7px");
+
+		    $("#chicken_FrameDecorationDiv_0").css("width", "240px");
+		    $("#chicken_FrameDecorationDiv_0").css("height", "auto");
+
+		    $("#chicken_FrameDecorationDiv_2").css("display", "none");
+		} else {
+		    $("#chicken_contentDiv .infowindow").css("margin", "0px");
+		    $("#chicken_FrameDecorationDiv_0").css("width", "240px");
+		    $("#chicken_FrameDecorationDiv_0").css("height", "auto");
+		    $("#chicken_FrameDecorationDiv_2").css("display", "none");
+		    $("#chicken_FrameDecorationDiv_0").css("display", "none");
+		    $("#chicken_contentDiv").css("top", "19px");
+		    $("#chicken_contentDiv").css("left", "7px");
+		    $("#chicken_contentDiv").css("background", "white");
+		    $("#chicken_contentDiv").css("width", "240px");
+		    $("#chicken_contentDiv .infowindow").css("padding", "10px 0px 0px 9px");
+		    
+		}
 		
-		$("#chicken_FrameDecorationDiv_0").css("width", "240px");
-		$("#chicken_FrameDecorationDiv_0").css("height", "auto");
-		
-		$("#chicken_FrameDecorationDiv_2").css("display", "none");
 		
 	}
 

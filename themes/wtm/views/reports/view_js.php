@@ -236,6 +236,7 @@ jQuery(window).load(function() {
 							return 1;
 						}
 						else{
+						    console.log(feature.attributes.graphicZIndex + " "+ feature.attributes.label);
 							return feature.attributes.graphicZIndex;
 						}
 					}
@@ -248,7 +249,7 @@ jQuery(window).load(function() {
 		fillOpacity: "0.7",
 		strokeColor: "#197700",
 		strokeWidth: 3,
-		graphicZIndex: 1
+		//graphicZIndex: 1
 	});
 
 
@@ -265,7 +266,8 @@ jQuery(window).load(function() {
 	map.addLayer(Ushahidi.GEOJSON, {
 		name: "Single Report",
 		url: "<?php echo 'json/single/'.$incident_id; ?>",
-		styleMap: styleMap
+		styleMap: styleMap,
+		rendererOptions: {zIndexing: true}
 	});
 	 myMap = map._olMap;
          

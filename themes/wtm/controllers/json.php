@@ -694,7 +694,7 @@ class Json_Controller extends Template_Controller {
 					
 				$fillcolor = ($item->geometry_color) ? $item->geometry_color : "ffcc66";
 					
-				$strokecolor = ($item->geometry_color) ? $item->geometry_color : "CC0000";
+				$strokecolor = ($item->geometry_strokeColor) ? $item->geometry_strokeColor : "CC0000";
 					
 				$strokewidth = ($item->geometry_strokewidth) ? $item->geometry_strokewidth : "3";
 				
@@ -712,6 +712,7 @@ class Json_Controller extends Template_Controller {
 				$fillOpacity = (isset($item->geometry_fillOpacity)) ? $item->geometry_fillOpacity : 0.7;
 				$strokeOpacity = (isset($item->geometry_strokeOpacity)) ? $item->geometry_strokeOpacity : 1.0;
 				$strokeDashstyle = (isset($item->geometry_strokeDashstyle)) ? $item->geometry_strokeDashstyle :'solid';
+				$geometry_zindex = (isset($item->geometry_zindex)) ? intval($item->geometry_zindex) : 1;
 
 				
 				$json_item = array();
@@ -735,7 +736,8 @@ class Json_Controller extends Template_Controller {
 					'labelOutlineWidth' => $labelOutlineWidth,
 					'fillOpacity' => $fillOpacity,
 					'strokeOpacity' => $strokeOpacity,
-					'strokeDashstyle' => $strokeDashstyle
+					'strokeDashstyle' => $strokeDashstyle,
+					'graphicZIndex'=>$geometry_zindex
 				);
 				$json_item['geometry'] = $geom_array;
 
@@ -765,8 +767,9 @@ class Json_Controller extends Template_Controller {
 		$sql = "SELECT id, incident_id, AsText(geometry) as geometry, geometry_label, 
 			geometry_comment, geometry_color, geometry_strokewidth, geometry_icon, geometry_showlabel, 
 			geometry_fontsize, geometry_fontcolor, geometry_labeloutlinewidth, geometry_labeloutlinecolor, 
-			geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle
-			FROM ".$this->table_prefix."geometry";
+			geometry_strokeColor, geometry_fillOpacity, geometry_strokeOpacity, geometry_strokeDashstyle,
+			geometry_zindex 
+			FROM ".$this->table_prefix."geometry ORDER BY geometry_zindex";
 		
 		$query = $db->query($sql);
 		foreach ( $query as $item )

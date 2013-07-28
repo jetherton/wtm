@@ -279,7 +279,9 @@
 					},
 				graphicZIndex : function(feature){
 					if(typeof feature.attributes.graphicZIndex == "undefined"){
-							return 1;
+						    //if we don't know the z-index, put it at the top
+						    feature.attributes.graphicZIndex = vlayer.features.length;
+						    return feature.attributes.graphicZIndex;
 						}
 						else{
 							return feature.attributes.graphicZIndex;
@@ -297,7 +299,7 @@
 				//fillOpacity: "0.7",
 				//strokeColor: "#197700",
 				//strokeWidth: 2.5,
-				graphicZIndex: 100,
+				//graphicZIndex: 100,
 				graphicOpacity: 0.5,
 				//graphicWidth: 26,
 				//graphicHeight: 31,
@@ -313,7 +315,8 @@
 				strokeColor: "#197700",
 				strokeWidth: 2.5,
 				externalGraphic: null,
-				label: null
+				label: null,
+				graphicZIndex: 10000
 				
 			});
 			
@@ -323,7 +326,7 @@
 				fillOpacity: "0.7",
 				strokeColor: "#197700",
 				strokeWidth: 2.5,
-				graphicZIndex: 1
+				//graphicZIndex: 1
 			});
 			
 			var vlayerStyles = new OpenLayers.StyleMap({
@@ -513,9 +516,8 @@
 					echo "wktFeature.attributes.fillOpacity = ".$geometry->fillOpacity.";\n";
 					echo "wktFeature.attributes.strokeOpacity = ".$geometry->strokeOpacity.";\n";
 					echo "wktFeature.attributes.strokeDashstyle = '".$geometry->strokeDashstyle."';\n";
-					//echo "wktFeature.attributes.graphicZIndex = '".$geometry->zindex."';\n";
-					echo "wktFeature.attributes.graphicZIndex = 1;\n";
-					
+					echo "wktFeature.attributes.graphicZIndex = '".$geometry->graphicZIndex."';\n";
+										
 					echo "vlayer.addFeatures(wktFeature);\n";
 				}
 			}
@@ -1300,33 +1302,113 @@
 			});
 			
 			//move graphic object to the front
-			$('#moveFront').click(function(){
-				moveAllBack();
-				for (f in selectedFeatures) {
-					selectedFeatures[f].attributes.graphicZIndex = 100;
-					vlayer.drawFeature(selectedFeatures[f]);
-				}
-				refreshFeatures();
+			$('#zIndexUpBtn').click(function(){
+			    moveToTop();
 			});
 			//move graphic object to the front
-			$('#moveBack').click(function(){
-				moveAllBack();
-				for (f in selectedFeatures) {
-					selectedFeatures[f].attributes.graphicZIndex = 1;
-					vlayer.drawFeature(selectedFeatures[f]);
-				}
-				refreshFeatures();
+			$('#zIndexDownBtn').click(function(){
+			    moveToBottom();
 			});
-			//move all other objects to the middle
-			function moveAllBack(){
-				for(f in vlayer.features){
-					//try to only get the text objects
-					if(vlayer.features[f].attributes.icon == "<?php echo url::base()?>media/img/openlayers/clear_rect32x14.png"){
-						vlayer.features[f].attributes.graphicZIndex = 50;
-						vlayer.drawFeature(vlayer.features[f]);
-					}
+			
+			
+			/**
+			 * Used to move the selected features to the top
+			 */
+			function moveToTop(){
+			    var featuresList = sortAndCopyFeatures();
+			    var currentZ = 0;
+			    //loop over all the curren features and force order			    
+			    for(i in featuresList){
+				var feature = featuresList[i];
+				var isSelected = false;
+				//is the current feature one of the ones that is selected?
+				for (f in selectedFeatures) {
+				    var selectedFeature = selectedFeatures[f];
+				    if(feature.id == selectedFeature.id){					
+					isSelected = true;
+					break;;
+				    }
 				}
-				refreshFeatures();
+				if(isSelected){
+				    //this is a selected feature so don't do anything
+				    continue;
+				}
+				//this feature isn't selected so set it's z
+				feature.attributes.graphicZIndex = currentZ;
+				vlayer.drawFeature(feature);
+				currentZ++;
+			    }
+			    //now set the selected items to the top
+			    for (f in selectedFeatures) {
+				var selectedFeature = selectedFeatures[f];
+				selectedFeature.attributes.graphicZIndex = currentZ;
+				vlayer.drawFeature(selectedFeature);
+				currentZ++;
+			    }			    
+			    refreshFeatures();
+			}
+			
+			
+			/**
+			 * Used to move the selected features to the bottom
+			 */
+			function moveToBottom(){
+			    var featuresList = sortAndCopyFeatures();
+			    var currentZ = 0;			    
+			    //Set the selected items to the bottom
+			    for (f in selectedFeatures) {
+				var selectedFeature = selectedFeatures[f];
+				selectedFeature.attributes.graphicZIndex = currentZ;
+				vlayer.drawFeature(selectedFeature);
+				currentZ++;
+			    }			    
+			    
+			    //now loop over all the curren features and force order			    
+			    for(i in featuresList){
+				var feature = featuresList[i];
+				var isSelected = false;
+				//is the current feature one of the ones that is selected?
+				for (f in selectedFeatures) {
+				    var selectedFeature = selectedFeatures[f];
+				    if(feature.id == selectedFeature.id){
+					isSelected = true;
+					break;
+				    }
+				}
+				if(isSelected){
+				    //this is a selected feature so don't do anything
+				    continue;
+				}
+				//this feature isn't selected so set it's z
+				feature.attributes.graphicZIndex = currentZ;
+				currentZ++;
+				vlayer.drawFeature(feature);
+			    }			    
+			    refreshFeatures();
+			}
+			
+			/**
+			 * Use to make an array of features
+			 * that is sorted by z-index
+			 * in ascending order
+			 */
+			function sortAndCopyFeatures(){
+			    //first copy the array
+			    var list = new Array();
+			    for(i in vlayer.features){
+				var f = vlayer.features[i];
+				list.push(f);
+			    }
+			    //now sort them by z-index
+			    list.sort(function(a,b){
+				if(typeof b.attributes.graphicZIndex === "undefined"){
+				    return 1;}
+				if(typeof a.attributes.graphicZIndex === "undefined"){
+				    return -1;}    
+				return parseInt(a.attributes.graphicZIndex) - parseInt(b.attributes.graphicZIndex);
+			    });
+			    
+			    return list;
 			}
 			
 			

@@ -404,10 +404,8 @@ class reports_Core {
 					$fillOpacity = (isset($item->fillOpacity)) ? floatval($item->fillOpacity) : 0.7;
 					$strokeOpacity = (isset($item->strokeOpacity)) ? floatval($item->strokeOpacity) : 1.0;
 					$strokeDashstyle = (isset($item->strokeDashstyle)) ? $item->strokeDashstyle :'solid';
-					
-					//$zindex = (isset($item->graphicZIndex)) ? $item->graphicZIndez : 1;
-					$zindex = 1;
-					    
+					$zindex = (isset($item->graphicZIndex)) ? $item->graphicZIndex : 1;
+										    
 					if ($geometry)
 					{
 						// 	Format the SQL string

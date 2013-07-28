@@ -2244,10 +2244,10 @@ ul.map-toggles li a:active { display:inline-block; padding:3px 5px 3px 17px; out
 			display:none;
 		}
 		#geometryLabelerClose{
-			z-index:5001;
+			z-index:15001;
 			position:absolute;
-			top:2px;
-			right:0;
+			top:10px;
+			right:30px;
 			width:18px;
 			height:18px;
 			background: url("../img/openlayers/layer-switcher-minimize.png") no-repeat;
