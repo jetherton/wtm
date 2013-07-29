@@ -2,7 +2,22 @@
 <a class="btn toggle" id="layers-menu-toggle" class="toggle" href="#kml_switch"><?php echo Kohana::lang('ui_main.layers');?> <span class="btn-icon ic-right">&raquo;</span></a>
 					<!-- Layers (KML/KMZ) -->
 					<ul id="kml_switch" class="category-filters map-menu-box" style="z-index:10000;">
-						<?php
+					    <li>
+						<a href="#" id="layer_bath">
+						 
+						    <span class="swatch" style="background-color:#2323b8"></span>
+						    <span class="layer-name">Bathymetry</span>
+						    <div class="layerMeta">
+							<p>
+							    <span style="font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">
+								Bathymetry is the study of underwater depth of lake or ocean floors. In other words, bathymetry is the underwater equivalent to hypsometry or topography. The name comes from Greek βαθύς (bathus), "deep",[1] and μέτρον (metron), "measure".[2] Bathymetric (or hydrographic) charts are typically produced to support safety of surface or sub-surface navigation, and usually show seafloor relief or terrain as contour lines (called depth contours or isobaths) and selected depths (soundings), and typically also provide surface navigational information. Bathymetric maps (a more general term where navigational safety is not a concern) may also use a Digital Terrain Model and artificial illumination techniques to illustrate the depths being portrayed. Paleobathymetry is the study of past underwater depths.
+							    </span>
+							    <br>
+							</p>
+						    </div>
+						</a>
+					    </li>
+						<?php						
 						foreach ($layers[0] as $layer_id => $layer)
 						{
 							$layer_name = $layer->layer_name;
@@ -32,6 +47,7 @@
 							//render_child_layers($layer, $layers);
 						}
 						?>
+					    
 					</ul>
 				</div>
 				

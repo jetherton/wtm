@@ -16,6 +16,7 @@
 ?>
 		var turnOffControls = null;
 		var map;
+		var bathymetry = null;
 		var myMap = null;
 		var thisLayer;
 		var proj_4326 = new OpenLayers.Projection('EPSG:4326');
@@ -358,7 +359,30 @@
 				onDrag: doDrag,
 				onComplete: endDrag
 			});
-			map.addControl(drag);                        
+			map.addControl(drag);                 
+			
+			
+			
+			
+			
+			//bathymetry layer	
+			var proj_4326 = new OpenLayers.Projection('EPSG:4326');
+			var topLeft = new OpenLayers.Geometry.Point(0, 45);
+			OpenLayers.Projection.transform(topLeft, proj_4326, myMap.getProjectionObject());
+			var bottomRight = new OpenLayers.Geometry.Point(32, 30);
+			OpenLayers.Projection.transform(bottomRight, proj_4326, myMap.getProjectionObject());
+
+			bathymetry = new OpenLayers.Layer.Image(
+			    'Bathymetry',
+			    '<?php echo url::base();?>media/img/openlayers/bathymetry.jpg',
+			    new OpenLayers.Bounds(topLeft.x, bottomRight.y, bottomRight.x, topLeft.y),
+			    new OpenLayers.Size(1280, 850),
+			     {'isBaseLayer': false, 'alwaysInRange': true}
+			);
+
+
+			myMap.addLayer(bathymetry);
+			bathymetry.setVisibility(false);
                         
 
                         

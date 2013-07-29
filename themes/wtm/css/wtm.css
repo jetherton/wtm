@@ -293,7 +293,8 @@ div#right { position:absolute; z-index:1000; }
   }
     .page-main ul.category-filters li li { clear:left; overflow:hidden;}
   .page-main ul.category-filters li a,
-  .right-col div#layers-box li a{ 
+  .right-col div#layers-box li a,
+    div#layers-box li a{ 
       border:none;
       border-top: solid 1px #666;
       overflow:visible;
@@ -351,6 +352,15 @@ div#right { position:absolute; z-index:1000; }
     max-height: 300px;
     overflow-x: hidden;
  }
+ div.report_detail #kml_switch{
+     max-height:250px;
+ }
+ 
+ div.report_detail #kml_switch li a.active{
+     color:#333;
+     background-color:white;
+ }
+ 
  ul#kml_switch li{
      padding-left: 0px;
      overflow:visible;
@@ -387,7 +397,7 @@ div#right { position:absolute; z-index:1000; }
 
 /* home page map */
 div.map { width:auto; border:none; border-top:0; position:relative; }
-div.map.timeline-enabled {height:529px; }
+div.map.timeline-enabled {height:529px; background:#666;}
 #mapStatus { 
     width:270px; float:none; overflow:auto; 
     position: relative;
@@ -1187,6 +1197,10 @@ a:hover .color_swatch{
 a.active .cat_icon, a.active .swatch,
 a:hover .cat_icon, a:hover .swatch{
     margin-left:0px;
+}
+
+div.report_detail #kml_switch a:hover .swatch{
+    margin-left: 5px;
 }
 
 .right-col div#layers-box li a.active .swatch,

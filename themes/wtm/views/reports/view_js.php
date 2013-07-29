@@ -17,6 +17,7 @@
 ?>
 
 var myMap = null;
+var bathymetry = null;
 
 // Set the base url
 Ushahidi.baseURL = "<?php echo url::site(); ?>";
@@ -236,7 +237,7 @@ jQuery(window).load(function() {
 							return 1;
 						}
 						else{
-						    console.log(feature.attributes.graphicZIndex + " "+ feature.attributes.label);
+						    //console.log(feature.attributes.graphicZIndex + " "+ feature.attributes.label);
 							return feature.attributes.graphicZIndex;
 						}
 					}
@@ -270,6 +271,30 @@ jQuery(window).load(function() {
 		rendererOptions: {zIndexing: true}
 	});
 	 myMap = map._olMap;
+	 
+	 
+	 
+	 
+	 
+	 
+	 //bathymetry layer	
+	var proj_4326 = new OpenLayers.Projection('EPSG:4326');
+	var topLeft = new OpenLayers.Geometry.Point(0, 45);
+	OpenLayers.Projection.transform(topLeft, proj_4326, myMap.getProjectionObject());
+	var bottomRight = new OpenLayers.Geometry.Point(32, 30);
+	OpenLayers.Projection.transform(bottomRight, proj_4326, myMap.getProjectionObject());
+
+	bathymetry = new OpenLayers.Layer.Image(
+	    'Bathymetry',
+	    '<?php echo url::base();?>media/img/openlayers/bathymetry.jpg',
+	    new OpenLayers.Bounds(topLeft.x, bottomRight.y, bottomRight.x, topLeft.y),
+	    new OpenLayers.Size(1280, 850),
+	     {'isBaseLayer': false, 'alwaysInRange': true}
+	);
+		
+
+	myMap.addLayer(bathymetry);
+	bathymetry.setVisibility(false);
          
          
          
@@ -294,13 +319,13 @@ jQuery(window).load(function() {
 	});
         var title = $(this, "strong").text();
 	//remove the layer if it was clicked again
-	if(isCurrentLayer){
+	if(isCurrentLayer && layerId != "bath"){
 		map.trigger("deletelayer", title);
 			$(this).removeClass("active");
 	}
 	
 	// Was a different layer selected?
-	if (!isCurrentLayer) {            
+	if (!isCurrentLayer && layerId != "bath") { 
 		// Set the currently selected layer as the active one
 		$(this).addClass("active");
 		map.addLayer(Ushahidi.KML, {
@@ -308,6 +333,18 @@ jQuery(window).load(function() {
 			url: "json/layer/" + layerId
 		});
 	}
+	
+	if(layerId == "bath"){
+		    
+		    if(bathymetry.visibility){
+			$(this).removeClass("active");
+			bathymetry.setVisibility(false);
+		    } else {
+			$(this).addClass("active");
+			
+			bathymetry.setVisibility(true);
+		    }
+		}
 
 	return false;
 });
@@ -390,6 +427,16 @@ jQuery(window).load(function() {
 
 }); // END jQuery(window).load();	
 
+
+
+
+
+
+
+
+
+
+
 function rating(id,action,type,loader) {
 	$('#' + loader).html('<img src="<?php echo url::file_loc('img')."media/img/loading_g.gif"; ?>">');
 	$.post("<?php echo url::site().'reports/rating/' ?>" + id, { action: action, type: type },
@@ -415,3 +462,5 @@ function rating(id,action,type,loader) {
 	  	}, "json");
 }
 		
+
+

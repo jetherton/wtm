@@ -19,6 +19,7 @@
 <script type="text/javascript">
 var layer_top = null;
 var cat_height = null;
+var bathymetry = null;
 $(document).ready(function() {
     
     $("#the-filters").show();
@@ -296,7 +297,8 @@ jQuery(function() {
 		url: reportsURL,
 		transform: false
 	}, true, true);
-
+	
+	
 
 	// Register the referesh timeline function as a callback
 	map.register("filterschanged", refreshTimeline);
@@ -458,6 +460,7 @@ jQuery(function() {
 	$("ul#kml_switch li > a").click(function(e) {
 		// Get the layer id
 		var layerId = this.id.substring(6);
+		
 
 		var isCurrentLayer = false;
 		var context = this;
@@ -471,19 +474,31 @@ jQuery(function() {
 			}
 		});
 		//remove the layer if it was clicked again
-		if(isCurrentLayer){
+		if(isCurrentLayer && layerId != "bath"){
 			map.trigger("deletelayer", $(".layer-name", this).html());
 				$(this).removeClass("active");
 		}
 		
 		// Was a different layer selected?
-		if (!isCurrentLayer) {
+		if (!isCurrentLayer && layerId != "bath") {
 			// Set the currently selected layer as the active one
 			$(this).addClass("active");
 			map.addLayer(Ushahidi.KML, {
 				name: $(".layer-name", this).html(),
 				url: "json/layer/" + layerId
 			});
+		}
+		
+		if(layerId == "bath"){
+		    
+		    if(bathymetry.visibility){
+			$(this).removeClass("active");
+			bathymetry.setVisibility(false);
+		    } else {
+			$(this).addClass("active");
+			
+			bathymetry.setVisibility(true);
+		    }
 		}
 
 		return false;
@@ -610,8 +625,27 @@ $(window).resize(function () {
 // TODO: Load the sidebar with the checkins - moving this to BackboneJS
 <?php endif; ?>
     
+    $(document).ready(function(){
     
-    
+	//bathymetry layer	
+	var proj_4326 = new OpenLayers.Projection('EPSG:4326');
+	var topLeft = new OpenLayers.Geometry.Point(0, 45);
+	OpenLayers.Projection.transform(topLeft, proj_4326, map._olMap.getProjectionObject());
+	var bottomRight = new OpenLayers.Geometry.Point(32, 30);
+	OpenLayers.Projection.transform(bottomRight, proj_4326, map._olMap.getProjectionObject());
+
+	bathymetry = new OpenLayers.Layer.Image(
+	    'Bathymetry',
+	    '<?php echo url::base();?>media/img/openlayers/bathymetry.jpg',
+	    new OpenLayers.Bounds(topLeft.x, bottomRight.y, bottomRight.x, topLeft.y),
+	    new OpenLayers.Size(1280, 850),
+	     {'isBaseLayer': false, 'alwaysInRange': true}
+	);
+		
+
+	map._olMap.addLayer(bathymetry);
+	bathymetry.setVisibility(false);
+    });
 
 
 </script>
