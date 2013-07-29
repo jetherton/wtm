@@ -345,18 +345,20 @@ div#right { position:absolute; z-index:1000; }
     #how-to-report-box ol { margin-left:22px; }
     #how-to-report-box ol li { margin-bottom:5px; }
  #kml_switch{
-     width:220px;
+     width:225px;
      padding:0px;
      overflow:visible;
-    overflow-y: auto;
-    max-height: 300px;
-    overflow-x: hidden;
+     overflow-y: auto;
+     max-height: 280px;
+     overflow-x: hidden;
+     padding-left:5px;
+     left:-5px;
  }
  div.report_detail #kml_switch{
      max-height:250px;
  }
  
- div.report_detail #kml_switch li a.active{
+ #kml_switch li a.active{
      color:#333;
      background-color:white;
  }
@@ -1199,15 +1201,8 @@ a:hover .cat_icon, a:hover .swatch{
     margin-left:0px;
 }
 
-div.report_detail #kml_switch a:hover .swatch{
-    margin-left: 5px;
-}
 
-.right-col div#layers-box li a.active .swatch,
-div#layers-box li a.active .swatch
-{
-    margin-left:5px;
-}
+
 
 div#layers-box{
     top:10px;

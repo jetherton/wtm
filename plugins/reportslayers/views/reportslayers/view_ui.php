@@ -4,7 +4,7 @@
 					<ul id="kml_switch" class="category-filters map-menu-box" style="z-index:10000;">
 					    <li>
 						<a href="#" id="layer_bath">
-						 
+						 <div class="color_swatch" style="background-color:#ea00ff;"></div>			
 						    <span class="swatch" style="background-color:#2323b8"></span>
 						    <span class="layer-name">Bathymetry</span>
 						    <div class="layerMeta">
@@ -29,7 +29,8 @@
 							$layer_link = (!$layer_url) ?
 								url::base().Kohana::config('upload.relative_directory').'/'.$layer_file :
 								$layer_url;
-							echo '<li><a href="#" id="layer_'. $layer .'" >';    														
+							echo '<li><a href="#" id="layer_'. $layer .'" >';    
+							echo '<div class="color_swatch" style="background-color:#'.$layer_color.';"></div>';
 							if($layer_icon != null OR $layer_icon != ""){
 							    echo '<span class="swatch" >';
 							    echo '<image src="'.url::base().'media/uploads/'.$layer_icon. '"/>';
