@@ -37,3 +37,6 @@ ALTER TABLE  `geometry` ADD  `geometry_zindex` INT(11) NOT NULL DEFAULT  '0';
 
 /** Etherton 2013-07-14 - Added a field to store the icon of a layer*/
 ALTER TABLE  `layer` ADD  `layer_icon_thumb` CHAR( 255 ) NULL DEFAULT NULL;
+
+/** Etherton 2013-07-31 - Adding a column to keep track of layer order */
+ALTER TABLE  `layer` ADD  `layer_order` INT NOT NULL DEFAULT  '0';

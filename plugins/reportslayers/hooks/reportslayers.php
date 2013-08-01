@@ -106,7 +106,7 @@ class reportslayers {
 		    $standard_layers_orm = ORM::factory('layer')
 					->where('layer_visible', 1)
 					->where('date_uploaded', '0000-00-00')
-					->orderby('layer_name', 'asc')
+					->orderby('layer_order', 'asc')
 					->find_all();
 		    $standard_layers = array();
 		    foreach($standard_layers_orm as $orm){
@@ -173,7 +173,7 @@ class reportslayers {
 				->join('reportslayers', 'reportslayers.layer_id', 'layer.id','INNER')
 				->where('reportslayers.report_id',$id)
 				->where('date_uploaded <> \'0000-00-00\'')
-				->orderby('layer_name', 'asc')
+				->orderby('layer_order', 'asc')
 				->find_all();		    
 			foreach($special_layers_orm as $orm){
 			    $special_layers[] = $orm;

@@ -50,6 +50,7 @@ function layerAction ( action, confirmAction, id )
 //Load jwysiwyg editor
 var hb_full ;
 $(document).ready(function(){
+
 	hb_full = $("#meta_data").wysiwyg({
 		resizeOptions: {},
 		
@@ -151,4 +152,35 @@ $(document).ready(function(){
 		},
 	});
 	$.wysiwyg.fileManager.setAjaxHandler("<?php echo url::site('admin/jwysiwyg/filemanager') ?>");
+	
+	
+	
+	$("#layerSort").tableDnD({
+		dragHandle: "col-drag-handle",
+		onDragClass: "col-drag",
+		onDrop: function(table, row) {
+			var rows = table.tBodies[0].rows;
+			var layersArray = [];
+			for (var i=0; i<rows.length; i++) {
+				layersArray[i] = rows[i].id;
+			}
+			var layers = layersArray.join(',');
+			$.post("<?php echo url::base();?>admin/manage/layers_sort/", { layers: layers },
+				function(data){
+					if (data == "ERROR") {
+						alert("Invalid Placement!!\n You cannot place a sub-layer on top of a layer.");
+					} else {
+						$("#layerSort"+" tbody tr td").effect("highlight", {}, 500);
+					}
+			});
+		}
+	});
+	
+	$("#layerSort tr").hover(function() {
+		$(this.cells[0]).addClass('col-show-handle');
+	}, function() {
+		$(this.cells[0]).removeClass('col-show-handle');
+	});
+
+	
 })

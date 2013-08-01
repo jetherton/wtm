@@ -711,6 +711,62 @@ class Manage_Controller extends Admin_Controller
 	/**
 	 * Add Edit Layers (KML, KMZ, GeoRSS)
 	 */
+	
+	/**
+	 * Used to change the order of layers by dragging and dropping
+	 */
+	public function layers_sort(){
+	    $this->auto_render = FALSE;
+	    $this->template = "";
+
+	    if ($_POST)
+	    {
+		    if (isset($_POST['layers'])
+			    AND ! empty($_POST['layers'])
+			    )
+		    {
+			    $layers = array_map('trim', explode(',', $_POST['layers']));
+			    $i = 0;
+			    $parent_id = 0;
+			    foreach ($layers as $layer_id)
+			    {
+				    if ($layer_id)
+				    {
+					    $layer = ORM::factory('layer', $layer_id);
+					    if ($layer->loaded)
+					    {
+						    if ($i == 0 AND $layer->parent_id != 0)
+						    { // ERROR!!!!!!!! WHY ARE YOU TRYING TO PLACE A SUBCATEGORY ABOVE A CATEGORY???
+							    echo "ERROR";
+							    return;
+						    }
+
+						    if ($layer->parent_id == 0)
+						    {
+							    // Set Parent ID
+							    $parent_id = $layer->id;
+						    }
+						    else
+						    {
+							    if ($parent_id)
+							    {
+								    $layer->parent_id = $parent_id;
+							    }
+						    }							
+
+						    $layer->layer_order = $i;
+						    $layer->save();
+					    }
+				    }
+
+				    $i++;
+			    }
+		    }
+	    }
+	}
+	
+	
+	
 	public function layers()
 	{
  						
@@ -974,7 +1030,7 @@ class Manage_Controller extends Admin_Controller
 
 		$layers = ORM::factory('layer')
 					->where('parent_id', 0)
-					->orderby('layer_name', 'asc')
+					->orderby('layer_order', 'asc')
 					->find_all();
 					//->find_all($this->items_per_page, $pagination->sql_offset);
 		
@@ -998,6 +1054,7 @@ class Manage_Controller extends Admin_Controller
 		// Javascript Header
 		$this->themes->colorpicker_enabled = TRUE;
 		$this->themes->editor_enabled = TRUE;
+		$this->themes->tablerowsort_enabled = TRUE;
 		$this->themes->js = new View('admin/manage/layers/layers_js');
 	}
 

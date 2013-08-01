@@ -52,7 +52,7 @@
 						<input type="hidden" name="action" id="action" value="">
 						<input type="hidden" name="layer_id" id="layer_id_action" value="">
 						<div class="table-holder">
-							<table class="table">
+							<table class="table" id="layerSort">
 								<thead>
 									<tr>
 										<th class="col-1">&nbsp;</th>
@@ -92,8 +92,8 @@
 										$parent_id = $layer->parent_id;
 										$icon = $layer->icon;
 										?>
-										<tr>
-											<td class="col-1">&nbsp;</td>
+										<tr id="<?php echo $layer_id;?>">
+											<td class="col-1 col-drag-handle">&nbsp;</td>
 											<td class="col-2">
 												<div class="post">
 													<h4><?php echo $layer_name; ?></h4>
@@ -130,7 +130,7 @@
 										</tr>
 										<?php			
 										//now figure out if there are any child layers
-										render_child_layers($layer_id,1);						
+										//render_child_layers($layer_id,1);						
 									}
 									?>
 								</tbody>

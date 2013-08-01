@@ -240,7 +240,7 @@ class Main_Controller extends Template_Controller {
 			foreach (ORM::factory('layer')
 					  ->where('layer_visible', 1)
 					  ->where('date_uploaded', '0000-00-00')
-					  ->orderby('layer_name', 'asc')
+					  ->orderby('layer_order', 'asc')
 					  ->find_all() as $layer)
 			{
 				if(!isset($layers[$layer->parent_id])){
