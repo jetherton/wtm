@@ -195,7 +195,7 @@
 		    
 	<div id="report-map" class="report-map">
 			    <?php
-		    Event::run('report_view.layer_insertion', $id);
+		    Event::run('report_view.layer_insertion', $incident_id);
 		    ?>
 				<div class="map-holder" id="map"></div>
         <ul class="map-toggles">
