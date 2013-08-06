@@ -1029,6 +1029,30 @@
 			});
 			<?php } ?>
 			
+			
+			
+			$("#helpButton").click(function(){
+			    //is the help screen already visible?
+			    if($("#helpText").is(":visible")){
+				//hide it
+				$("#helpText").hide();
+			    } else {
+				$("#helpText").show();
+			    }
+			});
+			
+			$("#helpTextClose").click(function(){
+			    $("#helpText").hide();			    
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			// Date Picker JS
 			$("#incident_date").datepicker({ 
 			    showOn: "both", 

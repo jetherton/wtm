@@ -962,6 +962,66 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
     display:block;
 }
 
+.report-find-location .btns a#helpButton{
+    left: 281px;
+    position: relative;
+    background: rgba(128,128,128,0.8);
+    line-height: 28px;
+    padding: 0px 4px;
+    height:29px;
+    border: solid 1px #9e9e9c;    
+}
+
+#helpText{
+    font-family: Agile-Bold;
+    font-size: 13px;
+    position: absolute;
+    bottom: 0;
+    display: none;
+    width: 400px;
+    background-color: #004562;
+    opacity: 0.95;
+    z-index: 6000;
+    color:white;
+    top:0px;
+    right:0px;
+    padding:10px;
+    overflow-y: auto;
+}
+#helpText ul{
+    padding-left:0px;
+    list-style-type:none;
+}
+#helpText ul li:before { content: "- "; }
+#helpText a{
+    color:white;
+}
+#helpText a:hover{
+    text-decoration:none;
+    color:#ddd;
+}
+
+#helpTextClose{
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 10px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+#helpTextClose:hover{
+    cursor:pointer;
+}
+
+.report-find-location .btns a#helpButton:hover{
+    text-decoration: none;
+    background:white;
+}
+
 .report-find-location .btns a.btn_del_last{
     background: url('../images/edit_submit_nonselect_icons.png') -341px 0px;
 }

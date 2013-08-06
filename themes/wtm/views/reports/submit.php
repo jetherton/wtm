@@ -378,6 +378,28 @@
 						    </table>
 						    <div id="geometryPointsClose"></div>
 						</div>
+					    <div id="helpText" style="display:none;">
+						<br/>
+						Help
+						<br/>
+						<br/>
+						Indicate as precisely as possible the chain of events of the ongoing or past incident, using the different sections and tools in this page.
+						<br/>
+						<br/>
+						<ul>
+						    <li>Describe the events in detail in the “description” section.</li>
+						    <li>Fill in the different relevant fields concerning sources.</li>
+						    <li>Select the date and time corresponding to the time of the incident</li>
+						    <li>Upload additional media such as audio or image files if they exist</li>
+						    <li>Select one or several categories the report should belong to</li>
+						    <li>Choose which layers are relevant to the incident and you would like WTM users to see when they will view your report.</li>
+						    <li>Use the different drawing tools on the map to draw the chain of events from the moment of the boat’s departure to the end of its journey (or its current position). Indicate with points the different key locations in the chain of events (the successive positions of the migrants’ boat as well as that of other actors involved). If only one point in the chain of events is known, indicate that one. By editing the points, you may label them and add information as to what happened at each point. Indicate with a full line trajectories that are known (by linking up known points), with a dashed line trajectories that are estimated. You may view a few examples such as the <strong><a href="<?php echo url::base();?>reports/view/16">"Left-to-die boat" case</a></strong>.</li>
+						</ul>
+						<br/>
+						<br/>
+						View the "<strong><a href="<?php echo url::base();?>page/index/4" >How to report</a></strong>" page for additional instructions or <strong><a href="mailto:chazheller@yahoo.com">write to us</a></strong> if you have any further questions.
+					    <div id="helpTextClose">X</div>
+					    </div>
 					    
 					</div>
 					<div class="report-find-location" style="width:960px;">
@@ -389,7 +411,7 @@
 							<a title="Delete last item added." href="#" class="btn_del_last">&nbsp;</a>
 							<a title="Re-add last deleted item." href="#" class="btn_undel_last">&nbsp;</a>
 							<a title="Delete selected item." href="#" class="btn_del_sel">&nbsp;</a>
-							
+							<a title="Help" href="#" id="helpButton" class="btn_help">HELP</a>
 						</div>
 						<div id="followAspectRatioDiv">
 						    Keep Aspect Ratio 
