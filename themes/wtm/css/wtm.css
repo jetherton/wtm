@@ -938,13 +938,21 @@ div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointI
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlModifyResizeItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -472px -1px;
+	background: url('../images/edit_submit_nonselect_icons_opacity.png') -472px -1px;	
+}
+div.report-find-location div.olControlEditingToolbar div.olControlModifyResizeItemInactive:hover{
+	background: url('../images/edit_submit_nonselect_icons.png') -472px -1px;	
 }
 div.report-find-location div.olControlEditingToolbar div.olControlModifyResizeItemActive{
 	background: white url('../images/edit_submit_nonselect_icons.png') -472px -1px;
+	opacity: 1;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateItemInactive{
+	background: url('../images/edit_submit_nonselect_icons_opacity.png') -450px 0px;
+	width:26px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateItemInactive:hover{
 	background: url('../images/edit_submit_nonselect_icons.png') -450px 0px;
 	width:26px;
 }
@@ -954,6 +962,9 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateIt
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItemInactive{
+	background: url('../images/edit_submit_nonselect_icons_opacity.png') -502px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItemInactive:hover{
 	background: url('../images/edit_submit_nonselect_icons.png') -502px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItemActive{
@@ -1081,14 +1092,19 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 }
 
 .report-find-location .btns a.btn_del_sel{
-    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -374px 0px;
+    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons_opacity.png') -372px 0px;
 }
+
 .report-find-location .btns a.btn_del_sel:hover{
-    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -374px 0px;
+    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -372px 0px;
     text-decoration:none;
 }
 
 .report-find-location .btns a.btn_kml_up{
+    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons_opacity.png') -250px 0px;
+    width:90px;
+}
+.report-find-location .btns a.btn_kml_up:hover{
     background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -250px 0px;
     width:90px;
 }
