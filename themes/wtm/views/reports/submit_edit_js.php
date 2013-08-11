@@ -84,7 +84,8 @@
 					"zoomend": incidentZoom
 				},
 				maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
-				maxResolution: 156543.0339
+				maxResolution: 156543.0339,
+				displayProjection: new OpenLayers.Projection("EPSG:4326")
 			};
 			
 			// Now initialise the map
@@ -94,7 +95,8 @@
 			map.addLayers(<?php echo map::layers_array(FALSE); ?>);
 			map.addControl(new OpenLayers.Control.Navigation());
 			map.addControl(new OpenLayers.Control.Zoom());
-			map.addControl(new OpenLayers.Control.MousePosition());
+			map.addControl(new OpenLayers.Control.MousePosition({displayProjection: proj_4326}));
+			
 			map.addControl(new OpenLayers.Control.ScaleLine());
 			map.addControl(new OpenLayers.Control.Scale('mapScale'));
 			map.addControl(new OpenLayers.Control.LayerSwitcher());

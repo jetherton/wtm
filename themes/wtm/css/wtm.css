@@ -398,7 +398,9 @@ div#right { position:absolute; z-index:1000; }
 /* home page map */
 div.map { width:auto; border:none; border-top:0; position:relative; }
 div.map.timeline-enabled {height:529px; background:#666;}
-#mapStatus { 
+#mapStatus,
+.big-block .olControlScale div, 
+.big-block .olControlMousePosition{ 
     width:270px; float:none; overflow:auto; 
     position: relative;
     top: -40px;
@@ -862,61 +864,84 @@ div.report-find-location div.olControlEditingToolbar div.olButton{
 	width:36px;
 	border-right: solid 1px #9e9e9c;
 }
-
+div.report-find-location div.olControlEditingToolbar div{
+    margin:0px;
+}
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePointItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -34px 0px;
+	background: no-repeat url('../images/icons/pencil.png') 2px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePointItemInactive:hover{
+	background: no-repeat  url('../images/icons/pencil_hover.png') 2px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePointItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -34px 0px;
+	background: white no-repeat  url('../images/icons/pencil_hover.png') 2px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -70px 0px;
+	background: no-repeat url('../images/icons/line.png') 2px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemInactive:hover{
+	background: no-repeat url('../images/icons/line_hover.png') 2px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePathItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -70px 0px;
+	background: white no-repeat url('../images/icons/line_hover.png') 2px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -106px 0px;
+	background: no-repeat url('../images/icons/square.png') 3px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemInactive:hover{
+	background: no-repeat url('../images/icons/square_hover.png') 3px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeaturePolygonItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -106px 0px;
+	background: white no-repeat url('../images/icons/square_hover.png') 3px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.elipseItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -142px 0px;
+	background: no-repeat url('../images/icons/circle.png') 3px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.elipseItemInactive:hover{
+	background: no-repeat url('../images/icons/circle_hover.png') 3px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.elipseItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -142px 0px;
+	background: white no-repeat url('../images/icons/circle_hover.png') 3px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlDragPanItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -214px 0px;
+	background: no-repeat url('../images/icons/move.png') 2px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDragPanItemInactive:hover{
+	background: no-repeat url('../images/icons/move_hover.png') 2px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlDragPanItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -214px 0px;
+	background: white no-repeat url('../images/icons/move_hover.png') 2px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoordPointItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') 0px 0px;
+	background: no-repeat  url('../images/icons/coordinates.png') 0px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoordPointItemInactive:hover{
+	background: no-repeat  url('../images/icons/coordinates_hover.png') 0px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlDrawFeatureCoordPointItemActive{
-	background: url('../images/edit_submit_selected_icons.png') 0px 0px;
+	background: white no-repeat  url('../images/icons/coordinates_hover.png') 0px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -180px 0px;
+	background: no-repeat url('../images/icons/textbox.png') 3px 0px;
+}
+div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointItemInactive:hover{
+	background: no-repeat url('../images/icons/textbox_hover.png') 3px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlDrawTextPointItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -180px 0px;
+	background: white no-repeat url('../images/icons/textbox_hover.png') 3px 0px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlModifyResizeItemInactive{
-	background: url('../images/edit_submit_nonselect_icons.png') -472px 0px;
+	background: url('../images/edit_submit_nonselect_icons.png') -472px -1px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlModifyResizeItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -472px 0px;
+	background: white url('../images/edit_submit_nonselect_icons.png') -472px -1px;
 }
 
 div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateItemInactive{
@@ -924,7 +949,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateIt
 	width:26px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlModifyRotateItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -450px 0px;
+	background: white url('../images/edit_submit_nonselect_icons.png') -450px 0px;
 	width:26px;
 }
 
@@ -932,7 +957,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 	background: url('../images/edit_submit_nonselect_icons.png') -502px 0px;
 }
 div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItemActive{
-	background: url('../images/edit_submit_selected_icons.png') -502px 0px;
+	background: white url('../images/edit_submit_nonselect_icons.png') -502px 0px;
 }
 
 
@@ -961,7 +986,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 }
 
 .report-find-location .btns a#helpButton{
-    left: 281px;
+    left: 332px;
     position: relative;
     background: rgba(128,128,128,0.8);
     line-height: 28px;
@@ -1007,25 +1032,32 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
     right: 0px;
     margin: 10px;
     text-align: right;
-    font-weight: bold;
-    font-size: 11px;
+    font-family: Agile-Bold;
+    background-color: rgba(128,128,128,0.85);
+    font-size: 13px;
 }
 
 #helpTextClose:hover{
     cursor:pointer;
+    
 }
 
 .report-find-location .btns a#helpButton:hover{
     text-decoration: none;
     background:white;
+    color:black;
 }
 
 .report-find-location .btns a.btn_del_last{
-    background: url('../images/edit_submit_nonselect_icons.png') -341px 0px;
+    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo.png') 2px 0px;
+}
+.report-find-location .btns a.btn_del_last:hover{
+    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo_hover.png') 2px 0px;
+    text-decoration: none;
 }
 
 .report-find-location .btns a.btn_undel_last{
-    background: url('../images/edit_submit_nonselect_icons.png') -341px 0px;
+    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo.png') 2px 0px;
      -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -1035,13 +1067,29 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
     border-left: solid 1px #9e9e9c;
     border-right:none;
 }
+.report-find-location .btns a.btn_undel_last:hover{
+    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo_hover.png') 2px 0px;
+     -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    border-left: solid 1px #9e9e9c;
+    border-right:none;
+    text-decoration: none;
+}
 
 .report-find-location .btns a.btn_del_sel{
-    background: url('../images/edit_submit_nonselect_icons.png') -374px 0px;
+    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -374px 0px;
+}
+.report-find-location .btns a.btn_del_sel:hover{
+    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -374px 0px;
+    text-decoration:none;
 }
 
 .report-find-location .btns a.btn_kml_up{
-    background: url('../images/edit_submit_nonselect_icons.png') -250px 0px;
+    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -250px 0px;
     width:90px;
 }
 
@@ -1172,10 +1220,12 @@ position: absolute;
 bottom: 0;
 display: none;
 width: 100%;
-background-color: #00008b;
+background-color: #004562;
 opacity: 1.0;
 z-index: 5002;
 height: 140px;
+font-family: "Agile-Bold", "Arial Bold", "Helvetical Bold","Sans Serif";
+font-size: 13px;
 }
 
 #geometryPointsClose{
@@ -1721,6 +1771,8 @@ div.report-media-box-content{
 
 .olControlEditingToolbar{
     margin:0px;
+    background: rgba(128,128,128,0.85);
+    height:31px;
 }
 
 div#submit_real_left{
@@ -1931,4 +1983,36 @@ div.clicker_wrapper{
     position:relative;
     top:0px;
     right:0px;
+}
+
+#geometryLabelerHolder{
+    background-color: #004562;
+    font-family: "Agile-Bold", "Arial Bold", "Helvetical Bold","Sans Serif";
+    font-size: 13px;   
+}
+
+.big-block .olControlScale div{
+    left: -828px;
+    padding: 5px;
+    height: 20px;
+    line-height: 20px;
+    width: 110px;
+    top: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+ .big-block .olControlMousePosition
+{
+    position: absolute;
+    z-index: 1003;
+    height: 30px;
+    top: 310px;
+    line-height: 30px;
+    padding-left: 5px;
+    text-align: center;
+    width: 160px;
+    left: 129px;
+    border-left: solid 1px grey;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
