@@ -2,18 +2,11 @@
 
 	<div class="left-col">
 
-  	  <?php
-    	  if ($incident_verified)
-    		{
-    			echo '<p class="r_verified">'.Kohana::lang('ui_main.verified').'</p>';
-    		}
-    		else
-    		{
-    			echo '<p class="r_unverified">'.Kohana::lang('ui_main.unverified').'</p>';
-    		}
-  	  ?>
+  	 
 
-		<h1 class="report-title"><?php
+		<h1 class="report-title"> 
+		    <a id="backToReportIcon" href="<?php echo url::base(); ?>reports"></a>
+		    <?php
 			echo html::escape($incident_title);
 
 			// If Admin is Logged In - Allow For Edit Link
@@ -22,10 +15,22 @@
 				echo " [&nbsp;<a href=\"".url::site()."admin/reports/edit/".$incident_id."\">"
 				    .Kohana::lang('ui_main.edit')."</a>&nbsp;]";
 			}
-		?><a id="backToReportIcon" href="<?php echo url::base(); ?>reports"></a></h1>
+		?></h1>
 	    
 	    <div class="report-category-list">
 		<p>
+		     <?php
+			if ($incident_verified)
+			      {
+				      echo '<p class="r_verified">'.Kohana::lang('ui_main.verified').'</p>';
+			      }
+			      else
+			      {
+				      echo '<p class="r_unverified">'.Kohana::lang('ui_main.unverified').'</p>';
+			      }
+			?>
+		    
+		    
 			<?php
 				foreach ($incident_category as $category)
 				{

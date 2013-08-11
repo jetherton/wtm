@@ -542,9 +542,9 @@ div#main.report_detail { padding:0px 0px; }
 
 .report_detail .r_verified,
 .report_detail .r_unverified{ 
-    position:absolute; 
-    top:46px; 
-    right:10px;  
+    position:relative; 
+    bottom:-4px; 
+    right:0px;  
     font-family: Agile-Light;
     font-size:13px;
     color:#333;
@@ -2282,4 +2282,41 @@ div.credibility{
 
 #reportListIconHere{
     background:no-repeat url('../images/icons/list.png') 0px 5px;
+}
+
+.page-search #content .big-block{
+    background: rgba(230,230,230,0.85);
+    padding:10px;
+}
+
+.search_block{
+    padding:0px;
+}
+
+.search_block ul.pager{
+    padding-bottom: 20px;
+}
+.search_block .search_info{
+    border:none;
+    border-top: 5px solid #a7e0fd;
+    border-bottom: 5px solid #a7e0fd;
+    background:none;
+}
+div.search_result{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom:1px solid #333;
+    font-family: Georgia;
+    font-size: 13px;
+}
+
+div.search_result .search_date{
+    font-family: Agile-Light;
+    font-size:13px;
+}
+
+div.search_result h3 a{
+    font-family: Georgia;
+    font-size: 24px;
+    font-weight:normal;
 }
