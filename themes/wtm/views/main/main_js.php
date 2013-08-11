@@ -519,6 +519,18 @@ jQuery(function() {
 	    }
 	});
 	
+	$("a#timelineSliderToggle").click(function(e) {
+	    if ( $(".slider-holder .ui-slider").is(":visible") ) {
+		
+	    } else {
+		$(".slider-holder").css("height","90px");
+		$(".slider-holder .ui-slider").show();
+		$("#timelineSliderToggle").hide();
+	    }
+	    
+	    return false;
+	});
+	
 		
 	// Timeslider and date change actions
 	$("select#startDate, select#endDate").selectToUISlider({

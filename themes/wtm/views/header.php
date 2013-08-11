@@ -124,8 +124,7 @@
 				    <!-- / searchform -->
 				    
 				    
-				    <a id="submitAReport" href="<?php echo url::base();?>reports/submit">
-					<img src="<?php echo url::base(); ?>themes/wtm/images/submitAReport.png"/>
-				    </a>	
+				    <a id="submitAReport" href="<?php echo url::base();?>reports/submit">Submit Report</a>	
+				    
 				</div>
 				<!-- / mainmenu -->

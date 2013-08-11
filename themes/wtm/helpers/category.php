@@ -31,8 +31,8 @@ class category_Core {
 		$html .= form::checkbox($form_field.'[]', $cid, $category_checked, ' class="check-box"'.$disabled);
 		
 		$cat = ORM::factory('category', $cid);
-		if($cat->category_image_thumb){
-		    $html .= '<img src="'.url::base().'media/uploads/'.$cat->category_image_thumb.'"/>';
+		if($cat->category_image){
+		    $html .= '<img src="'.url::base().'media/uploads/'.$cat->category_image.'"/>';
 		}
 		
 		$html .= '<span class="labelStr">'.$category['category_title'].'</span>';
@@ -160,7 +160,7 @@ class category_Core {
 		// Fetch the other categories
 		if ($count)
 		{
-			$sql = "SELECT c.id, c.parent_id, c.category_title, c.category_color, c.category_image, c.category_image_thumb, COUNT(i.id) report_count "
+			$sql = "SELECT c.id, c.parent_id, c.category_title, c.category_color, c.category_image, c.category_image, COUNT(i.id) report_count "
 				. "FROM ".$table_prefix."category c "
 				. "LEFT JOIN ".$table_prefix."category c_parent ON (c.parent_id = c_parent.id) "
 				. "LEFT JOIN ".$table_prefix."incident_category ic ON (ic.category_id = c.id) "
@@ -173,7 +173,7 @@ class category_Core {
 		}
 		else
 		{
-			$sql = "SELECT c.id, c.parent_id, c.category_title, c.category_color, c.category_image, c.category_image_thumb "
+			$sql = "SELECT c.id, c.parent_id, c.category_title, c.category_color, c.category_image, c.category_image "
 				. "FROM ".$table_prefix."category c "
 				. "LEFT JOIN ".$table_prefix."category c_parent ON (c.parent_id = c_parent.id) "
 				. "WHERE 1=1 "
@@ -205,7 +205,7 @@ class category_Core {
 					'category_color' => $category->category_color,
 					'category_image' => $category->category_image,
 					'children' => $children,
-					'category_image_thumb' => $category->category_image_thumb,
+					'category_image' => $category->category_image,
 					'parent_id' => $category->parent_id,
 					'report_count' => $category->report_count + $report_count
 				);
@@ -223,7 +223,7 @@ class category_Core {
 						'parent_id' => 0,
 						'category_color' => '',
 						'category_image' => '',
-						'category_image_thumb' => '',
+						'category_image' => '',
 						'children' => array(),
 						'report_count' => 0
 					);
@@ -237,7 +237,7 @@ class category_Core {
 					'parent_id' => $category->parent_id,
 					'category_color' => $category->category_color,
 					'category_image' => $category->category_image,
-					'category_image_thumb' => $category->category_image_thumb,
+					'category_image' => $category->category_image,
 					'report_count' => $category->report_count,
 					'children' => array()
 				);
@@ -265,7 +265,7 @@ class category_Core {
 			// Determine the category class
 			$category_class = ($category['parent_id'] > 0)? " class=\"report-listing-category-child\"" : "";
 			
-			$category_image = $category['category_image_thumb'] ? html::image(array('src'=> url::convert_uploaded_to_abs($category['category_image_thumb']), 'style'=>'width:20px;height:20px;float:left;padding-right:5px;')) : NULL;
+			$category_image = $category['category_image'] ? html::image(array('src'=> url::convert_uploaded_to_abs($category['category_image']), 'style'=>'width:20px;height:20px;float:left;padding-right:5px;')) : NULL;
 			$color_str = $category_image == null ?  'style="background-color: #'.$category['category_color'].'"' : "";
 			
 			$tree_html .= "<li".$category_class.">"

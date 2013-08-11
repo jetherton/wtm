@@ -1,4 +1,6 @@
 <div class="slider-holder">
+    <a href="#" id="timelineSliderToggle">&nbsp;</a>
+    <div id="graphSwitch" onclick="toggleGraph();">Histogram</div>
 	<?php echo form::open(NULL, array('method' => 'get')); ?>
 		<input type="hidden" value="0" name="currentCat" id="currentCat"/>
 		<fieldset>
@@ -15,17 +17,16 @@
     function toggleGraph(){
 	if($(".graph-holder").is(":visible")){
 	    $(".graph-holder").hide(400);
-	    $("#graphSwitch").text("Show Histogram");
+	    $("#graphSwitch").removeClass("active");
 	} else {
-	    $("#graphSwitch").text("Hide Histogram");
+	    $("#graphSwitch").addClass("active");
 	    $(".graph-holder").show(400);
 	    window.setTimeout(function(){reDrawGraph();},500);
 	    
 	}
     }
 </script>
-<div id="graphWrapper">
-    <div id="graphSwitch" onclick="toggleGraph();">Show Histogram</div>
+<div id="graphWrapper">    
 
     <div id="graph" class="graph-holder"></div>
 </div>

@@ -170,10 +170,42 @@ div.submit-incident a, .btn_submit {
   -webkit-border-radius: 3px;
 }
 
-#submitAReport{
+#submitAReport, #submitAReport:hover{
+    margin: 20px 20px 0 0;
+    padding: 8px 10px;
     position:relative;
-    top:-30px;
+    top:-20px;
+     text-shadow: none;
+    text-transform: uppercase;
+    font-family: Agile-Light;
+    font-size: 16px;
+    line-height:16px;
+    background:#a8e0ff;
+    color:#333;
+    padding-top:7px;
+    padding-bottom: 7px;
+    box-shadow: 1px 1px 1px gray;
+    border-radius: 3px;
+     /* Safari 4-5, Chrome 1-9 */
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a8e0ff), to(#a8e0ff));
+
+  /* Safari 5.1, Chrome 10+ */
+  background: -webkit-linear-gradient(top, #a8e0ff, #a8e0ff);
+
+  /* Firefox 3.6+ */
+  background: -moz-linear-gradient(top, #a8e0ff, #a8e0ff);
+
+  /* IE 10 */
+  background: -ms-linear-gradient(top, #a8e0ff, #a8e0ff);
+
+  /* Opera 11.10+ */
+  background: -o-linear-gradient(top, #a8e0ff, #a8e0ff);
     
+}
+
+#submitAReport:hover{
+    color:black;
+    text-decoration:none;
 }
 
 /* primary nav */
@@ -227,7 +259,7 @@ body.page-main #report-map-filter-box {
     position:relative; 
     z-index:1000; 
     left:730px; 
-    top:16px; 
+    top:18px; 
     width:220px; }
 
 
@@ -413,11 +445,13 @@ div.map.timeline-enabled {height:529px; background:#666;}
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
+    height:30px;
+    line-height:30px;
 
 }
 
 div#mapStatus div{
-    padding: 6px;
+    padding: 0px 6px;
 }
 div#mapStatus div#mapProjection{
     display:none;
@@ -568,6 +602,7 @@ div.report-additional-reports h5 { font-family: Arial, sans-serif;  }
     box-shadow: 1px 1px 1px #999;
     margin-top:0px;
     padding:10px;   
+    padding-top:15px;
     border:none;
     width:449px;
 }
@@ -584,7 +619,7 @@ div#footer {
 
 .page-main #footer{
     position:relative;
-    top:-170px;
+    top:-228px;
 }
 
 div#underfooter { background:transparent; }
@@ -703,6 +738,7 @@ h2{
 #front-page-news h1{
     border-bottom: 6px solid #a7e0fd;
     margin-bottom:0px;
+    padding-bottom:4px;
 }
 
 #front-page-news table h1 {
@@ -737,6 +773,12 @@ h2{
     font-size: 1em;
 }
 
+.front_teaser a{
+    font-size: 13px;
+    font-family: Georgia;
+    line-height: 18px;
+}
+
 img.teaser_img{
 	float:left;
 	width:222px;
@@ -750,22 +792,34 @@ img.teaser_img{
     word-spacing: 0.1em;
     text-align: center;
     letter-spacing: 0;
-    font-size: 14px;
+    font-size: 13px;
     border-bottom: solid 6px #a6a29f;
     font-weight: bold;
     margin-bottom: 20px;
     padding-bottom:15px;
 }
+#front_all_about div a{
+    font-family: Georgia;
+    font-size: 13px;
+}
 
 #front_about h1{
     text-align: center;
     border-bottom: solid 6px #a6a29f;
+    padding-bottom:4px;
 }
 
 #front_about p{
     font-size:16px;
+    font-family: Georgia;
+    line-height: 24px;
 }
 
+#front_all_about div#how_to_report_box{
+    border-bottom: none;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
 #how_to_report_box p {
     font-family: Agile-Light;
     color: #333;
@@ -775,6 +829,7 @@ img.teaser_img{
     line-height: 1.6em;
     font-weight: normal;
     font-size: 13px;
+    
 }
 
 #how_to_report_box p a{    
@@ -1044,7 +1099,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
     margin: 10px;
     text-align: right;
     font-family: Agile-Bold;
-    background-color: rgba(128,128,128,0.85);
+    background:none;
     font-size: 13px;
 }
 
@@ -1116,13 +1171,15 @@ div.report-find-location #panel{
 
 div#report-type-filter{
     position:relative;
-    top:-74px;
+    top:-75px;
     left:6px;
 }
 
 div#report-type-filter ul li {
     float: left;
     margin-right: 0px;
+    height:30px;
+    background: rgba(255,255,255,0.85);
 }
 
 div#report-type-filter ul li.left_most_filter{
@@ -1137,29 +1194,30 @@ div#report-type-filter ul li.right_most_filter{
 
 div#report-type-filter ul li a{
     font-family:Agile-Light;
-    height:29px;
+    height:30px;
     display:block;
-    width:32px;
-    background: rgba(255,255,255,0.85);
+    width:32px;    
     margin:0px;
     padding:0px;
+    opacity: 0.75;
 }
 div#report-type-filter ul li a:hover{
     border:none;
     -moz-border-radius:0px;
     -webkit-border-radius: 0px;
+    opacity: 1.0;
     
 }
 
 div#report-type-filter ul li div{
     font-family:Agile-Light;
-    height:23px;
+    height:30px;
     display:block;
     width:53px;
-    background: rgba(255,255,255,0.85);
+    background: none;
     margin:0px;
     font-size: 13px;
-    padding-top: 6px;
+    line-height: 30px;
     padding-left: 8px;
     color:#333;
     font-weight: bold;
@@ -1167,8 +1225,9 @@ div#report-type-filter ul li div{
 }
 
 div#report-type-filter ul li a#media_0{
-    height:23px;    
-    padding-top: 6px;
+    height:30px;    
+    line-height:30px;
+    padding-top: 0px;
     padding-left: 6px;
     color:#333;
 }
@@ -1181,16 +1240,16 @@ div#report-type-filter ul li a#media_0 span{
 
 div#report-type-filter ul li a#media_4{
     background-image: url('../images/news.png');
-    background-position: 0px -2px;
+    background-position: 0px 0px;
 }
 div#report-type-filter ul li a#media_1{
     background-image: url('../images/photo.png');
-    background-position: -0px -2px;
+    background-position: -0px 0px;
     width:35px;
 }
 div#report-type-filter ul li a#media_2{
     background-image: url('../images/video.png');
-    background-position: -0 -2px;
+    background-position: -0 1px;
     width:40px;
 }
 
@@ -1199,21 +1258,45 @@ div.slider-holder {
     background: rgba(255,255,255,0.85);
     margin-top: 0px;
     padding-right: 11px;
-    top: -60px;
+    top: -70px;
     position:relative;
+    padding-top:5px;
+    height:30px;
 }
 
 div#graphWrapper{
-    top: -50px;
+    top: -70px;
     position:relative;
 }
 
 div#graphSwitch{
-    background: rgba(150,150,150,0.85);
-    width: 100px;
+    background: none;
+    width: 120px;
     padding: 8px;
-    border-radius: 3px;
-    margin-bottom:10px
+    position: absolute;
+    right: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-family: Agile-Bold;
+    top: 2px;
+    background-image: url(../images/big_down.png);
+    background-position: 120px 9px;
+    background-repeat: no-repeat;
+}
+
+div#graphSwitch.active{
+    background: none;
+    width: 120px;
+    padding: 8px;
+    position: absolute;
+    right: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-family: Agile-Bold;
+    top: 2px;
+    background-image: url(../images/big_up.png);
+    background-position: 120px 9px;
+    background-repeat: no-repeat;
 }
 div#graphSwitch:hover{
     cursor:pointer;
@@ -1354,17 +1437,24 @@ div.olControlScaleLine{
 #front-page-news h1 a{
     font-family: "Georgia";
     font-size:24px;
+    line-height: 24px;
 }
 
 #front-page-news .front_teaser{
     font-family: "Georgia";
     font-size:13px;
+    line-height: 18px;
 }
 
 
 div#content{
     position: relative;
     top: -52px;
+}
+
+.page-reports-submit div#content{
+    position: relative;
+    top: -68px;
 }
 
 body.page-page-index div#content{
@@ -1375,7 +1465,14 @@ body.page-page-index div#content{
 
 span#date_range{
     font-family: Agile-light;
-    margin-left:40px
+    margin-left:40px;
+    font-size:20px;
+    font-weight:normal;
+    
+}
+
+div#reports_listing h1.heading{
+    margin-bottom:7px;
 }
 
 a.ic-time {
@@ -1385,6 +1482,21 @@ a.ic-time {
     position: relative;
     right: 0px;
     float: right;
+    background: no-repeat url('../images/icons/clock.png') 0px 4px;
+    padding-left:40px;
+    line-height:30px;
+}
+a.ic-time:hover {
+    font-size: 16px;
+    font-family: Georgia;
+    color: #000;
+    position: relative;
+    right: 0px;
+    float: right;
+    background: no-repeat url('../images/icons/clock_hover.png') 0px 4px;
+    padding-left:40px;
+    line-height:30px;
+    text-decoration:none;
 }
 
 .heading{
@@ -1446,6 +1558,11 @@ ul.link-toggle li a.next{
     position: relative;
     
 }
+ul.link-toggle li a.prev:hover,
+ul.link-toggle li a.next:hover{
+    background: none;
+    color:black;
+}
 
 .r_details h3 span.r_verified,
 .r_details h3 span.r_unverified{
@@ -1501,6 +1618,7 @@ p.r_date a.date_location{
     color:#333;
     font-family:Georgia;
     font-size:16px;
+    font-weight: normal;
 }
 .r_details h3{
     width:auto;
@@ -1518,6 +1636,7 @@ div.r_description a:hover{
     font-family: Georgia;
     font-size:13px;
     text-decoration: none;
+    line-height: 18px;
 }
 
 div.r_description a:hover span.description_more{
@@ -1642,9 +1761,13 @@ a.filter-button:hover,
     text-transform: uppercase;
     font-family: Agile-Light;
     font-size: 16px;
+    line-height:16px;
     background:#a8e0ff;
     color:#333;
-    box-shadow: 2px 2px 2px gray;
+    padding-top:7px;
+    padding-bottom: 7px;
+    box-shadow: 1px 1px 1px gray;
+    border-radius: 3px;
      /* Safari 4-5, Chrome 1-9 */
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a8e0ff), to(#a8e0ff));
 
@@ -1687,7 +1810,7 @@ div.report-category-list a span.r_cat-box{
 
 div#main.report_detail{
     position: relative;
-    top:-81px;
+    top:-51px;
     
 }
 
@@ -1701,7 +1824,7 @@ div.report-category-list a{
 div.report-category-list{
     border-top: none;
     border-bottom: solid 1px #a6a29f;
-    padding:0px;
+    padding:4px 0px;
 }
 
 .report-when-where {
@@ -1726,6 +1849,7 @@ div.report-description-text{
     font-family:Georgia;
     font-size: 16px;
     padding:0px;
+    line-height: 24px;
 }
 div.report-description-text h5{
     font-family:Georgia;
@@ -1734,6 +1858,7 @@ div.report-description-text h5{
 div.report-description-text div.news_sources a{
     font-size:13px;
     word-break:break-all;
+    line-height: 24px;
 }
 #main .right-col{
     padding:0px;
@@ -1741,11 +1866,11 @@ div.report-description-text div.news_sources a{
 }
 div.report-media {
     padding:0px;
-    padding-bottom: 10px;
 }
 
 div.report-media .photothumb img{
     max-width: 310px;
+    margin-bottom:10px;
 }
 div.report-additional-reports .rb_report{
     padding:10px 0px;
@@ -1763,6 +1888,9 @@ div.report-additional-reports .rb_report .r_date {
 }
 div.report-additional-reports .rb_report h5 a{
     text-decoration: underline;
+}
+div.report-additional-reports .rb_report h5 a:hover {
+    color:black;
 }
 
 div.realCredibility{
@@ -1806,6 +1934,7 @@ div#submit_real_left h1{
     font-size:24px;
     color:#333;
     border-bottom: solid 5px #333;
+    padding-bottom:3px;
 }
 
 .report_row h4 {
@@ -1836,7 +1965,7 @@ span.required {
 }
 .report_category ul li label span.labelStr{
     position: relative;
-    top:-5px;
+    top:-3px;
 }
 .report_category ul li label img{
     padding-left: 5px;
@@ -1846,7 +1975,7 @@ span.required {
     margin-bottom:10px;
 }
 .report_category ul li label span.layer-name{
-    top:-5px;
+    top:-3px;
     margin-left:0px;
 }
 
@@ -1861,15 +1990,23 @@ a.add, a.rem {
     width: 30px;
     height: 30px;
     float: left;
-    background: white url(../images/ZoomIn.png) no-repeat;
+    background: white url(../images/ZoomIn_grey.png) no-repeat;
     background-position: 5px 4px;
     position: relative;
     right: -10px;
 }
+a.add:hover{
+    background: white url(../images/ZoomIn_hover.png) no-repeat;
+    background-position: 5px 4px;
+}
 a.rem {
-    background: white url(../images/ZoomOut.png) no-repeat;
+    background: white url(../images/ZoomOut_grey.png) no-repeat;
     background-position: 5px,4px;
     margin-left: 10px;
+}
+a.rem:hover{
+    background: white url(../images/ZoomOut_hover.png) no-repeat;
+    background-position: 5px 5px;
 }
 
 
@@ -1905,19 +2042,21 @@ input.file{
     width:370px;
 }
 .report_optional{
-    width: 438px;
+    width: 448px;
     margin-top: 10px;
     background: rgba(230,230,230,0.85);
     box-shadow: 1px 1px 1px #999;
+    padding:10px;
 }
 .report_optional .long{
-    width: 430px;
+    width: 433px;
 }
 
 .report_optional h3{
     font-family: Georgia;
-    font-size:16px;
+    font-size:18px;
     color:#333;
+    border-bottom: solid 1px #333;
 }
 .file_upload_description{
     display:none;
@@ -1955,6 +2094,7 @@ div.file_upload div.second input.fileuploadinput{
 
 .file_upload_content ul{
     list-style: none;
+    padding:10px 0px;
 }
 .file_upload_content ul li{
     padding-top: 5px;
@@ -2008,14 +2148,33 @@ div.clicker_wrapper{
 }
 
 .big-block .olControlScale div{
-    left: -828px;
+    left: -948px;
+    position:absolute;
     padding: 5px;
+    margin:0px;
+    border:none;
     height: 20px;
     line-height: 20px;
     width: 110px;
-    top: 20px;
+    top: -10px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+
+@-moz-document url-prefix() {
+    .big-block .olControlScale div{
+	left: -948px;
+	position:absolute;
+	padding: 5px;
+	margin:0px;
+	border:none;
+	height: 20px;
+	line-height: 20px;
+	width: 110px;
+	top: -11px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+    }
 }
  .big-block .olControlMousePosition
 {
@@ -2024,11 +2183,103 @@ div.clicker_wrapper{
     height: 30px;
     top: 310px;
     line-height: 30px;
-    padding-left: 5px;
+    padding: 0px;
+    margin:0px;
     text-align: center;
     width: 160px;
     left: 129px;
     border-left: solid 1px grey;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+}
+
+
+#date_toggle{
+    text-decoration: underline;
+    font-size: 10px;
+    padding: 1px 0 0 18px;
+    background: url(../images/icons/clock.png) no-repeat 0px 0px;
+    float: right;
+    margin-right: 23px;
+    height: 30px;
+    line-height: 30px;
+    width: 75px;
+    text-align: right;
+}
+#label_handle_startDate{
+    padding-left:45px;
+}
+
+#timelineSliderToggle{
+   background-image: url(../images/icons/clock.png);
+    background-position: 0px -2px;
+    background-repeat: no-repeat;
+    height: 35px;
+    width: 35px;
+    display: block;
+    position: absolute;
+}
+
+#timelineSliderToggle:hover{
+   background-image: url(../images/icons/clock_hover.png);
+    background-position: 0px -2px;
+    background-repeat: no-repeat;
+    height: 35px;
+    width: 35px;
+    display: block;
+    position: absolute;
+    text-decoration:none;    
+}
+
+.slider-holder .ui-slider{
+    margin-top: 15px;
+    display:none;
+    padding-right: 10px;
+}
+
+#map .olControlLayerSwitcher .maximizeDiv{
+    top:0px;
+    left:0px;
+}
+
+#map .olControlLayerSwitcher{
+    top:75px;
+    left:-3px;    
+}
+
+.page-reports-view #map .olControlLayerSwitcher{
+    top:55px;
+    left:-3px;    
+}
+
+
+#map .olControlLayerSwitcher .layersDiv{
+    -webkit-border-radius: 0px 8px 8px 0px;
+    -moz-border-radius: 0px 8px 8px 0px;
+    -o-border-radius: 0px 8px 8px 0px;
+    border-radius: 0px 8px 8px 0px;
+}
+
+#backToReportIcon{
+    display:block;
+    background:no-repeat url('../images/icons/list.png') 0px 5px;
+    height:25px;
+    width:25px;
+    float:right;
+}
+#backToReportIcon:hover{
+    display:block;
+    background:no-repeat url('../images/icons/list_hover.png') 0px 5px;
+    height:25px;
+    width:25px;
+    float:right;
+}
+
+div.credibility{
+    border-top: solid 1px #333;
+    padding-top:10px;
+}
+
+#reportListIconHere{
+    background:no-repeat url('../images/icons/list.png') 0px 5px;
 }

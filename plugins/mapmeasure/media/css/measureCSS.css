@@ -45,6 +45,8 @@
 	width : 30px;
 	height: 30px;
 	border-right: solid 1px #9c9c9e;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
 }
 
 /*hover*/
@@ -72,7 +74,7 @@
 	background: url('../img/toolbar_hover.png') 0px 0px;	
 	cursor:pointer;
 	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
+	border-bottom-left-radius: 3px;	
 }
 
 /*active*/
@@ -136,6 +138,7 @@
 }
 #clickIn{
 	float:left;
+	border-top-right-radius: 3px;
 }
 
 #distanceOptionsDiv{

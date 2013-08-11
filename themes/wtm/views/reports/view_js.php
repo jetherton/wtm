@@ -102,8 +102,9 @@ jQuery(window).load(function() {
 						    return 20;
 						} else if(feature.attributes.icon.indexOf("incident_circle") != -1 ||
 						    feature.attributes.icon.indexOf("location_square") != -1 ||
-						    feature.attributes.icon.indexOf("marker.png") != -1 ||
-						    feature.attributes.icon.indexOf("wreck_cross.png") != -1) {
+						    feature.attributes.icon.indexOf("marker.png") != -1) {
+						    return 10;
+						} else if(feature.attributes.icon.indexOf("wreck_cross.png") != -1){
 						    return 20;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return 42;
@@ -118,8 +119,9 @@ jQuery(window).load(function() {
 						    return 17;
 						} else if(feature.attributes.icon.indexOf("incident_circle") != -1 ||
 						    feature.attributes.icon.indexOf("location_square") != -1 ||
-						    feature.attributes.icon.indexOf("marker.png") != -1 ||
-						    feature.attributes.icon.indexOf("wreck_cross.png") != -1) {
+						    feature.attributes.icon.indexOf("marker.png") != -1) {
+						    return 10;
+						} else if(feature.attributes.icon.indexOf("wreck_cross.png") != -1){
 						    return 20;
 						}else {
 						    return 30;
@@ -129,8 +131,9 @@ jQuery(window).load(function() {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return -5;
 						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png" ||
-						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/location_square.png" ||
-						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/wreck_cross.png") {
+						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/location_square.png") {
+						    return -5;
+						} else if( feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/wreck_cross.png"){
 						    return -10;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return -20;
@@ -141,8 +144,11 @@ jQuery(window).load(function() {
 				    iconOffsetY: function(feature) {
 						if(typeof feature.attributes.icon == "undefined"){
 						    return -5;
-						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png") {
-						    return -7;
+						} else if(feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/incident_circle.png" ||
+						    feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/location_square.png" ) {
+						    return -5;
+						} else if( feature.attributes.icon == "<?php echo url::base();?>media/img/openlayers/wreck_cross.png"){
+						    return -10;
 						} else if(feature.attributes.icon.indexOf("clear_rect32x14.png") != -1) {
 						    return -10;
 						} else {
@@ -418,22 +424,26 @@ jQuery(window).load(function() {
 				$('a[href=#report-map]').parent().hide();
 				$('a.taller-map').parent().show();
 				$('a.smaller-map').parent().show();
+				$('body.page-reports-view div#layers-box').show();
 				break;
 			case "taller-map":
 				$('.map-holder').css("height","600px");
 				$('a.shorter-map').parent().show();
 				$('a.smaller-map').parent().show();
+				$('body.page-reports-view div#layers-box').show();
 				break;
 			case "shorter-map":
 				$('.map-holder').css("height","350px");
 				$('a.taller-map').parent().show();
 				$('a.smaller-map').parent().show();
+				$('body.page-reports-view div#layers-box').show();
 				break;
 			case "smaller-map":
 				$('.report-map').hide().prependTo($('.report-media-box-content'));
-				$('.map-holder').css({"height":"350px", "width": "348px"});
+				$('.map-holder').css({"height":"350px", "width": "310px"});
 				$('a.wider-map').parent().show();
 				$('.report-map').show();
+				$('body.page-reports-view div#layers-box').hide();
 				break;
 		};
 		

@@ -19,8 +19,8 @@
 
 
 body.page-reports-view div#layers-box{
-    top: 39px;
-    position: relative;
+    top: 10px;
+    position: absolute;
     z-index: 1009;
     left: 731px;
 }

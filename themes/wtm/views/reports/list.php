@@ -25,7 +25,7 @@
 					</td>
 					<td><?php //echo $pagination; ?></td>
 					-->
-					<td style="width:150px;">Icon_here</td>
+					<td id='reportListIconHere'style="width:180px;">&nbsp;</td>
 					<td>
 					</td>
 					<td><?php echo $stats_breadcrumb; ?></td>
@@ -116,8 +116,8 @@
 								    <?php // Don't show hidden categories ?>
 								    <?php if($category->category_visible == 0) continue; ?>
 
-								    <?php if ($category->category_image_thumb): ?>
-									    <?php $category_image = url::base()."media/uploads/".$category->category_image_thumb; ?>
+								    <?php if ($category->category_image): ?>
+									    <?php $category_image = url::base()."media/uploads/".$category->category_image; ?>
 									    <a class="r_category" href="<?php echo url::site("reports/?c=$category->id") ?>">
 										    <span class="r_cat-box"><img src="<?php echo $category_image; ?>" height="20" width="20" /></span> 
 										    <span class="r_cat-desc"><?php echo Category_Lang_Model::category_title($category->id); ?></span>

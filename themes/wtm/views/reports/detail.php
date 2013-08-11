@@ -22,7 +22,7 @@
 				echo " [&nbsp;<a href=\"".url::site()."admin/reports/edit/".$incident_id."\">"
 				    .Kohana::lang('ui_main.edit')."</a>&nbsp;]";
 			}
-		?></h1>
+		?><a id="backToReportIcon" href="<?php echo url::base(); ?>reports"></a></h1>
 	    
 	    <div class="report-category-list">
 		<p>
@@ -213,10 +213,9 @@
 			Event::run('ushahidi_action.report_view_sidebar', $incident_id);
 		?>
 
-		<div class="report-additional-reports">
-		    <h4>Additoinal Documents</h4>
-		    <?php Event::run('report_view.upload_files_display', $id); ?>
-		</div>
+		
+		<?php Event::run('report_view.upload_files_display', $id); ?>
+		
 		<div class="report-additional-reports">
 			<h4>Related Reports</h4>
 			<?php foreach($incident_neighbors as $neighbor) { ?>

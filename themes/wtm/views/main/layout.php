@@ -166,7 +166,7 @@ $(function(){
 <!-- / main body -->
 
 <!-- content -->
-<div class="content-container" style="position: relative;top: -185px;">
+<div class="content-container" style="position: relative;top: -195px;">
 
 	<!-- content blocks -->
 	<div class="content-blocks clearingfix">
@@ -210,7 +210,7 @@ $(function(){
 					
 					
 					$content = $news_item->incident_description;
-					$content = substr($content, 0, strpos($content, "\n"));
+					$content = substr($content, 0, 130);
 					$content = html::clean($content);
 					
 					echo $content.' <a style="text-decoration:underline;" href="'.url::base().'reports/view/'.$news_item->id.'">more&gt;</a>';
