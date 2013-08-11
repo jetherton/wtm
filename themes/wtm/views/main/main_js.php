@@ -457,7 +457,7 @@ jQuery(function() {
 			
 
 	// Layer selection
-	$("ul#kml_switch li > a").click(function(e) {
+	$("ul#kml_switch li > a.toggleLayer").click(function(e) {
 		// Get the layer id
 		var layerId = this.id.substring(6);
 		
@@ -477,32 +477,48 @@ jQuery(function() {
 		if(isCurrentLayer && layerId != "bath"){
 			map.trigger("deletelayer", $(".layer-name", this).html());
 				$(this).removeClass("active");
+				$("#meta_layer_click_"+layerId).removeClass("layerActive");
 		}
 		
 		// Was a different layer selected?
 		if (!isCurrentLayer && layerId != "bath") {
 			// Set the currently selected layer as the active one
 			$(this).addClass("active");
+			$("#meta_layer_click_"+layerId).addClass("layerActive");
 			map.addLayer(Ushahidi.KML, {
 				name: $(".layer-name", this).html(),
 				url: "json/layer/" + layerId
 			});
 		}
-		
+		console.log(layerId);
 		if(layerId == "bath"){
 		    
 		    if(bathymetry.visibility){
 			$(this).removeClass("active");
+			$("#meta_layer_click_"+layerId).removeClass("layerActive");
 			bathymetry.setVisibility(false);
 		    } else {
 			$(this).addClass("active");
-			
+			$("#meta_layer_click_"+layerId).addClass("layerActive");
 			bathymetry.setVisibility(true);
 		    }
 		}
 
 		return false;
 	});
+	
+	$("ul#kml_switch li > a.layer_meta_clicker").click(function(e) {
+	    
+	    var layerId = this.id.substring(17);
+	    if($(this).hasClass("active")){
+		$(this).removeClass("active");
+		$("#layerMetaInfo_"+layerId).hide();
+	    } else {
+		$(this).addClass("active");
+		$("#layerMetaInfo_"+layerId).show();
+	    }
+	});
+	
 		
 	// Timeslider and date change actions
 	$("select#startDate, select#endDate").selectToUISlider({

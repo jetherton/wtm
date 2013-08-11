@@ -62,22 +62,7 @@ $(function(){
 					<a class="btn toggle" id="layers-menu-toggle" class="" href="#kml_switch"><?php echo Kohana::lang('ui_main.layers');?> <span id="show_layers_btn" class="btn-icon ic-right">&raquo;</span></a>
 					<!-- Layers (KML/KMZ) -->
 					<ul id="kml_switch" class="category-filters map-menu-box">
-					    <li>
-						<a href="#" id="layer_bath">
-						    <div class="color_swatch" style="background-color:#ea00ff;">
-						    </div>						    
-						    <span class="swatch" style="background-color:#2323b8"></span>
-						    <span class="layer-name">Bathymetry</span>
-						    <div class="layerMeta">
-							<p>
-							    <span style="font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">
-								Bathymetry is the study of underwater depth of lake or ocean floors. In other words, bathymetry is the underwater equivalent to hypsometry or topography. The name comes from Greek βαθύς (bathus), "deep",[1] and μέτρον (metron), "measure".[2] Bathymetric (or hydrographic) charts are typically produced to support safety of surface or sub-surface navigation, and usually show seafloor relief or terrain as contour lines (called depth contours or isobaths) and selected depths (soundings), and typically also provide surface navigational information. Bathymetric maps (a more general term where navigational safety is not a concern) may also use a Digital Terrain Model and artificial illumination techniques to illustrate the depths being portrayed. Paleobathymetry is the study of past underwater depths.
-							    </span>
-							    <br>
-							</p>
-						    </div>
-						</a>
-					    </li>
+					  
 						<?php
 						foreach ($layers[0] as $layer_id => $layer)
 						{
@@ -90,7 +75,7 @@ $(function(){
 							$layer_link = (!$layer_url) ?
 								url::base().Kohana::config('upload.relative_directory').'/'.$layer_file :
 								$layer_url;
-							echo '<li><a href="#" id="layer_'. $layer .'" >';
+							echo '<li><a href="#" class="toggleLayer" id="layer_'. $layer .'" >';
 							echo '<div class="color_swatch" style="background-color:#'.$layer_color.';"></div>';
 							if($layer_icon != null OR $layer_icon != ""){
 							    echo '<span class="swatch" >';
@@ -100,15 +85,35 @@ $(function(){
 							}
 							echo '</span>';
 							
-							echo '<span class="layer-name">'.$layer_name.'</span>';
-							echo '<div class="layerMeta">';
+							echo '<span class="layer-name">'.$layer_name.'</span>';														
+							echo '</a>';
+							echo '<a href="#" class="layer_meta_clicker" id="meta_layer_click_'.$layer.'">&nbsp;</a>';
+							echo '<div id="layerMetaInfo_'.$layer.'" class="layerMeta">';
 							echo $layer_meta_data;
 							echo '</div>';
-							echo '</a></li>';
+							echo '</li>';
 							
 							//render_child_layers($layer, $layers);
 						}
 						?>
+					    
+					      <li>
+						<a href="#" id="layer_bath" class="toggleLayer">
+						    <div class="color_swatch" style="background-color:#ea00ff;">
+						    </div>						    
+						    <span class="swatch" style="background-color:#2323b8"></span>
+						    <span class="layer-name">Bathymetry</span>						    
+						</a>
+						<a href="#" class="layer_meta_clicker" id="meta_layer_click_bath">&nbsp;</a>
+						<div class="layerMeta" id="layerMetaInfo_bath">
+						      <p>
+							  <span style="font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">
+							      Bathymetry is the study of underwater depth of lake or ocean floors. In other words, bathymetry is the underwater equivalent to hypsometry or topography. The name comes from Greek βαθύς (bathus), "deep",[1] and μέτρον (metron), "measure".[2] Bathymetric (or hydrographic) charts are typically produced to support safety of surface or sub-surface navigation, and usually show seafloor relief or terrain as contour lines (called depth contours or isobaths) and selected depths (soundings), and typically also provide surface navigational information. Bathymetric maps (a more general term where navigational safety is not a concern) may also use a Digital Terrain Model and artificial illumination techniques to illustrate the depths being portrayed. Paleobathymetry is the study of past underwater depths.
+							  </span>
+							  <br>
+						      </p>
+						</div>
+					    </li>
 					    
 					</ul>
 				</div>
@@ -223,9 +228,7 @@ $(function(){
 			    <div id="front_about">
 				<h1>About</h1>
 				<p> 
-				    WatchTheMed is a network and a tool in order to document violations of 
-				    migrants' rights at sea to establish responsiblity for the violations which
-				    are structural products of the EU's policy of closure.
+				    Watch The Med is an online mapping platform to monitor the deaths and violations of migrants’ rights at the maritime borders of the EU
 				</p>
 			    </div>
 			    <div id="front_flyer">			

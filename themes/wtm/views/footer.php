@@ -40,14 +40,14 @@
 					<?php endif; ?>
 					
 					<li>
-						<a href="<?php echo url::site()."contact"; ?>">
+						<a href="<?php echo url::base()."page/index/8"; ?>">
 							Impressum
 						</a>
 					</li>
 
 					
 					<li>
-						<a href="<?php echo url::site()."contact"; ?>">
+						<a href="<?php echo url::base()."page/index/7"; ?>">
 							<?php echo Kohana::lang('ui_main.contact'); ?>
 						</a>
 					</li>

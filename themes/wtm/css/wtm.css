@@ -345,7 +345,7 @@ div#right { position:absolute; z-index:1000; }
     #how-to-report-box ol { margin-left:22px; }
     #how-to-report-box ol li { margin-bottom:5px; }
  #kml_switch{
-     width:225px;
+     width:235px;
      padding:0px;
      overflow:visible;
      overflow-y: auto;
@@ -353,6 +353,9 @@ div#right { position:absolute; z-index:1000; }
      overflow-x: hidden;
      padding-left:5px;
      left:-5px;
+     -moz-box-shadow: none;
+     box-shadow: none;
+     -webkit-box-shadow: none;
  }
  div.report_detail #kml_switch{
      max-height:250px;
@@ -368,23 +371,18 @@ div#right { position:absolute; z-index:1000; }
      overflow:visible;
  }
  ul#kml_switch li a{
-     width:220px;
-     background-image: url(../images/arrow_small_normal.png);
-     background-repeat: no-repeat;
-     background-position: 193px 5px;
+     width:190px;
  }
  
  ul#kml_switch li a:hover{
-     background-image: url(../images/arrow_small_hover.png);  
  }
  
 
  
  ul#kml_switch li a.active{
-     background-image: url(../images/arrow_small_active.png);
+     
  }
  ul#kml_switch li a.active:hover{
-     background-image: url(../images/arrow_small_active.png);
  }
  #layer_meta_window{
      display:none;
@@ -1269,17 +1267,18 @@ div#layers-box{
     position:relative;
 }
 
-a div.layerMeta{
+#kml_switch div.layerMeta{
     display:none;
-}
-
-a.active div.layerMeta{
-    display:block;
-    padding-left:30px;
-    margin-top:12px;
+    padding-left:30px;    
     padding-right:5px;
     border-top:solid 1px black;
+    background: rgba(255,255,255,0.85);
+    float:left;
+    width:185px;
+    
 }
+
+
 
 
 div.olControlScaleLine{
@@ -1897,4 +1896,39 @@ div.file_upload div.second input.fileuploadinput{
     font-weight: bold;
     font-family: Georgia;
     font-size:13px;
+}
+
+ul#kml_switch li a.layer_meta_clicker{
+    width:30px;
+    height:30px;
+    position:relative;
+    border-top: solid 1px #666;
+    background-color: rgba(255,255,255,0.85);
+    top:0px;
+    left:0px;
+    background-image: url(../images/arrow_small_normal.png);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+}
+     
+ 
+ul#kml_switch li a.layer_meta_clicker:hover{
+     background-image: url(../images/arrow_small_hover.png);  
+ }
+ul#kml_switch li a.layer_meta_clicker.active{ 
+ background-image: url(../images/arrow_small_active.png);
+ 
+}
+ul#kml_switch li a.layer_meta_clicker.layerActive{ 
+    background-color:white;
+}
+
+ul#kml_switch li div.layerMeta{
+    display:none;
+}
+
+div.clicker_wrapper{
+    position:relative;
+    top:0px;
+    right:0px;
 }
