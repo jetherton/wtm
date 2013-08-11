@@ -2301,6 +2301,10 @@ div.credibility{
     border-top: 5px solid #a7e0fd;
     border-bottom: 5px solid #a7e0fd;
     background:none;
+    font-family: Agile-Bold;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 10px 0px;
 }
 div.search_result{
     margin-bottom: 10px;
