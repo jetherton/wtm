@@ -166,7 +166,7 @@ $(function(){
 <!-- / main body -->
 
 <!-- content -->
-<div class="content-container" style="position: relative;top: -195px;">
+<div class="content-container" style="position: relative;top: -198px;">
 
 	<!-- content blocks -->
 	<div class="content-blocks clearingfix">

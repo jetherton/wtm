@@ -7,5 +7,5 @@
 	<div id="mapProjection"></div>
 	<div id="mapOutput"></div>
 </div>
-<div style="clear:both;"></div>
+<div id="clearBoth" style="clear:both;"></div>
 <!-- / map -->

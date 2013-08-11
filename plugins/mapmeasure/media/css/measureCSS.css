@@ -49,6 +49,14 @@
 	border-bottom-left-radius: 3px;
 }
 
+#fullScreen img.fullScreen{
+	background: url('../img/fullscreen.png') 0px 1px;
+	width : 30px;
+	height: 30px;
+	border-right: solid 1px #9c9c9e;
+
+}
+
 /*hover*/
 #toolbarControl img.rulerIcon:hover{
 	background: url('../img/toolbar_hover.png') -104px 0px;		
@@ -73,8 +81,9 @@
 #clickIn img.zoomInIcon:hover{
 	background: url('../img/toolbar_hover.png') 0px 0px;	
 	cursor:pointer;
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;	
+}
+#fullScreen img.fullScreen:hover{
+	background: url('../img/fullscreen_hover.png') 0px 1px;
 }
 
 /*active*/
@@ -101,6 +110,9 @@
 #clickIn.active img.zoomInIcon{
 	background: url('../img/toolbar_active.png') 0px 0px;	
 	cursor:pointer;
+}
+#fullScreen.active img.fullScreen{
+	background: url('../img/fullscreen_active.png') 0px 1px;
 }
 
 #lineDraw{
@@ -133,7 +145,7 @@
 	position:relative;
 	top: -8px;
 }
-#clickOut{
+#clickOut, #fullScreen{
 	float: left;
 }
 #clickIn{

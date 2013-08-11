@@ -293,12 +293,20 @@
 	function zoomButtons(){
 	    $('.olControlZoom').hide();
 
+	    
 	    $('#lineDraw').before(
 		    '<div id="clickIn" title="Zoom in"><img class="zoomInIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
 		    <div id="clickOut" title="Zoom out"><img class="zoomOutIcon" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>\
 		    <div id="ZoomBoxHolder" class="olControlEditingToolbar"></div>'
 	    );
-		    
+	
+	    if(path_info == "main"){
+		$('#lineDraw').before(	
+		    '<div id="fullScreen" title="FullScreen"><img class="fullScreen" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>'
+		);
+		$("#toolbarControl").css("width","250px");
+	    }
+	    
 	    zoomBox =  new OpenLayers.Control.ZoomBox();	
 	    
 	    var panelControls = [ zoomBox ];	
@@ -400,6 +408,70 @@
 		    'cursor': "url('<?php echo URL::base()?>plugins/mapmeasure/media/img/ZoomIn.png'), -moz-zoom-in"
 	    });
 	});	
+	
+	$('#fullScreen').click(function(){
+	    if($("#fullScreen").hasClass("active")){
+		$("#fullScreen").removeClass("active")
+		$("#mainmenu").show();
+		$(".slider-holder").show();
+		$("#graphWrapper").show();
+		$(".content-container").show();
+		$("#footer").show();
+		$("#clearBoth").show();
+		$("div.wrapper").css("width","960px");
+		
+		$("#page").css("height", "auto");
+		$("div.wrapper").css("height", "auto");
+		$("#page").css("height", "auto");
+		$("#middle").css("height", "auto");
+		$("div.background").css("height", "auto");
+		$("#main").css("height", "auto");
+		$("#mainmiddle").css("height", "auto");
+		$("#content").css("height", "auto");
+		$("#map").css("height", "592px");
+		
+		$("div#report-type-filter").css("position","relative");
+		$("div#report-type-filter").css("top","-75px");
+		$("div#report-type-filter").css("bottom","auto");
+
+		$("#mapStatus").css("position","relative");
+		$("#mapStatus").css("top","-40px");
+		$("#mapStatus").css("bottom","auto");
+		
+	    } else {
+		$("#fullScreen").addClass("active")
+		
+		$("#mainmenu").hide();
+		$(".slider-holder").hide();
+		$("#graphWrapper").hide();
+		$(".content-container").hide();
+		$("#footer").hide();
+		$("#clearBoth").hide();
+		$("div.wrapper").css("width","100%");
+		
+		$("#page").css("height", "100%");
+		$("div.wrapper").css("height", "100%");
+		$("#page").css("height", "100%");
+		$("#middle").css("height", "100%");
+		$("div.background").css("height", "100%");
+		$("#main").css("height", "100%");
+		$("#mainmiddle").css("height", "100%");
+		$("#content").css("height", "100%");
+		$("#map").css("height", "100%");
+		
+		$("div#report-type-filter").css("position","absolute");
+		$("div#report-type-filter").css("top", "auto");
+		$("div#report-type-filter").css("bottom", "10px");
+
+		$("#mapStatus").css("position","absolute");
+		$("#mapStatus").css("top","auto");
+		$("#mapStatus").css("bottom", "15px");
+
+		
+	    }
+	    
+	    my_map.updateSize();
+	});
 	
 	$('#lineDraw').click(function() {
 	    deactivateAll();

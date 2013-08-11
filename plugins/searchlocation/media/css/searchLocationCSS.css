@@ -7,6 +7,9 @@
 	border-radius: 3px;
 }
 
+.page-main #searchControl{
+    left: 265px;
+}
 
 #searchControl img.searchIcon{
 	background: url(../img/searchIcon.png) -66px -2px;
