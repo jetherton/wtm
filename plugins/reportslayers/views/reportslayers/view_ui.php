@@ -36,6 +36,7 @@
 							//render_child_layers($layer, $layers);
 						}
 						?>
+					    <!--
 					     <li>
 						<a href="#" id="layer_bath" class="toggleLayer">
 						    <div class="color_swatch" style="background-color:#ea00ff;">
@@ -53,6 +54,7 @@
 						      </p>
 						</div>
 					    </li>
+					    -->
 					    
 					</ul>
 				</div>

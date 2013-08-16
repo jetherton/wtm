@@ -90,6 +90,7 @@ div#searchbox div.search-form {
     left:765px;
     position:relative;
     width:89px;
+    top:1px;
 }
 div.search-form, div.search-form ul li{
     float:none;
@@ -174,7 +175,7 @@ div.submit-incident a, .btn_submit {
     margin: 20px 20px 0 0;
     padding: 8px 10px;
     position:relative;
-    top:-20px;
+    top:-23px;
      text-shadow: none;
     text-transform: uppercase;
     font-family: Agile-Light;
@@ -1969,7 +1970,10 @@ span.required {
 }
 .report_category ul li label img{
     padding-left: 5px;
-    padding-right: 5px;
+    padding-right: 5px;    
+}
+#categories ul li label img{
+    height:20px;
 }
 .report_category ul li {
     margin-bottom:10px;
@@ -2323,4 +2327,20 @@ div.search_result h3 a{
     font-family: Georgia;
     font-size: 24px;
     font-weight:normal;
+}
+
+
+
+body.page-page-index div.big-block h1{
+    padding-bottom: 4px;
+    border-bottom: 5px solid #a7e0fd;
+}
+
+div.page_text ul, div.page_text ol{
+    margin-left:20px;    
+}
+
+body.page-page-index div#footer{
+    top: -60px;
+    position: relative;
 }

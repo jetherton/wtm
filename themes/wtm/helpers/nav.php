@@ -53,12 +53,15 @@ class nav_Core {
 			}
 		}
 		// Investigations Page
+		/*
 		if( ! in_array('investigations',$dontshow))
 		{
 			$menu .= "<li><a href=\"".url::site()."page/index/5\" ";
 			$menu .= ($this_page == 'investigations') ? " class=\"active\"":"";
 			$menu .= ">".Kohana::lang('wtm.investigations')."</a></li>";
 		}
+		* 
+		*/
 		$menu .= "</div><div id='mainMenuRight' class='menuRight'>";
 		// Alerts
 		if(! in_array('alerts',$dontshow))

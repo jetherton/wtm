@@ -1321,7 +1321,23 @@
 					    .text(x + ", " + y)); 
 				    }
 				    break;
-				}				
+				} else if( selectedFeatures[f].geometry.id.indexOf("LineString") != -1){
+				    for(i in selectedFeatures[f].geometry.components){					
+					var component = selectedFeatures[f].geometry.components[i];
+					var id = component.id;
+					var x = component.x;
+					var y = component.y;
+					var lonLat = new OpenLayers.LonLat(x, y);
+					var point2 =  lonLat.transform(proj_900913, proj_4326);
+					x = point2.lat;
+					y = point2.lon;
+					 $('#pointsListHolder')
+					    .append($("<option></option>")
+					    .attr("value",id)
+					    .text(x + ", " + y)); 
+				    }
+				    break;
+				}
 			    }
 			});
 			
@@ -1548,6 +1564,21 @@
 				if(selectedFeatures[f].geometry.componentTypes[0] == "OpenLayers.Geometry.LinearRing"){
 				    for(i in selectedFeatures[f].geometry.components[0].components){
 					var component = selectedFeatures[f].geometry.components[0].components[i];
+					var id = component.id;
+					if( id == currentPoint){					    
+					    var lonLat = new OpenLayers.LonLat(lon, lat);
+					    var point2 =  lonLat.transform( proj_4326,proj_900913);
+					    component.y = point2.lat;
+					    component.x = point2.lon;
+					    break;
+					}
+				    }
+				    vlayer.drawFeature(selectedFeatures[f]);
+				    refreshFeatures();
+				    break;
+				} else if( selectedFeatures[f].geometry.id.indexOf("LineString") != -1){
+				    for(i in selectedFeatures[f].geometry.components){					
+					var component = selectedFeatures[f].geometry.components[i];
 					var id = component.id;
 					if( id == currentPoint){					    
 					    var lonLat = new OpenLayers.LonLat(lon, lat);

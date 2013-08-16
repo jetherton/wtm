@@ -97,6 +97,7 @@ $(function(){
 						}
 						?>
 					    
+					    <!--
 					      <li>
 						<a href="#" id="layer_bath" class="toggleLayer">
 						    <div class="color_swatch" style="background-color:#ea00ff;">
@@ -114,7 +115,7 @@ $(function(){
 						      </p>
 						</div>
 					    </li>
-					    
+					    -->
 					</ul>
 				</div>
 				<!-- /Layers -->
