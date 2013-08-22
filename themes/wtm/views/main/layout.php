@@ -297,9 +297,9 @@ $(function(){
 			</div>
 			
 			<div id="front_social" class="wtm_head_up">
-			    <a class="social" href="http://facebook.com"><div id="social_facebook"></div></a>
+			    <a class="social" href="https://www.facebook.com/pages/Watch-The-Med/142123319326364#"><div id="social_facebook"></div></a>
 			    <a class="social" href="http://twitter.com"><div id="social_twitter"></div></a>
-			    <a class="social" href="<?php echo url::base();?>rss"><div id="social_rss"></div></a>
+			    <a class="social" href="<?php echo url::base();?>feed"><div id="social_rss"></div></a>
 			</div>
 			
 			<!--
