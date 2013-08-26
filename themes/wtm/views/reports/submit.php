@@ -557,3 +557,4 @@
 		<!-- end report form block -->
 	</div>
 </div>
+<div style="clear:both"></div>

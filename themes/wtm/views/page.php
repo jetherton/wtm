@@ -1,14 +1,4 @@
-<div id="content" style="width:619px; float:left">
-	<div class="content-bg">
-		<div class="big-block">
-			<h1><?php echo html::escape($page_title) ?></h1>
-			<div class="page_text"><?php 
-			echo $page_description;
-			Event::run('ushahidi_action.page_extra', $page_id);
-			?></div>
-		</div>
-	</div>
-</div>
+
 <div id="front-col-small"  style="width:310px; float:right; padding:0px;position: relative;top: -51px;">
 			<div id="front_all_about" class="wtm_head_up">
 			    <div id="front_about">
@@ -98,3 +88,15 @@
 			-->
 
 		    </div>
+
+<div id="content" style="width:619px;min-height: 488px;">
+	<div class="content-bg">
+		<div class="big-block">
+			<h1><?php echo html::escape($page_title) ?></h1>
+			<div class="page_text"><?php 
+			echo $page_description;
+			Event::run('ushahidi_action.page_extra', $page_id);
+			?></div>
+		</div>
+	</div>
+</div>

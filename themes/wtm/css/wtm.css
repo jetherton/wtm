@@ -627,9 +627,9 @@ div#footer {
   background: none;
 }
 
-.page-main #footer{
+body.page-main #footer{
     position:relative;
-    top:-228px;
+    top:-270px;
 }
 
 div#underfooter { background:transparent; }
@@ -1501,7 +1501,7 @@ a.ic-time {
     line-height:30px;
 }
 a.ic-time:hover {
-    font-size: 16px;
+    font-size: 13px;
     font-family: Georgia;
     color: #000;
     position: relative;
@@ -2359,7 +2359,7 @@ div.page_text ul, div.page_text ol{
 }
 
 body.page-page-index div#footer{
-    top: -60px;
+    top: -85px;
     position: relative;
 }
 
@@ -2414,7 +2414,8 @@ body.page-reports #footer{
 
 .olControlLayerSwitcher .layersDiv { background: #004562;}
 
-body.page-page-index div.page_text div a{
+body.page-page-index div.page_text div a,
+body.page-page-index div.page_text a{
     font-family: Georgia;
     text-decoration: underline;
 }
@@ -2422,4 +2423,13 @@ body.page-page-index div.page_text div a{
 body.page-page-index div.page_text div.footnote {
     font-family: Agile-Light;
     font-size:13px;
+}
+body.page-reports-submit #footer{
+    position:relative;
+    top:-110px;
+}
+
+body.page-reports-view #footer{
+    position:relative;
+    top:-85px;
 }

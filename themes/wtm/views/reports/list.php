@@ -26,14 +26,16 @@
 					<td><?php //echo $pagination; ?></td>
 					-->
 					<td id='reportListIconHere'style="width:180px;">&nbsp;</td>
-					<td>
+					<td  class="last">
+					    <ul class="link-toggle lt-icons-only">
+						<li style="position:relative;left:-10px;"><a href="#page_<?php echo $previous_page; ?>" class="prev">&lt;</a></li>							
+					    </ul>
 					</td>
 					<td><?php echo $stats_breadcrumb; ?></td>
 					<td class="last">
 						<ul class="link-toggle lt-icons-only">
 							<?php //@todo Toggle the status of these links depending on the current page ?>							
-							<li style="position:relative;left:-100px;"><a href="#page_<?php echo $previous_page; ?>" class="prev">&lt;</a></li>							
-							<li style="position:relative;left:-40px;" ><a href="#page_<?php echo $next_page; ?>" class="next">&gt;</a></li>
+							<li style="position:relative;left:0px;" ><a href="#page_<?php echo $next_page; ?>" class="next">&gt;</a></li>
 						</ul>
 					</td>
 				</tr>
