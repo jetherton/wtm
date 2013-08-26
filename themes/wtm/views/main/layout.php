@@ -210,9 +210,8 @@ $(function(){
 					
 					
 					
-					$content = $news_item->incident_description;
-					$content = substr($content, 0, 130);
-					$content = html::clean($content);
+					$content = $news_item->incident_description;					
+					$content = text::limit_chars(html::strip_tags($content), 130, "...", true);					
 					
 					echo $content.' <a style="text-decoration:underline;" href="'.url::base().'reports/view/'.$news_item->id.'">more&gt;</a>';
 					?>
