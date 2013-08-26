@@ -98,22 +98,22 @@
 					fontsize: function(feature) {
 						feature_icon = feature.attributes.icon;
 						if (feature_icon !== "") {
-							return "9px";
+							return "10px";
 						}
 						else {
 							feature_count = feature.attributes.count;
 							if (feature_count > 1000) {
-								return "20px";
+								return "22px";
 							} else if (feature_count > 500) {
-								return "18px";
+								return "20px";
 							} else if (feature_count > 100) {
-								return "14px";
+								return "16px";
 							} else if (feature_count > 10) {
-								return "12px";
+								return "14px";
 							} else if (feature_count >= 2) {
-								return "10px";
+								return "12px";
 							} else {
-								return "";
+								return "10";
 							}
 						}
 					},
@@ -188,15 +188,15 @@
 							}
 							else if (feature_count > 100)
 							{
-								return 15;
+								return 16;
 							}
 							else if (feature_count > 10)
 							{
-								return 10;
+								return 14;
 							}
 							else if (feature_count >= 2)
 							{
-								return 10;
+								return 12;
 							}
 							else
 							{
@@ -255,6 +255,9 @@
 						}
 					},
 					strokeOpacity: function(feature) {
+						if(true){
+						    return 0.6;
+						}
 						if(typeof(feature.attributes.strokeopacity) != 'undefined' && 
 							feature.attributes.strokeopacity != '')
 						{

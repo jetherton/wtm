@@ -18,9 +18,11 @@
 	if($(".graph-holder").is(":visible")){
 	    $(".graph-holder").hide(400);
 	    $("#graphSwitch").removeClass("active");
+	    $("#graphWrapper").css("padding-bottom","0px");
 	} else {
 	    $("#graphSwitch").addClass("active");
 	    $(".graph-holder").show(400);
+	    $("#graphWrapper").css("padding-bottom","10px");
 	    window.setTimeout(function(){reDrawGraph();},500);
 	    
 	}

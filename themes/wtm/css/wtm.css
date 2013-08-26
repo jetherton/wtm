@@ -1277,7 +1277,7 @@ div.slider-holder {
 div#graphWrapper{
     top: -73px;
     position:relative;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     background: rgba(255,255,255,0.85);
 }
 
@@ -1315,10 +1315,12 @@ div#graphSwitch:hover{
 }
 
 div.graph-holder{
-    width:960px;
+    width:940px;
     position: relative;
     background: none;
     display:none;
+    margin-left:10px;
+    margin-right:10px;
 }
 
 div.report_row div.report_map{
@@ -2411,3 +2413,13 @@ body.page-reports #footer{
 }
 
 .olControlLayerSwitcher .layersDiv { background: #004562;}
+
+body.page-page-index div.page_text div a{
+    font-family: Georgia;
+    text-decoration: underline;
+}
+
+body.page-page-index div.page_text div.footnote {
+    font-family: Agile-Light;
+    font-size:13px;
+}

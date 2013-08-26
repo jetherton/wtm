@@ -241,7 +241,7 @@ jQuery(function() {
 	//Etherton: commented this out and put in the enhanced map URL so that we can have the full power
         //of enahcned map
         //var reportsURL = "<?php echo Kohana::config('settings.allow_clustering') == 1 ? "json/cluster" : "json"; ?>";
-        var reportsURL = "bigmap_json";
+        var reportsURL = "bigmap_json/cluster";
 
 	// Render thee JavaScript for the base layers so that
 	// they are accessible by Ushahidi.js
