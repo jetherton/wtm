@@ -196,11 +196,11 @@
 							}
 							else if (feature_count >= 2)
 							{
-								return 5;
+								return 10;
 							}
 							else
 							{
-								return 1;
+								return 10;
 							}
 						}
 					},

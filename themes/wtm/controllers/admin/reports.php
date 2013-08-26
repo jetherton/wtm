@@ -749,7 +749,7 @@ class Reports_Controller extends Admin_Controller {
 								"comment" => $item->geometry_comment,
 								"color" => $item->geometry_color,
 								"strokewidth" => $item->geometry_strokewidth,
-								"icon"=>$item->geometry_icon,
+								"icon"=>($item->geometry_icon) ? $item->geometry_icon : "incident_circle.png",
 								"showLabel"=>$item->geometry_showlabel,
 								"fontSize"=>$item->geometry_fontsize,
 								"fontColor"=>$item->geometry_fontcolor,

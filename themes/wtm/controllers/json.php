@@ -701,7 +701,7 @@ class Json_Controller extends Template_Controller {
 				$label = ($item->geometry_label == "" || $item->geometry_label == null) ? "" : $item->geometry_label;
 				$label = $item->geometry_showlabel ? $label : "";
 				
-				$icon = ($item->geometry_icon) ? url::file_loc('img').'media/img/openlayers/'.$item->geometry_icon : url::file_loc('img').'media/img/openlayers/marker.png';
+				$icon = ($item->geometry_icon) ? url::file_loc('img').'media/img/openlayers/'.$item->geometry_icon : url::file_loc('img').'media/img/openlayers/incident_circle.png';
 				
 				$fontSize = ($item->geometry_fontsize) ? $item->geometry_fontsize : 12;
 				$fontColor = ($item->geometry_fontcolor) ? $item->geometry_fontcolor : "ffffff";

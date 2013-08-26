@@ -209,6 +209,15 @@ div.submit-incident a, .btn_submit {
     text-decoration:none;
 }
 
+#how_to_report_box p #submitAReport{
+    top:-16px;
+    background:grey;
+    color:#333;
+    font-size: 16px;
+    line-height: 16px;
+    text-decoration:none;
+}
+
 /* primary nav */
 div#mainmenu { 
     border:none; 
@@ -1268,6 +1277,8 @@ div.slider-holder {
 div#graphWrapper{
     top: -73px;
     position:relative;
+    padding-bottom: 10px;
+    background: rgba(255,255,255,0.85);
 }
 
 div#graphSwitch{
@@ -1306,7 +1317,7 @@ div#graphSwitch:hover{
 div.graph-holder{
     width:960px;
     position: relative;
-    background: rgba(255,255,255,0.85);
+    background: none;
     display:none;
 }
 
@@ -1477,7 +1488,7 @@ div#reports_listing h1.heading{
 }
 
 a.ic-time {
-    font-size: 16px;
+    font-size: 13px;
     font-family: Georgia;
     color: #666;
     position: relative;
@@ -1593,8 +1604,10 @@ ul.link-toggle li a.next:hover{
     border:none;
 }
 .r_photo img{
-    max-width:150px;
-    max-height:none;
+    width:150px;
+    height:105px;
+    max-height: none;
+    max-width: none;
 }
 
 .r_details{
@@ -1619,7 +1632,7 @@ p.r_date a.date_location{
     color:#333;
     font-family:Georgia;
     font-size:16px;
-    font-weight: normal;
+    font-weight: bold;
 }
 .r_details h3{
     width:auto;
@@ -1741,6 +1754,9 @@ ul.filter-list li a span.item-title{
 }
 .ic-news{
     background: transparent url(../images/news.png) no-repeat;
+}
+.ic-sms{
+    background: transparent url(../images/sms.png) no-repeat;
 }
 .ic-verified{
     background: transparent url(../images/verified.png) no-repeat;
@@ -2344,3 +2360,54 @@ body.page-page-index div#footer{
     top: -60px;
     position: relative;
 }
+
+body.page-page-index div.page_text div{
+    font-family: Georgia;
+    font-size: 16px;
+}
+
+body.page-page-index div.page_text h1{
+    font-weight: bold;
+}
+
+body.page-page-index div.page_text h2{
+    font-family: Georgia;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+body.page-page-index div.page_text h3{
+    font-family: Georgia;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom:5px;
+}
+
+body.page-page-index div.page_text h4{
+    font-family: Georgia;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom:5px;
+}
+
+body.page-page-index div.page_text h5{
+    font-family: Agile-Bold;
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom:5px;
+}
+
+
+body.page-reports ul.filter-list li a span.item-swatch{
+    position:relative;
+    top:4px;
+}
+
+
+body.page-reports #footer{
+    margin-top:0px;
+    position:relative;
+    top:-63px;
+}
+
+.olControlLayerSwitcher .layersDiv { background: #004562;}

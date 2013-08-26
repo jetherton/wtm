@@ -97,12 +97,12 @@ $(function(){
 						}
 						?>
 					    
-					    <!--
+						<!--
 					      <li>
 						<a href="#" id="layer_bath" class="toggleLayer">
 						    <div class="color_swatch" style="background-color:#ea00ff;">
 						    </div>						    
-						    <span class="swatch" style="background-color:#2323b8"></span>
+						    <span class="swatch"><img src="<?php echo url::base();?>themes/wtm/images/bathmetric.png"/></span>
 						    <span class="layer-name">Bathymetry</span>						    
 						</a>
 						<a href="#" class="layer_meta_clicker" id="meta_layer_click_bath">&nbsp;</a>
@@ -115,7 +115,7 @@ $(function(){
 						      </p>
 						</div>
 					    </li>
-					    -->
+					-->
 					</ul>
 				</div>
 				<!-- /Layers -->
@@ -286,9 +286,12 @@ $(function(){
 				<!-- Web Form -->
 				<p>
 					<a href="<?php echo url::site() . 'reports/submit/'; ?>">
-					    <?php echo Kohana::lang('ui_main.report_option_4'); ?>
-					    <img style="margin-top:10px;" src="<?php echo url::base();?>themes/wtm/images/submit_a_report.png"/>
+					    <?php echo Kohana::lang('ui_main.report_option_4'); ?>					    
 					</a>
+				    <br/>
+				    <br/>
+				    <br/>
+				    <a id="submitAReport" class="sidepanel" href="<?php echo url::base();?>reports/submit">Submit Report</a>	
 				</p>
 
 

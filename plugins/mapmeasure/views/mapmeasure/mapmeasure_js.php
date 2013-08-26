@@ -301,9 +301,11 @@
 	    );
 	
 	    if(path_info == "main"){
-		$('#lineDraw').before(	
-		    '<div id="fullScreen" title="FullScreen"><img class="fullScreen" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>'
+		$('#noDraw').after(	
+		    '<div id="fullScreen" title="FullScreen"><img style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;" class="fullScreen" src="<?php echo URL::base();?>plugins/mapmeasure/media/img/img_trans.gif" width="1" height="1"/></div>'
 		);
+		$('#noDraw img').css('border-top-right-radius', '0px');
+		$('#noDraw img').css('border-bottom-right-radius', '0px');
 		$("#toolbarControl").css("width","250px");
 	    }
 	    
@@ -438,6 +440,12 @@
 		$("#mapStatus").css("top","-40px");
 		$("#mapStatus").css("bottom","auto");
 		
+		$("#report-map-filter-box").css("float","none");
+		$("#report-map-filter-box").css("left","730px");
+		
+		$("#toolbarControl").css("top", "10px");
+		$("#searchControl").css("top", "10px");
+		
 	    } else {
 		$("#fullScreen").addClass("active")
 		
@@ -461,12 +469,18 @@
 		
 		$("div#report-type-filter").css("position","absolute");
 		$("div#report-type-filter").css("top", "auto");
-		$("div#report-type-filter").css("bottom", "10px");
+		$("div#report-type-filter").css("bottom", "-55px");
 
 		$("#mapStatus").css("position","absolute");
 		$("#mapStatus").css("top","auto");
-		$("#mapStatus").css("bottom", "15px");
+		$("#mapStatus").css("bottom", "-50px");
+		
+		$("#report-map-filter-box").css("float","right");
+		$("#report-map-filter-box").css("left","-10px");
 
+		$("#toolbarControl").css("top", "70px");
+		
+		$("#searchControl").css("top", "70px");
 		
 	    }
 	    

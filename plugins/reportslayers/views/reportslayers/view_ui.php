@@ -41,7 +41,7 @@
 						<a href="#" id="layer_bath" class="toggleLayer">
 						    <div class="color_swatch" style="background-color:#ea00ff;">
 						    </div>						    
-						    <span class="swatch" style="background-color:#2323b8"></span>
+						    <span class="swatch"><img src="<?php echo url::base();?>themes/wtm/images/bathmetric.png"/></span>
 						    <span class="layer-name">Bathymetry</span>						    
 						</a>
 						<a href="#" class="layer_meta_clicker" id="meta_layer_click_bath">&nbsp;</a>

@@ -117,7 +117,7 @@
 			<?php } ?>
 			<!-- end additional fields -->
 
-			<?php if ($features_count)
+			<?php if ($features_count && false)
 			{
 				?>
 				<br /><br /><h5><?php echo Kohana::lang('ui_main.reports_features');?></h5>
