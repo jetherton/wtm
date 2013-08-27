@@ -1,10 +1,11 @@
 			</div>
+			<div style="clear:both;"></div>
 		</div>
 		<!-- / main body -->
 
 	</div>
 	<!-- / wrapper -->
-
+<div style="clear:both;"></div>
 	<!-- footer -->
 	<div id="footer" class="clearingfix">
 

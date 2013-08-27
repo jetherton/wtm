@@ -109,7 +109,7 @@ $(function(){
 						<div class="layerMeta" id="layerMetaInfo_bath">
 						      <p>
 							  <span style="font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">
-							      Bathymetry is the study of underwater depth of lake or ocean floors. In other words, bathymetry is the underwater equivalent to hypsometry or topography. The name comes from Greek βαθύς (bathus), "deep",[1] and μέτρον (metron), "measure".[2] Bathymetric (or hydrographic) charts are typically produced to support safety of surface or sub-surface navigation, and usually show seafloor relief or terrain as contour lines (called depth contours or isobaths) and selected depths (soundings), and typically also provide surface navigational information. Bathymetric maps (a more general term where navigational safety is not a concern) may also use a Digital Terrain Model and artificial illumination techniques to illustrate the depths being portrayed. Paleobathymetry is the study of past underwater depths.
+							      Bathymetry is the study of underwater depth of lake or ocean floors. In other words, bathymetry is the underwater equivalent to hypsometry or topography. The name comes from Greek ????? (bathus), "deep",[1] and ?????? (metron), "measure".[2] Bathymetric (or hydrographic) charts are typically produced to support safety of surface or sub-surface navigation, and usually show seafloor relief or terrain as contour lines (called depth contours or isobaths) and selected depths (soundings), and typically also provide surface navigational information. Bathymetric maps (a more general term where navigational safety is not a concern) may also use a Digital Terrain Model and artificial illumination techniques to illustrate the depths being portrayed. Paleobathymetry is the study of past underwater depths.
 							  </span>
 							  <br>
 						      </p>
@@ -132,6 +132,7 @@ $(function(){
 
 		<!-- content column -->
 		<div id="content" class="clearingfix">
+		    <div style="clear:both;position: relative;"></div>
 				<?php
 				// Map and Timeline Blocks
 				echo $div_map;
@@ -172,63 +173,13 @@ $(function(){
 	<!-- content blocks -->
 	<div class="content-blocks clearingfix">
 		<ul class="content-column">
-		    <li id="front-page-news" class="wtm_head_up" style="width:620px;">
-			<h1>News</h1>
-			<table style="width:100%;">
-			    <?php
-				foreach($news as $news_item){
-				    ?>
-			    <tr>
-				<td>
-					<?php 
-					$media = ORM::Factory('media')->where('incident_id', $news_item->id)->find_all();
-					if ($media->count())
-					{
-						foreach ($media as $photo)
-						{
-							if ($photo->media_thumb)
-							{ // Get the first thumb
-								$incident_thumb = url::convert_uploaded_to_abs($photo->media_thumb);
-								echo '<img class="teaser_img" src="'.$incident_thumb.'"/>';
-								break;
-							}
-						}
-					}
-					?>
-				    <div class="front_date_cat">
-					<?php 
-					    $t = strtotime($news_item->incident_date);
-					    echo date('Y-m-d',$t).' / ';
-					    echo Kohana::lang('ui_main.category').': '.$news_item->category[0]->category_title;
-					    echo ' /';
-					?>
-				    </div>
-				    <h1><a href="<?php echo url::base().'reports/view/'.$news_item->id;?>"><?php echo $news_item->incident_title; ?></a></h1>
-				    <div class="front_teaser">
-					<?php
-					
-					
-					
-					
-					$content = $news_item->incident_description;					
-					$content = text::limit_chars(html::strip_tags($content), 130, "...", true);					
-					
-					echo $content.' <a style="text-decoration:underline;" href="'.url::base().'reports/view/'.$news_item->id.'">more&gt;</a>';
-					?>
-				    </div>
-				</td>				
-			    </tr>
-			    <?php
-				}
-			    ?>
-			</table>
-		    </li>
-		    <li id="front-col-small"  style="width:310px; padding:0px;">
+    
+		    <li id="front-col-small"  style="width:310px; padding:0px; float:right;">
 			<div id="front_all_about" class="wtm_head_up">
 			    <div id="front_about">
 				<h1>About</h1>
 				<p> 
-				    Watch The Med is an online mapping platform to monitor the deaths and violations of migrants’ rights at the maritime borders of the EU
+				    Watch The Med is an online mapping platform to monitor the deaths and violations of migrants' rights at the maritime borders of the EU
 				</p>
 			    </div>
 			    <div id="front_flyer">			
@@ -311,6 +262,58 @@ $(function(){
 			-->
 
 		    </li>
+		    <li id="front-page-news" class="wtm_head_up" style="width:620px; float:left;">
+			<h1>News</h1>
+			<table style="width:100%;">
+			    <?php
+				foreach($news as $news_item){
+				    ?>
+			    <tr>
+				<td>
+					<?php 
+					$media = ORM::Factory('media')->where('incident_id', $news_item->id)->find_all();
+					if ($media->count())
+					{
+						foreach ($media as $photo)
+						{
+							if ($photo->media_thumb)
+							{ // Get the first thumb
+								$incident_thumb = url::convert_uploaded_to_abs($photo->media_thumb);
+								echo '<img class="teaser_img" src="'.$incident_thumb.'"/>';
+								break;
+							}
+						}
+					}
+					?>
+				    <div class="front_date_cat">
+					<?php 
+					    $t = strtotime($news_item->incident_date);
+					    echo date('Y-m-d',$t).' / ';
+					    echo Kohana::lang('ui_main.category').': '.$news_item->category[0]->category_title;
+					    echo ' /';
+					?>
+				    </div>
+				    <h1><a href="<?php echo url::base().'reports/view/'.$news_item->id;?>"><?php echo $news_item->incident_title; ?></a></h1>
+				    <div class="front_teaser">
+					<?php
+					
+					
+					
+					
+					$content = $news_item->incident_description;					
+					$content = text::limit_chars(html::strip_tags($content), 130, "...", true);					
+					
+					echo $content.' <a style="text-decoration:underline;" href="'.url::base().'reports/view/'.$news_item->id.'">more&gt;</a>';
+					?>
+				    </div>
+				</td>				
+			    </tr>
+			    <?php
+				}
+			    ?>
+			</table>
+		    </li>
+		    <!--end of news-->
 		</ul>
 	</div>
 	<!-- /content blocks -->
@@ -318,7 +321,7 @@ $(function(){
 </div>
 <!-- content -->
 
-
+<div style="clear:both;"></div>
 
 
 
