@@ -30,7 +30,7 @@ $(document).ready(function(){
 							</div>\
 						</div>');
 	//initialize the apple overlay effect
-	$("a[rel]").overlay({
+	$("a.btn_kml_up").overlay({
 		mask: 'grey',
 		effect: 'apple',
 		onBeforeLoad: function() {

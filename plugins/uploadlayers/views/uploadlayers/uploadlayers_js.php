@@ -30,7 +30,7 @@ $(document).ready(function(){
 						</div>');
 	$('#uploadLayer').after('<input type="hidden" id="user_kml_ids" name="user_kml_ids"/>');
 	//initialize the apple overlay effect
-	$("a[rel]").overlay({
+	$("a.btn_kml_up").overlay({
 		mask: 'grey',
 		effect: 'apple',
 		onBeforeLoad: function() {

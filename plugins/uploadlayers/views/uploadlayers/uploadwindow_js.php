@@ -86,27 +86,27 @@ var iconuploader = new qq.FineUploader({
 }
   });
   
-	$(document).ready(function() {
-	 
-	    $('#triggerUpload').click(function() {
-	    	if(!$('.qq-upload-list').children().length){
-				alert('<?php echo Kohana::lang('uploadlayers.listAlert')?>');
-			}
-	    	else if($('#layer_name').val() == null || $('#layer_name').val() == ''){
-		    	alert('<?php echo Kohana::lang('uploadlayers.nameAlert')?>');
-		    }
-		    else{
-				manualuploader.setParams({
-					 layer_name : $('#layer_name').val(),
-					 layer_color : $('#layer_color').val(),
-					 meta_data : $('#meta_data').val()
-		    	  });
-		      manualuploader.uploadStoredFiles();
-		      
-		    }
-		   
+$(document).ready(function() {
+    
+    console.log("ready function called");
+
+    $('#triggerUpload').click(function() {
+
+	console.log("clicked");
+	if(!$('.qq-upload-list').children().length){
+	    alert('<?php echo Kohana::lang('uploadlayers.listAlert')?>');
+	} else if($('#layer_name').val() == null || $('#layer_name').val() == ''){
+	    alert('<?php echo Kohana::lang('uploadlayers.nameAlert')?>');
+	} else{
+	    manualuploader.setParams({
+		layer_name : $('#layer_name').val(),
+		layer_color : $('#layer_color').val(),
+		meta_data : $('#meta_data').val()
 	    });
-	  });
+	    manualuploader.uploadStoredFiles();
+	}   
+    });
+  });
 
 	  function setLayerId(){
 		  if(iconuploader._netUploadedOrQueued > 0){
