@@ -88,11 +88,10 @@ var iconuploader = new qq.FineUploader({
   
 $(document).ready(function() {
     
-    console.log("ready function called");
+
 
     $('#triggerUpload').click(function() {
 
-	console.log("clicked");
 	if(!$('.qq-upload-list').children().length){
 	    alert('<?php echo Kohana::lang('uploadlayers.listAlert')?>');
 	} else if($('#layer_name').val() == null || $('#layer_name').val() == ''){
@@ -111,7 +110,6 @@ $(document).ready(function() {
 	  function setLayerId(){
 		  if(iconuploader._netUploadedOrQueued > 0){
 			  var id = manualuploader.getUploads()[0].uuid;
-			  console.log('setting id: ' + id );
 			  iconuploader.setParams({
 					layer_id : id
 			  });
@@ -128,7 +126,6 @@ $(document).ready(function() {
 
 	  function endUpload(){
 		  setId();
-		  console.log("endUpload");
 		  if(iconuploader.getUploads()[0].status == 'upload successful'){
 		  	alert('<?php echo Kohana::lang('uploadlayers.success') ?>');
 		  	$("a[rel]").overlay().close();
@@ -140,7 +137,6 @@ $(document).ready(function() {
 		  var url = '<?php echo strpos(url::current(), 'admin/reports/edit') !== false ? 'edit' : 'submit'?>';
 		  var id = manualuploader.getUploads()[0].uuid;
 		  //$('#user_kml_ids').val(id);
-		  console.log('right before post');
 		  $.post('<?php echo url::base();?>/parseFiles/getLayerDetails', {'layer' : id}, 
 				  function(data){
 			  /*
@@ -159,7 +155,6 @@ $(document).ready(function() {
 					  }
 					  else{
 						  */
-						 console.log(data);
 						  if(typeof(data.icon) != 'undefined'){
 							  $('#custom_forms').append('<ul class="category-column category-column-1 treeview" id="category-column-1"><li\
 								        title="'+data.label+'" class="last"><label><input\

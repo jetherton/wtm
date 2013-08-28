@@ -84,6 +84,9 @@ class S_Cleanup_Controller extends Controller {
 	public function remove_orphan_images()
 	{
 
+	    /* This may have been deleting things we want, so I commented it out just to be sure
+	     * Etherton 2013-08-28
+	     
 		// open the images directory and create it if it's not there.
 		if( ! is_dir(Kohana::config('upload.relative_directory')))
 		{
@@ -154,5 +157,6 @@ class S_Cleanup_Controller extends Controller {
 			// close the directory
 			closedir($dhandle);
 		}
+	    */
 	}
 }
