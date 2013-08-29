@@ -1064,7 +1064,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 .report-find-location .btns a#helpButton{
     left: 332px;
     position: relative;
-    background: rgba(128,128,128,0.8);
+    background: rgba(212,212,207,0.85);
     line-height: 28px;
     padding: 0px 4px;
     height:29px;
@@ -1125,15 +1125,15 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 }
 
 .report-find-location .btns a.btn_del_last{
-    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo.png') 2px 0px;
+    background: rgba(212,212,207,0.85) no-repeat url('../images/icons/undo.png') 2px 0px;
 }
 .report-find-location .btns a.btn_del_last:hover{
-    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo_hover.png') 2px 0px;
+    background: rgba(212,212,207,0.85) no-repeat url('../images/icons/undo_hover.png') 2px 0px;
     text-decoration: none;
 }
 
 .report-find-location .btns a.btn_undel_last{
-    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo.png') 2px 0px;
+    background: rgba(212,212,207,0.85) no-repeat url('../images/icons/undo.png') 2px 0px;
      -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -1144,7 +1144,7 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
     border-right:none;
 }
 .report-find-location .btns a.btn_undel_last:hover{
-    background: rgba(128,128,128,0.85) no-repeat url('../images/icons/undo_hover.png') 2px 0px;
+    background: rgba(212,212,207,0.85) no-repeat url('../images/icons/undo_hover.png') 2px 0px;
      -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -1157,20 +1157,20 @@ div.report-find-location div.olControlEditingToolbar div.olControlModifyVertItem
 }
 
 .report-find-location .btns a.btn_del_sel{
-    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons_opacity.png') -372px 0px;
+    background: rgba(212,212,207,0.85)  url('../images/edit_submit_nonselect_icons_opacity.png') -372px 0px;
 }
 
 .report-find-location .btns a.btn_del_sel:hover{
-    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -372px 0px;
+    background: rgba(212,212,207,0.85)  url('../images/edit_submit_nonselect_icons.png') -372px 0px;
     text-decoration:none;
 }
 
 .report-find-location .btns a.btn_kml_up{
-    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons_opacity.png') -250px 0px;
+    background: rgba(212,212,207,0.85)  url('../images/edit_submit_nonselect_icons_opacity.png') -250px 0px;
     width:90px;
 }
 .report-find-location .btns a.btn_kml_up:hover{
-    background: rgba(128,128,128,0.85)  url('../images/edit_submit_nonselect_icons.png') -250px 0px;
+    background: rgba(212,212,207,0.85)  url('../images/edit_submit_nonselect_icons.png') -250px 0px;
     width:90px;
 }
 
@@ -1934,7 +1934,7 @@ div.report-media-box-content{
 
 .olControlEditingToolbar{
     margin:0px;
-    background: rgba(128,128,128,0.85);
+    background: rgba(212,212,207,0.85);
     height:31px;
 }
 

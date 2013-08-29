@@ -634,6 +634,8 @@ class Json_Controller extends Template_Controller {
 	{
 		$this->template = "";
 		$this->auto_render = FALSE;
+		
+		Kohana::log('error', 'json.layer() User requested layer_id: '.$layer_id);
 
 		$layer = ORM::factory('layer')
 			->where('layer_visible', 1)
@@ -648,11 +650,13 @@ class Json_Controller extends Template_Controller {
 			{
 				// Pull from a URL
 				$layer_link = $layer_url;
+				Kohana::log('error', 'json.layer() layer is a URL: '.$layer_url);
 			}
 			else
 			{
 				// Pull from an uploaded file
 				$layer_link = Kohana::config('upload.directory').'/'.$layer_file;
+				Kohana::log('error', 'json.layer() layer is a file: '.$layer_file);
 			}
 
 			$content = file_get_contents($layer_link);
@@ -664,7 +668,8 @@ class Json_Controller extends Template_Controller {
 		}
 		else
 		{
-			throw new Kohana_404_Exception();
+		    Kohana::log('error', 'json.layer() layer not found');
+		    throw new Kohana_404_Exception();
 		}
 	}
 
