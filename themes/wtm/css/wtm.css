@@ -461,8 +461,11 @@ div.map.timeline-enabled {height:529px; background:#666;}
 
 }
 
+div#mapScale{
+    width:90px;
+}
 div#mapStatus div{
-    padding: 0px 6px;
+    padding: 0px 6px;    
 }
 div#mapStatus div#mapProjection{
     display:none;
