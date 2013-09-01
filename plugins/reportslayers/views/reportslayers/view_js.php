@@ -1,13 +1,33 @@
 <script type="text/javascript">
 
+var layersToLoad = [
+<?php if(sizeof($selections) > 0){ 
+    $i = 0;
+    foreach($selections as $selection){
+	$i++;
+	if($i > 1){echo ",";}
+	echo $selection;
+    }
+} ?>
+];
+
+
 
 jQuery(window).load(function() {
-	  <?php if(sizeof($selections) > 0){ 
-	      foreach($selections as $selection){
-		echo '$("#layer_'.$selection.'").click();';
-	      }
-	  } ?>
+	setTimeout(iterativelyLoadLayers, 250);
+	
 });
+
+function iterativelyLoadLayers(){
+    if(layersToLoad.length > 0){
+	var layerId = layersToLoad.pop();
+	$("#layer_"+layerId).click();
+	setTimeout(iterativelyLoadLayers, 250);
+	var d = new Date();
+	if(typeof(console) == 'object'){console.log('chainging selection on layer_'+layerId + ' at: '+d.getTime());}
+    }
+}
+	  
 
 
 $(document).ready(function() {

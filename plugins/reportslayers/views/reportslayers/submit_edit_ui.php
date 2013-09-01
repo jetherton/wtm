@@ -55,18 +55,41 @@
 </div>
 
 
-<?php if(sizeof($selections)>0){?>
-<script type="text/javascript">
-    jQuery(window).load(function() {
-	<?php
-	    foreach($selections as $selection){
-		echo 'jQuery("#layer_'.$selection.'").change();'."\n";
-	    }
-	?>
-    });
+
+
+<?php if(sizeof($selections) > 0){ ?>
+    <script type="text/javascript">
+<?php
+    echo "var layersToLoad = [";
+    $i = 0;
+    foreach($selections as $selection){
+	$i++;
+	if($i > 1){echo ",";}
+	echo $selection;
+    }
+    echo "]";
+ ?>
+
+
+
+
+jQuery(window).load(function() {
+	setTimeout(iterativelyLoadLayers, 250);
+	
+});
+
+function iterativelyLoadLayers(){
+    if(layersToLoad.length > 0){
+	var layerId = layersToLoad.pop();	
+	jQuery("#layer_"+layerId).change();
+	setTimeout(iterativelyLoadLayers, 250);
+	var d = new Date();
+	if(typeof(console) == 'object'){console.log('chainging selection on layer_'+layerId + ' at: '+d.getTime());}
+    }
+}
+	  
 </script>
 <?php } ?>
-
 
 
 
@@ -108,4 +131,4 @@ function render_child_layers_edit_submit($layer, $layers){
 	
 	}
 
-	?>
+?>

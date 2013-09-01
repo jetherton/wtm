@@ -31,6 +31,18 @@
 		var redoStack = new Array();
 		
 		
+		function recenterMap(){
+		    if(myMap.getLayersByName('Editable').length == 0){
+			setTimeout(recenterMap, 200);
+		    } else {
+			var startPoint = new OpenLayers.LonLat(<?php echo $longitude; ?>, <?php echo $latitude; ?>);
+			startPoint.transform(proj_4326, map.getProjectionObject());
+			map.setCenter(startPoint);
+		    }
+		}
+		
+		
+		
 		// jQuery Textbox Hints Plugin
 		// Will move to separate file later or attach to forms plugin
 		jQuery.fn.hint = function (blurClass) {
@@ -1862,8 +1874,10 @@
 					$("#longitude").attr("value", lonlat[0]);
 				}
 			});
+			
+			setTimeout(recenterMap, 200);
 
-		});
+		}); //end of jQuery(window).load();
 		
 		function addFormField(div, field, hidden_id, field_type) {
 			var id = document.getElementById(hidden_id).value;

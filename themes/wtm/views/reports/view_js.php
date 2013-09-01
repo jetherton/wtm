@@ -22,6 +22,18 @@ var bathymetry = null;
 // Set the base url
 Ushahidi.baseURL = "<?php echo url::site(); ?>";
 
+function recenterMap(){
+    if(myMap.getLayersByName('Single Report').length == 0){
+	setTimeout(recenterMap, 200);
+    } else {
+	var latitude = <?php echo $latitude; ?>;
+	var longitude =  <?php echo $longitude; ?>;
+        var newCenter = new OpenLayers.LonLat(longitude, latitude);
+	newCenter.transform(Ushahidi.proj_4326, Ushahidi.proj_900913);
+	myMap.setCenter(newCenter);
+    }
+}
+
 jQuery(window).load(function() {
 
 	<?php echo map::layers_js(FALSE); ?>
@@ -243,7 +255,6 @@ jQuery(window).load(function() {
 							return 1;
 						}
 						else{
-						    //console.log(feature.attributes.graphicZIndex + " "+ feature.attributes.label);
 							return feature.attributes.graphicZIndex;
 						}
 					}
@@ -277,6 +288,8 @@ jQuery(window).load(function() {
 		rendererOptions: {zIndexing: true}
 	});
 	 myMap = map._olMap;
+	 setTimeout(recenterMap, 200);
+	 
 	 
 	 
 	 
@@ -342,7 +355,6 @@ jQuery(window).load(function() {
 				url: "json/layer/" + layerId
 			});
 		}
-		console.log(layerId);
 		if(layerId == "bath"){
 		    
 		    if(bathymetry.visibility){

@@ -35,10 +35,10 @@
         all_maps[1] = esri_street;
         all_maps[2] = esri_imagery;
         all_maps[3] = esri_natgeo;
-        all_maps[4] = google_satellite;
-        all_maps[5] = google_hybrid;
-        all_maps[6] = google_normal;
-        all_maps[7] = google_physical;
+        //all_maps[4] = google_satellite;
+        //all_maps[5] = google_hybrid;
+        //all_maps[6] = google_normal;
+        //all_maps[7] = google_physical;
         all_maps[8] = bing_road;
         all_maps[9] = bing_hybrid;
         all_maps[10] = bing_satellite;
@@ -74,7 +74,7 @@
             break;
 			
 		}    
-		for(var m = 0; m < all_maps.length; m++){
+		for(m in all_maps){
 			var preExistingLayers = my_map.getLayersByName(all_maps[m].name);
 			if(preExistingLayers == 0){
 				my_map.addLayer(all_maps[m]);
@@ -84,6 +84,7 @@
 
     //load the google API
     if(typeof(google) == "undefined"){
+	/*
 	    window.google = window.google || {};
 	    google.maps = google.maps || {};
 	    (function() {
@@ -107,6 +108,7 @@
 	      getScript("https://maps.gstatic.com/intl/en_us/mapfiles/api-3/10/21/main.js");
 	    })();
 	    //end Google API
+	    */
     }
     
 

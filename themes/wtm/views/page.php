@@ -9,7 +9,7 @@
 			    </div>
 			    <div id="front_flyer">			
 				<p> 
-				    Read the Flyer: <a href="/">english</a>, <a href="/">french</a>, <a href="/">arabic</a>
+				    Read the Flyer: <a href="<?php echo url::base(); ?>pdf/WTM-flyer-eng.pdf">english</a>, <a href="/">french</a>, <a href="/">arabic</a>
 				</p>
 			    </div>
 

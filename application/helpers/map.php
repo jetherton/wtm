@@ -49,6 +49,11 @@ class map_Core {
 
 				if ($all == TRUE OR $layer->openlayers == $openlayers_type)
 				{
+				    if(strpos($layer->name, "google") === 0){
+					//echo "console.log('".$layer->name."');\n";
+					//echo "console.log('".strpos($layer->name, "google")."');\n";
+					continue;
+				    }
 					//++ Bing doesn't have the first argument
 					if ($layer->openlayers == "Bing")
 					{

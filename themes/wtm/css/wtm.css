@@ -443,7 +443,8 @@ div.map.timeline-enabled {height:529px; background:#666;}
 #mapStatus,
 .big-block .olControlScale div, 
 .big-block .olControlMousePosition{ 
-    width:270px; float:none; overflow:auto; 
+    width:270px; float:none; 
+    overflow:hidden;
     position: relative;
     top: -40px;
     left:227px;
