@@ -478,9 +478,9 @@
 		$("#report-map-filter-box").css("float","right");
 		$("#report-map-filter-box").css("left","-10px");
 
-		$("#toolbarControl").css("top", "70px");
+		$("#toolbarControl").css("top", "10px");
 		
-		$("#searchControl").css("top", "70px");
+		$("#searchControl").css("top", "10px");
 		
 	    }
 	    
