@@ -2431,6 +2431,7 @@ body.page-page-index div.page_text div.footnote {
 body.page-reports-submit #footer{
     position:relative;
     top:-110px;
+    z-index: -100;
 }
 
 body.page-reports-view #footer{
