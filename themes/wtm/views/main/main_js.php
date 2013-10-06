@@ -671,7 +671,7 @@ $(window).resize(function () {
 	);
 		
 
-	map._olMap.addLayer(bathymetry);
+	//map._olMap.addLayer(bathymetry);
 	bathymetry.setVisibility(false);
     });
 
