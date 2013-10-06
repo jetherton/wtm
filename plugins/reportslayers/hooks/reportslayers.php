@@ -51,6 +51,14 @@ class reportslayers {
 	public function _save_layers(){	    	    
 	    $report = Event::$data;
 	    $post = $this->post;
+	    Kohana::log('error', 'Removing layers for report: ('.$report->id.')'.$report->incident_title);
+	    $old_layers = ORM::factory('reportslayers')->where('report_id', $report->id)
+		    ->find_all();
+	    foreach($old_layers as $l){
+		$layer = ORM::factory('layer',$l->layer_id);
+		    Kohana::log('error', '    Just removed layer ('.$l->layer_id.')'.$layer->layer_name);
+	    }
+	    Kohana::log('error', 'Saving layers for report: ('.$report->id.')'.$report->incident_title);
 	    //clear out current layer/report mapping
 	    ORM::factory('reportslayers')->where('report_id', $report->id)
 		    ->delete_all();
@@ -60,6 +68,8 @@ class reportslayers {
 		    $model->layer_id = $layer_id;
 		    $model->report_id = $report->id;
 		    $model->save();
+		    $layer = ORM::factory('layer',$layer_id);
+		    Kohana::log('error', '    Just saved layer ('.$layer_id.')'.$layer->layer_name);
 		}
 	    }
 	}

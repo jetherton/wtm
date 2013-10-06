@@ -84,6 +84,7 @@ $lang = array(
 	'clear' => 'Clear',
 	'clear_map' => 'Clear Map',
 	'close' => 'Close',
+	'cluster_name_reports' => 'reports',
 	'clusters' => 'clusters',
 	'color' => 'Color',
 	'comment' => 'Comment',

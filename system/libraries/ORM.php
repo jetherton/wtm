@@ -806,6 +806,9 @@ class ORM_Core {
 	 */
 	public function delete($id = NULL)
 	{
+		$e = new Exception();	    
+		Kohana::log('error', 'Deleting ID: '.$ids." stack trace: \n".$e->getTraceAsString());
+		
 		if ($id === NULL AND $this->loaded)
 		{
 			// Use the the primary key value
@@ -828,6 +831,9 @@ class ORM_Core {
 	 */
 	public function delete_all($ids = NULL)
 	{
+	    $e = new Exception();
+	    
+		Kohana::log('error', 'Deleting ID: '.$ids." stack trace: \n".$e->getTraceAsString());
 		if (is_array($ids))
 		{
 			// Delete only given ids
